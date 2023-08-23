@@ -10,20 +10,20 @@
 <head>
 <meta charset="UTF-8">
 <title>네모: 관심사</title>
- <link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-    <link rel="stylesheet" href="${contextPath}/css/common.css" />
-    <link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-    <link rel="stylesheet" href="${contextPath}/css/interest.css" />
-    <script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
-    <script src="${contextPath}/js/interest.js"></script>
+ <link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/interests.css" />
+    <script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
+    <script src="${contextPath}/resources/js/interests.js"></script>
     <script src="https://kit.fontawesome.com/f9a2702e84.js" crossorigin="anonymous"></script>
-    <script src="${contextPath}/js/header.js"></script>
+    <script src="${contextPath}/resources/js/header.js"></script>
 </head>
 <body>
 
 <jsp:include page="../header.jsp" flush="true"></jsp:include>
 
-	<form action="${contextPath}/join/interestsChoice" method="post" id="interestForm">
+	<form action="${contextPath}/signup/interests" method="post" id="interestForm">
 
     <!-- 콘텐츠 영역 -->
     <div class="contentsArea">
@@ -271,7 +271,7 @@
         <div class="saveInterest">
           <button type="button" class="button" id="btnSubmit" disabled>선택하기</button>
          
-         <a href="${contextPath}/login"> <button type="button" class="buttonCancle">넘어가기</button></a>
+         <a href="${contextPath}/login/loginform"> <button type="button" class="buttonCancle">넘어가기</button></a>
           
         </div>
       </div>

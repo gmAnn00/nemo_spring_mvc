@@ -4,13 +4,22 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="mapper.signUp">
-	
-	
+
 	<insert id="joinUser" parameterType="userVO">
 		<![CDATA[
 			INSERT INTO USER_TBL(USER_ID, PASSWORD, USER_NAME, NICKNAME, ZIPCODE, USER_ADDR1, USER_ADDR2, PHONE, EMAIL, BIRTHDATE)
 			VALUES(#{user_id}, #{password}, #{user_name}, #{nickname}, #{zipcode}, #{user_addr1}, #{user_addr2}, #{phone}, #{email}, #{birthdate})
 		]]>
+	</insert>
+	
+	<insert id="addInterests" parameterType="java.util.List">
+		<foreach item="interest" collection="list" open="DECLARE BEGIN"
+		separator=";" close="; END;">
+			INSERT INTO INTERESTS_TBL(USER_ID, MAIN_CATE, SUB_CATE)
+			VALUES(#{interest.user_id}, #{interest.main_cate}, #{interest.sub_cate})
+		</foreach>
+			
+		
 	</insert>
 
 </mapper>
