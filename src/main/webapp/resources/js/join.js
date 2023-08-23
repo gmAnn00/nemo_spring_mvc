@@ -192,7 +192,7 @@ function fn_nicknameCheck() {
             success: function (data, textStatus) {
                 if (data == "usable") {
                     nickCheck = true;
-                    console.log('ㅅ용 가능 닉네임:2', nickCheck);
+                    console.log('사용용 가능 닉네임:2', nickCheck);
                     $("#resultMsgNick").show();
                     $("#resultMsgNick").html("사용할 수 있는 닉네임입니다.");
                     $("#resultMsgNick").css("color", "#3384ff");
@@ -293,6 +293,7 @@ function fn_emailCheck() {
                 }
             },
             error: function (data, textStatus, error) {
+            	console.log("data="+data);
                 alert("에러가 발생했습니다.");
             },
         });
@@ -302,6 +303,11 @@ function fn_emailCheck() {
 
 function fnJoin() {
     let isEmpty = false;
+    let emailReg = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+    let emailId = $("#emailId").val();
+    let emailDomain = $("#emailDomain").val();
+    let email = emailId + "@" + emailDomain;
+    
     $("#frm")
         .find('input[id!="user_addr2"]')
         .each(function () {
@@ -316,10 +322,7 @@ function fnJoin() {
         alert("필수항목을 입력해주세요");
         return false;
     } else if (!isEmpty) {
-        let emailReg = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-        let emailId = $("#emailId").val();
-        let emailDomain = $("#emailDomain").val();
-        let email = "";
+        
 
         if (!idCheck) {
             alert("ID를 다시 입력해주세요");
@@ -347,6 +350,10 @@ function fnJoin() {
             return false;
         }
     }
+    
+    let emailInput = $("<input type='hidden' name='email' value=" + email + " />");
+    console.log("email="+email);
+    $("#frm").append(emailInput);
     document.getElementById("frm").submit();
 }
 

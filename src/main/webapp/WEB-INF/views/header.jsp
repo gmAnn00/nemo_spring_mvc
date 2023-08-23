@@ -55,7 +55,7 @@
             			<li></li>
             			<li><a href="${contextPath}/groupSearch">소모임 검색</a></li>
             			<li><a href="${contextPath}/login/loginForm">로그인</a></li>
-            			<li><a href="${contextPath}/join/agreeForm">회원가입</a></li>
+            			<li><a href="${contextPath}/signup/agree">회원가입</a></li>
             		</c:otherwise>
             	</c:choose>
             </ul>

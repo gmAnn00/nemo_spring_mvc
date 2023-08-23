@@ -14,7 +14,7 @@ public class ViewNameInterceptor extends HandlerInterceptorAdapter{
 		
 		String viewName=getViewName(request);
 		request.setAttribute("viewName", viewName);
-		//System.out.println("preHandle È£Ãâ");
+		//System.out.println("preHandle È£ï¿½ï¿½");
 		return true;
 	}
 	

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.duplicate">
+	<select id="idCheck" parameterType="String" resultType="String">
+		<![CDATA[
+         SELECT DECODE(count(*), 1, 'disable' , 'usable') as result FROM USER_TBL WHERE user_id = #{user_id}
+      ]]>
+	</select>
+	
+	<select id="nicknameCheck" parameterType="String" resultType="String">
+		<![CDATA[
+         SELECT DECODE(count(*), 1, 'disable' , 'usable') as result FROM USER_TBL WHERE nickname = #{nickname}
+      ]]>
+	</select>
+	
+	
+	<select id="emailCheck" parameterType="String" resultType="String">
+		<![CDATA[
+         SELECT DECODE(count(*), 1, 'disable' , 'usable') as result FROM USER_TBL WHERE email = #{email}
+      ]]>
+	</select>
+	
+	
+
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.springmvc.nemo.board.vo.BoardVO" alias="boardVO"/>
+		<typeAlias type="com.springmvc.nemo.board.vo.CommentVO" alias="commentVO"/>
+		<typeAlias type="com.springmvc.nemo.group.vo.GroupVO" alias="groupVO"/>
+		<typeAlias type="com.springmvc.nemo.group.vo.WaitListVO" alias="waitListVO"/>
+		<typeAlias type="com.springmvc.nemo.group.vo.GroupVO" alias="groupVO"/>
+		<typeAlias type="com.springmvc.nemo.qna.vo.QnaVO" alias="qnaVO"/>
+		<typeAlias type="com.springmvc.nemo.report.vo.GroupReportVO" alias="groupReportVO"/>
+		<typeAlias type="com.springmvc.nemo.report.vo.UserReportVO" alias="userReportVO"/>
+		<typeAlias type="com.springmvc.nemo.schedule.vo.AttendVO" alias="attendVO"/>
+		<typeAlias type="com.springmvc.nemo.schedule.vo.ScheduleVO" alias="scheduleVO"/>
+		<typeAlias type="com.springmvc.nemo.user.vo.BookmarkVO" alias="bookmarkVO"/>
+		<typeAlias type="com.springmvc.nemo.user.vo.InterestsVO" alias="interestsVO"/>
+		<typeAlias type="com.springmvc.nemo.user.vo.KakaoVO" alias="kakaoVO"/>
+		<typeAlias type="com.springmvc.nemo.user.vo.UserVO" alias="userVO"/>
+		
+	</typeAliases>
+	
+	
+	
+</configuration>

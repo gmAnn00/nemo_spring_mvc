@@ -21,7 +21,7 @@ public class IndexControllerImpl implements IndexController{
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
-		System.out.println("viewName="+viewName);
+//		System.out.println("viewName="+viewName);
 		return mav;
 	}
 	

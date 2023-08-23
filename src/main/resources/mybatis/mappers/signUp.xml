@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.signUp">
+	
+	
+	<insert id="joinUser" parameterType="userVO">
+		<![CDATA[
+			INSERT INTO USER_TBL(USER_ID, PASSWORD, USER_NAME, NICKNAME, ZIPCODE, USER_ADDR1, USER_ADDR2, PHONE, EMAIL, BIRTHDATE)
+			VALUES(#{user_id}, #{password}, #{user_name}, #{nickname}, #{zipcode}, #{user_addr1}, #{user_addr2}, #{phone}, #{email}, #{birthdate})
+		]]>
+	</insert>
+
+</mapper>
