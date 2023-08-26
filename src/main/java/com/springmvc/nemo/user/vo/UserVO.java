@@ -2,11 +2,7 @@ package com.springmvc.nemo.user.vo;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.sql.Timestamp;
 import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Component;
 
 
 public class UserVO {

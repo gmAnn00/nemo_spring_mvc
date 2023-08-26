@@ -10,13 +10,13 @@
 <head>
 <meta charset="UTF-8">
 <title>네모: 로그인</title>
-	<script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
-    <script src="${contextPath}/js/header.js"></script>
-    <script src="${contextPath}/js/loginCook.js"></script>
-    <link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-    <link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-    <link rel="stylesheet" href="${contextPath}/css/common.css" />
-    <link rel="stylesheet" href="${contextPath}/css/login.css" />
+	<script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
+    <script src="${contextPath}/resources/js/header.js"></script>
+    <script src="${contextPath}/resources/js/loginCook.js"></script>
+    <link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/login.css" />
     <script src="https://kit.fontawesome.com/f9a2702e84.js" crossorigin="anonymous"></script>
     
 </head>
@@ -65,9 +65,15 @@
             <input type="checkbox" id="keepLogin" name="keepLogin" class="keepLogin" />로그인 상태 유지
           </label>  -->
           <p class="joinFind">
-            <a href="${contextPath}/join/agreeForm" class="join">회원가입</a>
-            <a href="${contextPath}/search/findidForm"class="find">아이디/비밀번호 찾기</a>
+            <a href="${contextPath}/signup/agree" class="join">회원가입</a>
+            <a href="${contextPath}/login/findidform"class="find">아이디/비밀번호 찾기</a>
           </p>
+          <input
+            type="image"
+            src="${contextPath}/resources/images/login_kakao.png"
+            alt="카카오 아이디로 로그인"
+            class="kakaoLog"
+          />
           <!-- 
           <input
             type="image"
@@ -75,12 +81,7 @@
             alt="네이버 간편 로그인"
             class="naverLog"
           />
-          <input
-            type="image"
-            src="${contextPath}/images/login_kakao.png"
-            alt="카카오 아이디로 로그인"
-            class="kakaoLog"
-          />
+          
           <input
             type="image"
             src="${contextPath}/images/login_google.png"

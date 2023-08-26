@@ -129,7 +129,7 @@ function fn_pwdCheck() {
         return;
     } else if (!pwdRegExp.test(password)) {
         $("#resultMsgPwd").show();
-        $("#resultMsgPwd").html("비밀번호를 문자, 숫자, 특수문자포함 8~20자로 입력해주세요.");
+        $("#resultMsgPwd").html("비밀번호를 문자, 숫자, 특수문자 포함 8~20자로 입력해주세요.");
         $("#resultMsgPwd").css("color", "#f43965");
         return;
     } else {

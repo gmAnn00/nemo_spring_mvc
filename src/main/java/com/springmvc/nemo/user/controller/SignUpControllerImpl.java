@@ -1,6 +1,5 @@
 package com.springmvc.nemo.user.controller;
 
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +24,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.springmvc.nemo.common.Message;
 import com.springmvc.nemo.user.service.SignUpService;
 import com.springmvc.nemo.user.vo.InterestsVO;

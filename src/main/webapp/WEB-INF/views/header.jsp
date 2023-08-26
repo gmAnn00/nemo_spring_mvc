@@ -31,30 +31,30 @@
             	<c:choose>
             		<c:when test="${user_id != null && admin == 0}">
 	            		<li>
-	                    	<a href="${contextPath}/mypage">
+	                    	<a href="${contextPath}">
 	                       	 <div class="profile"><img class="fa-solid" src="${contextPath}/userImageDownload?user_id=${user_id}&user_img=${user_img}" alt="프로필사진"><span class="profile_name">${nickname}</span></div>
 	                    	</a>
 	               		 </li>
-	              		 <li><a href="${contextPath}/group/createGroup/form">소모임 만들기</a></li>
-	               		 <li><a href="${contextPath}/groupSearch">소모임 검색</a></li>
-	               		 <li><a href="${contextPath}/mypage">프로필</a></li>
-	               		 <li><a href="${contextPath}/mypage/mySchedule">내 일정</a></li>
-	               		 <li><a href="${contextPath}/mypage/myGroupList">내 소모임</a></li>
-	                	 <li><a href="${contextPath}/viewQna">고객센터</a></li>
+	              		 <li><a href="${contextPath}">소모임 만들기</a></li>
+	               		 <li><a href="${contextPath}">소모임 검색</a></li>
+	               		 <li><a href="${contextPath}">프로필</a></li>
+	               		 <li><a href="${contextPath}">내 일정</a></li>
+	               		 <li><a href="${contextPath}">내 소모임</a></li>
+	                	 <li><a href="${contextPath}">고객센터</a></li>
 	                	 <li><a href="${contextPath}/login/logout">로그아웃</a></li>
             		</c:when>
             		<c:when test="${user_id != null && admin == 1 }">
             			<li></li>
-            			<li><a href="${contextPath}/adminUser">회원 관리</a></li>
-            			<li><a href="${contextPath}/adminGroup">소모임 관리</a></li>
-            			<li><a href="${contextPath}/adminReport">신고 관리</a></li>
-            			<li><a href="${contextPath}/viewQna">문의사항 관리</a></li>
+            			<li><a href="${contextPath}">회원 관리</a></li>
+            			<li><a href="${contextPath}">소모임 관리</a></li>
+            			<li><a href="${contextPath}">신고 관리</a></li>
+            			<li><a href="${contextPath}">문의사항 관리</a></li>
             			<li><a href="${contextPath}/login/logout">로그아웃</a></li>
             		</c:when>
             		<c:otherwise>
             			<li></li>
-            			<li><a href="${contextPath}/groupSearch">소모임 검색</a></li>
-            			<li><a href="${contextPath}/login/loginForm">로그인</a></li>
+            			<li><a href="${contextPath}">소모임 검색</a></li>
+            			<li><a href="${contextPath}/login/loginform">로그인</a></li>
             			<li><a href="${contextPath}/signup/agree">회원가입</a></li>
             		</c:otherwise>
             	</c:choose>

@@ -36,7 +36,7 @@ p {
 .tabContent.current {
   display: inherit;
 }
-.tabContent input {
+.tabContent input{
   display: block;
   margin: 0 auto;
   margin-bottom: 20px;
@@ -47,4 +47,19 @@ p {
   display: block;
   margin: 0 auto;
   width: 200px;
+}
+/* 비밀번호 중복, 조건 체크 */
+.alert {  
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 300px;
+  padding-top: 5px;
+  font-size: 13px;
+}
+.alertSuccess {
+  color: var(--blue-color);
+}
+.alertDanger {
+  color: var(--heart-color);
 }

@@ -65,7 +65,7 @@
               type="password"
               id="password"
               name="password"
-              placeholder="비밀번호 입력(문자, 숫자, 특수문자포함 8~20자)"
+              placeholder="비밀번호 입력(문자, 숫자 포함 8~20자)"
               minlength="8"
               maxlength="20"
               oninput="fn_pwdCheck()"
