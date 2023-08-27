@@ -32,7 +32,7 @@
             		<c:when test="${user_id != null && admin == 0}">
 	            		<li>
 	                    	<a href="${contextPath}">
-	                       	 <div class="profile"><img class="fa-solid" src="${contextPath}/userImageDownload?user_id=${user_id}&user_img=${user_img}" alt="프로필사진"><span class="profile_name">${nickname}</span></div>
+	                       	 <div class="profile"><img class="fa-solid" src="${contextPath}/userimagedownload?user_id=${user_id}&user_img=${user_img}" alt="프로필사진"><span class="profile_name">${nickname}</span></div>
 	                    	</a>
 	               		 </li>
 	              		 <li><a href="${contextPath}">소모임 만들기</a></li>
