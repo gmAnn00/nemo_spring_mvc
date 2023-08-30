@@ -28,6 +28,10 @@
 		user_addr1=#{user_addr1}, user_addr2=#{user_addr2}, phone=#{phone}, email=#{email},
 		birthdate=TO_DATE(#{birthdate}, 'YYYY-MM-DD'), user_img=#{user_img} WHERE user_id=#{user_id}
 	</update>
+	
+	<update id="modImage" parameterType="java.util.Map">
+		UPDATE USER_TBL SET user_img=#{user_img} WHERE user_id=#{user_id}
+	</update>
 
 
 </mapper>

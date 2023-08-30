@@ -37,8 +37,14 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	@Override
-	public void modProfile(Map userMap) throws DataAccessException {
+	public void modProfile(Map<String, Object> userMap) throws DataAccessException {
 		myPageDAO.modProfile(userMap);
+		
+	}
+	
+	@Override
+	public void modImage(Map<String, Object> userMap) throws DataAccessException {
+		myPageDAO.modImage(userMap);
 		
 	}
 

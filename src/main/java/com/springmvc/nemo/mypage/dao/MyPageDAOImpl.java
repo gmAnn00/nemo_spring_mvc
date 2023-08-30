@@ -37,9 +37,15 @@ public class MyPageDAOImpl implements MyPageDAO{
 	}
 	
 	@Override
-	public void modProfile(Map userMap) throws DataAccessException {
-		sqlSession.update("mapper.myPage.modProfile", userMap);
+	public void modProfile(Map<String, Object> userMap) throws DataAccessException {
 		
+		sqlSession.update("mapper.myPage.modProfile", userMap);
+	}
+	
+	@Override
+	public void modImage(Map<String, Object> userMap) throws DataAccessException {
+		
+		sqlSession.update("mapper.myPage.modImage", userMap);
 	}
 
 }

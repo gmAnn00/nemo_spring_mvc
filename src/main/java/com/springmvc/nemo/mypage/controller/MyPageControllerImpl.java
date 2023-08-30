@@ -97,7 +97,7 @@ public class MyPageControllerImpl implements MyPageController{
 			throws Exception {
 		
 		multipartRequest.setCharacterEncoding("utf-8");
-		Map<String, Object> userMap = new HashMap();
+		Map<String, Object> userMap = new HashMap<String, Object>();
 		Enumeration enu = multipartRequest.getParameterNames();
 		//logger.info("enum={}", enu.toString());
 		while (enu.hasMoreElements()) {
@@ -174,6 +174,86 @@ public class MyPageControllerImpl implements MyPageController{
 		return resEnt;
 	}
 	
+	@RequestMapping(value = "/mypage/userimageupload", method = RequestMethod.POST)
+	@Override
+	public ResponseEntity modImage(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+			throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String, Object> userMap = new HashMap<String, Object>();
+		Enumeration enu = multipartRequest.getParameterNames();
+		//logger.info("enum={}", enu.toString());
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String value = multipartRequest.getParameter(name);
+			userMap.put(name, value);
+		}
+		
+		HttpSession session = multipartRequest.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		userMap.put("user_id", user_id);
+
+		// 이미지 파일 업로드
+		USER_IMG_REPO = this.getClass().getResource("").getPath();
+		USER_IMG_REPO = USER_IMG_REPO.substring(1, USER_IMG_REPO.indexOf(".metadata"));
+		USER_IMG_REPO = USER_IMG_REPO.replace("/", "\\");
+		USER_IMG_REPO += "nemo_spring_mvc\\src\\main\\webapp\\WEB-INF\\views\\userImages\\";
+		
+		String originalFileName = (String) userMap.get("originalFileName");
+		String user_img = upload(multipartRequest, "false");
+		//logger.info("user_img1={}", user_img);
+		
+		String message = "";
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html;charset=utf-8");
+		
+		//logger.info("user_map={}", userMap.toString());
+		
+		try {
+
+			if(user_img != null) {
+				// 이미지 변경함 또는 삭제함
+				File srcFile = new File(USER_IMG_REPO + "\\temp\\" + user_img);
+				File destDir = new File(USER_IMG_REPO + "\\" + user_id);
+				destDir.mkdirs();
+				FileUtils.cleanDirectory(destDir);
+				FileUtils.moveFileToDirectory(srcFile, destDir, true);
+				srcFile.delete();
+			}else{
+				// 이미지 그대로
+				user_img = originalFileName;
+			}
+			//logger.info("user_img2={}", user_img);
+			userMap.put("user_img", user_img);
+			myPageService.modImage(userMap);
+			
+			session.removeAttribute("user_img");
+			session.setAttribute("user_img", user_img);
+			
+			message = "<script>";
+			message += "alert('프로필 이미지를 변경하였습니다.');";
+			message += "location.href='" + multipartRequest.getContextPath() + "/mypage/myprofile';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			File srcFile = new File(USER_IMG_REPO + "\\temp\\" + user_img);
+			srcFile.delete();
+			message = "<script>";
+			message += "alert('프로필 이미지 수정에 실패하였습니다.')";
+			message += "location.href='" + multipartRequest.getContextPath() + "/mypage/myprofile';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			
+		}
+
+		return resEnt;
+		
+	}
+	
 	
 	private String upload(MultipartHttpServletRequest multipartRequest, String isDeleteImg) throws Exception {
 		String imageFileName = null;
@@ -198,7 +278,7 @@ public class MyPageControllerImpl implements MyPageController{
 		}
 		
 		while (fileNames.hasNext()) {
-			//logger.info("이미지 변경함");
+			//logger.info("이미지 변경 또는 삭제");
 			String fileName = fileNames.next();
 			logger.info("fileName={}", fileName);
 			MultipartFile mFile = multipartRequest.getFile(fileName);

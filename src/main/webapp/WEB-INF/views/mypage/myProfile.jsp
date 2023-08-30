@@ -35,7 +35,7 @@
 			$("#userIMGform").submit();
 		} else {
 			//취소 눌러서 선택한 파일에 값이 없을 때, 미리보기 없애기
-			$("#userImg").attr('src', '#');
+			//$("#userImg").attr('src', '#');
 		}
 	}
 </script>

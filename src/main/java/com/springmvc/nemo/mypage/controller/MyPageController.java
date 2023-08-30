@@ -16,5 +16,8 @@ public interface MyPageController {
 	public ResponseEntity modProfile(
 			MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	
+	public ResponseEntity modImage(
+			MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+	
 	
 }

@@ -17,6 +17,8 @@ public interface MyPageService {
 
 	public ModInfoVO findMyUserInfoById(String user_id) throws DataAccessException;
 	
-	public void modProfile(Map userMap) throws DataAccessException;
+	public void modProfile(Map<String, Object> userMap) throws DataAccessException;
+
+	public void modImage(Map<String, Object> userMap) throws DataAccessException;
 	
 }
