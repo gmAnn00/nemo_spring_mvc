@@ -12,20 +12,20 @@
 <head>
 <meta charset="UTF-8">
 <title>네모: 마이페이지</title>
-<link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-<link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-<link rel="stylesheet" href="${contextPath}/css/common.css" />
-<link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-<link rel="stylesheet" href="${contextPath}/css/modifyProfile.css" />
+<link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+<link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/modifyProfile.css" />
 <script
   src="https://kit.fontawesome.com/bc604c01cc.js"
   crossorigin="anonymous"
 ></script>
-<script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
-<script src="${contextPath}/js/header.js"></script>
+<script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
+<script src="${contextPath}/resources/js/header.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="${contextPath}/js/join.js"></script>
-<script src="${contextPath}/js/modifyProfile.js"></script>
+<script src="${contextPath}/resources/js/join.js"></script>
+<script src="${contextPath}/resources/js/modifyProfile.js"></script>
 <script>
 	//이미지 미리보기 구현
 	function readImage(input) {		
@@ -59,7 +59,7 @@
             <h2 class="sc2_menu_title">프로필</h2>
             <ul class="sc2_menu_list">
               <li>
-                <a href="${contextPath}/mypage">
+                <a href="${contextPath}/mypage/myprofile">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name submenu_select">
                       <span>프로필</span>
@@ -69,7 +69,7 @@
                 </a>
               </li>
               <li>
-                <a href="${contextPath}/mypage/mySchedule">
+                <a href="${contextPath}/mypage/myschedule">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name"><span>내 일정</span></div>
                     <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -77,7 +77,7 @@
                 </a>
               </li>
               <li>
-                <a href="${contextPath}/mypage/myGroupList">
+                <a href="${contextPath}/mypage/mygroup">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name menu_angle">
                       <span>내 소모임</span>
@@ -87,7 +87,7 @@
                 </a>
               </li>
               <li>
-                <a href="${contextPath}/mypage/myBoardList">
+                <a href="${contextPath}/mypage/myboard">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name">
                       <span>내가 쓴 글·댓글</span>
@@ -118,7 +118,7 @@
             <!-- nav 바 종료 -->
           </div>
           
-		<form action="${contextPath}/mypage/modProfile" id="frm" name="frm" method="post" enctype="multipart/form-data">
+		<form action="${contextPath}/mypage/modprofile" id="frm" name="frm" method="post" enctype="multipart/form-data">
           	<!--3. myImage-->          
           	<div class="myImage">                         
              <c:choose>
@@ -126,7 +126,7 @@
                 	<img id="userImg" src="" alt=" 프로필 사진" />
                 </c:when>
                 <c:when test="${!empty userVO.user_img}">                                  
-                	<img id="userImg" src="${contextPath}/userImageDownload?user_id=${user_id}&user_img=${userVO.user_img}" alt=" 프로필 사진" />                  
+                	<img id="userImg" src="${contextPath}/userimagedownload?user_id=${user_id}&user_img=${userVO.user_img}" alt=" 프로필 사진" />                  
                 </c:when>
                 </c:choose>     
               <div>
@@ -366,7 +366,7 @@
                   >수정하기</a
                 > -->
                 <!-- type을 버튼으로 바꾸고 action과 submit을 jsp 처리하기 -->
-                <a href="${contextPath}/mypage" role="button" class="buttonCancle"
+                <a href="${contextPath}/mypage/myprofile" role="button" class="buttonCancle"
                   >수정취소</a
                 >
               </div>

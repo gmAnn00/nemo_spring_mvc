@@ -358,6 +358,11 @@ function fnJoin() {
 }
 
 function fnModify() {
+	let emailId = $("#emailId").val();
+    let emailDomain = $("#emailDomain").val();
+    let email = emailId + "@" + emailDomain;
+	
+	
     let isEmpty = false;
     $("#frm")
         .find('input[class!="ignoreFind"]')
@@ -374,9 +379,7 @@ function fnModify() {
         return false;
     } else if (!isEmpty) {
         let emailReg = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-        let emailId = $("#emailId").val();
-        let emailDomain = $("#emailDomain").val();
-        let email = "";
+        
         
         fn_phoneCheck();
         fn_emailCheck();
@@ -407,5 +410,7 @@ function fnModify() {
             return false;
         }
     }
+    let emailInput = $("<input type='hidden' name='email' value=" + email + " />");
+    $("#frm").append(emailInput);
     document.getElementById("frm").submit();
 }

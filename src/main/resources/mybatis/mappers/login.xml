@@ -7,7 +7,7 @@
 
 	<select id="loginTry" parameterType="userVO" resultType="String">
 		<![CDATA[
-         SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM USER_TBL WHERE user_id = #{user_id} AND password = #{password}
+         SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM USER_TBL WHERE user_id = #{user_id} AND password = #{password} AND cancel = 0
       ]]>
 	</select>
 	
@@ -19,19 +19,19 @@
 	
 	<select id="findId" parameterType="userVO" resultType="String">
 		<![CDATA[
-         SELECT user_id FROM USER_TBL WHERE user_name = #{user_name} AND email = #{email}
+         SELECT user_id FROM USER_TBL WHERE user_name = #{user_name} AND email = #{email}  AND cancel = 0
       ]]>
 	</select>
 	
 	<select id="resetPasswordCheck" parameterType="userVO" resultType="String">
 		<![CDATA[
-         SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM USER_TBL WHERE user_id = #{user_id} AND user_name = #{user_name} AND email = #{email}
+         SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM USER_TBL WHERE user_id = #{user_id} AND user_name = #{user_name} AND email = #{email}  AND cancel = 0
       ]]>
 	</select>
 
 	<update id="resetPassword" parameterType="userVO">
 		<![CDATA[
-         UPDATE USER_TBL SET password = #{password} WHERE user_id = #{user_id}
+         UPDATE USER_TBL SET password = #{password} WHERE user_id = #{user_id}  AND cancel = 0
       ]]>
 	</update>
 

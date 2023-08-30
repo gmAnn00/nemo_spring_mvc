@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.myPage">
+
+	<select id="findMyProfileById" parameterType="String" resultType="myProfileVO">
+		<![CDATA[
+        	SELECT user_id, user_name, nickname, user_addr1, phone, email, TO_CHAR(birthdate, 'yyyy-mm-dd') as birthdate, user_img FROM USER_TBL WHERE user_id = #{user_id}
+      ]]>
+	</select>
+	
+	<select id="findMyInterestsById" parameterType="String" resultType="interestsVO">
+		<![CDATA[
+         SELECT * FROM INTERESTS_TBL WHERE user_id = #{user_id}
+      ]]>
+	</select>
+	
+	<select id="findMyUserInfoById" parameterType="String" resultType="modInfoVO">
+		<![CDATA[
+        	SELECT * FROM USER_TBL WHERE user_id = #{user_id}
+      ]]>
+	</select>
+	
+	<update id="modProfile" parameterType="java.util.Map">
+		UPDATE USER_TBL SET password=#{password}, nickname=#{nickname}, zipcode=#{zipcode},
+		user_addr1=#{user_addr1}, user_addr2=#{user_addr2}, phone=#{phone}, email=#{email},
+		birthdate=TO_DATE(#{birthdate}, 'YYYY-MM-DD'), user_img=#{user_img} WHERE user_id=#{user_id}
+	</update>
+
+
+</mapper>

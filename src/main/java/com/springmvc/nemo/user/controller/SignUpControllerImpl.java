@@ -1,5 +1,6 @@
 package com.springmvc.nemo.user.controller;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,9 @@ public class SignUpControllerImpl implements SignUpController {
 	
 	@Autowired
 	private SignUpService signUpService;
+	
+	private static String USER_IMG_REPO;
+	private static String USER_IMG_DEFAULT;
 	
 	/** 어노테이션을 이용한 방법 **/
 	@InitBinder
@@ -83,6 +88,22 @@ public class SignUpControllerImpl implements SignUpController {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("user_id_temp", user.getUser_id());
+		
+		// 회원 이미지 자동 추가
+		USER_IMG_REPO = this.getClass().getResource("").getPath();
+		USER_IMG_REPO = USER_IMG_REPO.substring(1, USER_IMG_REPO.indexOf(".metadata"));
+		USER_IMG_REPO = USER_IMG_REPO.replace("/", "\\");
+		USER_IMG_REPO += "nemo_spring_mvc\\src\\main\\webapp\\WEB-INF\\views\\userImages\\";
+		
+		USER_IMG_DEFAULT = this.getClass().getResource("").getPath();
+		USER_IMG_DEFAULT = USER_IMG_DEFAULT.substring(1, USER_IMG_DEFAULT.indexOf(".metadata"));
+		USER_IMG_DEFAULT = USER_IMG_DEFAULT.replace("/", "\\");
+		USER_IMG_DEFAULT += "nemo_spring_mvc\\src\\main\\webapp\\resources\\images\\pingoo.jpg";
+		
+		File srcFile = new File(USER_IMG_DEFAULT);
+		File destDir = new File(USER_IMG_REPO + "\\" + user.getUser_id());
+		destDir.mkdir();
+		FileUtils.copyFileToDirectory(srcFile, destDir, false);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("data", new Message("회원가입이 완료되었습니다.", request.getContextPath()+"/signup/interestsform"));

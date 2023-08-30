@@ -33,7 +33,7 @@ public class ImageDownloadController {
 		USER_IMG_REPO = this.getClass().getResource("").getPath();
 		USER_IMG_REPO = USER_IMG_REPO.substring(1, USER_IMG_REPO.indexOf(".metadata"));
 		USER_IMG_REPO = USER_IMG_REPO.replace("/", "\\");
-		USER_IMG_REPO += "nemo_spring_mvc\\src\\main\\webapp\\resources\\userImages\\";
+		USER_IMG_REPO += "nemo_spring_mvc\\src\\main\\webapp\\WEB-INF\\views\\userImages\\";
 		
 		OutputStream outs = response.getOutputStream();
 		String path = USER_IMG_REPO + "\\" + user_id + "\\" + user_img;
@@ -73,7 +73,7 @@ public class ImageDownloadController {
 		GROUP_IMG_REPO = this.getClass().getResource("").getPath();
 		GROUP_IMG_REPO = GROUP_IMG_REPO.substring(1, GROUP_IMG_REPO.indexOf(".metadata"));
 		GROUP_IMG_REPO = GROUP_IMG_REPO.replace("/", "\\");
-		GROUP_IMG_REPO += "nemo_spring_mvc\\src\\main\\webapp\\resources\\groupImages\\";
+		GROUP_IMG_REPO += "nemo_spring_mvc\\src\\main\\webapp\\WEB-INF\\views\\groupImages\\";
 		
 		OutputStream outs = response.getOutputStream();
 		String path = GROUP_IMG_REPO + "\\" + group_id + "\\" + group_img;

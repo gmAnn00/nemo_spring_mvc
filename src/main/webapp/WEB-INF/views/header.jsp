@@ -36,10 +36,10 @@
 	                    	</a>
 	               		 </li>
 	              		 <li><a href="${contextPath}">소모임 만들기</a></li>
-	               		 <li><a href="${contextPath}">소모임 검색</a></li>
-	               		 <li><a href="${contextPath}">프로필</a></li>
-	               		 <li><a href="${contextPath}">내 일정</a></li>
-	               		 <li><a href="${contextPath}">내 소모임</a></li>
+	               		 <li><a href="${contextPath}/search">소모임 검색</a></li>
+	               		 <li><a href="${contextPath}/mypage/myprofile">프로필</a></li>
+	               		 <li><a href="${contextPath}/mypage/myschedule">내 일정</a></li>
+	               		 <li><a href="${contextPath}/mypage/mygroup">내 소모임</a></li>
 	                	 <li><a href="${contextPath}">고객센터</a></li>
 	                	 <li><a href="${contextPath}/login/logout">로그아웃</a></li>
             		</c:when>
@@ -53,7 +53,7 @@
             		</c:when>
             		<c:otherwise>
             			<li></li>
-            			<li><a href="${contextPath}">소모임 검색</a></li>
+            			<li><a href="${contextPath}/search">소모임 검색</a></li>
             			<li><a href="${contextPath}/login/loginform">로그인</a></li>
             			<li><a href="${contextPath}/signup/agree">회원가입</a></li>
             		</c:otherwise>

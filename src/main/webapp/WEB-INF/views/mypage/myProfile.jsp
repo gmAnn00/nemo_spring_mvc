@@ -10,15 +10,15 @@
 <head>
 <meta charset="UTF-8">
 <title>네모: 마이페이지</title>
-<link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-<link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-<link rel="stylesheet" href="${contextPath}/css/common.css" />
-<link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-<link rel="stylesheet" href="${contextPath}/css/myProfile.css" />
+<link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+<link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/myProfile.css" />
 <script src="https://kit.fontawesome.com/bc604c01cc.js"
 	crossorigin="anonymous"></script>
-<script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
-<script src="${contextPath}/js/header.js"></script>
+<script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
+<script src="${contextPath}/resources/js/header.js"></script>
 <script>
 	//이미지 미리보기 구현
 	function readImage(input) {
@@ -51,7 +51,7 @@
 				<div class="sc2_menu">
 					<h2 class="sc2_menu_title">프로필</h2>
 					<ul class="sc2_menu_list">
-						<li><a href="${contextPath}/mypage">
+						<li><a href="${contextPath}/mypage/myprofile">
 								<div class="sc2_icon_menu">
 									<div class="menu_submenu_name submenu_select">
 										<span>프로필</span>
@@ -59,7 +59,7 @@
 									<i class="fa-solid fa-minus submenu_select"></i>
 								</div>
 						</a></li>
-						<li><a href="${contextPath}/mypage/mySchedule">
+						<li><a href="${contextPath}/mypage/myschedule">
 								<div class="sc2_icon_menu">
 									<div class="menu_submenu_name">
 										<span>내 일정</span>
@@ -67,7 +67,7 @@
 									<i class="fa-solid fa-angle-right menu_angle"></i>
 								</div>
 						</a></li>
-						<li><a href="${contextPath}/mypage/myGroupList">
+						<li><a href="${contextPath}/mypage/mygroup">
 								<div class="sc2_icon_menu">
 									<div class="menu_submenu_name menu_angle">
 										<span>내 소모임</span>
@@ -75,7 +75,7 @@
 									<i class="fa-solid fa-angle-right menu_angle"></i>
 								</div>
 						</a></li>
-						<li><a href="${contextPath}/mypage/myBoardList">
+						<li><a href="${contextPath}/mypage/myboard">
 								<div class="sc2_icon_menu">
 									<div class="menu_submenu_name">
 										<span>내가 쓴 글·댓글</span>
@@ -110,7 +110,7 @@
 					<!--4-1-->
 					<div class="myProMo">
 						<h3>내정보 조회</h3>
-						<a href="${contextPath}/mypage/modProfileForm" role="button"
+						<a href="${contextPath}/mypage/modprofileform" role="button"
 							class="button">수정</a>
 					</div>
 
@@ -118,7 +118,7 @@
 					<div class="myInfo">
 						<div class="myImage">
 							<form id="userIMGform"
-								action="${contextPath}/mypage/userImgUpload" method="post"
+								action="${contextPath}/mypage/userimageupload" method="post"
 								enctype="multipart/form-data">
 								<c:choose>
 									<c:when test="${empty userVO.user_img}">
@@ -126,7 +126,7 @@
 									</c:when>
 									<c:when test="${!empty userVO.user_img}">
 										<img id="userImg"
-											src="${contextPath}/userImageDownload?user_id=${user_id}&user_img=${userVO.user_img}"
+											src="${contextPath}/userimagedownload?user_id=${user_id}&user_img=${userVO.user_img}"
 											alt=" 프로필 사진" />
 									</c:when>
 								</c:choose>
@@ -172,7 +172,7 @@
 					<div class="myHabi">
 						<div class="myHabiText">
 							<h3>내 관심사</h3>
-							<a href="${contextPath}/mypage/interest/modInterestForm" role="button" class="button">수정</a>
+							<a href="${contextPath}/mypage/interest/modinterestform" role="button" class="button">수정</a>
 							<!--  수정 버튼 누르면 관심사 바꿀 수 있게 -->
 						</div>
 
@@ -184,7 +184,7 @@
 									</c:when>
 									<c:when test="${!empty interestsList}">
 										<c:forEach var="interestVO" items="${interestsList}">
-											<li>${interestVO.sub_name}</li>
+											<li>${interestVO.sub_cate}</li>
 										</c:forEach>
 									</c:when>
 								</c:choose>
@@ -195,7 +195,7 @@
 					<!-- 탈퇴 -->
 					<div class="withdrawal">
 						<h3>
-							<a href="${contextPath}/mypage/delUserForm" class="delMemberlink">회원
+							<a href="${contextPath}/mypage/deluserform" class="delMemberlink">회원
 								탈퇴하기 &gt;</a>
 						</h3>
 					</div>

@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 function delUserImgSubmit(){
-  	document.getElementById("userImg").src = "../images/dall.png";
+  	document.getElementById("userImg").src = "../images/pingoo.jpg";
   	document.getElementById("isDeleteImg").value="true";
   	console.log("이미지 삭제");
   	 //form.upload.select();    

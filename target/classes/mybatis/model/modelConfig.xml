@@ -23,7 +23,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.springmvc.nemo.user.vo.InterestsVO" alias="interestsVO"/>
 		<typeAlias type="com.springmvc.nemo.user.vo.KakaoVO" alias="kakaoVO"/>
 		<typeAlias type="com.springmvc.nemo.user.vo.UserVO" alias="userVO"/>
-		
+		<typeAlias type="com.springmvc.nemo.mypage.vo.MyProfileVO" alias="myProfileVO"/>
+		<typeAlias type="com.springmvc.nemo.mypage.vo.ModInfoVO" alias="modInfoVO"/>
 	</typeAliases>
 	
 	
