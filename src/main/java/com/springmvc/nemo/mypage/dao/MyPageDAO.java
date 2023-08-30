@@ -20,5 +20,9 @@ public interface MyPageDAO {
 	public void modProfile(Map<String, Object> userMap) throws DataAccessException;
 
 	public void modImage(Map<String, Object> userMap) throws DataAccessException;
+	
+	public void deleteInterests(String user_Id) throws DataAccessException;
+
+	public void addInterests(List<InterestsVO> interestsList) throws DataAccessException;
 
 }

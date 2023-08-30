@@ -47,5 +47,12 @@ public class MyPageServiceImpl implements MyPageService{
 		myPageDAO.modImage(userMap);
 		
 	}
+	
+	@Override
+	public void modInterests(List<InterestsVO> interestsList) throws DataAccessException {
+		String user_id = interestsList.get(0).getUser_id();
+		myPageDAO.deleteInterests(user_id);
+		myPageDAO.addInterests(interestsList);
+	}
 
 }

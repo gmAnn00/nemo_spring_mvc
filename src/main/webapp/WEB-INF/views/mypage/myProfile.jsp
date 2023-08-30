@@ -172,7 +172,7 @@
 					<div class="myHabi">
 						<div class="myHabiText">
 							<h3>내 관심사</h3>
-							<a href="${contextPath}/mypage/interest/modinterestform" role="button" class="button">수정</a>
+							<a href="${contextPath}/mypage/modinterestsform" role="button" class="button">수정</a>
 							<!--  수정 버튼 누르면 관심사 바꿀 수 있게 -->
 						</div>
 

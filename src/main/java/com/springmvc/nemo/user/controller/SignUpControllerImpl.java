@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -27,12 +29,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.springmvc.nemo.common.Message;
+import com.springmvc.nemo.mypage.controller.MyPageControllerImpl;
 import com.springmvc.nemo.user.service.SignUpService;
 import com.springmvc.nemo.user.vo.InterestsVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
 @Controller("joinController")
 public class SignUpControllerImpl implements SignUpController {
+	private static final Logger logger = LoggerFactory.getLogger(SignUpControllerImpl.class);
 	
 	@Autowired
 	private SignUpService signUpService;
@@ -136,11 +140,11 @@ public class SignUpControllerImpl implements SignUpController {
 		String user_id = (String) session.getAttribute("user_id_temp");
 		session.removeAttribute("user_id_temp");
 		
-		System.out.println("interests="+interests);
+		//logger.info("interests={}", interests);
 		
 		JsonArray jsonArray = new Gson().fromJson(interests, JsonArray.class);
 		
-		List<InterestsVO> interestsVOs = new ArrayList<InterestsVO>();
+		List<InterestsVO> interestsList = new ArrayList<InterestsVO>();
 		for(JsonElement elem : jsonArray) {
 			JsonObject interestObj = elem.getAsJsonObject();
 			
@@ -149,11 +153,10 @@ public class SignUpControllerImpl implements SignUpController {
 			interestsVO.setMain_cate(interestObj.get("main_cate").getAsString());
 			interestsVO.setSub_cate(interestObj.get("sub_cate").getAsString());
 			
-			interestsVOs.add(interestsVO);
-			//System.out.println(interestsVO.toString());
+			interestsList.add(interestsVO);
 		}
 		
-		signUpService.interests(interestsVOs);
+		signUpService.interests(interestsList);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("data", new Message("관심사를 추가하였습니다.", request.getContextPath()+"/login/loginform"));

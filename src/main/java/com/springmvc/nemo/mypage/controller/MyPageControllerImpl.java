@@ -22,11 +22,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.springmvc.nemo.common.Message;
 import com.springmvc.nemo.mypage.service.MyPageService;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
 import com.springmvc.nemo.mypage.vo.MyProfileVO;
@@ -52,8 +58,8 @@ public class MyPageControllerImpl implements MyPageController{
 		MyProfileVO myProfileVO = myPageService.findMyProfileById(user_id);
 		List<InterestsVO> interestsList = myPageService.findMyInterestsById(user_id);
 		
-		//logger.info("myProfileVO="+myProfileVO.toString());
-		//logger.info("interestsList="+interestsList.toString());
+		//logger.info("myProfileVO={}",myProfileVO.toString());
+		//logger.info("interestsList={}",interestsList.toString());
 		
 		
 		String viewName = (String) request.getAttribute("viewName");
@@ -252,6 +258,57 @@ public class MyPageControllerImpl implements MyPageController{
 
 		return resEnt;
 		
+	}
+	
+	@RequestMapping(value = "/mypage/modinterestsform", method = RequestMethod.GET)
+	@Override
+	public ModelAndView modInterestsForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		List<InterestsVO> interestsList = myPageService.findMyInterestsById(user_id);
+		
+		//logger.info("interestsList={}",interestsList.toString());
+		
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("interestsList", interestsList);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/mypage/modinterests", method = RequestMethod.POST)
+	@Override
+	public ModelAndView modInterests(@RequestParam("interests") String interests,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		JsonArray jsonArray = new Gson().fromJson(interests, JsonArray.class);
+		
+		List<InterestsVO> interestsList = new ArrayList<InterestsVO>();
+		for(JsonElement elem : jsonArray) {
+			JsonObject interestObj = elem.getAsJsonObject();
+			
+			InterestsVO interestsVO = new InterestsVO();
+			interestsVO.setUser_id(user_id);
+			interestsVO.setMain_cate(interestObj.get("main_cate").getAsString());
+			interestsVO.setSub_cate(interestObj.get("sub_cate").getAsString());
+			
+			interestsList.add(interestsVO);
+		}
+		
+		myPageService.modInterests(interestsList);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("data", new Message("관심사를 수정하였습니다.", request.getContextPath()+"/mypage/myprofile"));
+		mav.setViewName("message");
+		
+		return mav;
 	}
 	
 	

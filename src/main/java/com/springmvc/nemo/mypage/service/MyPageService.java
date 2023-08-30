@@ -20,5 +20,7 @@ public interface MyPageService {
 	public void modProfile(Map<String, Object> userMap) throws DataAccessException;
 
 	public void modImage(Map<String, Object> userMap) throws DataAccessException;
+
+	public void modInterests(List<InterestsVO> interestsList) throws DataAccessException;
 	
 }

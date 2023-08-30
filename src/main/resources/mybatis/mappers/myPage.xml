@@ -32,6 +32,18 @@
 	<update id="modImage" parameterType="java.util.Map">
 		UPDATE USER_TBL SET user_img=#{user_img} WHERE user_id=#{user_id}
 	</update>
+	
+	<delete id="deleteInterests" parameterType="String">
+		DELETE FROM INTERESTS_TBL WHERE user_id=#{user_id}
+	</delete>
+
+	<insert id="addInterests" parameterType="java.util.List">
+		<foreach item="interest" collection="list" open="DECLARE BEGIN"
+		separator=";" close="; END;">
+			INSERT INTO INTERESTS_TBL(USER_ID, MAIN_CATE, SUB_CATE)
+			VALUES(#{interest.user_id}, #{interest.main_cate}, #{interest.sub_cate})
+		</foreach>
+	</insert>
 
 
 </mapper>

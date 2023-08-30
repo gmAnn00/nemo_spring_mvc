@@ -47,5 +47,17 @@ public class MyPageDAOImpl implements MyPageDAO{
 		
 		sqlSession.update("mapper.myPage.modImage", userMap);
 	}
+	
+	@Override
+	public void deleteInterests(String user_id) throws DataAccessException {
+		sqlSession.delete("mapper.myPage.deleteInterests", user_id);
+		
+	}
+	
+	@Override
+	public void addInterests(List<InterestsVO> interestsList) throws DataAccessException {
+		
+		sqlSession.update("mapper.myPage.addInterests", interestsList);
+	}
 
 }
