@@ -119,14 +119,14 @@ public class MyPageControllerImpl implements MyPageController{
 		String originalFileName = (String) userMap.get("originalFileName");
 		String isDeleteImg = (String) userMap.get("isDeleteImg");
 		String user_img = upload(multipartRequest, isDeleteImg);
-		logger.info("user_img1={}", user_img);
+		//logger.info("user_img1={}", user_img);
 		
 		String message = "";
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html;charset=utf-8");
 		
-		logger.info("user_map={}", userMap.toString());
+		//logger.info("user_map={}", userMap.toString());
 		
 		try {
 
@@ -142,7 +142,7 @@ public class MyPageControllerImpl implements MyPageController{
 				// 이미지 그대로
 				user_img = originalFileName;
 			}
-			logger.info("user_img2={}", user_img);
+			//logger.info("user_img2={}", user_img);
 			userMap.put("user_img", user_img);
 			myPageService.modProfile(userMap);
 			
@@ -198,15 +198,15 @@ public class MyPageControllerImpl implements MyPageController{
 		}
 		
 		while (fileNames.hasNext()) {
-			logger.info("이미지 변경함");
+			//logger.info("이미지 변경함");
 			String fileName = fileNames.next();
 			logger.info("fileName={}", fileName);
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			imageFileName = mFile.getOriginalFilename();
-			logger.info("imageFileName={}", imageFileName);
+			//logger.info("imageFileName={}", imageFileName);
 			
 			if(isDeleteImg.equals("false") && (imageFileName == null || imageFileName.equals("") || imageFileName.length() == 0)) {
-				logger.info("이미지 그대로");
+				//logger.info("이미지 그대로");
 				return null;
 			}
 			
