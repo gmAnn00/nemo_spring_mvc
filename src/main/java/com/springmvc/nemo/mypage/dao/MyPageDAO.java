@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
 import com.springmvc.nemo.mypage.vo.MyProfileVO;
 import com.springmvc.nemo.user.vo.InterestsVO;
+import com.springmvc.nemo.user.vo.UserVO;
 
 public interface MyPageDAO {
 	
@@ -24,5 +25,9 @@ public interface MyPageDAO {
 	public void deleteInterests(String user_Id) throws DataAccessException;
 
 	public void addInterests(List<InterestsVO> interestsList) throws DataAccessException;
+
+	public boolean checkPassword(UserVO userVO) throws DataAccessException;
+
+	public void delUser(UserVO userVO) throws DataAccessException;
 
 }

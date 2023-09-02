@@ -7,7 +7,8 @@
 
 	<select id="findMyProfileById" parameterType="String" resultType="myProfileVO">
 		<![CDATA[
-        	SELECT user_id, user_name, nickname, user_addr1, phone, email, TO_CHAR(birthdate, 'yyyy-mm-dd') as birthdate, user_img FROM USER_TBL WHERE user_id = #{user_id}
+        	SELECT user_id, user_name, nickname, user_addr1, phone, email, TO_CHAR(birthdate, 'yyyy-mm-dd') as birthdate,
+        	 user_img FROM USER_TBL WHERE user_id = #{user_id}
       ]]>
 	</select>
 	
@@ -44,6 +45,16 @@
 			VALUES(#{interest.user_id}, #{interest.main_cate}, #{interest.sub_cate})
 		</foreach>
 	</insert>
+	
+	<select id="checkPassword" parameterType="userVO" resultType="boolean">
+		<![CDATA[
+         SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM USER_TBL WHERE user_id = #{user_id} AND password = #{password} AND cancel = 0
+      ]]>
+	</select>
+	
+	<update id="delUser" parameterType="userVO">
+		UPDATE USER_TBL SET cancel=1 WHERE user_id=#{user_id} AND password=#{password} AND cancel=0
+	</update>
 
 
 </mapper>

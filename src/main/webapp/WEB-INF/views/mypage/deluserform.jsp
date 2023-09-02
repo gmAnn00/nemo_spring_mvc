@@ -12,17 +12,17 @@
 <head>
 <meta charset="UTF-8">
 <title>네모: 마이페이지</title>
-<link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-<link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-<link rel="stylesheet" href="${contextPath}/css/common.css" />
-<link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-<link rel="stylesheet" href="${contextPath}/css/delUser.css" />
+<link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+<link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/delUser.css" />
 <script
   src="https://kit.fontawesome.com/bc604c01cc.js"
   crossorigin="anonymous"
 ></script>
-<script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
-<script src="${contextPath}/js/header.js"></script>
+<script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
+<script src="${contextPath}/resources/js/header.js"></script>
 
 </head>
 <body>
@@ -37,7 +37,7 @@
             <h2 class="sc2_menu_title">프로필</h2>
             <ul class="sc2_menu_list">
               <li>
-                <a href="${contextPath}/mypage">
+                <a href="${contextPath}/mypage/myprofile">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name submenu_select">
                       <span>프로필</span>
@@ -47,7 +47,7 @@
                 </a>
               </li>
               <li>
-                <a href="${contextPath}/mypage/mySchedule">
+                <a href="${contextPath}/mypage/myschedule">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name"><span>내 일정</span></div>
                     <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -55,7 +55,7 @@
                 </a>
               </li>
               <li>
-                <a href="${contextPath}/mypage/myGroupList">
+                <a href="${contextPath}/mypage/mygroup">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name menu_angle">
                       <span>내 소모임</span>
@@ -65,7 +65,7 @@
                 </a>
               </li>
               <li>
-                <a href="${contextPath}/mypage/myBoardList">
+                <a href="${contextPath}/mypage/myboard">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name">
                       <span>내가 쓴 글·댓글</span>
@@ -100,8 +100,8 @@
           <div class="withdrawal">
             <h3>정말로 네모를 <span>탈퇴</span>하시겠습니까?</h3>
             <h4>탈퇴하시려면 비밀번호를 입력하고 탈퇴하기를 눌러주세요</h4>
-            <form action="${contextPath}/mypage/delUser" method="post">
-              비밀번호 확인 <input type="text" name="delpassword" />
+            <form action="${contextPath}/mypage/deluser" method="post">
+              비밀번호 확인 <input type="password" name="password" />
               <input type="submit" class="buttonCancle" value="탈퇴하기" />
             </form>
           </div>

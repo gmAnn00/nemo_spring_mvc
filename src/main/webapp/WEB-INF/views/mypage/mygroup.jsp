@@ -8,11 +8,11 @@ pageEncoding="UTF-8" isELIgnored="false" %>
   <head>
     <meta charset="UTF-8" />
     <title>네모: 마이페이지</title>
-    <link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-    <link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-    <link rel="stylesheet" href="${contextPath}/css/common.css" />
-    <link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-    <link rel="stylesheet" href="${contextPath}/css/myGroupList.css" />
+    <link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/myGroupList.css" />
     <link
       href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
       rel="stylesheet"
@@ -25,9 +25,9 @@ pageEncoding="UTF-8" isELIgnored="false" %>
       src="https://kit.fontawesome.com/bc604c01cc.js"
       crossorigin="anonymous"
     ></script>
-    <script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
-    <script src="${contextPath}/js/header.js"></script>
-    <script src="${contextPath}/js/myGroupList.js"></script>
+    <script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
+    <script src="${contextPath}/resources/js/header.js"></script>
+    <script src="${contextPath}/resources/js/myGroupList.js"></script>
   </head>
   <body>
     <jsp:include page="../header.jsp" flush="true"></jsp:include>
@@ -41,7 +41,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
             <h2 class="sc2_menu_title">마이페이지</h2>
             <ul class="sc2_menu_list">
               <li>
-                <a href="${contextPath}/mypage">
+                <a href="${contextPath}/mypage/myprofile">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name"><span>프로필</span></div>
                     <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -49,7 +49,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                 </a>
               </li>
               <li>
-                <a href="${contextPath}/mypage/mySchedule">
+                <a href="${contextPath}/mypage/myschedule">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name"><span>내 일정</span></div>
                     <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -57,7 +57,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                 </a>
               </li>
               <li>
-                <a href="${contextPath}/mypage/myGroupList">
+                <a href="${contextPath}/mypage/mygroup">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name submenu_select">
                       <span>내 소모임</span>
@@ -67,7 +67,7 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                 </a>
               </li>
               <li>
-                <a href="${contextPath}/mypage/myBoardList">
+                <a href="${contextPath}/mypage/myboard">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name">
                       <span>내가 쓴 글·댓글</span>

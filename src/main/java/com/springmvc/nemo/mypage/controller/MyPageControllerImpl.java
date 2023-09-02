@@ -311,6 +311,76 @@ public class MyPageControllerImpl implements MyPageController{
 		return mav;
 	}
 	
+	@RequestMapping(value = "/mypage/deluserform", method = RequestMethod.GET)
+	@Override
+	public ModelAndView delUserForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		
+		return mav;
+		
+	}
+	
+	@RequestMapping(value = "/mypage/deluser", method = RequestMethod.POST)
+	@Override
+	public ModelAndView delUser(@RequestParam("password") String password, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		UserVO userVO = new UserVO();
+		userVO.setUser_id(user_id);
+		userVO.setPassword(password);
+		
+		// true : 탈퇴 성공, false : 비밀번호 틀림. 탈퇴 실패
+		boolean result = myPageService.delUser(userVO);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(result) {
+			session.invalidate();
+			mav.addObject("data", new Message("네모 탈퇴를 완료하였습니다.", request.getContextPath()+"/index"));
+			
+		} else {
+			mav.addObject("data", new Message("비밀번호가 일치하지 않습니다.", request.getContextPath()+"/mypage/deluserform"));
+		}
+		mav.setViewName("message");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/mypage/myschedule", method = RequestMethod.GET)
+	@Override
+	public ModelAndView mySchedule(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/mypage/mygroup", method = RequestMethod.GET)
+	@Override
+	public ModelAndView myGroup(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/mypage/myboard", method = RequestMethod.GET)
+	@Override
+	public ModelAndView myBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		
+		return mav;
+	}
+	
 	
 	private String upload(MultipartHttpServletRequest multipartRequest, String isDeleteImg) throws Exception {
 		String imageFileName = null;

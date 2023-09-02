@@ -26,4 +26,15 @@ public interface MyPageController {
 	public ModelAndView modInterests(@RequestParam("interests") String interests,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	public ModelAndView delUserForm(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView delUser(@RequestParam("password") String password,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView mySchedule(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView myGroup(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView myBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }

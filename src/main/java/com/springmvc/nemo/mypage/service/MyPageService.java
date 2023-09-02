@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
 import com.springmvc.nemo.mypage.vo.MyProfileVO;
 import com.springmvc.nemo.user.vo.InterestsVO;
+import com.springmvc.nemo.user.vo.UserVO;
 
 public interface MyPageService {
 	
@@ -22,5 +23,7 @@ public interface MyPageService {
 	public void modImage(Map<String, Object> userMap) throws DataAccessException;
 
 	public void modInterests(List<InterestsVO> interestsList) throws DataAccessException;
+
+	public boolean delUser(UserVO userVO) throws DataAccessException;
 	
 }

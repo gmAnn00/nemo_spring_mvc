@@ -10,16 +10,16 @@
 <head>
 <meta charset="UTF-8">
 <title>네모: 마이페이지</title>
-<link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-<link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-<link rel="stylesheet" href="${contextPath}/css/common.css" />
-<link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-<link rel="stylesheet" href="${contextPath}/css/myBoardList.css" />
-<link rel="stylesheet" href="${contextPath}/css/tabmenu.css">
+<link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+<link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/myBoardList.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/tabmenu.css">
 <script src="https://kit.fontawesome.com/bc604c01cc.js"crossorigin="anonymous"></script>
-<script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
-<script src="${contextPath}/js/header.js"></script>
-<script src="${contextPath}/js/tabmenu.js"></script>
+<script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
+<script src="${contextPath}/resources/js/header.js"></script>
+<script src="${contextPath}/resources/js/tabmenu.js"></script>
     
 </head>
 <body>
@@ -33,7 +33,7 @@
 				<div class="sc2_menu">
 					<h2 class="sc2_menu_title">프로필</h2>
 					<ul class="sc2_menu_list">
-						<li><a href="${contextPath}/mypage">
+						<li><a href="${contextPath}/mypage/myprofile">
 								<div class="sc2_icon_menu">
 									<div class="menu_submenu_name">
 										<span>프로필</span>
@@ -41,7 +41,7 @@
 									<i class="fa-solid fa-angle-right menu_angle"></i>
 								</div>
 						</a></li>
-						<li><a href="${contextPath}/mypage/mySchedule">
+						<li><a href="${contextPath}/mypage/myschedule">
 								<div class="sc2_icon_menu">
 									<div class="menu_submenu_name">
 										<span>내 일정</span>
@@ -49,7 +49,7 @@
 									<i class="fa-solid fa-angle-right menu_angle"></i>
 								</div>
 						</a></li>
-						<li><a href="${contextPath}/mypage/myGroupList">
+						<li><a href="${contextPath}/mypage/mygroup">
 								<div class="sc2_icon_menu">
 									<div class="menu_submenu_name menu_angle">
 										<span>내 소모임</span>
@@ -57,7 +57,7 @@
 									<i class="fa-solid fa-angle-right menu_angle"></i>
 								</div>
 						</a></li>
-						<li><a href="${contextPath}/mypage/myBoardList">
+						<li><a href="${contextPath}/mypage/myboard">
 								<div class="sc2_icon_menu">
 									<div class="menu_submenu_name menu_angle submenu_select">
 										<span>내가 쓴 글·댓글</span>

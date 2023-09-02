@@ -11,6 +11,7 @@ import com.springmvc.nemo.mypage.dao.MyPageDAO;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
 import com.springmvc.nemo.mypage.vo.MyProfileVO;
 import com.springmvc.nemo.user.vo.InterestsVO;
+import com.springmvc.nemo.user.vo.UserVO;
 
 @Service("myPageService")
 public class MyPageServiceImpl implements MyPageService{
@@ -53,6 +54,20 @@ public class MyPageServiceImpl implements MyPageService{
 		String user_id = interestsList.get(0).getUser_id();
 		myPageDAO.deleteInterests(user_id);
 		myPageDAO.addInterests(interestsList);
+	}
+	
+	@Override
+	public boolean delUser(UserVO userVO) throws DataAccessException {
+		boolean result = myPageDAO.checkPassword(userVO);
+		
+		// true : 아이디와 비밀번호 일치
+		if(result) {
+			myPageDAO.delUser(userVO);
+			return true;
+		}
+		
+		
+		return false;
 	}
 
 }

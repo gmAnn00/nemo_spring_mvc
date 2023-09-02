@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
 import com.springmvc.nemo.mypage.vo.MyProfileVO;
 import com.springmvc.nemo.user.vo.InterestsVO;
+import com.springmvc.nemo.user.vo.UserVO;
 
 @Repository("myPageDAO")
 public class MyPageDAOImpl implements MyPageDAO{
@@ -58,6 +59,18 @@ public class MyPageDAOImpl implements MyPageDAO{
 	public void addInterests(List<InterestsVO> interestsList) throws DataAccessException {
 		
 		sqlSession.update("mapper.myPage.addInterests", interestsList);
+	}
+	
+	@Override
+	public boolean checkPassword(UserVO userVO) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.myPage.checkPassword", userVO);
+	}
+	
+	@Override
+	public void delUser(UserVO userVO) throws DataAccessException {
+		
+		sqlSession.update("mapper.myPage.delUser", userVO);
 	}
 
 }
