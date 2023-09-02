@@ -12,44 +12,14 @@
 <head>
 <meta charset="UTF-8">
 <title>네모: 소모임 만들기</title>
-<link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-<link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-<link rel="stylesheet" href="${contextPath}/css/common.css" />
-<link rel="stylesheet" href="${contextPath}/css/jquery-ui.min.css" />
-<link rel="stylesheet" href="${contextPath}/css/createGroup.css" />
-<script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
-<script src="${contextPath}/js/header.js"></script>
+<link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+<link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/jquery-ui.min.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/createGroup.css" />
+<script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
+<script src="${contextPath}/resources/js/header.js"></script>
 <script src="https://kit.fontawesome.com/f9a2702e84.js" crossorigin="anonymous"></script>
- 
-<script>
-function fn_app_st() {
-	let app_st = $("#app_st").prop("checked")? "1" : "0";
-	$("#app_st").val(app_st);
-	console.log($("#app_st").val());
-}
-
-function Check_test() {
-	var arrSelect=document.getElementsByName("terms");
-	let inputLength = $('#grpDescription').val().length;
-	console.log(inputLength);
-	if(inputLength<100) {
-		alert("100자 이상 입력해주세요");
-		$('#grpDescription').focus();
-	} else {
-		for(var i=0; i<arrSelect.length; i++) {
-			if(arrSelect[i].checked ) {
-				document.getElementById("createGroup").submit();
-				return true;
-			}
-		}
-		alert("약관동의 체크 해주세요.");
-		return false;	
-	}
-}
-
-
-</script>
-
 </head>
 <body>
 	<jsp:include page="../header.jsp" flush="true"></jsp:include>
@@ -68,7 +38,7 @@ function Check_test() {
         <!-- 소모임 생성 정보 입력 영역 -->
         <div class="formArea">
           <form
-            action="${contextPath}/group/createGroup/create"
+            action="${contextPath}/group/creategroup"
             method="post"
             id="createGroup"
             name="createGroup"
@@ -81,7 +51,7 @@ function Check_test() {
         <div class="uploadArea">
           <div class="imgCrop">
             <img
-              src="${contextPath}/images/sea.jpg"
+              src="${contextPath}/resources/images/sea.jpg"
               alt=""
               class="grpImg"
               id="previewImage"
@@ -94,7 +64,7 @@ function Check_test() {
 	          </label>
 	          <input
 	            type="file"
-	            name="grp_img"
+	            name="group_img"
 	            id="grp_img"
 	            class="hidden"
 	            accept="image/gif, image/jpeg, image/png"
@@ -110,7 +80,7 @@ function Check_test() {
                 <label for="groupName">소모임이름</label>
                 <input
                   type="text"
-                  name="grp_name"
+                  name="group_name"
                   id="groupName"
                   minlength="2"
                   maxlength="10"
@@ -122,7 +92,7 @@ function Check_test() {
                 <label for="groupNum">소모임인원</label>
                 <input
                   type="text"
-                  name="mem_no"
+                  name="max_memno"
                   id="groupNum"
                   maxlength="3"
                   placeholder="2~50"
@@ -139,7 +109,7 @@ function Check_test() {
                     <td>
                       <div class="selectBox">
                         <select
-                          name="main_name"
+                          name="main_cate"
                           id="largeCate"
                           onchange="fn_category_selected(this);"
                           class="commonSelect input"
@@ -151,7 +121,7 @@ function Check_test() {
                     <td>
                       <div class="selectBox">
                         <select
-                          name="sub_name"
+                          name="sub_cate"
                           id="smallCate"
                           class="commonSelect select"
                           onchange="fn_category_selected(this);"
@@ -170,7 +140,7 @@ function Check_test() {
                 <input
                   type="text"
                   id="zipcode"
-                  name="grp_zipcode"
+                  name="group_zipcode"
                   maxlength="5"
                   size="5"
                   placeholder="우편번호"
@@ -188,21 +158,21 @@ function Check_test() {
                 <input
                   type="text"
                   id="grp_addr1"
-                  name="grp_addr1"
+                  name="group_addr1"
                   placeholder="주소"
                   readonly
                 />
                 <input
                   type="text"
                   id="grp_addr2"
-                  name="grp_addr2"
+                  name="group_addr2"
                   placeholder="상세주소"
                 />
               </div>
               <div class="textAreaTd">
                 <label for="grpDescription">소모임소개</label>
                 <textarea
-                  name="grp_intro"
+                  name="group_desc"
                   id="grpDescription"
                   placeholder="메세지를 입력해주세요."
                   rows="10"
@@ -213,7 +183,7 @@ function Check_test() {
               </div>
               <div class="checkConfirm">
                 <label>가입설정</label>
-                <input type="checkbox" name="app_st" id="app_st" value="0" onclick="fn_app_st()"/>
+                <input type="checkbox" name="app_st" id="app_st"/>
                 <label class="checkLabel" for="app_st">소모임장 승인제 (체크시 승인된 사람만 가입가능합니다.)</label>
 
                 <input type="checkbox" name="terms" id="terms"/>
@@ -225,7 +195,7 @@ function Check_test() {
                   name="createGrpBtn"
                   id="createGrpBtn"
                   class="button"
-                  onclick="Check_test()"
+                  onclick="fn_app_st();Check_test();"
                   value="소모임 만들기"
                 > 소모임 만들기 </a>
                 <input
@@ -249,7 +219,7 @@ function Check_test() {
 	
 	<jsp:include page="../footer.jsp" flush="true"></jsp:include>
 	
-	<script src="${contextPath}/js/createGroup.js"></script>
+	<script src="${contextPath}/resources/js/createGroup.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

@@ -35,7 +35,7 @@
 	                       	 <div class="profile"><img class="fa-solid" src="${contextPath}/userimagedownload?user_id=${user_id}&user_img=${user_img}" alt="프로필사진"><span class="profile_name">${nickname}</span></div>
 	                    	</a>
 	               		 </li>
-	              		 <li><a href="${contextPath}">소모임 만들기</a></li>
+	              		 <li><a href="${contextPath}/group/creategroupform">소모임 만들기</a></li>
 	               		 <li><a href="${contextPath}/search">소모임 검색</a></li>
 	               		 <li><a href="${contextPath}/mypage/myprofile">프로필</a></li>
 	               		 <li><a href="${contextPath}/mypage/myschedule">내 일정</a></li>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.group">
+
+	<select id="getNewGroupId" resultType="int">
+		<![CDATA[
+         SELECT nvl(max(group_id), 0)+1 FROM GROUP_TBL
+      ]]>
+	</select>
+	
+	<insert id="createGroup" parameterType="java.util.Map">
+		<![CDATA[
+         INSERT INTO GROUP_TBL(group_id, group_name, group_leader, max_memno,
+         group_zipcode, group_addr1, group_addr2, group_desc, permission, main_cate, sub_cate, group_img)
+         VALUES (#{group_id}, #{group_name}, #{group_leader}, #{max_memno},
+         #{group_zipcode}, #{group_addr1}, #{group_addr2}, #{group_desc}, #{permission}, #{main_cate}, #{sub_cate}, #{group_img})
+      ]]>
+	</insert>
+	
+	<insert id="joinGroup" parameterType="joinVO">
+		<![CDATA[
+         INSERT INTO JOIN_TBL(group_id, user_id) VALUES (#{group_id}, #{user_id})
+      ]]>
+	</insert>
+
+</mapper>
