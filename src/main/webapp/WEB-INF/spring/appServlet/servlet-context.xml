@@ -40,6 +40,14 @@
 			<mvc:mapping path="/**"/>
 			<beans:bean class="com.springmvc.nemo.common.interceptor.ViewNameInterceptor" />
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/mypage/**"/>
+			<mvc:mapping path="/group/**"/>
+			<mvc:mapping path="/qna/**"/>
+			<mvc:mapping path="/admin/**"/>
+			<beans:bean class="com.springmvc.nemo.common.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	
