@@ -25,5 +25,30 @@
          INSERT INTO JOIN_TBL(group_id, user_id) VALUES (#{group_id}, #{user_id})
       ]]>
 	</insert>
+	
+	<select id="getGroupInfo" parameterType="int" resultType="groupVO">
+		<![CDATA[
+         SELECT * FROM GROUP_TBL WHERE group_id=#{group_id}
+      ]]>
+	</select>
+	
+	<select id="getGroupLeaderInfo" parameterType="int" resultType="userVO">
+		<![CDATA[
+         SELECT u.nickname, u.user_img FROM GROUP_TBL g, USER_TBL u WHERE g.group_id=#{group_id} AND g.group_leader = u.user_id
+      ]]>
+	</select>
+	
+	<select id="getRecentDate" parameterType="int" resultType="java.sql.Date">
+		<![CDATA[
+         SELECT create_date FROM (SELECT * from BOARD_TBL order by create_date desc) WHERE group_id=#{group_id} AND rownum=1
+      ]]>
+	</select>
+	
+	<select id="isBookmark" parameterType="bookmarkVO" resultType="boolean">
+		<![CDATA[
+         SELECT DECODE(count(*), 1, 'true' , 'false') FROM BOOKMARK_TBL WHERE user_id=#{user_id} AND group_id=#{group_id}
+      ]]>
+	</select>
+	
 
 </mapper>

@@ -3,7 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:set var="group" value="${groupInfo}" />
 <%
 request.setCharacterEncoding("utf-8");
 %>
@@ -12,16 +11,16 @@ request.setCharacterEncoding("utf-8");
 <head>
 <meta charset="UTF-8">
 <title>네모: 모임 소개</title>
-<link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-<link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-<link rel="stylesheet" href="${contextPath}/css/common.css" />
-<link rel="stylesheet" href="${contextPath}/css/jquery-ui.min.css" />
-<link rel="stylesheet" href="${contextPath}/css/sectionTitle.css" />
-<link rel="stylesheet" href="${contextPath}/css/groupInfo.css" />
-<script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
+<link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+<link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/jquery-ui.min.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/sectionTitle.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/groupInfo.css" />
+<script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea6bda86230b8415e663eb00385b3b43&libraries=services"></script>
-<script src="${contextPath}/js/header.js"></script>
-<script src="${contextPath}/js/groupInfo.js"></script>
+<script src="${contextPath}/resources/js/header.js"></script>
+<script src="${contextPath}/resources/js/groupInfo.js"></script>
 <script src="https://kit.fontawesome.com/f9a2702e84.js"
 	crossorigin="anonymous"></script>
 
@@ -30,7 +29,7 @@ request.setCharacterEncoding("utf-8");
 	<jsp:include page="../header.jsp" flush="true"></jsp:include>
 	
     <!-- section1 시작 -->
-    <div class="section1" style="background-image:url('${contextPath}/groupImageDownload?group_id=${group.groupVO.grp_id}&group_img=${group.groupVO.grp_img}')">
+    <div class="section1" style="background-image:url('${contextPath}/groupimagedownload?group_id=${groupVO.group_id}&group_img=${groupVO.group_img}')">
       <div class="group_containter">
         
         <div class="group_all">
@@ -75,22 +74,22 @@ request.setCharacterEncoding("utf-8");
 			</button>
 			<!-- 하트 표시 종료 -->
             <div class="group_img">
-                <img src="${contextPath}/groupImageDownload?group_id=${group.groupVO.grp_id}&group_img=${group.groupVO.grp_img}" />
+                <img src="${contextPath}/groupimagedownload?group_id=${groupVO.group_id}&group_img=${groupVO.group_img}" />
             </div>
             <div class="group_name">
-                <a href="${contextPath}/group/groupMain?group_id=${group.groupVO.grp_id}">
-                    <span class="group_name_title">${group.groupVO.grp_name}</span>                    
+                <a href="${contextPath}/group/groupmain?group_id=${groupVO.group_id}">
+                    <span class="group_name_title">${groupVO.group_name}</span>                    
                 </a>
 
                 <div class="group_info_category">
-                    <div class="category_box group_info_category_box">${group.groupVO.main_name} | ${group.groupVO.sub_name}</div>
+                    <div class="category_box group_info_category_box">${groupVO.main_cate} | ${groupVO.sub_cate}</div>
 	                 <div class="group_info_member">
 	                     <div class="group_info_title"><span>MEMBER</span></div>
-	                     <div class="group_info_contents"><span class="group_info_number">${group.currentMemNo} / ${group.groupVO.mem_no}</span></div>
+	                     <div class="group_info_contents"><span class="group_info_number">${groupVO.current_memno} / ${groupVO.max_memno}</span></div>
 	                 </div>
 	                 <div class="group_info_follower">
 	                     <div class="group_info_title"><span>SINCE</span></div>
-	                     <div class="group_info_contents"><span class="group_info_date"><fmt:formatDate pattern="yyyy.MM.dd." value="${group.groupVO.create_date}"/></span></div>
+	                     <div class="group_info_contents"><span class="group_info_date"><fmt:formatDate pattern="yyyy.MM.dd." value="${groupVO.create_date}"/></span></div>
 	                 </div>
             	</div>
             </div>
@@ -109,15 +108,15 @@ request.setCharacterEncoding("utf-8");
 			<div class="shortInfoArea">
 				<div class="shortInfoDetail">
 					<h3>네모설명</h3>
-					<p class="detailInfo">${groupVO.grp_intro}</p>
+					<p class="detailInfo">${groupVO.group_desc}</p>
 					
 					<!-- 기타 정보 영역 시작-->
 					<div class="etcInfoArea">
 						<h3>기타정보</h3>
-						<c:if test="${app_st == 0}">
+						<c:if test="${groupVO.permission == 0}">
 							<p class="etcInfo">가입 즉시 활동할 수 있는 소모임입니다.</p>
 						</c:if>
-						<c:if test="${app_st == 1}">
+						<c:if test="${groupVO.permission == 1}">
 							<p class="etcInfo">가입 시 소모임장의 승인이 필요합니다.</p>
 						</c:if>
 					</div>
@@ -130,15 +129,15 @@ request.setCharacterEncoding("utf-8");
 			
 				<div class="shortInfoTbl">
 					<div class="shortInfoTblMng">
-						<h3>개설자</h3>
+						<h3>리더</h3>
 						<div class="shortInfoTblMngImgArea">
-							<img src="${contextPath}/userImageDownload?user_id=${mngUserVO.user_id}&user_img=${mngUserVO.user_img}" alt="grp_mng">
-							<span>${mngUserVO.nickname}</span>
+							<img src="${contextPath}/userimagedownload?user_id=${groupVO.group_leader}&user_img=${leaderUserVO.user_img}" alt="소모임 리더">
+							<span>${leaderUserVO.nickname}</span>
 						</div>				
 					</div>
 					<div class="shortInfoTblHeart">
 						<span class="shortInfoTblTitle">찜한 인원</span>
-						<span class="shortInfoTblHeartContent">${groupBookmarkNum}명</span>					
+						<span class="shortInfoTblHeartContent">${groupVO.bookmark_no}명</span>					
 					</div>
 					<div class="shortInfoTblRecent">
 						<span class="shortInfoTblTitle">최근활동일</span>
@@ -167,7 +166,7 @@ request.setCharacterEncoding("utf-8");
 						<div id="map">
 							
 						</div>
-						<span>${groupVO.grp_addr1}</span>
+						<span>${groupVO.group_addr1}</span>
 					</div>
 				</div>
 
@@ -185,7 +184,7 @@ request.setCharacterEncoding("utf-8");
 
 	<jsp:include page="../footer.jsp" flush="true"></jsp:include>
 	<input type="hidden" id="user_id_hidden" name="user_id_hidden" value="${user_id}"/>
-	<input type="hidden" id="grp_addr1_hidden" name="grp_addr1_hidden" value="${groupVO.grp_addr1}" />
+	<input type="hidden" id="grp_addr1_hidden" name="grp_addr1_hidden" value="${groupVO.group_addr1}" />
 	
 </body>
 </html>

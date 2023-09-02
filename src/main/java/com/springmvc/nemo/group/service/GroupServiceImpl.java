@@ -1,5 +1,6 @@
 package com.springmvc.nemo.group.service;
 
+import java.sql.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.springmvc.nemo.group.dao.GroupDAO;
 import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.group.vo.JoinVO;
+import com.springmvc.nemo.user.vo.BookmarkVO;
+import com.springmvc.nemo.user.vo.UserVO;
 
 @Service("groupService")
 public class GroupServiceImpl implements GroupService{
@@ -30,5 +33,29 @@ public class GroupServiceImpl implements GroupService{
 		groupDAO.joinGroup(joinVO);
 		
 		return group_id;
+	}
+	
+	@Override
+	public GroupVO getGroupInfo(int group_id) throws DataAccessException {
+
+		return groupDAO.getGroupInfo(group_id);
+	}
+	
+	@Override
+	public UserVO getGroupLeaderInfo(int group_id) throws DataAccessException {
+		
+		return groupDAO.getGroupLeaderInfo(group_id);
+	}
+	
+	@Override
+	public Date getRecentDate(int group_id) throws DataAccessException {
+		
+		return groupDAO.getRecentDate(group_id);
+	}
+	
+	@Override
+	public boolean isBookmark(BookmarkVO bookmarkVO) throws DataAccessException {
+		
+		return groupDAO.isBookmark(bookmarkVO);
 	}
 }

@@ -1,6 +1,7 @@
 package com.springmvc.nemo.group.controller;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +31,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.springmvc.nemo.common.Message;
 import com.springmvc.nemo.group.service.GroupService;
 import com.springmvc.nemo.group.vo.GroupVO;
+import com.springmvc.nemo.user.vo.BookmarkVO;
+import com.springmvc.nemo.user.vo.UserVO;
 
 @Controller("groupController")
 public class GroupControllerImpl implements GroupController{
@@ -117,6 +122,51 @@ public class GroupControllerImpl implements GroupController{
 		}
 		
 		return resEnt;
+	}
+	
+	@RequestMapping(value = "/group/groupinfo", method = RequestMethod.GET)
+	@Override
+	public ModelAndView groupInfo(
+			@RequestParam String group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		BookmarkVO bookmarkVO = new BookmarkVO();
+		bookmarkVO.setUser_id(user_id);
+		bookmarkVO.setGroup_id(Integer.parseInt(group_id));
+		
+		GroupVO groupVO = groupService.getGroupInfo(Integer.parseInt(group_id));
+		UserVO leaderUserVO = groupService.getGroupLeaderInfo(Integer.parseInt(group_id));
+		Date recentDate = groupService.getRecentDate(Integer.parseInt(group_id));
+		boolean isBookmark = groupService.isBookmark(bookmarkVO);
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("groupVO", groupVO);
+		mav.addObject("leaderUserVO", leaderUserVO);
+		mav.addObject("recentDate", recentDate);
+		mav.addObject("isBookmark", isBookmark);
+		
+		return mav;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/group/bookmark", method = {RequestMethod.GET, RequestMethod.POST})
+	@Override
+	public String bookmark(@RequestParam String user_id, @RequestParam String group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		BookmarkVO bookmarkVO = new BookmarkVO();
+		bookmarkVO.setUser_id(user_id);
+		bookmarkVO.setGroup_id(Integer.parseInt(group_id));
+		
+		
+		
+		return null;
 	}
 	
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {

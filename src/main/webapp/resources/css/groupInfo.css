@@ -193,7 +193,7 @@ svg {
 /* 소모임 자세한 정보 영역 */
 
 .infoDetailArea {
-  
+    margin-top: 60px;
 }
 
 .infoDetailArea section {
