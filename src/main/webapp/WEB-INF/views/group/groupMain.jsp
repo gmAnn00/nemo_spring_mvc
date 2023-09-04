@@ -5,12 +5,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:set var="isMng" value="false" />
-<c:forEach var="elem" items="${grpMngList}" >
-	<c:if test="${elem eq param.group_id}">
-		<c:set var="isMng" value="true" />
-	</c:if>
-</c:forEach>
 
 <%
 	request.setCharacterEncoding("utf-8");
@@ -20,22 +14,22 @@
 <head>
 <meta charset="UTF-8">
 <title>네모: 모임 메인페이지</title>
-<link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-<link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-<link rel="stylesheet" href="${contextPath}/css/common.css" />
-<link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-<link rel="stylesheet" href="${contextPath}/css/sectionTitle.css" />
-<link rel="stylesheet" href="${contextPath}/css/groupMain.css" />
-<link rel="stylesheet" href="${contextPath}/css/jquery-ui.min.css" />
-<script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
-<script src="${contextPath}/js/header.js"></script>
-<script src="${contextPath}/js/groupMain.js"></script>
+<link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+<link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/sectionTitle.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/groupMain.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/jquery-ui.min.css" />
+<script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
+<script src="${contextPath}/resources/js/header.js"></script>
+<script src="${contextPath}/resources/js/groupMain.js"></script>
 <script src="https://kit.fontawesome.com/f9a2702e84.js" crossorigin="anonymous"></script>
 </head>
 <body>
 	<jsp:include page="../header.jsp" flush="true"></jsp:include>
 	<!-- section1 -->
-	<jsp:include page="./groupHeader.jsp" flush="true"></jsp:include>
+	<jsp:include page="./groupheader.jsp" flush="true"></jsp:include>
 	<!-- section1종료 -->
 	
 	<!-- main content 시작-->
@@ -47,7 +41,7 @@
                         <h2 class="sc2_menu_title">나의 모임</h2>
                         <ul class="sc2_menu_list">
    							<c:choose>
-   								<c:when test="${isMng == true }">
+   								<c:when test="${isLeader == true }">
    									<li>
 		                                <a href="${contextPath}/group/schedule?group_id=${param.group_id}">
 		                                    <div class="sc2_icon_menu">
@@ -65,7 +59,7 @@
 		                                </a>
 		                            </li>
 		                            <li>
-		                                <a href="${contextPath}/group/manager/member?group_id=${param.group_id}">
+		                                <a href="${contextPath}/group/leader/memberinfo?group_id=${param.group_id}">
 		                                    <div class="sc2_icon_menu">
 		                                        <div class="menu_submenu_name"><span>멤버</span></div>
 		                                        <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -73,15 +67,15 @@
 		                                </a>
 		                            </li>
 		                            <li>
-		                                <a href="${contextPath}/group/manager/setting?group_id=${param.group_id}">
+		                                <a href="${contextPath}/group/leader/setting?group_id=${param.group_id}">
 		                                    <div class="sc2_icon_menu">
 		                                        <div class="menu_submenu_name"><span>소모임관리</span></div>
 		                                        <i class="fa-solid fa-angle-right menu_angle"></i>
 		                                    </div>
 		                                </a>
 		                            </li>
-					     <li>
-		                                <a href="${contextPath}/group/manager/member/delGroupForm?group_id=${param.group_id}">
+					     			<li>
+		                                <a href="${contextPath}/group/leader/delgroupform?group_id=${param.group_id}">
 		                                    <div class="sc2_icon_menu reportArea">
 		                                        <div class="menu_submenu_name reportTitle"><span>소모임삭제</span></div>
 		                                        <i class="fa-solid fa-arrow-right menu_angle"></i>
@@ -243,7 +237,7 @@
 								<c:set var="locationU" value="${user.user_addr1.substring(0, idx)}"/>
                                 	<div class="slideContent">
                                 		<div class="memImg">
-                                			<img src="${contextPath}/userImageDownload?user_id=${user.user_id}&user_img=${user.user_img}" />
+                                			<img src="${contextPath}/userimagedownload?user_id=${user.user_id}&user_img=${user.user_img}" />
                                 		</div>
                                 		<br/>
                                 		<div class="memName">

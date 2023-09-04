@@ -200,6 +200,21 @@ public class GroupControllerImpl implements GroupController{
 		return mav;
 	}
 	
+	@RequestMapping(value = "/group/groupmain", method = RequestMethod.GET)
+	@Override
+	public ModelAndView groupMain(@RequestParam("group_id") String group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		//logger.info("isLeader={}",request.getAttribute("isLeader"));
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		//mav.addObject("groupHeader", groupHeader);
+		//mav.addObject("isLeader", isLeader);
+		return mav;
+	}
+	
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
 		String imageFileName = null;
 		Iterator<String> fileNames = multipartRequest.getFileNames();

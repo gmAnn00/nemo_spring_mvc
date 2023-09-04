@@ -108,7 +108,7 @@
           <div class="withdrawal">
             <h3>정말로 소모임을 <span>삭제</span>하시겠습니까?</h3>
             <h4>삭제하시려면 "삭제하기"를 입력하고 버튼을 눌러주세요</h4>
-            <form action="${contextPath}/group/manager/member/delGroup?group_id=${param.group_id}" method="post">
+            <form action="${contextPath}/group/leader/delgroup?group_id=${param.group_id}" method="post">
               <input type="text" name="delString" placeholder="'삭제하기'를 입력하세요"/>
               <input type="submit" class="buttonCancle" value="소모임 삭제" />
             </form>

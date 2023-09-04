@@ -48,6 +48,33 @@
 			<mvc:mapping path="/admin/**"/>
 			<beans:bean class="com.springmvc.nemo.common.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/group/groupmain"/>
+			<mvc:mapping path="/group/schedule"/>
+			<mvc:mapping path="/group/board"/>
+			<mvc:mapping path="/group/member"/>
+			<mvc:mapping path="/group/leader/**"/>
+			<beans:bean class="com.springmvc.nemo.common.interceptor.CheckMemberInterceptor"/>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/group/groupmain"/>
+			<mvc:mapping path="/group/schedule"/>
+			<mvc:mapping path="/group/board"/>
+			<mvc:mapping path="/group/member"/>
+			<mvc:mapping path="/group/leader/**"/>
+			<beans:bean class="com.springmvc.nemo.common.interceptor.CheckLeaderInterceptor"/>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/group/groupmain"/>
+			<mvc:mapping path="/group/schedule"/>
+			<mvc:mapping path="/group/board"/>
+			<mvc:mapping path="/group/member"/>
+			<mvc:mapping path="/group/leader/**"/>
+			<beans:bean class="com.springmvc.nemo.common.interceptor.GroupHeaderInterceptor"/>
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	
