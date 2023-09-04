@@ -19,7 +19,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.springmvc.nemo.common.Message;
 import com.springmvc.nemo.group.service.GroupService;
 import com.springmvc.nemo.group.vo.GroupVO;
+import com.springmvc.nemo.group.vo.JoinVO;
 import com.springmvc.nemo.user.vo.BookmarkVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
@@ -168,6 +168,36 @@ public class GroupControllerImpl implements GroupController{
 		String result = groupService.toggleBookmark(bookmarkVO);
 		
 		return result;
+	}
+	
+	@RequestMapping(value = "/group/joingroup", method = RequestMethod.GET)
+	@Override
+	public ModelAndView joinGroup(@RequestParam("group_id") String group_id,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		JoinVO joinVO = new JoinVO();
+		joinVO.setGroup_id(Integer.parseInt(group_id));
+		joinVO.setUser_id(user_id);
+		
+		boolean isGroupMemberResult = groupService.isGroupMember(joinVO);
+		boolean isFullGroupResult = groupService.isFullGroup(Integer.parseInt(group_id));
+		
+		if(isGroupMemberResult) {
+			mav.addObject("data", new Message("이미 가입한 소모임입니다.", request.getContextPath()+"/group/groupmain?group_id="+group_id));
+		} else if(!isGroupMemberResult && isFullGroupResult) {
+			mav.addObject("data", new Message("소모임의 정원이 다 찼습니다.", request.getContextPath()+"/group/groupinfo?group_id="+group_id));
+		} else {
+			groupService.joinGroup(joinVO);
+			mav.addObject("data", new Message("소모임에 가입했습니다.", request.getContextPath()+"/group/groupmain?group_id="+group_id));
+		}
+
+		mav.setViewName("message");
+		return mav;
 	}
 	
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {

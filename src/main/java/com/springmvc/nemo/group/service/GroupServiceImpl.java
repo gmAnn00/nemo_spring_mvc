@@ -70,4 +70,33 @@ public class GroupServiceImpl implements GroupService{
 		}
 		return BMResult;
 	}
+	
+	@Override
+	public boolean isGroupMember(JoinVO joinVO) throws DataAccessException {
+		
+		return groupDAO.isGroupMember(joinVO);
+	}
+	
+	@Override
+	public boolean isFullGroup(int group_id) throws DataAccessException {
+		
+		GroupVO groupVO = groupDAO.getGroupInfo(group_id);
+		int maxNum = groupVO.getMax_memno();
+		int curNum = groupVO.getCurrent_memno();
+		
+		if(maxNum == curNum) {
+			return true;
+		}
+		
+		return false;
+		
+	}
+	
+	@Override
+	public void joinGroup(JoinVO joinVO) throws DataAccessException {
+		groupDAO.joinGroup(joinVO);
+		
+	}
+	
+	
 }

@@ -161,12 +161,13 @@ request.setCharacterEncoding("utf-8");
 				<!-- 장소 영역 시작-->
 				<div class="mapAreaSection">
 					<h3>네모장소</h3>
+					<p id="grp_addr1_hidden" class="etcInfo">${groupVO.group_addr1}</p>
 					<!-- 지도영역 부분 -->
 					<div class="mapArea">
 						<div id="map">
 							
 						</div>
-						<span>${groupVO.group_addr1}</span>
+						
 					</div>
 				</div>
 
@@ -184,7 +185,6 @@ request.setCharacterEncoding("utf-8");
 
 	<jsp:include page="../footer.jsp" flush="true"></jsp:include>
 	<input type="hidden" id="user_id_hidden" name="user_id_hidden" value="${user_id}"/>
-	<input type="hidden" id="grp_addr1_hidden" name="grp_addr1_hidden" value="${groupVO.group_addr1}" />
 	
 </body>
 </html>

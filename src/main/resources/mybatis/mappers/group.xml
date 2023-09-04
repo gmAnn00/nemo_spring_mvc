@@ -26,6 +26,12 @@
       ]]>
 	</insert>
 	
+	<update id="increaseCurrentMemNo" parameterType="int">
+		<![CDATA[
+         UPDATE GROUP_TBL SET current_memno=current_memno+1 WHERE group_id=#{group_id}
+      ]]>
+	</update>
+	
 	<select id="getGroupInfo" parameterType="int" resultType="groupVO">
 		<![CDATA[
          SELECT * FROM GROUP_TBL WHERE group_id=#{group_id}
@@ -73,6 +79,12 @@
          UPDATE GROUP_TBL SET bookmark_no = bookmark_no-1 WHERE group_id=#{group_id}
       ]]>
 	</update>
+	
+	<select id="isGroupMember" parameterType="joinVO" resultType="boolean">
+		<![CDATA[
+         SELECT DECODE(count(*), 1, 'true' , 'false') FROM JOIN_TBL WHERE group_id=#{group_id} AND user_id=#{user_id}
+      ]]>
+	</select>
 	
 
 </mapper>

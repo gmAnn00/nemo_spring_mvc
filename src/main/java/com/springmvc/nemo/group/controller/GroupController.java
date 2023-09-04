@@ -26,4 +26,7 @@ public interface GroupController {
 			@RequestParam("user_id") String user_id, @RequestParam("group_id") String group_id,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	public ModelAndView joinGroup(@RequestParam("group_id") String group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }

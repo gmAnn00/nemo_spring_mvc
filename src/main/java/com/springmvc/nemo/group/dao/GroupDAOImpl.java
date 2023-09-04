@@ -33,7 +33,7 @@ public class GroupDAOImpl implements GroupDAO{
 	@Override
 	public void joinGroup(JoinVO joinVO) throws DataAccessException {
 		sqlSession.insert("mapper.group.joinGroup", joinVO);
-		
+		sqlSession.update("mapper.group.increaseCurrentMemNo", joinVO.getGroup_id());
 	}
 	
 	@Override
@@ -73,5 +73,12 @@ public class GroupDAOImpl implements GroupDAO{
 		sqlSession.update("mapper.group.decreaseBookmarkNo", bookmarkVO);
 		return "false";
 	}
+	
+	@Override
+	public boolean isGroupMember(JoinVO joinVO) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.group.isGroupMember", joinVO);
+	}
+
 
 }

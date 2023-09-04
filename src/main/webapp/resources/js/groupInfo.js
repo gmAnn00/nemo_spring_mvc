@@ -14,10 +14,10 @@ $(function() {
 		//console.log(group_id);
 		if (user_id === "null" || user_id === "") {
 			alert("로그인 후 이용해주세요");
-			location.href="/nemo/login/loginForm";
+			location.href="/nemo/login/loginform";
 		} else {
 			console.log("user_id" + user_id);
-			location.href = "/nemo/group/joinGroup?group_id=" + group_id;
+			location.href = "/nemo/group/joingroup?group_id=" + group_id;
 		}
 	});
 
@@ -65,7 +65,7 @@ $(function() {
 
 	});
 
-	let grp_addr1 = $("#grp_addr1_hidden").val();
+	let grp_addr1 = $("#grp_addr1_hidden").text();
 	console.log(grp_addr1);
 	//console.log("grp_zipcode=" + grp_zipcode);
 	let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스

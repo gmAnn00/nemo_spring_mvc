@@ -30,6 +30,7 @@ public interface GroupDAO {
 
 	public String delBookmark(BookmarkVO bookmarkVO) throws DataAccessException;
 
+	public boolean isGroupMember(JoinVO joinVO) throws DataAccessException;
 	
 
 }
