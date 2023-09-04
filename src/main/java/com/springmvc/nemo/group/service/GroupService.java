@@ -21,5 +21,8 @@ public interface GroupService {
 
 	public boolean isBookmark(BookmarkVO bookmarkVO) throws DataAccessException;
 
+	public String toggleBookmark(BookmarkVO bookmarkVO) throws DataAccessException;
+
+
 
 }

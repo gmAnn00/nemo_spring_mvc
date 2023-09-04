@@ -164,9 +164,10 @@ public class GroupControllerImpl implements GroupController{
 		bookmarkVO.setUser_id(user_id);
 		bookmarkVO.setGroup_id(Integer.parseInt(group_id));
 		
+		// true : 북마크 추가함 false : 북마크 삭제함
+		String result = groupService.toggleBookmark(bookmarkVO);
 		
-		
-		return null;
+		return result;
 	}
 	
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {

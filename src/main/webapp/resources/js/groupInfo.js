@@ -25,7 +25,7 @@ $(function() {
 		if (user_id === 'null' || user_id === "" || user_id == null) {
 			$(this).removeClass("on");
 			alert("로그인 후 이용해주세요");
-			location.href = "/nemo/login/loginForm";
+			location.href = "/nemo/login/loginform";
 
 		} else {
 			let hostIndex = location.href.indexOf(location.host) + location.host.length;

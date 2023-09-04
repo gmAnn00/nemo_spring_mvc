@@ -25,5 +25,11 @@ public interface GroupDAO {
 	public Date getRecentDate(int group_id) throws DataAccessException;
 
 	public boolean isBookmark(BookmarkVO bookmarkVO) throws DataAccessException;
+	
+	public String addBookmark(BookmarkVO bookmarkVO) throws DataAccessException;
+
+	public String delBookmark(BookmarkVO bookmarkVO) throws DataAccessException;
+
+	
 
 }

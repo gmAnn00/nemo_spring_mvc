@@ -58,4 +58,16 @@ public class GroupServiceImpl implements GroupService{
 		
 		return groupDAO.isBookmark(bookmarkVO);
 	}
+	
+	@Override
+	public String toggleBookmark(BookmarkVO bookmarkVO) throws DataAccessException {
+		boolean isBMResult = groupDAO.isBookmark(bookmarkVO);
+		String BMResult = "false";
+		if(isBMResult) {
+			BMResult = groupDAO.delBookmark(bookmarkVO);
+		} else {
+			BMResult = groupDAO.addBookmark(bookmarkVO);
+		}
+		return BMResult;
+	}
 }

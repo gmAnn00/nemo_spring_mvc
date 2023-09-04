@@ -50,5 +50,29 @@
       ]]>
 	</select>
 	
+	<insert id="addBookmark" parameterType="bookmarkVO">
+		<![CDATA[
+         INSERT INTO BOOKMARK_TBL(user_id, group_id) VALUES (#{user_id}, #{group_id})
+      ]]>
+	</insert>
+	
+	<update id="increaseBookmarkNo" parameterType="bookmarkVO">
+		<![CDATA[
+         UPDATE GROUP_TBL SET bookmark_no = bookmark_no+1 WHERE group_id=#{group_id}
+      ]]>
+	</update>
+	
+	<delete id="delBookmark" parameterType="bookmarkVO">
+		<![CDATA[
+         DELETE FROM BOOKMARK_TBL WHERE user_id=#{user_id} AND group_id=#{group_id}
+      ]]>
+	</delete>
+	
+	<update id="decreaseBookmarkNo" parameterType="bookmarkVO">
+		<![CDATA[
+         UPDATE GROUP_TBL SET bookmark_no = bookmark_no-1 WHERE group_id=#{group_id}
+      ]]>
+	</update>
+	
 
 </mapper>

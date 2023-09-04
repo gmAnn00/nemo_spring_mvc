@@ -59,5 +59,19 @@ public class GroupDAOImpl implements GroupDAO{
 		
 		return sqlSession.selectOne("mapper.group.isBookmark", bookmarkVO);
 	}
+	
+	@Override
+	public String addBookmark(BookmarkVO bookmarkVO) throws DataAccessException {
+		sqlSession.insert("mapper.group.addBookmark", bookmarkVO);
+		sqlSession.update("mapper.group.increaseBookmarkNo", bookmarkVO);
+		return "true";
+	}
+	
+	@Override
+	public String delBookmark(BookmarkVO bookmarkVO) throws DataAccessException {
+		sqlSession.delete("mapper.group.delBookmark", bookmarkVO);
+		sqlSession.update("mapper.group.decreaseBookmarkNo", bookmarkVO);
+		return "false";
+	}
 
 }

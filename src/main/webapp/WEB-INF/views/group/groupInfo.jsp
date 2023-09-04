@@ -137,7 +137,7 @@ request.setCharacterEncoding("utf-8");
 					</div>
 					<div class="shortInfoTblHeart">
 						<span class="shortInfoTblTitle">찜한 인원</span>
-						<span class="shortInfoTblHeartContent">${groupVO.bookmark_no}명</span>					
+						<span class="shortInfoTblHeartContent"><span id="likeNum">${groupVO.bookmark_no}</span>명</span>					
 					</div>
 					<div class="shortInfoTblRecent">
 						<span class="shortInfoTblTitle">최근활동일</span>
