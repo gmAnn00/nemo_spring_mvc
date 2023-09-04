@@ -2,9 +2,11 @@ package com.springmvc.nemo.group.controller;
 
 import java.io.File;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,10 +29,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.springmvc.nemo.board.vo.BoardVO;
 import com.springmvc.nemo.common.Message;
 import com.springmvc.nemo.group.service.GroupService;
 import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.group.vo.JoinVO;
+import com.springmvc.nemo.schedule.vo.ScheduleVO;
 import com.springmvc.nemo.user.vo.BookmarkVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
@@ -207,9 +211,22 @@ public class GroupControllerImpl implements GroupController{
 		
 		//logger.info("isLeader={}",request.getAttribute("isLeader"));
 		
+		List<ScheduleVO> schedulesList = new ArrayList<>();
+		schedulesList = groupService.getPreviewSchedule(Integer.parseInt(group_id));
+		
+		List<BoardVO> boardsList = new ArrayList<>();
+		boardsList = groupService.getPreviewBoard(Integer.parseInt(group_id));
+		
+		List<UserVO> membersList = new ArrayList<>();
+		membersList = groupService.getGroupMember(Integer.parseInt(group_id));
+		
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
+		mav.addObject("schedulesList", schedulesList);
+		mav.addObject("boardsList", boardsList);
+		mav.addObject("membersList", membersList);
+		
 		//mav.addObject("groupHeader", groupHeader);
 		//mav.addObject("isLeader", isLeader);
 		return mav;

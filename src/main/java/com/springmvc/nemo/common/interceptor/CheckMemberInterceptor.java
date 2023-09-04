@@ -24,7 +24,7 @@ public class CheckMemberInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		logger.info("checkMem");
+		//logger.info("checkMem");
 		HttpSession session = request.getSession(false);
 		String user_id = (String) session.getAttribute("user_id");
 		String str_group_id = request.getParameter("group_id");

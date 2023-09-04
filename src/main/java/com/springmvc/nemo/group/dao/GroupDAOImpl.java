@@ -1,6 +1,7 @@
 package com.springmvc.nemo.group.dao;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.springmvc.nemo.board.vo.BoardVO;
 import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.group.vo.JoinVO;
+import com.springmvc.nemo.schedule.vo.ScheduleVO;
 import com.springmvc.nemo.user.vo.BookmarkVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
@@ -78,6 +81,24 @@ public class GroupDAOImpl implements GroupDAO{
 	public boolean isGroupMember(JoinVO joinVO) throws DataAccessException {
 		
 		return sqlSession.selectOne("mapper.group.isGroupMember", joinVO);
+	}
+	
+	@Override
+	public List<ScheduleVO> getPreviewSchedule(int group_id) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.group.getPreviewSchedule", group_id);
+	}
+	
+	@Override
+	public List<BoardVO> getPreviewBoard(int group_id) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.group.getPreviewBoard", group_id);
+	}
+	
+	@Override
+	public List<UserVO> getGroupMember(int group_id) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.group.getGroupMember", group_id);
 	}
 
 

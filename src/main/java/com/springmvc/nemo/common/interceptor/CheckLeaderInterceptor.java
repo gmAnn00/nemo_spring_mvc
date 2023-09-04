@@ -24,7 +24,7 @@ public class CheckLeaderInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		logger.info("checkLeader");
+		//logger.info("checkLeader");
 		HttpSession session = request.getSession(false);
 		String user_id = (String) session.getAttribute("user_id");
 		String str_group_id = request.getParameter("group_id");
@@ -34,7 +34,7 @@ public class CheckLeaderInterceptor extends HandlerInterceptorAdapter{
 		String group_leader = groupVO.getGroup_leader();
 		boolean isLeaderResult = user_id.equals(group_leader);
 		request.setAttribute("isLeader", isLeaderResult);
-		logger.info("isLeader={}", isLeaderResult);
+		//logger.info("isLeader={}", isLeaderResult);
 		
 		String servletPath = request.getServletPath();
 		boolean isLeaderURL = servletPath.contains("/leader");

@@ -1,15 +1,18 @@
 package com.springmvc.nemo.group.service;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.springmvc.nemo.board.vo.BoardVO;
 import com.springmvc.nemo.group.dao.GroupDAO;
 import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.group.vo.JoinVO;
+import com.springmvc.nemo.schedule.vo.ScheduleVO;
 import com.springmvc.nemo.user.vo.BookmarkVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
@@ -98,5 +101,23 @@ public class GroupServiceImpl implements GroupService{
 		
 	}
 	
+	@Override
+	public List<ScheduleVO> getPreviewSchedule(int group_id) throws DataAccessException {
+		
+		return groupDAO.getPreviewSchedule(group_id);
+	}
+	
+	@Override
+	public List<BoardVO> getPreviewBoard(int group_id) throws DataAccessException {
+		
+		return groupDAO.getPreviewBoard(group_id);
+	}
+	
+	
+	@Override
+	public List<UserVO> getGroupMember(int group_id) throws DataAccessException {
+		
+		return groupDAO.getGroupMember(group_id);
+	}
 	
 }

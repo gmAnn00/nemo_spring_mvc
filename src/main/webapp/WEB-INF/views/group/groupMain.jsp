@@ -162,17 +162,17 @@
                                 <th>모임날짜</th>
                             </tr>
                             <c:choose>
-                        		<c:when test="${schdulesList.isEmpty()}">
+                        		<c:when test="${schedulesList.isEmpty()}">
                         			<tr>
                         				<td colspan="3" align="center">등록된 일정이 없습니다.</td>
                         			</tr>
                         		</c:when>
-                        		<c:when test="${!schdulesList.isEmpty()}">
-                        			<c:forEach var="schedule" items="${schdulesList}">
+                        		<c:when test="${!schedulesList.isEmpty()}">
+                        			<c:forEach var="schedule" items="${schedulesList}">
                         				<tr>
-                        					<td>${schedule.sche_title}</td>                        				                           					
+                        					<td>${schedule.schedule_title}</td>                        				                           					
                         					<td>${schedule.location}</td>
-                        					 <td><fmt:formatDate value="${schedule.schedule}" pattern="yyyy-MM-dd HH:mm" /></td>
+                        					 <td><fmt:formatDate value="${schedule.schedule_date}" pattern="yyyy-MM-dd HH:mm" /></td>
                         				</tr>
                         			</c:forEach>
                         		</c:when>
@@ -225,23 +225,23 @@
                     <!-- 멤버 영역 시작-->
                     <div class="memberArea sc2_subsection">
                         <div class="mainTitle">
-                            <h3 class="nemoMemTitle">네모멤버</h3>
-                            <span>(<span class="currentNum">${groupNum}</span>/<span class="maxNum">${groupVO.mem_no}</span>)</span>
+                            <h3 class="nemoMemTitle">소모임 멤버</h3>
+                            <span>(<span class="currentNum">${groupHeader.current_memno}</span>/<span class="maxNum">${groupHeader.max_memno}</span>)</span>
                         </div>
                         <span class="btnEventPrev" title="이전보기"><i class="fa-solid fa-chevron fa-chevron-left"></i></span>
                         <div class="animationSlide">
                             <div class="sliderPanel">
                                 <!-- <p><center>이미지슬라이드영역~</center></p> -->
-                                <c:forEach var="user" items="${usersList}">
-                                <c:set var="idx" value="${user.user_addr1.indexOf(' ', user.user_addr1.indexOf(' ') + 1)}" />
-								<c:set var="locationU" value="${user.user_addr1.substring(0, idx)}"/>
+                                <c:forEach var="member" items="${membersList}">
+                                <c:set var="idx" value="${member.user_addr1.indexOf(' ', member.user_addr1.indexOf(' ') + 1)}" />
+								<c:set var="locationU" value="${member.user_addr1.substring(0, idx)}"/>
                                 	<div class="slideContent">
                                 		<div class="memImg">
-                                			<img src="${contextPath}/userimagedownload?user_id=${user.user_id}&user_img=${user.user_img}" />
+                                			<img src="${contextPath}/userimagedownload?user_id=${member.user_id}&user_img=${member.user_img}" />
                                 		</div>
                                 		<br/>
                                 		<div class="memName">
-                                			<span>${user.nickname}</span>
+                                			<span>${member.nickname}</span>
                                 		</div>
                                 	</div>
                                 </c:forEach>
@@ -257,10 +257,8 @@
 
             <!-- main content 종료-->
         </div>
-        <input type="hidden" id="groupNum_hidden" name="groupNum_hidden" value="${groupNum}" />
+
         <input type="hidden" id="user_id_hidden" name="user_id_hidden" value="${user_id}" />
-        <input type="hidden" id="isMember_hidden" name="isMember_hidden" value="${isMember}" />
-        <input type="hidden" id="isAdmin_hidden" name="isAdmin_hidden" value="${admin}" />
 	
 	<jsp:include page="../footer.jsp" flush="true"></jsp:include>
 </body>

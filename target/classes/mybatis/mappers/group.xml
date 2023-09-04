@@ -82,9 +82,30 @@
 	
 	<select id="isGroupMember" parameterType="joinVO" resultType="boolean">
 		<![CDATA[
-         SELECT DECODE(count(*), 1, 'true' , 'false') FROM JOIN_TBL WHERE group_id=#{group_id} AND user_id=#{user_id}
+         SELECT DECODE(count(*), 1, 'true' , 'false') FROM JOIN_TBL WHERE group_id=#{group_id} AND user_id=#{user_id} AND cancel=0
       ]]>
 	</select>
 	
+	<select id="getPreviewSchedule" parameterType="int" resultType="scheduleVO">
+		<![CDATA[
+         SELECT ROWNUM, s.* FROM
+         (SELECT * FROM SCHEDULE_TBL WHERE group_id=#{group_id} ORDER BY SCHEDULE_DATE DESC) s
+         WHERE ROWNUM <=3
+      ]]>
+	</select>
+	
+	<select id="getPreviewBoard" parameterType="int" resultType="boardVO">
+		<![CDATA[
+         SELECT ROWNUM, b.* FROM
+         (SELECT * FROM BOARD_TBL WHERE group_id=#{group_id} ORDER BY CREATE_DATE DESC) b
+         WHERE ROWNUM <=3
+      ]]>
+	</select>
+	
+	<select id="getGroupMember" parameterType="int" resultType="userVO">
+		<![CDATA[
+         SELECT u.user_id, u.nickname, u.user_addr1, u.user_img FROM USER_TBL u, JOIN_TBL j WHERE u.user_id=j.user_id AND j.group_id=#{group_id}
+      ]]>
+	</select>
 
 </mapper>
