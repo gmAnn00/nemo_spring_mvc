@@ -6,12 +6,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:set var="isMng" value="false" />
-<c:forEach var="elem" items="${grpMngList}" >
-	<c:if test="${elem eq param.group_id}">
-		<c:set var="isMng" value="true" />
-	</c:if>
-</c:forEach>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -20,35 +14,30 @@
 <head>
 <meta charset="UTF-8" />
 <title>네모:일정</title>
-<link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-<link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-<link rel="stylesheet" href="${contextPath}/css/common.css" />
-<link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-<link rel="stylesheet" href="${contextPath}/css/sectionTitle.css" />
-<link rel="stylesheet" href="${contextPath}/css/schedule.css" />
+<link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+<link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/sectionTitle.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/schedule.css" />
 <!-- <script src="https://kit.fontawesome.com/bc604c01cc.js" crossorigin="anonymous"></script> -->
 <script src="https://kit.fontawesome.com/f9a2702e84.js" crossorigin="anonymous"></script>
-<script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
-<script src="${contextPath}/js/header.js"></script>
-
+<script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
+<script src="${contextPath}/resources/js/header.js"></script>
+<script src="${contextPath}/resources/js/schedule.js"></script>
 
 <script>
     var contextPath = "${pageContext.request.contextPath}";
 </script>
 
-<script src="${contextPath}/js/schedule.js"></script>
-
-<!--<script>
-    	const ctx = ${contextPath};
-    </script> -->
 
 </head>
 <body>
 	<!-- header 시작 -->
-	<jsp:include page="../header.jsp" flush="true"></jsp:include>
+	<jsp:include page="../../header.jsp" flush="true"></jsp:include>
 	<!-- header 종료 -->
 	<!-- section1 -->
-	<jsp:include page="./groupHeader.jsp" flush="true"></jsp:include>
+	<jsp:include page="../groupheader.jsp" flush="true"></jsp:include>
 	<!-- section1종료 -->
 
 	<!-- 콘텐츠 영역 -->
@@ -59,11 +48,11 @@
 			<div class="sc2_menu_contents">
 				<div class="sc2_menu">
 					<h2 class="sc2_menu_title">
-						<a href="${contextPath}/group/groupMain?group_id=${param.group_id}">나의 모임</a>
+						<a href="${contextPath}/group/groupmain?group_id=${param.group_id}">나의 모임</a>
 					</h2>
 					<ul class="sc2_menu_list">
 						<c:choose>
-   								<c:when test="${isMng == true }">
+   								<c:when test="${isLeader == true }">
    									<li>
 		                                <a href="${contextPath}/group/schedule?group_id=${param.group_id}">
 		                                    <div class="sc2_icon_menu">
@@ -81,7 +70,7 @@
 		                                </a>
 		                            </li>
 		                            <li>
-		                                <a href="${contextPath}/group/manager/member?group_id=${param.group_id}">
+		                                <a href="${contextPath}/group/leader/memberinfo?group_id=${param.group_id}">
 		                                    <div class="sc2_icon_menu">
 		                                        <div class="menu_submenu_name"><span>멤버</span></div>
 		                                        <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -89,7 +78,7 @@
 		                                </a>
 		                            </li>
 		                            <li>
-		                                <a href="${contextPath}/group/manager/setting?group_id=${param.group_id}">
+		                                <a href="${contextPath}/group/leader/setting?group_id=${param.group_id}">
 		                                    <div class="sc2_icon_menu">
 		                                        <div class="menu_submenu_name"><span>소모임관리</span></div>
 		                                        <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -402,7 +391,7 @@
 	
 
 	<!-- 푸터 영역 시작 -->
-	<jsp:include page="../footer.jsp" flush="true"></jsp:include>
+	<jsp:include page="../../footer.jsp" flush="true"></jsp:include>
 	<!-- 푸터 영역 끝 -->
 
 </body>
