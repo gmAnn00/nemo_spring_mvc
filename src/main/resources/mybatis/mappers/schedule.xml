@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.schedule">
+
+	<select id="getCommingSchedule" parameterType="int" resultType="usingScheduleVO">
+		<![CDATA[
+        	SELECT S.schedule_id, TO_CHAR(S.schedule_date, 'YYYY"년 "MM"월 "DD"일"') as schedule_date,
+        	TO_CHAR(S.schedule_date, 'HH24"시 "MI"분"') as schedule_time, S.schedule_title,
+        	S.location FROM ( 
+        	SELECT ROWNUM as scdNum, schedule_id, schedule_title, schedule_date, location FROM SCHEDULE_TBL
+        	WHERE group_id = #{group_id} AND schedule_date >= sysdate order by schedule_date ) S
+        	WHERE scdNum <= 4
+      ]]>
+	</select>
+	
+	<select id="getScheduleDate" parameterType="java.util.Map" resultType="String">
+		<![CDATA[
+        	SELECT substr(schedule_date, 7, 8) as day FROM SCHEDULE_TBL
+        	WHERE group_id = #{group_id} AND substr(schedule_date, 1, 5) = #{currentYM}
+        	order by day
+      ]]>
+	</select>
+	
+	<select id="isScheduleExist" parameterType="java.util.Map" resultType="boolean">
+		<![CDATA[
+        	SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM SCHEDULE_TBL
+        	WHERE group_id=#{group_id} AND TO_CHAR(schedule_date, 'YYYY-MM-DD')=#{selScheDate}
+      ]]>
+	</select>
+	
+	<select id="getSchedule" parameterType="java.util.Map" resultType="usingScheduleVO">
+		<![CDATA[
+        	SELECT schedule_id, schedule_title, schedule_content, location, 
+        	TO_CHAR(schedule_date, 'YYYY-MM-DD"T"HH24:MI') as schedule_date_time,
+        	TO_CHAR(schedule_date, 'YYYY-MM-DD') as schedule_date,
+        	TO_CHAR(schedule_date, 'AM HH:MI') as schedule_time
+        	FROM SCHEDULE_TBL
+        	WHERE group_id=#{group_id} AND TO_CHAR(schedule_date, 'YYYY-MM-DD')=#{selScheDate}
+      ]]>
+	</select>
+	
+	<select id="isAttend" parameterType="java.util.Map" resultType="boolean">
+		<![CDATA[
+        	SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM SCHEDULE_TBL S, ATTEND_TBL A
+        	WHERE S.group_id=#{group_id} AND TO_CHAR(S.schedule_date, 'YYYY-MM-DD')=#{selScheDate}
+        	AND S.schedule_id=A.schedule_id AND A.user_id=#{user_id}
+      ]]>
+	</select>
+
+	<select id="getAttendUsersList" parameterType="java.util.Map" resultType="userVO">
+		<![CDATA[
+        	SELECT U.user_id, U.nickname, U.user_img
+        	FROM ATTEND_TBL A, USER_TBL U, SCHEDULE_TBL S
+        	WHERE A.user_id = U.user_id AND S.group_id=#{group_id}
+        	AND S.schedule_id=A.schedule_id AND TO_CHAR(S.schedule_date, 'YYYY-MM-DD')=#{selScheDate}
+      ]]>
+	</select>
+
+</mapper>

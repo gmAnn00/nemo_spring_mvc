@@ -145,14 +145,14 @@
 	                      <p>등록된 일정이 없습니다.</p>
 	                    </c:when>
 	                    <c:when test="${!empty commingScheduleList}"> 	                                             
-	                      <c:forEach var="comGrpSchedule" items="${commingScheduleList}">
+	                      <c:forEach var="commmingSchedule" items="${commingScheduleList}">
 	                     	      
 			                  <div class="mySchedule">		                  	
-			                    <p class="myScheduleDate">${comGrpSchedule.scheduleDate}<span> ${comGrpSchedule.scheduleTime}</span></p>
+			                    <p class="myScheduleDate">${commmingSchedule.schedule_date}<span> ${commmingSchedule.schedule_time}</span></p>
 			                    <div class="myScheduleImgContent">		                                           
 			                      <div class="myScheduleContent">		                        
-			                        <p class="contents">${comGrpSchedule.scheduleVO.sche_title}</p>
-			                        <p class="contents location"><i class="fa-solid fa-location-dot"></i>${comGrpSchedule.scheduleVO.location}</p>
+			                        <p class="contents">${commmingSchedule.schedule_title}</p>
+			                        <p class="contents location"><i class="fa-solid fa-location-dot"></i>${commmingSchedule.location}</p>
 			                      </div>
 			                    </div>		                    
 			                  </div>    		                                                 
@@ -194,6 +194,7 @@
 												<button type="button" id="joinSchedule" class="button btnPart" onclick="fn_joinSchedule(${param.group_id})">참석</button>
 											</div>
 											<div class="dateTime">
+												<input type="hidden" id="schedule_id" name="schedule_id" />
 												<input type="datetime-local" id="sche_dateTime_old" value="" name="sche_dateTime_old" style="display:none"/>							
 												<input id="sche_dateTime" type="datetime-local" name="sche_dateTime_new" value="">																				
 											</div>
@@ -305,7 +306,7 @@
 
 					<!-- 상세 일정 등록하기 -->
 					<form
-						action="${contextPath}/group/schedule/addSchedule?group_id=${param.group_id}"
+						action="${contextPath}/group/schedule/addschedule?group_id=${param.group_id}"
 						method="post">
 						<div class="scheduleEditArea clearfixed">												
 							<div class="scheduleEdit">
@@ -315,9 +316,9 @@
 										<h3>상세 일정 등록하기</h3>
 									</div>
 									<div class="scheduleTitle">
-										<textarea name="sche_title" placeholder="제목을 입력하세요"class="scheduleTitleText" rows="1" maxlength="200" required></textarea>
+										<textarea name="schedule_title" placeholder="제목을 입력하세요"class="scheduleTitleText" rows="1" maxlength="200" required></textarea>
 										<div class="dateTime">
-											<input type="datetime-local" name="schedule"
+											<input type="datetime-local" name="schedule_date"
 												id="myDateTimeInput" required/>
 										</div>
 									</div>								
@@ -332,9 +333,10 @@
 										
 										var koreanDateTime = currentYear + '-' + currentMonth + '-' + currentDay + 'T' + currentHour + ':' + currentMinute;
 										document.getElementById("myDateTimeInput").min = koreanDateTime;
+										
 										</script>
 										<div class="contentDetail">
-											<textarea name="sche_cont" placeholder="내용을 입력하세요"class="contentDetailText" rows="10" maxlength="1000" required></textarea>
+											<textarea name="schedule_content" placeholder="내용을 입력하세요"class="contentDetailText" rows="10" maxlength="1000" required></textarea>
 										</div>
 									</div>
 								</div>

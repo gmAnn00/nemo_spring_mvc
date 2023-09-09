@@ -1,15 +1,17 @@
 package com.springmvc.nemo.schedule.vo;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class ScheduleVO {
 
 	private int schedule_id;
+	//private Timestamp schedule_date;
 	private Date schedule_date;
 	private int group_id;
 	private String user_id;
 	private String schedule_title;
-	private String shcedule_cont;
+	private String schedule_content;
 	private String location;
 	private int attendee_no;
 	
@@ -25,6 +27,17 @@ public class ScheduleVO {
 		this.schedule_id = schedule_id;
 	}
 
+	
+	/*
+	public Timestamp getSchedule_date() {
+		return schedule_date;
+	}
+
+	public void setSchedule_date(Timestamp schedule_date) {
+		this.schedule_date = schedule_date;
+	}
+	*/
+	
 	public Date getSchedule_date() {
 		return schedule_date;
 	}
@@ -32,10 +45,12 @@ public class ScheduleVO {
 	public void setSchedule_date(Date schedule_date) {
 		this.schedule_date = schedule_date;
 	}
-
+	
 	public int getGroup_id() {
 		return group_id;
 	}
+
+	
 
 	public void setGroup_id(int group_id) {
 		this.group_id = group_id;
@@ -57,12 +72,14 @@ public class ScheduleVO {
 		this.schedule_title = schedule_title;
 	}
 
-	public String getShcedule_cont() {
-		return shcedule_cont;
+	
+
+	public String getSchedule_content() {
+		return schedule_content;
 	}
 
-	public void setShcedule_cont(String shcedule_cont) {
-		this.shcedule_cont = shcedule_cont;
+	public void setSchedule_content(String schedule_content) {
+		this.schedule_content = schedule_content;
 	}
 
 	public String getLocation() {
@@ -84,9 +101,10 @@ public class ScheduleVO {
 	@Override
 	public String toString() {
 		return "ScheduleVO [schedule_id=" + schedule_id + ", schedule_date=" + schedule_date + ", group_id=" + group_id
-				+ ", user_id=" + user_id + ", schedule_title=" + schedule_title + ", shcedule_cont=" + shcedule_cont
-				+ ", location=" + location + ", attendee_no=" + attendee_no + "]";
+				+ ", user_id=" + user_id + ", schedule_title=" + schedule_title + ", schedule_content="
+				+ schedule_content + ", location=" + location + ", attendee_no=" + attendee_no + "]";
 	}
+
 	
 	
 }

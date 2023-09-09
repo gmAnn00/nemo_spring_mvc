@@ -33,6 +33,15 @@
 		<beans:property name="defaultEncoding" value="utf-8" />
 	</beans:bean>
 	
+	<!-- A Custom Property Editor for SqlTimestamp -->
+	  <beans:bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+	    <beans:property name="customEditors">
+	      <beans:map>
+	        <beans:entry key="java.sql.Timestamp" value="com.springmvc.nemo.common.SqlTimestampPropertyEditor" />
+	      </beans:map>
+	    </beans:property>
+	  </beans:bean>
+	
 	
 	<!-- 인터셉터 설정 -->
 	<mvc:interceptors>
@@ -51,27 +60,27 @@
 		
 		<mvc:interceptor>
 			<mvc:mapping path="/group/groupmain"/>
-			<mvc:mapping path="/group/schedule"/>
-			<mvc:mapping path="/group/board"/>
-			<mvc:mapping path="/group/member"/>
+			<mvc:mapping path="/group/schedule/**"/>
+			<mvc:mapping path="/group/board/**"/>
+			<mvc:mapping path="/group/member/**"/>
 			<mvc:mapping path="/group/leader/**"/>
 			<beans:bean class="com.springmvc.nemo.common.interceptor.CheckMemberInterceptor"/>
 		</mvc:interceptor>
 		
 		<mvc:interceptor>
 			<mvc:mapping path="/group/groupmain"/>
-			<mvc:mapping path="/group/schedule"/>
-			<mvc:mapping path="/group/board"/>
-			<mvc:mapping path="/group/member"/>
+			<mvc:mapping path="/group/schedule/**"/>
+			<mvc:mapping path="/group/board/**"/>
+			<mvc:mapping path="/group/member/**"/>
 			<mvc:mapping path="/group/leader/**"/>
 			<beans:bean class="com.springmvc.nemo.common.interceptor.CheckLeaderInterceptor"/>
 		</mvc:interceptor>
 		
 		<mvc:interceptor>
 			<mvc:mapping path="/group/groupmain"/>
-			<mvc:mapping path="/group/schedule"/>
-			<mvc:mapping path="/group/board"/>
-			<mvc:mapping path="/group/member"/>
+			<mvc:mapping path="/group/schedule/**"/>
+			<mvc:mapping path="/group/board/**"/>
+			<mvc:mapping path="/group/member/**"/>
 			<mvc:mapping path="/group/leader/**"/>
 			<beans:bean class="com.springmvc.nemo.common.interceptor.GroupHeaderInterceptor"/>
 		</mvc:interceptor>

@@ -18,6 +18,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.springmvc.nemo.report.vo.GroupReportVO" alias="groupReportVO"/>
 		<typeAlias type="com.springmvc.nemo.report.vo.UserReportVO" alias="userReportVO"/>
 		<typeAlias type="com.springmvc.nemo.schedule.vo.AttendVO" alias="attendVO"/>
+		<typeAlias type="com.springmvc.nemo.schedule.vo.UsingScheduleVO" alias="usingScheduleVO"/>
 		<typeAlias type="com.springmvc.nemo.schedule.vo.ScheduleVO" alias="scheduleVO"/>
 		<typeAlias type="com.springmvc.nemo.user.vo.BookmarkVO" alias="bookmarkVO"/>
 		<typeAlias type="com.springmvc.nemo.user.vo.InterestsVO" alias="interestsVO"/>
