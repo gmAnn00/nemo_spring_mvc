@@ -49,6 +49,7 @@
         	AND S.schedule_id=A.schedule_id AND A.user_id=#{user_id}
       ]]>
 	</select>
+	
 
 	<select id="getAttendUsersList" parameterType="java.util.Map" resultType="userVO">
 		<![CDATA[
@@ -58,5 +59,38 @@
         	AND S.schedule_id=A.schedule_id AND TO_CHAR(S.schedule_date, 'YYYY-MM-DD')=#{selScheDate}
       ]]>
 	</select>
+	
+	
+	<select id="getNewScheduleId" resultType="int">
+		<![CDATA[
+        	SELECT MAX(schedule_id)+1 FROM SCHEDULE_TBL
+      ]]>
+	</select>
+	
+	
+	<select id="getNewAttendId" resultType="int">
+		<![CDATA[
+        	SELECT MAX(attend_id)+1 FROM ATTEND_TBL
+      ]]>
+	</select>
+	
+	
+	<insert id="addSchedule" parameterType="scheduleVO">
+	<![CDATA[
+			INSERT INTO SCHEDULE_TBL(schedule_id, schedule_date, group_id, user_id, schedule_title, schedule_content, location, attendee_no)
+			VALUES (#{schedule_id}, #{schedule_date}, #{group_id}, #{user_id}, #{schedule_title}, #{schedule_content}, #{location}, 0)
+		]]>
+	</insert>
+	
+	<insert id="attendSchedule" parameterType="attendVO">
+		<![CDATA[
+			INSERT INTO ATTEND_TBL(attend_id, schedule_id, user_id)
+			VALUES (#{attend_id}, #{schedule_id}, #{user_id})
+		]]>
+	</insert>
+	
+	<update id="increaseAttendeeNo" parameterType="int">
+		UPDATE SCHEDULE_TBL SET attendee_no=attendee_no+1 WHERE schedule_id=#{schedule_id}
+	</update>
 
 </mapper>

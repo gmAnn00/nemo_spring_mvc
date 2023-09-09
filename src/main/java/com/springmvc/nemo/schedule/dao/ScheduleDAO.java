@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.springmvc.nemo.schedule.vo.AttendVO;
+import com.springmvc.nemo.schedule.vo.ScheduleVO;
 import com.springmvc.nemo.schedule.vo.UsingScheduleVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
@@ -21,5 +23,13 @@ public interface ScheduleDAO {
 	public boolean isAttend(Map<String, Object> scheduleMap) throws DataAccessException;
 
 	public List<UserVO> getAttendUsersList(Map<String, Object> scheduleMap) throws DataAccessException;
+	
+	public int getNewScheduleId() throws DataAccessException;
+	
+	public int getNewAttendId() throws DataAccessException;
+
+	public void addSchedule(ScheduleVO schedule) throws DataAccessException;
+	
+	public void attendSchedule(AttendVO attendVO) throws DataAccessException;
 
 }

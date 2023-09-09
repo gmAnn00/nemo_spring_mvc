@@ -155,19 +155,24 @@ public class ScheduleControllerImpl implements ScheduleController{
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("message");
-		
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String selScheDate = dateFormat.format(schedule.getSchedule_date());
+		Map<String, Object> scheduleMap = new HashMap();
+		scheduleMap.put("group_id", group_id);
+		scheduleMap.put("selScheDate", selScheDate);
 		// true : 같은 날에 일정이 이미 존재함, false: 일정이 존재하지 않음
-		boolean alreadyExist=false;
-		
+		boolean isScheduleExistResult = scheduleService.isScheduleExist(scheduleMap);
 		
 		if(schedule.getLocation().equals("") || schedule.getLocation().length() == 0) {
 			mav.addObject("data", new Message("장소를 선택해 주세요", request.getContextPath()+"/group/schedule?group_id="+str_group_id));
 			return mav;
-		}else if(alreadyExist) {
+		}else if(isScheduleExistResult) {
 			mav.addObject("data", new Message("같은 날이 일정이 이미 존재합니다.", request.getContextPath()+"/group/schedule?group_id="+str_group_id));
 			return mav;
 		}
 		
+		scheduleService.addSchedule(schedule);
 		mav.addObject("data", new Message("새 일정이 등록되었습니다.", request.getContextPath()+"/group/schedule?group_id="+str_group_id));
 		
 		return mav;
