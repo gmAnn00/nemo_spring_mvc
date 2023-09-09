@@ -378,8 +378,8 @@
 							</div>
 							
 							<div class="editBtn">
-								<a href="#" role="button" class="buttonCancle">취소</a>
 								<button type="submit" class="button btnResi">등록</button>
+								<a href="#" role="button" class="buttonCancle">취소</a>
 							</div>
 							
 							</div>
