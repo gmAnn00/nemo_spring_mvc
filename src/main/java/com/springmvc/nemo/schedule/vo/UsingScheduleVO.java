@@ -8,6 +8,8 @@ public class UsingScheduleVO {
 	private String schedule_title;
 	private String schedule_content;
 	private String location;
+	private String user_id;
+	private String group_id;
 	
 	public UsingScheduleVO() {
 		// TODO Auto-generated constructor stub
@@ -68,6 +70,23 @@ public class UsingScheduleVO {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+	public String getGroup_id() {
+		return group_id;
+	}
+
+	public void setGroup_id(String group_id) {
+		this.group_id = group_id;
+	}
+
 	
 	
 	

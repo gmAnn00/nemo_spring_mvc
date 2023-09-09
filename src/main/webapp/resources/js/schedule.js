@@ -725,6 +725,9 @@ function scheduleChk(selScheDate) {
                         $("#sche_dateTime_old").val(usingScheduleVO.schedule_date_time);
                         $("#schedule_id").val(usingScheduleVO.schedule_id);
                         $("#keyword").val(address);
+                        if($("#user_id_hidden").val() !== usingScheduleVO.user_id){
+                        	document.getElementById("editButton").style.display = "none";
+                        }
 
                         date = usingScheduleVO.schedule_date;
                         time = usingScheduleVO.schedule_time;

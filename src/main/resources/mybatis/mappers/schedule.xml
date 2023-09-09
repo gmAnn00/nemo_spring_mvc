@@ -36,7 +36,8 @@
         	SELECT schedule_id, schedule_title, schedule_content, location, 
         	TO_CHAR(schedule_date, 'YYYY-MM-DD"T"HH24:MI') as schedule_date_time,
         	TO_CHAR(schedule_date, 'YYYY-MM-DD') as schedule_date,
-        	TO_CHAR(schedule_date, 'AM HH:MI') as schedule_time
+        	TO_CHAR(schedule_date, 'AM HH:MI') as schedule_time,
+        	user_id
         	FROM SCHEDULE_TBL
         	WHERE group_id=#{group_id} AND TO_CHAR(schedule_date, 'YYYY-MM-DD')=#{selScheDate}
       ]]>

@@ -195,6 +195,7 @@
 											</div>
 											<div class="dateTime">
 												<input type="hidden" id="schedule_id" name="schedule_id" />
+												<input type="hidden" id="user_id_hidden" name="user_id_hidden" value="${user_id}"/>
 												<input type="datetime-local" id="sche_dateTime_old" value="" name="sche_dateTime_old" style="display:none"/>							
 												<input id="sche_dateTime" type="datetime-local" name="sche_dateTime_new" value="">																				
 											</div>
