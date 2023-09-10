@@ -25,4 +25,6 @@ public interface ScheduleService {
 
 	public void addSchedule(ScheduleVO schedule) throws DataAccessException;
 
+	public boolean modSchedule(ScheduleVO schedule) throws DataAccessException;
+
 }

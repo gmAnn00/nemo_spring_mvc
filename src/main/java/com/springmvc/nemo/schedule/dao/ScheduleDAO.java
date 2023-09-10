@@ -32,4 +32,6 @@ public interface ScheduleDAO {
 	
 	public void attendSchedule(AttendVO attendVO) throws DataAccessException;
 
+	public void modSchedule(ScheduleVO schedule) throws DataAccessException;
+
 }

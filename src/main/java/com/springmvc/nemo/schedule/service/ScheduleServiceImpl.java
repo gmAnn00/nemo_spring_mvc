@@ -1,5 +1,7 @@
 package com.springmvc.nemo.schedule.service;
 
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +72,27 @@ public class ScheduleServiceImpl implements ScheduleService{
 		
 		scheduleDAO.addSchedule(scheduleVO);
 		scheduleDAO.attendSchedule(attendVO);
+	}
+	
+	@Override
+	public boolean modSchedule(ScheduleVO schedule) throws DataAccessException {
+		
+		Map<String, Object> scheduleMap = new HashMap();
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String selScheDate = dateFormat.format(schedule.getSchedule_date());
+		
+		scheduleMap.put("group_id", schedule.getGroup_id());
+		scheduleMap.put("selScheDate", selScheDate);
+		scheduleMap.put("schedule_id", schedule.getSchedule_id());
+		
+		if(scheduleDAO.isScheduleExist(scheduleMap)) {
+			return false;
+		}
+		
+		scheduleDAO.modSchedule(schedule);
+		
+		return true;
 	}
 
 }

@@ -25,10 +25,13 @@
 	</select>
 	
 	<select id="isScheduleExist" parameterType="java.util.Map" resultType="boolean">
-		<![CDATA[
-        	SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM SCHEDULE_TBL
-        	WHERE group_id=#{group_id} AND TO_CHAR(schedule_date, 'YYYY-MM-DD')=#{selScheDate}
-      ]]>
+		
+        SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM SCHEDULE_TBL
+        WHERE group_id=#{group_id} AND TO_CHAR(schedule_date, 'YYYY-MM-DD')=#{selScheDate}
+        <if test="schedule_id != null">
+        	AND schedule_id != #{schedule_id}
+        </if>
+      
 	</select>
 	
 	<select id="getSchedule" parameterType="java.util.Map" resultType="usingScheduleVO">
@@ -91,7 +94,17 @@
 	</insert>
 	
 	<update id="increaseAttendeeNo" parameterType="int">
-		UPDATE SCHEDULE_TBL SET attendee_no=attendee_no+1 WHERE schedule_id=#{schedule_id}
+		<![CDATA[
+			UPDATE SCHEDULE_TBL SET attendee_no=attendee_no+1 WHERE schedule_id=#{schedule_id}
+		]]>
+	</update>
+	
+	<update id="modSchedule" parameterType="scheduleVO">
+		<![CDATA[
+			UPDATE SCHEDULE_TBL SET
+			schedule_date=#{schedule_date}, schedule_title=#{schedule_title}, schedule_content=#{schedule_content},
+			location=#{location} WHERE schedule_id=#{schedule_id}
+		]]>
 	</update>
 
 </mapper>

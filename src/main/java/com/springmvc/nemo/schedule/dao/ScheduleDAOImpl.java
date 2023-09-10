@@ -79,4 +79,10 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 		sqlSession.update("mapper.schedule.increaseAttendeeNo", schedule_id);
 		sqlSession.insert("mapper.schedule.attendSchedule", attendVO);
 	}
+	
+	@Override
+	public void modSchedule(ScheduleVO schedule) throws DataAccessException {
+		
+		sqlSession.update("mapper.schedule.modSchedule", schedule);
+	}
 }

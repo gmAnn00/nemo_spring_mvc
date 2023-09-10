@@ -178,5 +178,46 @@ public class ScheduleControllerImpl implements ScheduleController{
 		return mav;
 	}
 	
+	@RequestMapping(value = "/group/schedule/modschedule", method = RequestMethod.POST)
+	@Override
+	public ModelAndView modSchedule(
+			@RequestParam("group_id") String str_group_id,
+			@ModelAttribute("scheduleVO") ScheduleVO scheduleVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String)session.getAttribute("user_id");
+		
+		int group_id = Integer.parseInt(str_group_id);
+		
+		ScheduleVO schedule = scheduleVO;
+		schedule.setGroup_id(group_id);
+		schedule.setUser_id(user_id);
+		
+		logger.info("schedule={}",schedule.toString());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		
+		if(schedule.getLocation().equals("") || schedule.getLocation().length() == 0) {
+			mav.addObject("data", new Message("장소를 선택해 주세요", request.getContextPath()+"/group/schedule?group_id="+str_group_id));
+			return mav;
+		}
+		
+		// true : 일정 수정 성공, false : 일정 수정 실패(겹치는 날짜 있음)
+		boolean modSheduleResult = scheduleService.modSchedule(schedule);
+		
+		if(modSheduleResult) {
+			mav.addObject("data", new Message("일정이 수정되었습니다.", request.getContextPath()+"/group/schedule?group_id="+str_group_id));
+		}else {
+			mav.addObject("data", new Message("다른 일정의 날짜와 중복됩니다. 날짜를 변경해 주세요.", request.getContextPath()+"/group/schedule?group_id="+str_group_id));
+			
+		}
+		
+		
+		
+		return mav;
+	}
+	
 
 }

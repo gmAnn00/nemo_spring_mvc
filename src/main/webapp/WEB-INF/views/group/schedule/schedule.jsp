@@ -167,37 +167,29 @@
 				</div>				
 				
 				
-				<!-- 상세일정부분 3가지(빈일정, 조회, 등록) 겹쳐져 있는 부분 -->
+				<!-- 일정 조회 ,추가, 수정, 삭제 부분 -->
 				<div class="scheduleArea clearfixed">
-					<!-- 빈 일정 (등록버튼만 있음) -->
-					<!-- <div class="scheduleNone">
-			              <h3>빈 일정</h3>
-			              <div class="topBtn">
-			                <a href="#" role="button" class="button btnResi">등록</a>
-			              </div>
-			            </div> -->
 					<!-- 일정 상세보기 -->
-					<form name = "frmSchedule"  action="">
+					<form name = "frmSchedule"  action="" method="post">
 						<div class="scheduleDetailArea clearfixed">
 							<div class="scheduleDetail">								
 								<div class="contentLocationMap">
 														
 									<div class="titleContent">
 										<div class="detailTop">
-											<h3>일정 상세보기</h3>
-											<!--   -->
+											<h3 id="schedule_h3">일정 상세보기</h3>
 										</div>
 										<div id="schedule_Title">								
 											
 											<div class="partBtn clearfixed">
-												<input type="text" id="scheduleTitle" name="scheduleTitle_new" class="scheduleTitle" value="">
-												<button type="button" id="joinSchedule" class="button btnPart" onclick="fn_joinSchedule(${param.group_id})">참석</button>
+												<textarea id="scheduleTitle" name="schedule_title" placeholder="제목을 입력하세요" class="scheduleTitleText" rows="1" maxlength="200" required></textarea>
+												<button type="button" id="joinSchedule" class="button btnPart" onclick="fn_join_schedule(${param.group_id})">참석</button>
 											</div>
 											<div class="dateTime">
 												<input type="hidden" id="schedule_id" name="schedule_id" />
-												<input type="hidden" id="user_id_hidden" name="user_id_hidden" value="${user_id}"/>
-												<input type="datetime-local" id="sche_dateTime_old" value="" name="sche_dateTime_old" style="display:none"/>							
-												<input id="sche_dateTime" type="datetime-local" name="sche_dateTime_new" value="">																				
+												<input type="hidden" id="group_id" name="group_id" value="${param.group_id}" />
+												<input type="hidden" id="user_id_hidden" name="user_id_hidden" value="${user_id}"/>						
+												<input id="sche_dateTime" type="datetime-local" name="schedule_date" value="">																				
 											</div>
 										</div>									
 										<div class="content">										
@@ -213,24 +205,25 @@
 													document.getElementById("sche_dateTime").min = koreanDateTime;
 												</script>
 											<div class="contentDetail">
-												<textarea id="sche_cont" name="sche_cont_new" class="contentDetailText" maxlength="1000" rows="10"></textarea>
+												<textarea id="sche_cont" name="schedule_content" class="contentDetailText" maxlength="1000" rows="10"></textarea>
 											</div>
 										</div>
 									</div>									
 									
 									<!-- 모임 위치 -->
-									<input type="hidden" id="detailAddr2" name="location_new" value="" required>
+									<input type="hidden" id="location" name="location" value="" required />
 									<div class="locationMap" id="newMap">
 										<h4>모임 위치</h4>
 										<div id="clickLatlng"></div>
-										<div class="map" id="map">
+										<div style="position: relative">
+											<div class="map" id="map"></div>
 											<div id="menu_wrap" class="bg_white menu_wrap_class">
 												<div class="option">
 													<div>
 														<form>
-															<input type="text" id="keyword" value=""
-																size="10" placeholder="만남 장소" onkeydown="return handleOuterFormKeyDown(event);">
-															<button type="button"onclick="fn_mod_schedule(); return false;" style="padding: 3px">검색하기</button>
+															<input type="text" id="keyword" value="서울광역시"
+																size="10" placeholder="만남 장소" onkeydown="return handleOuterFormKeyDown(event);" />
+															<button type="button" onclick="fn_addr_search(); return false;" style="padding: 3px">검색하기</button>
 														</form>
 													</div>
 												</div>
@@ -282,107 +275,23 @@
 				                        <span class="btnEventNext" title="다음보기"><i class="fa-solid fa-chevron fa-chevron-right"></i></span>
 				                    </div>
 				                    <!-- 멤버 영역 끝-->								
-									
-									<!-- 
-									<div class="partMember">
-										<ul id="partMemberArea">
-											
-										</ul>
-									</div>
-									 -->
+	
 								</div>
-								<div class="editBtn" id="button_modify">
+								<div id="submit_modify_button" class="editBtn">
 									<button type="button" id="modScheduleBtn" class="button btnEdit" onclick="fn_modify_schedule(this.form, ${param.group_id})">수정반영하기</button>
 									<input type="button" value="취소" onclick="toSchedule(frmSchedule, ${param.group_id})" class="button buttonCancle">
 								</div>
 								
 								
-								<div id="editButton" class="editBtn">
-									<input type="button" value="수정" onclick="fn_enable(this.form);" class="button btnEdit">
-									<button type="button" id="delScheduleBtn" class="buttonCancle btnDel" onclick="delSchedule(${param.group_id})">삭제</button>									
-								</div>
-							</div>
-						</div>
-					</form>
-
-					<!-- 상세 일정 등록하기 -->
-					<form
-						action="${contextPath}/group/schedule/addschedule?group_id=${param.group_id}"
-						method="post">
-						<div class="scheduleEditArea clearfixed">												
-							<div class="scheduleEdit">
-							<div class="contentLocationMap">
-								<div class="titleContent">
-									<div class="detailTop">
-										<h3>상세 일정 등록하기</h3>
-									</div>
-									<div class="scheduleTitle">
-										<textarea name="schedule_title" placeholder="제목을 입력하세요"class="scheduleTitleText" rows="1" maxlength="200" required></textarea>
-										<div class="dateTime">
-											<input type="datetime-local" name="schedule_date"
-												id="myDateTimeInput" required/>
-										</div>
-									</div>								
-									<div class="content">										
-										<script>
-										var currentDate = new Date();
-										var currentYear = currentDate.getFullYear();
-										var currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-										var currentDay = currentDate.getDate().toString().padStart(2, '0');
-										var currentHour = currentDate.getHours().toString().padStart(2, '0');
-										var currentMinute = currentDate.getMinutes().toString().padStart(2, '0');
-										
-										var koreanDateTime = currentYear + '-' + currentMonth + '-' + currentDay + 'T' + currentHour + ':' + currentMinute;
-										document.getElementById("myDateTimeInput").min = koreanDateTime;
-										
-										</script>
-										<div class="contentDetail">
-											<textarea name="schedule_content" placeholder="내용을 입력하세요"class="contentDetailText" rows="10" maxlength="1000" required></textarea>
-										</div>
-									</div>
-								</div>
-		
-								<!-- 모임 위치 설정 -->
-								<div class="locationMap">
-									<h4>모임 위치</h4>
-									<div class="hAddr">
-										<span class="title"></span> <span
-											id="centerAddr"></span>
-									</div>
-									<div class="map" id="map2">
-
-										<!-- 모임 위치 지번 주소 -->
-										<input type="hidden" id="detailAddr" name="location" value="" required>
-
-										<div id="menu_wrap2" class="bg_white">
-											<div class="option">
-												<div>
-													<form>
-														키워드 : <input type="text" value="종로구" id="keyword2"
-															size="10" placeholder="만남 장소" onkeydown="return handleOuterFormKeyDown(event);">
-														<button type="button"
-															onclick="createKakaoMap2(); return false;" style="padding: 3px">검색하기</button>
-													</form>
-												</div>
-											</div>
-											<hr>
-											<ul id="placesList2"></ul>
-											<div id="pagination2"></div>
-										</div>
-
-										<script type="text/javascript"
-											src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea6bda86230b8415e663eb00385b3b43&libraries=services"></script>
-										
-									</div>
+								<div id="modify_button" class="editBtn">
+									<input type="button" value="수정" onclick="fn_mod_able()" class="button btnEdit">
+									<button type="button" id="delScheduleBtn" class="buttonCancle btnDel" onclick="fn_delete_schedule()">삭제</button>									
 								</div>
 								
-							</div>
-							
-							<div class="editBtn">
-								<button type="submit" class="button btnResi">등록</button>
-								<a href="#" role="button" class="buttonCancle">취소</a>
-							</div>
-							
+								<div id="submit_button" class="editBtn">
+									<input type="button" value="등록" onclick="fn_add_schedule(this.form);" class="button btnResi" />
+									<input type="button" value="취소" onclick="toSchedule(frmSchedule, ${param.group_id})" class="button buttonCancle" />
+								</div>
 							</div>
 						</div>
 					</form>

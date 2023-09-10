@@ -306,6 +306,7 @@ div.mySchedule p.contents .fa-location-dot {
 }
 
 /* 지도 부분 */
+
 .locationMap {
   flex: 3;
   padding: 20px;
