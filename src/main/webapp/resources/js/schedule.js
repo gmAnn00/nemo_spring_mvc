@@ -62,13 +62,17 @@ function fn_mod_able() {
 }
 
 function fn_join_schedule() {
+	let searchParams = new URL(location.href).searchParams;
+	let group_id = searchParams.get("group_id");
     let schedule_id = $("#schedule_id").val();
-    location.href = "/nemo/group/schedule/joinschedule?schedule_id=" + schedule_id;
+    location.href = "/nemo/group/schedule/joinschedule?schedule_id=" + schedule_id + "&group_id=" + group_id;
 }
 
 function fn_cancel_schedule() {
+	let searchParams = new URL(location.href).searchParams;
+	let group_id = searchParams.get("group_id");
     let schedule_id = $("#schedule_id").val();
-    location.href = "/nemo/group/schedule/cancelschedule?schedule_id=" + schedule_id;
+    location.href = "/nemo/group/schedule/cancelschedule?schedule_id=" + schedule_id + "&group_id=" + group_id;
 }
 
 function scheduleChk(selScheDate) {

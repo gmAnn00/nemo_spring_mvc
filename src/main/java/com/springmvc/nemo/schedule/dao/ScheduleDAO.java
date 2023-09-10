@@ -40,4 +40,8 @@ public interface ScheduleDAO {
 
 	public void delSchedule(int schedule_id) throws DataAccessException;
 
+	public boolean isAttendById(AttendVO attendVO) throws DataAccessException;
+
+	public void cancelSchedule(AttendVO attendVO) throws DataAccessException;
+
 }

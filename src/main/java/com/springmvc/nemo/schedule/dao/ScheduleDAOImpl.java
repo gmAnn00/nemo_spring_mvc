@@ -103,4 +103,17 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 		sqlSession.delete("mapper.schedule.delSchedule", schedule_id);
 		
 	}
+	
+	@Override
+	public boolean isAttendById(AttendVO attendVO) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.schedule.isAttendById", attendVO);
+	}
+	
+	@Override
+	public void cancelSchedule(AttendVO attendVO) throws DataAccessException {
+		int schedule_id = attendVO.getSchedule_id();
+		sqlSession.update("mapper.schedule.decreaseAttendeeNo", schedule_id);
+		sqlSession.delete("mapper.schedule.cancelSchedule", attendVO);
+	}
 }

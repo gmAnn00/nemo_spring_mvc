@@ -40,5 +40,15 @@ public interface ScheduleController {
 			@RequestParam("schedule_id") int schedule_id,
 			@RequestParam("group_id") int group_id,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView joinSchedule(
+			@RequestParam("schedule_id") int schedule_id,
+			@RequestParam("group_id") int group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView cancelSchedule(
+			@RequestParam("schedule_id") int schedule_id,
+			@RequestParam("group_id") int group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 			
 }

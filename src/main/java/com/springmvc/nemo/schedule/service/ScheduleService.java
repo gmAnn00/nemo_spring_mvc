@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.springmvc.nemo.schedule.vo.AttendVO;
 import com.springmvc.nemo.schedule.vo.ScheduleVO;
 import com.springmvc.nemo.schedule.vo.UsingScheduleVO;
 import com.springmvc.nemo.user.vo.UserVO;
@@ -30,5 +31,13 @@ public interface ScheduleService {
 	public String getScheduleMakerId(int schedule_id) throws DataAccessException;
 
 	public void delSchedule(int schedule_id) throws DataAccessException;
+	
+	public boolean isAttendById(AttendVO attendVO) throws DataAccessException;
+
+	public void joinSchedule(AttendVO attendVO) throws DataAccessException;
+
+	public void cancelSchedule(AttendVO attendVO) throws DataAccessException;
+
+	
 
 }

@@ -107,5 +107,25 @@ public class ScheduleServiceImpl implements ScheduleService{
 		scheduleDAO.delAttend(schedule_id);
 		scheduleDAO.delSchedule(schedule_id);
 	}
+	
+	@Override
+	public boolean isAttendById(AttendVO attendVO) throws DataAccessException {
+		
+		return scheduleDAO.isAttendById(attendVO);
+	}
+	
+	@Override
+	public void joinSchedule(AttendVO attendVO) throws DataAccessException {
+		int attend_id = scheduleDAO.getNewAttendId();
+		attendVO.setAttend_id(attend_id);
+		scheduleDAO.attendSchedule(attendVO);
+		
+	}
 
+	
+	@Override
+	public void cancelSchedule(AttendVO attendVO) throws DataAccessException {
+		scheduleDAO.cancelSchedule(attendVO);
+		
+	}
 }

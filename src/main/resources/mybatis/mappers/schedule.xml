@@ -99,6 +99,12 @@
 		]]>
 	</update>
 	
+	<update id="decreaseAttendeeNo" parameterType="int">
+		<![CDATA[
+			UPDATE SCHEDULE_TBL SET attendee_no=attendee_no-1 WHERE schedule_id=#{schedule_id}
+		]]>
+	</update>
+	
 	<update id="modSchedule" parameterType="scheduleVO">
 		<![CDATA[
 			UPDATE SCHEDULE_TBL SET
@@ -119,6 +125,17 @@
 	
 	<delete id="delSchedule" parameterType="int">
 		DELETE FROM SCHEDULE_TBL WHERE schedule_id=#{schedule_id}
+	</delete>
+	
+	<select id="isAttendById" parameterType="attendVO" resultType="boolean">
+		<![CDATA[
+        	SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM ATTEND_TBL
+        	WHERE schedule_id=#{schedule_id} AND user_id=#{user_id}
+      ]]>
+	</select>
+	
+	<delete id="cancelSchedule" parameterType="attendVO">
+		DELETE FROM ATTEND_TBL WHERE schedule_id=#{schedule_id} AND user_id=#{user_id}
 	</delete>
 
 </mapper>

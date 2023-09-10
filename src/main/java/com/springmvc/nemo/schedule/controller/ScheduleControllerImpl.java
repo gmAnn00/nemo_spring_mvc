@@ -31,6 +31,7 @@ import com.google.gson.JsonObject;
 import com.springmvc.nemo.common.Message;
 import com.springmvc.nemo.common.SqlTimestampPropertyEditor;
 import com.springmvc.nemo.schedule.service.ScheduleService;
+import com.springmvc.nemo.schedule.vo.AttendVO;
 import com.springmvc.nemo.schedule.vo.ScheduleVO;
 import com.springmvc.nemo.schedule.vo.UsingScheduleVO;
 import com.springmvc.nemo.user.vo.UserVO;
@@ -245,5 +246,66 @@ public class ScheduleControllerImpl implements ScheduleController{
 		return mav;
 	}
 	
+	@RequestMapping(value = "/group/schedule/joinschedule", method = RequestMethod.GET)
+	@Override
+	public ModelAndView joinSchedule(
+			@RequestParam("schedule_id") int schedule_id,
+			@RequestParam("group_id") int group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String)session.getAttribute("user_id");
+		String str_group_id = Integer.toString(group_id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		
+		AttendVO attendVO = new AttendVO();
+		attendVO.setUser_id(user_id);
+		attendVO.setSchedule_id(schedule_id);
+		
+		// true : 이미 일정에 참석 신청함, false: 일정에 참석 신청하지 않음
+		boolean isAttendByIdResult = scheduleService.isAttendById(attendVO);
+		
+		if(isAttendByIdResult) {
+			mav.addObject("data", new Message("이미 참석을 신청하였습니다.", request.getContextPath()+"/group/schedule?group_id="+str_group_id));
+		}else {
+			scheduleService.joinSchedule(attendVO);
+			mav.addObject("data", new Message("일정 참석을 신청하였습니다.", request.getContextPath()+"/group/schedule?group_id="+str_group_id));
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/group/schedule/cancelschedule", method = RequestMethod.GET)
+	@Override
+	public ModelAndView cancelSchedule(
+			@RequestParam("schedule_id") int schedule_id,
+			@RequestParam("group_id") int group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String)session.getAttribute("user_id");
+		String str_group_id = Integer.toString(group_id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		
+		AttendVO attendVO = new AttendVO();
+		attendVO.setUser_id(user_id);
+		attendVO.setSchedule_id(schedule_id);
+		
+		// true : 이미 일정에 참석 신청함, false: 일정에 참석 신청하지 않음
+		boolean isAttendByIdResult = scheduleService.isAttendById(attendVO);
+		
+		if(isAttendByIdResult) {
+			scheduleService.cancelSchedule(attendVO);
+			mav.addObject("data", new Message("일정 참석을 취소하였습니다.", request.getContextPath()+"/group/schedule?group_id="+str_group_id));
+		}else {
+			mav.addObject("data", new Message("일정 참석을 신청한 상태가 아닙니다.", request.getContextPath()+"/group/schedule?group_id="+str_group_id));
+		}
+		
+		return mav;
+	}
 
 }
