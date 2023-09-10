@@ -34,4 +34,10 @@ public interface ScheduleDAO {
 
 	public void modSchedule(ScheduleVO schedule) throws DataAccessException;
 
+	public String getScheduleMakerId(int schedule_id) throws DataAccessException;
+
+	public void delAttend(int schedule_id) throws DataAccessException;
+
+	public void delSchedule(int schedule_id) throws DataAccessException;
+
 }

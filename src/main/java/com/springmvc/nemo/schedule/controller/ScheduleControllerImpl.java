@@ -219,5 +219,31 @@ public class ScheduleControllerImpl implements ScheduleController{
 		return mav;
 	}
 	
+	@RequestMapping(value = "/group/schedule/delschedule", method = RequestMethod.GET)
+	@Override
+	public ModelAndView delSchedule(
+			@RequestParam("schedule_id") int schedule_id,
+			@RequestParam("group_id") int group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String)session.getAttribute("user_id");
+		String str_group_id = Integer.toString(group_id);
+		
+		String scheduleMakerId = scheduleService.getScheduleMakerId(schedule_id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		
+		if(user_id.equals(scheduleMakerId)) {
+			scheduleService.delSchedule(schedule_id);
+			mav.addObject("data", new Message("일정을 삭제하였습니다.", request.getContextPath()+"/group/schedule?group_id="+str_group_id));
+		}else {
+			mav.addObject("data", new Message("일정 생성자만 일정을 삭제할 수 있습니다.", request.getContextPath()+"/group/schedule?group_id="+str_group_id));
+		}
+		
+		return mav;
+	}
+	
 
 }

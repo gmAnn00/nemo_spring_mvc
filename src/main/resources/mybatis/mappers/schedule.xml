@@ -106,5 +106,19 @@
 			location=#{location} WHERE schedule_id=#{schedule_id}
 		]]>
 	</update>
+	
+	<select id="getScheduleMakerId" parameterType="int" resultType="String">
+		<![CDATA[
+			SELECT user_id FROM SCHEDULE_TBL WHERE schedule_id=#{schedule_id}
+		]]>
+	</select>
+	
+	<delete id="delAttend" parameterType="int">
+		DELETE FROM ATTEND_TBL WHERE schedule_id=#{schedule_id}
+	</delete>
+	
+	<delete id="delSchedule" parameterType="int">
+		DELETE FROM SCHEDULE_TBL WHERE schedule_id=#{schedule_id}
+	</delete>
 
 </mapper>

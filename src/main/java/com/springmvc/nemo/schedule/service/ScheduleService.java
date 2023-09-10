@@ -27,4 +27,8 @@ public interface ScheduleService {
 
 	public boolean modSchedule(ScheduleVO schedule) throws DataAccessException;
 
+	public String getScheduleMakerId(int schedule_id) throws DataAccessException;
+
+	public void delSchedule(int schedule_id) throws DataAccessException;
+
 }

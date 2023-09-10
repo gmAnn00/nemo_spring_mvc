@@ -35,5 +35,10 @@ public interface ScheduleController {
 			@RequestParam("group_id") String str_group_id,
 			@ModelAttribute("scheduleVO") ScheduleVO scheduleVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView delSchedule(
+			@RequestParam("schedule_id") int schedule_id,
+			@RequestParam("group_id") int group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 			
 }

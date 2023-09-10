@@ -20,10 +20,12 @@ function fn_add_schedule(obj) {
 }
 
 function fn_delete_schedule() {
+	let searchParams = new URL(location.href).searchParams;
+	let group_id = searchParams.get("group_id");
     let result = confirm("삭제하시겠습니까?");
     if (result) {
         let schedule_id = $("#schedule_id").val();
-        location.href = "/nemo/group/schedule/delschedule?schedule_id=" + schedule_id;
+        location.href = "/nemo/group/schedule/delschedule?schedule_id=" + schedule_id + "&group_id=" + group_id;
     }
 }
 
@@ -125,11 +127,12 @@ function scheduleChk(selScheDate) {
                 $(".memberArea").show();
 
                 if ($("#user_id_hidden").val() !== usingScheduleVO.user_id) {
-                    $("#editButton").css("display", "none");
+                    $("#modify_button").css("display", "none");
+                }else{
+                	$("#modify_button").css("display", "block");
                 }
 
                 $("#submit_button").css("display", "none");
-                $("#modify_button").css("display", "block");
                 $("#submit_modify_button").css("display", "none");
 
                 date = usingScheduleVO.schedule_date;

@@ -94,5 +94,18 @@ public class ScheduleServiceImpl implements ScheduleService{
 		
 		return true;
 	}
+	
+	@Override
+	public String getScheduleMakerId(int schedule_id) throws DataAccessException {
+		
+		return scheduleDAO.getScheduleMakerId(schedule_id);
+	}
+	
+	@Override
+	public void delSchedule(int schedule_id) throws DataAccessException {
+		
+		scheduleDAO.delAttend(schedule_id);
+		scheduleDAO.delSchedule(schedule_id);
+	}
 
 }

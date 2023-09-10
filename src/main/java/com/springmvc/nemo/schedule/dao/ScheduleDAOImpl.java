@@ -85,4 +85,22 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 		
 		sqlSession.update("mapper.schedule.modSchedule", schedule);
 	}
+	
+	@Override
+	public String getScheduleMakerId(int schedule_id) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.schedule.getScheduleMakerId", schedule_id);
+	}
+	
+	@Override
+	public void delAttend(int schedule_id) throws DataAccessException {
+		sqlSession.delete("mapper.schedule.delAttend", schedule_id);
+		
+	}
+	
+	@Override
+	public void delSchedule(int schedule_id) throws DataAccessException {
+		sqlSession.delete("mapper.schedule.delSchedule", schedule_id);
+		
+	}
 }
