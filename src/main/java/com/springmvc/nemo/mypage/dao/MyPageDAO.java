@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.springmvc.nemo.mypage.vo.CommingScheduleVO;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
 import com.springmvc.nemo.mypage.vo.MyProfileVO;
 import com.springmvc.nemo.user.vo.InterestsVO;
@@ -29,5 +30,13 @@ public interface MyPageDAO {
 	public boolean checkPassword(UserVO userVO) throws DataAccessException;
 
 	public void delUser(UserVO userVO) throws DataAccessException;
+
+	public List<CommingScheduleVO> getCommingSchedules(String user_id) throws DataAccessException;
+
+	public List<String> getSelectYMSchedule(Map<String, String> scheduleMap) throws DataAccessException;
+
+	public List<CommingScheduleVO> getSelectMonthSchedule(Map<String, String> scheduleMap) throws DataAccessException;
+	
+	
 
 }

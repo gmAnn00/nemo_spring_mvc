@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.springmvc.nemo.mypage.dao.MyPageDAO;
+import com.springmvc.nemo.mypage.vo.CommingScheduleVO;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
 import com.springmvc.nemo.mypage.vo.MyProfileVO;
 import com.springmvc.nemo.user.vo.InterestsVO;
@@ -68,6 +69,24 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		
 		return false;
+	}
+	
+	@Override
+	public List<CommingScheduleVO> getCommingSchedules(String user_id) throws DataAccessException {
+		
+		return myPageDAO.getCommingSchedules(user_id);
+	}
+	
+	@Override
+	public List<String> getSelectYMSchedule(Map<String, String> scheduleMap) throws DataAccessException {
+		
+		return myPageDAO.getSelectYMSchedule(scheduleMap);
+	}
+	
+	@Override
+	public List<CommingScheduleVO> getSelectMonthSchedule(Map<String, String> scheduleMap) throws DataAccessException {
+		
+		return myPageDAO.getSelectMonthSchedule(scheduleMap);
 	}
 
 }

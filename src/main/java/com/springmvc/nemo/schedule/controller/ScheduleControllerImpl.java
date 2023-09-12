@@ -92,6 +92,8 @@ public class ScheduleControllerImpl implements ScheduleController{
 		Gson gson = new Gson();
 		String scheduleDateJson = gson.toJson(scheduleDateList);
 		
+		logger.info("scheduleDateList={}", scheduleDateList.toString());
+		
 		return scheduleDateJson;
 	}
 	

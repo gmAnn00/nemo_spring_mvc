@@ -108,27 +108,24 @@
                       <p>등록된 일정이 없습니다.</p>
                     </c:when>
                     <c:when test="${!empty commingScheduleList}">                                       
-                      <c:forEach var="comMySchedule" items="${commingScheduleList}">
-                      <fmt:formatDate value="${comMySchedule.date}" pattern="yyyy-MM-dd hh:mm" var="date"/>
-                      <c:if test = "${today<=date}" >
-                                            
+                      <c:forEach var="commingSchedule" items="${commingScheduleList}">
+                      <%--<fmt:formatDate value="${commingSchedule.schedule_date}" pattern="yyyy-MM-dd hh:mm" var="date"/> --%>                
 	                  <div class="mySchedule">
-	                  	<a href="${contextPath}/group/schedule?group_id=${comMySchedule.scheduleVO.grp_id}">
-	                    <p class="myScheduleDate">${comMySchedule.scheduleDate}<span> ${comMySchedule.scheduleTime}</span></p>
+	                  	<a href="${contextPath}/group/schedule?group_id=${commingSchedule.group_id}">
+	                    <p class="myScheduleDate">${commingSchedule.schedule_date}</span></p>
 	                    <div class="myScheduleImgContent">
 	                      <div class="groupImg">
-	                        <img src="${contextPath}/groupImages/${comMySchedule.scheduleVO.grp_id}/${comMySchedule.grp_img}" alt="소모임 사진" />
+	                        <img src="${contextPath}/groupimagedownload?group_id=${commingSchedule.group_id}&group_img=${commingSchedule.group_img}"
+	                        alt="소모임 사진" />
 	                      </div>	                      
 	                      <div class="myScheduleContent">
-	                        <p class="myScheduleGroupName">${comMySchedule.grp_name}</p>
-	                        <p class="contents">${comMySchedule.scheduleVO.sche_title}</p>
-	                        <p class="contents"><i class="fa-solid fa-location-dot"></i>${comMySchedule.scheduleVO.location}</p>
+	                        <p class="myScheduleGroupName">${commingSchedule.group_name}</p>
+	                        <p class="contents">${commingSchedule.schedule_title}</p>
+	                        <p class="contents"><i class="fa-solid fa-location-dot"></i> ${commingSchedule.location}</p>
 	                      </div>
 	                    </div>
 	                    </a>
 	                  </div>    
-	                                                 
-                  	  </c:if>    	 
                   	  </c:forEach>
                     </c:when>
                   </c:choose>

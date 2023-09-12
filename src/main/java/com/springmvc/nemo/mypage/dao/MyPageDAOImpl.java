@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.springmvc.nemo.mypage.vo.CommingScheduleVO;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
 import com.springmvc.nemo.mypage.vo.MyProfileVO;
 import com.springmvc.nemo.user.vo.InterestsVO;
@@ -71,6 +72,24 @@ public class MyPageDAOImpl implements MyPageDAO{
 	public void delUser(UserVO userVO) throws DataAccessException {
 		
 		sqlSession.update("mapper.myPage.delUser", userVO);
+	}
+	
+	@Override
+	public List<CommingScheduleVO> getCommingSchedules(String user_id) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.myPage.getCommingSchedules", user_id);
+	}
+	
+	@Override
+	public List<String> getSelectYMSchedule(Map<String, String> scheduleMap) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.myPage.getSelectYMSchedule", scheduleMap);
+	}
+	
+	@Override
+	public List<CommingScheduleVO> getSelectMonthSchedule(Map<String, String> scheduleMap) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.myPage.getSelectMonthSchedule", scheduleMap);
 	}
 
 }

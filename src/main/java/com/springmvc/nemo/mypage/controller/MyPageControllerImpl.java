@@ -34,6 +34,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.springmvc.nemo.common.Message;
 import com.springmvc.nemo.mypage.service.MyPageService;
+import com.springmvc.nemo.mypage.vo.CommingScheduleVO;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
 import com.springmvc.nemo.mypage.vo.MyProfileVO;
 import com.springmvc.nemo.user.vo.InterestsVO;
@@ -354,11 +355,71 @@ public class MyPageControllerImpl implements MyPageController{
 	@RequestMapping(value = "/mypage/myschedule", method = RequestMethod.GET)
 	@Override
 	public ModelAndView mySchedule(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		
+		// 내 일정 정보 추가
+		
+		// 다가오는 일정
+		List<CommingScheduleVO> commingScheduleList = myPageService.getCommingSchedules(user_id);
+		
+		mav.addObject("commingScheduleList", commingScheduleList);
+		
 		return mav;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/mypage/myschedule/ajaxschedule", method = RequestMethod.GET, produces="application/text;charset=utf-8")
+	@Override
+	public String ajaxSchedule(
+			@RequestParam("year") String year, @RequestParam("month") String month,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		String selectYM = year + "/" + month;
+		
+		Map<String, String> scheduleMap = new HashMap<String, String>();
+		scheduleMap.put("user_id", user_id);
+		scheduleMap.put("selectYM", selectYM);
+		
+		List<String> scheduleList = myPageService.getSelectYMSchedule(scheduleMap);
+		
+		Gson gson = new Gson();
+		String scheduleInfo = gson.toJson(scheduleList);
+			
+		return scheduleInfo;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/mypage/myschedule/ajaxselectmonthschedule", method = RequestMethod.GET, produces="application/text;charset=utf-8")
+	@Override
+	public String ajaxSelectMonthSchedule(String year, String month, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		String selectYM = year + "/" + month;
+		
+		Map<String, String> scheduleMap = new HashMap<String, String>();
+		scheduleMap.put("user_id", user_id);
+		scheduleMap.put("selectYM", selectYM);
+		
+		List<CommingScheduleVO> selectMonthScheduleList = myPageService.getSelectMonthSchedule(scheduleMap);
+		
+		Gson gson = new Gson();
+		String scheduleInfo = gson.toJson(selectMonthScheduleList);
+		
+		logger.info("scheduleInfo={}", scheduleInfo);
+		
+		return scheduleInfo;
 	}
 	
 	@RequestMapping(value = "/mypage/mygroup", method = RequestMethod.GET)
@@ -367,6 +428,8 @@ public class MyPageControllerImpl implements MyPageController{
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
+		
+		// 내 소모임 정보 추가
 		
 		return mav;
 	}
@@ -377,6 +440,8 @@ public class MyPageControllerImpl implements MyPageController{
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
+		
+		// 내가 쓴글 정보 추가
 		
 		return mav;
 	}

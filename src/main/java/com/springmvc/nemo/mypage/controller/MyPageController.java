@@ -37,4 +37,13 @@ public interface MyPageController {
 	
 	public ModelAndView myBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	public String ajaxSchedule(
+			@RequestParam("year") String year, @RequestParam("month") String month,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public String ajaxSelectMonthSchedule(
+			@RequestParam("year") String year, @RequestParam("month") String month,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	
 }

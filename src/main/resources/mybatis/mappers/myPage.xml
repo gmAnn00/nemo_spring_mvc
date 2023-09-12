@@ -57,4 +57,36 @@
 	</update>
 
 
+	<select id="getCommingSchedules" parameterType="string" resultType="commingScheduleVO">
+		<![CDATA[
+         SELECT t.group_id, t.group_name, t.group_img,
+		TO_CHAR(t.schedule_date, 'YYYY"년 "MM"월 "DD"일 "AM HH"시 "MI"분"') as schedule_date,
+		t.schedule_title, t.location FROM
+		(SELECT ROWNUM as scdnum, g.group_id, g.group_name, g.group_img,
+		s.schedule_date, s.schedule_title, s.location
+		FROM GROUP_TBL g, SCHEDULE_TBL s, ATTEND_TBL a
+		WHERE a.user_id =#{user_id} AND a.schedule_id=s.schedule_id AND s.group_id = g.group_id AND s.schedule_date >= sysdate
+		ORDER BY s.schedule_date, g.group_id) t WHERE scdnum<=3
+      ]]>
+	</select>
+	
+	<select id="getSelectYMSchedule" parameterType="java.util.Map" resultType="string">
+		<![CDATA[
+        	SELECT substr(s.schedule_date, 7, 8) as day FROM SCHEDULE_TBL s, ATTEND_TBL a
+        	WHERE a.user_id=#{user_id} AND substr(schedule_date, 1, 5) = #{selectYM} AND s.schedule_id=a.schedule_id
+        	order by day
+      ]]>
+	</select>
+	
+	<select id="getSelectMonthSchedule" parameterType="java.util.Map" resultType="commingScheduleVO">
+		<![CDATA[
+			SELECT g.group_id, g.group_name, g.group_img,
+			TO_CHAR(s.schedule_date, 'YYYY"년 "MM"월 "DD"일 "AM HH"시 "MI"분"') as schedule_date, s.schedule_title, s.location
+			FROM GROUP_TBL g, SCHEDULE_TBL s, ATTEND_TBL a
+			WHERE a.user_id =#{user_id} AND a.schedule_id=s.schedule_id AND
+			s.group_id = g.group_id AND substr(s.schedule_date, 1, 5)=#{selectYM}
+			ORDER BY s.schedule_date, g.group_id
+		]]>
+	</select>
+
 </mapper>
