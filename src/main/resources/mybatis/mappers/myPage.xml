@@ -100,7 +100,7 @@
 	<select id="getGroup" parameterType="String" resultType="groupVO">
 		<![CDATA[
         	SELECT g.* FROM GROUP_TBL g, JOIN_TBL j
-        	WHERE j.user_id=#{user_id} AND g.group_id=j.group_id AND g.group_leader<>#{user_id}
+        	WHERE j.user_id=#{user_id} AND g.group_id=j.group_id AND g.group_leader<>#{user_id} AND j.cancel=0
       ]]>
 	</select>
 	

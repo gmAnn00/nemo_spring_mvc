@@ -26,6 +26,18 @@
       ]]>
 	</insert>
 	
+	<select id="getCancel" parameterType="joinVO" resultType="int">
+		<![CDATA[
+         SELECT cancel FROM JOIN_TBL WHERE group_id=#{group_id} AND user_id=#{user_id}
+      ]]>
+	</select>
+	
+	<update id="rejoinGroup" parameterType="joinVO">
+		<![CDATA[
+         UPDATE JOIN_TBL SET cancel=0 WHERE group_id=#{group_id} AND user_id=#{user_id}
+      ]]>
+	</update>
+	
 	<update id="increaseCurrentMemNo" parameterType="int">
 		<![CDATA[
          UPDATE GROUP_TBL SET current_memno=current_memno+1 WHERE group_id=#{group_id}

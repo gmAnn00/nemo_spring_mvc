@@ -209,8 +209,14 @@ public class GroupControllerImpl implements GroupController{
 			groupService.waitGroup(waitListVO);
 			mav.addObject("data", new Message("소모임 가입을 신청했습니다.", request.getContextPath()+"/mypage/mygroup"));
 		} else {
-			groupService.joinGroup(joinVO);
-			mav.addObject("data", new Message("소모임에 가입했습니다.", request.getContextPath()+"/group/groupmain?group_id="+group_id));
+			
+			boolean result = groupService.joinGroup(joinVO);
+			if(result) {
+				mav.addObject("data", new Message("소모임에 가입했습니다.", request.getContextPath()+"/group/groupmain?group_id="+group_id));
+			}else {
+				mav.addObject("data", new Message("소모임에 가입할 수 없습니다.", request.getContextPath()+"/group/groupinfo?group_id="+group_id));
+			}
+			
 		}
 
 		mav.setViewName("message");

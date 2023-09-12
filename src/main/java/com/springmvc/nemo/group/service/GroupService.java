@@ -36,7 +36,7 @@ public interface GroupService {
 
 	public void waitGroup(WaitListVO waitListVO) throws DataAccessException;
 
-	public void joinGroup(JoinVO joinVO) throws DataAccessException;
+	public boolean joinGroup(JoinVO joinVO) throws DataAccessException;
 
 	public boolean isFullGroup(int group_id) throws DataAccessException;
 

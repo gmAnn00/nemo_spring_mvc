@@ -175,6 +175,7 @@
                                     <!-- tab1 종료 -->
                                     
                                     <!-- tab2 시작 -->
+                                    
                                     <div id="tab2" class="tab-slider--body">
                                         <div class="tab_box_profile">
                                             
@@ -214,6 +215,7 @@
                         					
                                         </div>
                                     </div>
+                                    
                                     <!-- tab2 종료 -->
                                 
                                 </div>

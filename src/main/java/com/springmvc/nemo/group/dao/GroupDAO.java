@@ -19,8 +19,12 @@ public interface GroupDAO {
 	public int getNewGroupId() throws DataAccessException;
 
 	public void createGroup(Map<String, Object> groupMap) throws DataAccessException;
-
+	
 	public void joinGroup(JoinVO joinVO) throws DataAccessException;
+
+	public int getCancel(JoinVO joinVO) throws DataAccessException;
+	
+	public void rejoinGroup(JoinVO joinVO) throws DataAccessException;
 
 	public GroupVO getGroupInfo(int group_id) throws DataAccessException;
 
@@ -48,7 +52,5 @@ public interface GroupDAO {
 
 	public List<UserVO> getGroupMember(int group_id) throws DataAccessException;
 
-	
-	
 
 }

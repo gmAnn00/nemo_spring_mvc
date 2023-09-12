@@ -62,7 +62,8 @@
 			<mvc:mapping path="/group/groupmain"/>
 			<mvc:mapping path="/group/schedule/**"/>
 			<mvc:mapping path="/group/board/**"/>
-			<mvc:mapping path="/group/member/**"/>
+			<mvc:mapping path="/group/member"/>
+			<mvc:mapping path="/group/member/cancelgroup"/>
 			<mvc:mapping path="/group/leader/**"/>
 			<beans:bean class="com.springmvc.nemo.common.interceptor.CheckMemberInterceptor"/>
 		</mvc:interceptor>
@@ -71,7 +72,8 @@
 			<mvc:mapping path="/group/groupmain"/>
 			<mvc:mapping path="/group/schedule/**"/>
 			<mvc:mapping path="/group/board/**"/>
-			<mvc:mapping path="/group/member/**"/>
+			<mvc:mapping path="/group/member"/>
+			<mvc:mapping path="/group/member/cancelgroup"/>
 			<mvc:mapping path="/group/leader/**"/>
 			<beans:bean class="com.springmvc.nemo.common.interceptor.CheckLeaderInterceptor"/>
 		</mvc:interceptor>

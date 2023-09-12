@@ -116,9 +116,22 @@ public class GroupServiceImpl implements GroupService{
 	
 	
 	@Override
-	public void joinGroup(JoinVO joinVO) throws DataAccessException {
-		groupDAO.joinGroup(joinVO);
+	public boolean joinGroup(JoinVO joinVO) throws DataAccessException {
+		int getCancelResult = groupDAO.getCancel(joinVO);
+		if(getCancelResult == 0) {
+			// 완전 처음 가입(0)
+			groupDAO.joinGroup(joinVO);
+			return true;
+		} else if(getCancelResult == 1) {
+			// 한번 탈퇴했던 사람이면 가입 가능(1)
+			groupDAO.rejoinGroup(joinVO);
+			return true;
+		}else if(getCancelResult == 2) {
+			// 추방된 사람이면 가입 불가능(2)
+			return false;
+		}
 		
+		return false;
 	}
 	
 	@Override

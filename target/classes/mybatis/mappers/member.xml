@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.member">
+
+	<select id="getUserInfo" parameterType="String" resultType="userVO">
+		<![CDATA[
+			SELECT user_id, nickname, user_addr1, join_date, user_img
+			FROM USER_TBL WHERE user_id=#{user_id}
+		]]>
+	</select>
+	
+	
+	<select id="getMemberInfo" parameterType="joinVO" resultType="userVO">
+		<![CDATA[
+			SELECT u.user_id, u.nickname, u.user_addr1, u.join_date, u.user_img
+			FROM USER_TBL u, JOIN_TBL j
+			WHERE j.group_id=#{group_id} AND j.user_id=u.user_id AND j.cancel=0 AND j.user_id<>#{user_id}
+		]]>
+	</select>
+	
+	
+	<select id="isAlreadyCancel" parameterType="joinVO" resultType="boolean">
+		<![CDATA[
+			SELECT DECODE(cancel, 1, 'true', 'false')
+			FROM JOIN_TBL WHERE group_id=#{group_id} AND user_id=#{user_id}
+		]]>
+		
+	</select>
+	
+	<update id="decreaseCurrentMemNo" parameterType="int">
+		<![CDATA[
+			UPDATE GROUP_TBL SET current_memno=current_memno-1 WHERE group_id=#{group_id}
+		]]>
+	</update>
+	
+	
+	<update id="cancelGroup" parameterType="joinVO">
+		<![CDATA[
+			UPDATE JOIN_TBL SET cancel=1
+			WHERE group_id=#{group_id} AND user_id=#{user_id}
+		]]>
+	</update>
+	
+	
+	<delete id="cancelWait" parameterType="waitListVO">
+		<![CDATA[
+			DELETE FROM WAITLIST_TBL WHERE group_id=#{group_id} AND user_id=#{user_id}
+		]]>
+	</delete>
+
+</mapper>

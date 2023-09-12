@@ -36,8 +36,22 @@ public class GroupDAOImpl implements GroupDAO{
 	
 	@Override
 	public void joinGroup(JoinVO joinVO) throws DataAccessException {
+		int group_id = joinVO.getGroup_id();
 		sqlSession.insert("mapper.group.joinGroup", joinVO);
-		sqlSession.update("mapper.group.increaseCurrentMemNo", joinVO.getGroup_id());
+		sqlSession.update("mapper.group.increaseCurrentMemNo", group_id);
+	}
+	
+	@Override
+	public int getCancel(JoinVO joinVO) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.group.getCancel", joinVO);
+	}
+	
+	@Override
+	public void rejoinGroup(JoinVO joinVO) throws DataAccessException {
+		int group_id = joinVO.getGroup_id();
+		sqlSession.update("mapper.group.rejoinGroup", joinVO);
+		sqlSession.update("mapper.group.increaseCurrentMemNo", group_id);
 	}
 	
 	@Override
