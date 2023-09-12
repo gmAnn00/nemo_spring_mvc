@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import com.springmvc.nemo.board.vo.BoardVO;
 import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.group.vo.JoinVO;
+import com.springmvc.nemo.group.vo.WaitListVO;
 import com.springmvc.nemo.schedule.vo.ScheduleVO;
 import com.springmvc.nemo.user.vo.BookmarkVO;
 import com.springmvc.nemo.user.vo.UserVO;
@@ -28,6 +29,12 @@ public interface GroupService {
 	public String toggleBookmark(BookmarkVO bookmarkVO) throws DataAccessException;
 
 	public boolean isGroupMember(JoinVO joinVO) throws DataAccessException;
+	
+	public boolean isWaitGroup(int group_id) throws DataAccessException;
+
+	public boolean isAlreadyWait(WaitListVO waitListVO) throws DataAccessException;
+
+	public void waitGroup(WaitListVO waitListVO) throws DataAccessException;
 
 	public void joinGroup(JoinVO joinVO) throws DataAccessException;
 
@@ -38,6 +45,8 @@ public interface GroupService {
 	public List<BoardVO> getPreviewBoard(int group_id) throws DataAccessException;
 
 	public List<UserVO> getGroupMember(int group_id) throws DataAccessException;
+
+	
 
 
 

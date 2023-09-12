@@ -34,6 +34,7 @@ import com.springmvc.nemo.common.Message;
 import com.springmvc.nemo.group.service.GroupService;
 import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.group.vo.JoinVO;
+import com.springmvc.nemo.group.vo.WaitListVO;
 import com.springmvc.nemo.schedule.vo.ScheduleVO;
 import com.springmvc.nemo.user.vo.BookmarkVO;
 import com.springmvc.nemo.user.vo.UserVO;
@@ -188,13 +189,25 @@ public class GroupControllerImpl implements GroupController{
 		joinVO.setGroup_id(Integer.parseInt(group_id));
 		joinVO.setUser_id(user_id);
 		
+		WaitListVO waitListVO = new WaitListVO();
+		waitListVO.setGroup_id(Integer.parseInt(group_id));
+		waitListVO.setUser_id(user_id);
+		
 		boolean isGroupMemberResult = groupService.isGroupMember(joinVO);
 		boolean isFullGroupResult = groupService.isFullGroup(Integer.parseInt(group_id));
+		boolean isWaitGroupResult = groupService.isWaitGroup(Integer.parseInt(group_id));
+		boolean isAlreadyWaitResult = groupService.isAlreadyWait(waitListVO);
+		
 		
 		if(isGroupMemberResult) {
 			mav.addObject("data", new Message("이미 가입한 소모임입니다.", request.getContextPath()+"/group/groupmain?group_id="+group_id));
 		} else if(!isGroupMemberResult && isFullGroupResult) {
 			mav.addObject("data", new Message("소모임의 정원이 다 찼습니다.", request.getContextPath()+"/group/groupinfo?group_id="+group_id));
+		} else if(!isGroupMemberResult && !isFullGroupResult && isWaitGroupResult && isAlreadyWaitResult) {
+			mav.addObject("data", new Message("이미 소모임 가입을 신청했습니다.", request.getContextPath()+"/mypage/mygroup"));
+		} else if(!isGroupMemberResult && !isFullGroupResult && isWaitGroupResult && !isAlreadyWaitResult) {
+			groupService.waitGroup(waitListVO);
+			mav.addObject("data", new Message("소모임 가입을 신청했습니다.", request.getContextPath()+"/mypage/mygroup"));
 		} else {
 			groupService.joinGroup(joinVO);
 			mav.addObject("data", new Message("소모임에 가입했습니다.", request.getContextPath()+"/group/groupmain?group_id="+group_id));

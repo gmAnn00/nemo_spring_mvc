@@ -12,6 +12,7 @@ import com.springmvc.nemo.board.vo.BoardVO;
 import com.springmvc.nemo.group.dao.GroupDAO;
 import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.group.vo.JoinVO;
+import com.springmvc.nemo.group.vo.WaitListVO;
 import com.springmvc.nemo.schedule.vo.ScheduleVO;
 import com.springmvc.nemo.user.vo.BookmarkVO;
 import com.springmvc.nemo.user.vo.UserVO;
@@ -94,6 +95,25 @@ public class GroupServiceImpl implements GroupService{
 		return false;
 		
 	}
+	
+	@Override
+	public boolean isWaitGroup(int group_id) throws DataAccessException {
+		
+		return groupDAO.isWaitGroup(group_id);
+	}
+	
+	@Override
+	public boolean isAlreadyWait(WaitListVO waitListVO) throws DataAccessException {
+		
+		return groupDAO.isAlreadyWait(waitListVO);
+	}
+	
+	@Override
+	public void waitGroup(WaitListVO waitListVO) throws DataAccessException {
+		
+		groupDAO.waitGroup(waitListVO);
+	}
+	
 	
 	@Override
 	public void joinGroup(JoinVO joinVO) throws DataAccessException {

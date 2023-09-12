@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.springmvc.nemo.board.vo.BoardVO;
 import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.group.vo.JoinVO;
+import com.springmvc.nemo.group.vo.WaitListVO;
 import com.springmvc.nemo.schedule.vo.ScheduleVO;
 import com.springmvc.nemo.user.vo.BookmarkVO;
 import com.springmvc.nemo.user.vo.UserVO;
@@ -81,6 +82,24 @@ public class GroupDAOImpl implements GroupDAO{
 	public boolean isGroupMember(JoinVO joinVO) throws DataAccessException {
 		
 		return sqlSession.selectOne("mapper.group.isGroupMember", joinVO);
+	}
+	
+	@Override
+	public boolean isWaitGroup(int group_id) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.group.isWaitGroup", group_id);
+	}
+	
+	@Override
+	public boolean isAlreadyWait(WaitListVO waitListVO) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.group.isAlreadyWait", waitListVO);
+	}
+	
+	@Override
+	public void waitGroup(WaitListVO waitListVO) throws DataAccessException {
+		
+		sqlSession.insert("mapper.group.waitGroup", waitListVO);
 	}
 	
 	@Override

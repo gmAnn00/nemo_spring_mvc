@@ -82,9 +82,25 @@
 	
 	<select id="isGroupMember" parameterType="joinVO" resultType="boolean">
 		<![CDATA[
-         SELECT DECODE(count(*), 1, 'true' , 'false') FROM JOIN_TBL WHERE group_id=#{group_id} AND user_id=#{user_id} AND cancel=0
+          SELECT DECODE(count(*), 1, 'true' , 'false') FROM JOIN_TBL WHERE group_id=#{group_id} AND user_id=#{user_id} AND cancel=0
       ]]>
 	</select>
+	
+	<select id="isWaitGroup" parameterType="int" resultType="boolean">
+		<![CDATA[       
+         SELECT DECODE(permission, 1, 'true' , 'false') FROM GROUP_TBL WHERE group_id=#{group_id}
+      ]]>
+	</select>
+	
+	<select id="isAlreadyWait" parameterType="waitListVO" resultType="boolean">
+		<![CDATA[
+          SELECT DECODE(count(*), 1, 'true' , 'false') FROM WAITLIST_TBL WHERE group_id=#{group_id} AND user_id=#{user_id}
+      ]]>
+	</select>
+	
+	<insert id="waitGroup" parameterType="waitListVO">
+		INSERT INTO WAITLIST_TBL(group_id, user_id) VALUES (#{group_id}, #{user_id})
+	</insert>
 	
 	<select id="getPreviewSchedule" parameterType="int" resultType="scheduleVO">
 		<![CDATA[
