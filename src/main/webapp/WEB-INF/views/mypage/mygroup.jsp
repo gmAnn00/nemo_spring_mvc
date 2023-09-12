@@ -108,26 +108,31 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                 </div>               
                 <div class="cards">
                   <c:choose>
-                    <c:when test="${empty mngGroupList}">
+                    <c:when test="${empty leaderGroupList}">
                       <p>만든 소모임이 없습니다.</p>
                     </c:when>
-                    <c:when test="${!empty mngGroupList}">
-                      <c:forEach var="mngGroup" items="${mngGroupList}" varStatus="loop">
-                      <c:set var="idx" value="${mngGroup.grp_addr1.indexOf(' ', mngGroup.grp_addr1.indexOf(' ') + 1)}" />
-                      <c:set var="locationM" value="${mngGroup.grp_addr1.substring(0, idx)}"/>
+                    <c:when test="${!empty leaderGroupList}">
+                      <c:forEach var="leaderGroup" items="${leaderGroupList}" varStatus="loop">
+                      <c:set var="idx" value="${leaderGroup.group_addr1.indexOf(' ', leaderGroup.group_addr1.indexOf(' ') + 1)}" />
+                      <c:set var="locationM" value="${leaderGroup.group_addr1.substring(0, idx)}"/>
                         <div class="card card--1">
                           <div class="card__info-hover">                            
                             <span></span>
                             <span>바로가기 <i class="fa-solid fa-arrow-right"></i></span>                            
                           </div>
                           <div class="card__img"></div>
-                          <a href="${contextPath}/group/groupMain?group_id=${mngGroup.grp_id}" class="card_link">
-                            <div class="card__img--hover" style="background-image:url('${contextPath}/groupImages/${mngGroup.grp_id}/${mngGroup.grp_img}')"></div>
+                          <a href="${contextPath}/group/groupmain?group_id=${leaderGroup.group_id}" class="card_link">
+                          	<img class="card__img--hover" alt="소모임 사진"
+                          	src="${contextPath}/groupimagedownload?group_id=${leaderGroup.group_id}&group_img=${leaderGroup.group_img}">
+                          	<%-- 
+                            <div class="card__img--hover"
+                            style="background-image:url('${contextPath}/WEB-INF/views/groupImages/${leaderGroup.group_id}/${leaderGroup.group_img}')"></div>
+                            --%>
                           </a>
                           <div class="card__info">
-                            <span class="card__category">${mngGroup.main_name}</span>
-                            <span class="card__category">${mngGroup.sub_name}</span>
-                            <h3 class="card__title">${mngGroup.grp_name}</h3>
+                            <span class="card__category">${leaderGroup.main_cate}</span>
+                            <span class="card__category">${leaderGroup.sub_cate}</span>
+                            <h3 class="card__title">${leaderGroup.group_name}</h3>
                             
                             <span class="card__by">
                               <i class="fa-solid fa-location-dot"></i>
@@ -153,35 +158,37 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 
                 <div class="cards">
                   <c:choose>
-                    <c:when test="${empty userGroupList && empty waitGroupList}">
+                    <c:when test="${empty groupList && empty waitGroupList}">
                       <p>가입한 소모임이 없습니다.</p>
                     </c:when>
                   
-                    <c:when test="${!empty userGroupList}">
-                      <c:forEach var="userGroup" items="${userGroupList}" varStatus="loop">
-                      <c:set var="idx" value="${userGroup.grp_addr1.indexOf(' ', userGroup.grp_addr1.indexOf(' ') + 1)}" />
-                      <c:set var="locationU" value="${userGroup.grp_addr1.substring(0, idx)}"/>
+                    <c:when test="${!empty groupList}">
+                      <c:forEach var="userGroup" items="${groupList}" varStatus="loop">
+                      <c:set var="idx" value="${userGroup.group_addr1.indexOf(' ', userGroup.group_addr1.indexOf(' ') + 1)}" />
+                      <c:set var="locationU" value="${userGroup.group_addr1.substring(0, idx)}"/>
                         <div class="card card--1">
                           <div class="card__info-hover">
-                            <a href="${contextPath}/group/member/delete?group_id=${userGroup.grp_id}"><span class="leave">탈퇴하기</span></a>
-                            <a href="${contextPath}/group/groupMain?group_id=${userGroup.grp_id}" class="card_link">
+                            <a href="${contextPath}/group/member/cancel?group_id=${userGroup.group_id}"><span class="leave">탈퇴하기</span></a>
+                            <a href="${contextPath}/group/groupmain?group_id=${userGroup.group_id}" class="card_link">
                             <span>바로가기</span>	<i class="fa-solid fa-arrow-right"></i></a>
                           </div>
                           <div class="card__img"></div>
-                          <div class="card__img--hover" style="background-image:url('${contextPath}/groupImages/${userGroup.grp_id}/${userGroup.grp_img}')">
+                          <div class="card__img--hover">
+                         	<img class="card__img--hover" alt="소모임 사진"
+                          	src="${contextPath}/groupimagedownload?group_id=${userGroup.group_id}&group_img=${userGroup.group_img}">
                           	<div class="link">
-	                          	<a href="${contextPath}/group/member/delete?group_id=${userGroup.grp_id}"><span class="leave"> &nbsp; &nbsp; &nbsp; &nbsp; </span></a>
-	                            <a href="${contextPath}/group/groupMain?group_id=${userGroup.grp_id}" class="card_link">
+	                          	<a href="${contextPath}/group/member/cancel?group_id=${userGroup.group_id}"><span class="leave"> &nbsp; &nbsp; &nbsp; &nbsp; </span></a>
+	                            <a href="${contextPath}/group/groupmain?group_id=${userGroup.group_id}" class="card_link">
 	                              <span> &nbsp; &nbsp; &nbsp; &nbsp; </span>
 	                          	</a>
                           	</div>
                           </div>
                           
                           <div class="card__info">
-	                        <a href="${contextPath}/group/groupMain?group_id=${userGroup.grp_id}" class="card_link">
-	                          <span class="card__category">${userGroup.main_name}</span>
-	                          <span class="card__category">${userGroup.sub_name}</span>
-	                          <h3 class="card__title">${userGroup.grp_name}</h3>
+	                        <a href="${contextPath}/group/groupmain?group_id=${userGroup.group_id}" class="card_link">
+	                          <span class="card__category">${userGroup.main_cate}</span>
+	                          <span class="card__category">${userGroup.sub_cate}</span>
+	                          <h3 class="card__title">${userGroup.group_name}</h3>
 	                        </a>
                             <span class="card__by"><i class="fa-solid fa-location-dot"></i>
                               <a href="#" class="card__author">${locationU}</a>
@@ -197,30 +204,33 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                     <c:choose>
                     <c:when test="${!empty waitGroupList}">
                       <c:forEach var="waitGroup" items="${waitGroupList}" varStatus="loop">
-                      <c:set var="idx" value="${waitGroup.grp_addr1.indexOf(' ', waitGroup.grp_addr1.indexOf(' ') + 1)}" />
-                      <c:set var="locationW" value="${waitGroup.grp_addr1.substring(0, idx)}"/>                      	
-                        <div class="card card--${waitGroup.grp_id}">
+                      <c:set var="idx" value="${waitGroup.group_addr1.indexOf(' ', waitGroup.group_addr1.indexOf(' ') + 1)}" />
+                      <c:set var="locationW" value="${waitGroup.group_addr1.substring(0, idx)}"/>                      	
+                        <div class="card card--${waitGroup.group_id}">
                           <div class="card__info-hover">
-                            <a href="${contextPath}/group/member/delete?group_id=${waitGroup.grp_id}"><span class="leave">취소하기</span></a>
-                            <a href="${contextPath}/group/groupMain?group_id=${waitGroup.grp_id}" class="card_link">
+                            <a href="${contextPath}/group/member/cancelwait?group_id=${waitGroup.group_id}"><span class="leave">취소하기</span></a>
+                            <a href="${contextPath}/group/groupinfo?group_id=${waitGroup.group_id}" class="card_link">
                             <span>바로가기</span>	<i class="fa-solid fa-arrow-right"></i></a>
                           </div>
-                          <div class="card__img"></div>   
-                          <div class="card__img--hover" style="background-image:url('${contextPath}/groupImages/${waitGroup.grp_id}/${waitGroup.grp_img}')">
+                          <div class="card__img"></div>
+                         
+                          <div class="card__img--hover">
+                          	 <img class="card__img--hover" alt="소모임 사진"
+                          	src="${contextPath}/groupimagedownload?group_id=${waitGroup.group_id}&group_img=${waitGroup.group_img}">
                         	<div class="link">
                         		<div class="wait_grp">가입 대기중</div>
-                         		<a href="${contextPath}/group/member/cancel?group_id=${waitGroup.grp_id}"><span class="leave"> &nbsp; &nbsp; &nbsp; &nbsp; </span></a>
-	                            <a href="${contextPath}/group/groupInfo?group_id=${waitGroup.grp_id}" class="card_link">
+                         		<a href="${contextPath}/group/member/cancelwait?group_id=${waitGroup.group_id}"><span class="leave"> &nbsp; &nbsp; &nbsp; &nbsp; </span></a>
+	                            <a href="${contextPath}/group/groupinfo?group_id=${waitGroup.group_id}" class="card_link">
 	                              <span> &nbsp; &nbsp; &nbsp; &nbsp; </span>
 	                         	</a>
                         	</div>
                           </div>                          
                          
                           <div class="card__info">
-                             <a href="${contextPath}/group/groupMain?group_id=${waitGroup.grp_id}" class="card_link">
-	                          <span class="card__category">${waitGroup.main_name}</span>
-	                          <span class="card__category">${waitGroup.sub_name}</span>
-	                          <h3 class="card__title">${waitGroup.grp_name}</h3>
+                             <a href="${contextPath}/group/info?group_id=${waitGroup.group_id}" class="card_link">
+	                          <span class="card__category">${waitGroup.main_cate}</span>
+	                          <span class="card__category">${waitGroup.sub_cate}</span>
+	                          <h3 class="card__title">${waitGroup.group_name}</h3>
 	                        </a>
                             <span class="card__by">
                               <i class="fa-solid fa-location-dot"></i>
@@ -251,28 +261,31 @@ pageEncoding="UTF-8" isELIgnored="false" %>
                   
                     <c:when test="${!empty bookmarkGroupList}">
                       <c:forEach var="bookmarkGroup" items="${bookmarkGroupList}" varStatus="loop">
-                      <c:set var="idx" value="${bookmarkGroup.grp_addr1.indexOf(' ', bookmarkGroup.grp_addr1.indexOf(' ') + 1)}" />
-                      <c:set var="locationB" value="${bookmarkGroup.grp_addr1.substring(0, idx)}"/>                      
+                      <c:set var="idx" value="${bookmarkGroup.group_addr1.indexOf(' ', bookmarkGroup.group_addr1.indexOf(' ') + 1)}" />
+                      <c:set var="locationB" value="${bookmarkGroup.group_addr1.substring(0, idx)}"/>                      
 		                  <div class="card card--1">		                    
 		                    <div class="card__info-hover">
 		                      <span></span>
 		                      <span>바로가기 <i class="fa-solid fa-arrow-right"></i></span>		                    
 		                    </div>
 		                    <div class="card__img"></div>
-		                    <a href="${contextPath}/group/groupInfo?group_id=${bookmarkGroup.grp_id}" class="card_link">
-		                      <div class="card__img--hover" style="background-image:url('${contextPath}/groupImages/${bookmarkGroup.grp_id}/${bookmarkGroup.grp_img}')"></div>
+		                    <a href="${contextPath}/group/groupinfo?group_id=${bookmarkGroup.group_id}" class="card_link">
+		                      <img class="card__img--hover" alt="소모임 사진"
+                          	    src="${contextPath}/groupimagedownload?group_id=${bookmarkGroup.group_id}&group_img=${bookmarkGroup.group_img}">
+                          	    <%-- 
+		                      <div class="card__img--hover"
+		                      style="background-image:url('/WEB-INF/views/groupImages/${bookmarkGroup.group_id}/${bookmarkGroup.group_img}')"></div>
+		                      --%>
 		                    </a>
 		                    <div class="card__info">
-		                      <span class="card__category">${bookmarkGroup.main_name}</span>
-		                      <span class="card__category">${bookmarkGroup.sub_name}</span>
-		                      <h3 class="card__title">${bookmarkGroup.grp_name}</h3>
+		                      <span class="card__category">${bookmarkGroup.main_cate}</span>
+		                      <span class="card__category">${bookmarkGroup.sub_cate}</span>
+		                      <h3 class="card__title">${bookmarkGroup.group_name}</h3>
 		                      <span class="card__by"
 		                        ><i class="fa-solid fa-location-dot"></i>
 		                        <a href="#" class="card__author">${locationB}</a>
-		                          <button type="button" class="grpLikeBtn" onchli title="네모찜하기">
-			                        <c:if test="${isBookmark}">
-				
-										<span class="grpLike grpLike${bookmarkGroup.grp_id} on" onclick="bookmarkClick('${user_id}', '${bookmarkGroup.grp_id}')"> <svg viewBox="0 0 24 24">
+		                          <button type="button" class="grpLikeBtn" title="네모찜하기">
+		                          <span class="grpLike grpLike${bookmarkGroup.group_id} on" onclick="bookmarkClick('${user_id}', '${bookmarkGroup.group_id}')"> <svg viewBox="0 0 24 24">
 				                                <use xlink:href="#heart" />
 				                                <!-- filled heart -->
 				                                <use xlink:href="#heart" />
@@ -286,34 +299,9 @@ pageEncoding="UTF-8" isELIgnored="false" %>
 				                            </svg>
 										</span>
 										<span class="hidden">찜하기</span>
-									
-									</c:if>
-									
-									<c:if test="${!isBookmark}">
-				
-										<span class="groupLike grpLike${bookmarkGroup.grp_id}" onclick="bookmarkClick('${user_id}', '${bookmarkGroup.grp_id}')"> <svg viewBox="0 0 24 24">
-				                                <use xlink:href="#heart" />
-				                                <!-- filled heart -->
-				                                <use xlink:href="#heart" />
-				                                <!-- outline heart -->
-				                            </svg> <!-- reference path for both outline, and filled, hearts -->
-											<svg class="hide" viewBox="0 0 24 24">
-				                                <defs>
-				                                    <path id="heart"
-													d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z" />
-				                                </defs>
-				                            </svg>
-										</span>
-										<span class="hidden">찜하기</span>
-				
-									</c:if>
-									
 			                      </button>
 		                      </span>
 		                    </div>
-		                    <input type="hidden" id="user_id_hidden" name="user_id_hidden" value="${user_id}"/>
-                            <input type="hidden" id="grp_id_hidden" name="grp_id_hidden" value="${bookmarkGroup.grp_id}"/>
-						    <input type="hidden" id="isBookmark_hidden" name="isBookmark_hidden" value="${isBookmark}"/>
 		                  </div>
 						</c:forEach>
                     </c:when>

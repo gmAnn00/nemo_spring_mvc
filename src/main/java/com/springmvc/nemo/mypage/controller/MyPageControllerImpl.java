@@ -33,6 +33,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.springmvc.nemo.common.Message;
+import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.mypage.service.MyPageService;
 import com.springmvc.nemo.mypage.vo.CommingScheduleVO;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
@@ -425,11 +426,30 @@ public class MyPageControllerImpl implements MyPageController{
 	@RequestMapping(value = "/mypage/mygroup", method = RequestMethod.GET)
 	@Override
 	public ModelAndView myGroup(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		
 		// 내 소모임 정보 추가
+		
+		// 내가 리더인 소모임
+		List<GroupVO> leaderGroupList = myPageService.getLeaderGroup(user_id);
+		mav.addObject("leaderGroupList", leaderGroupList);
+		
+		// 일반 회원인 소모임
+		List<GroupVO> groupList = myPageService.getGroup(user_id);
+		mav.addObject("groupList", groupList);
+		
+		// 가입 대기중인 소모임
+		List<GroupVO> waitGroupList = myPageService.getWaitGroup(user_id);
+		mav.addObject("waitGroupList", waitGroupList);
+		
+		// 찜한 소모임
+		List<GroupVO> bookmarkGroupList = myPageService.getBookmarkGroup(user_id);
+		mav.addObject("bookmarkGroupList", bookmarkGroupList);
 		
 		return mav;
 	}

@@ -5,9 +5,6 @@ function bookmarkClick(user_id, group_id){
 	let url = contextPath + "/group/bookmark";
 	//console.log(contextPath);
 	
-	let isBookmark_hidden = $("#isBookmark"+group_id).val();
-	console.log("isBookmark_hidden=" ,isBookmark_hidden);
-	
 	$.ajax({
 		type: "post",
 		async: true,

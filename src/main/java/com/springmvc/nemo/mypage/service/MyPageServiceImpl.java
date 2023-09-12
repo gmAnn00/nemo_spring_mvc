@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.mypage.dao.MyPageDAO;
 import com.springmvc.nemo.mypage.vo.CommingScheduleVO;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
@@ -87,6 +88,30 @@ public class MyPageServiceImpl implements MyPageService{
 	public List<CommingScheduleVO> getSelectMonthSchedule(Map<String, String> scheduleMap) throws DataAccessException {
 		
 		return myPageDAO.getSelectMonthSchedule(scheduleMap);
+	}
+	
+	@Override
+	public List<GroupVO> getLeaderGroup(String user_id) throws DataAccessException {
+		
+		return myPageDAO.getLeaderGroup(user_id);
+	}
+	
+	@Override
+	public List<GroupVO> getGroup(String user_id) throws DataAccessException {
+		
+		return myPageDAO.getGroup(user_id);
+	}
+	
+	@Override
+	public List<GroupVO> getWaitGroup(String user_id) throws DataAccessException {
+		
+		return myPageDAO.getWaitGroup(user_id);
+	}
+	
+	@Override
+	public List<GroupVO> getBookmarkGroup(String user_id) throws DataAccessException {
+		
+		return myPageDAO.getBookmarkGroup(user_id);
 	}
 
 }

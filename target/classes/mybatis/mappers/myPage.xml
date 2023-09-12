@@ -57,7 +57,7 @@
 	</update>
 
 
-	<select id="getCommingSchedules" parameterType="string" resultType="commingScheduleVO">
+	<select id="getCommingSchedules" parameterType="String" resultType="commingScheduleVO">
 		<![CDATA[
          SELECT t.group_id, t.group_name, t.group_img,
 		TO_CHAR(t.schedule_date, 'YYYY"년 "MM"월 "DD"일 "AM HH"시 "MI"분"') as schedule_date,
@@ -87,6 +87,37 @@
 			s.group_id = g.group_id AND substr(s.schedule_date, 1, 5)=#{selectYM}
 			ORDER BY s.schedule_date, g.group_id
 		]]>
+	</select>
+	
+	
+	<select id="getLeaderGroup" parameterType="String" resultType="groupVO">
+		<![CDATA[
+        	SELECT * FROM GROUP_TBL WHERE group_leader=#{user_id}
+      ]]>
+	</select>
+	
+	
+	<select id="getGroup" parameterType="String" resultType="groupVO">
+		<![CDATA[
+        	SELECT g.* FROM GROUP_TBL g, JOIN_TBL j
+        	WHERE j.user_id=#{user_id} AND g.group_id=j.group_id AND g.group_leader<>#{user_id}
+      ]]>
+	</select>
+	
+	
+	<select id="getWaitGroup" parameterType="String" resultType="groupVO">
+		<![CDATA[
+        	SELECT g.* FROM GROUP_TBL g, WAITLIST_TBL w
+        	WHERE w.user_id=#{user_id} AND g.group_id=w.group_id
+      ]]>
+	</select>
+	
+	
+	<select id="getBookmarkGroup" parameterType="String" resultType="groupVO">
+		<![CDATA[
+        	SELECT g.* FROM GROUP_TBL g, BOOKMARK_TBL b
+        	WHERE b.user_id=#{user_id} AND g.group_id=b.group_id
+      ]]>
 	</select>
 
 </mapper>

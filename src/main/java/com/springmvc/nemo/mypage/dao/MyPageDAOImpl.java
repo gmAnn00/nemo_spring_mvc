@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.mypage.vo.CommingScheduleVO;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
 import com.springmvc.nemo.mypage.vo.MyProfileVO;
@@ -90,6 +91,30 @@ public class MyPageDAOImpl implements MyPageDAO{
 	public List<CommingScheduleVO> getSelectMonthSchedule(Map<String, String> scheduleMap) throws DataAccessException {
 		
 		return sqlSession.selectList("mapper.myPage.getSelectMonthSchedule", scheduleMap);
+	}
+	
+	@Override
+	public List<GroupVO> getLeaderGroup(String user_id) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.myPage.getLeaderGroup", user_id);
+	}
+	
+	@Override
+	public List<GroupVO> getGroup(String user_id) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.myPage.getGroup", user_id);
+	}
+	
+	@Override
+	public List<GroupVO> getWaitGroup(String user_id) throws DataAccessException {
+
+		return sqlSession.selectList("mapper.myPage.getWaitGroup", user_id);
+	}
+	
+	@Override
+	public List<GroupVO> getBookmarkGroup(String user_id) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.myPage.getBookmarkGroup", user_id);
 	}
 
 }
