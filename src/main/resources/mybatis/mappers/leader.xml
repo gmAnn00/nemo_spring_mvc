@@ -21,5 +21,18 @@
 			AND j.user_id=u.user_id AND j.cancel=0 AND j.user_id<>g.group_leader
 		]]>
 	</select>
+	
+	
+	<select id="getUserNickname" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT nickname FROM USER_TBL WHERE user_id=#{target_id}
+		]]>
+	</select>
+
+	<update id="mandateLeader" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE GROUP_TBL SET group_leader=#{target_id} WHERE group_id=#{group_id}
+		]]>
+	</update>
 
 </mapper>

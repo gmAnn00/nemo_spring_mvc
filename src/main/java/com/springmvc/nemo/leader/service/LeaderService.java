@@ -1,6 +1,7 @@
 package com.springmvc.nemo.leader.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -11,4 +12,6 @@ public interface LeaderService {
 	public UserVO getUserInfo(String user_id) throws DataAccessException;
 
 	public List<UserVO> getMemberInfo(int group_id) throws DataAccessException;
+
+	public String mandateLeader(Map<String, Object> mandateMap) throws DataAccessException;
 }

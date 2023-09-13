@@ -1,6 +1,7 @@
 package com.springmvc.nemo.leader.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,17 @@ public class LeaderDAOImpl implements LeaderDAO{
 	public List<UserVO> getMemberInfo(int group_id) throws DataAccessException {
 		
 		return sqlSession.selectList("mapper.leader.getMemberInfo", group_id);
+	}
+	
+	@Override
+	public String getUserNickname(String target_id) throws DataAccessException{
+		return sqlSession.selectOne("mapper.leader.getUserNickname", target_id);
+	}
+	
+	@Override
+	public void mandateLeader(Map<String, Object> mandateMap) throws DataAccessException {
+		
+		sqlSession.update("mapper.leader.mandateLeader", mandateMap);
 	}
 
 }

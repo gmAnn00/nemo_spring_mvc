@@ -162,8 +162,8 @@
 		                                                    
 		                                                        <ul class="hidden_menu_bar">
 		                                                            <li><a href="${contextPath}/report/member?accused_id=${member.user_id}&group_id=${param.group_id}">신고</a></li>
-		                                                            <li><a href="${contextPath}/group/leader/mandate?group_id=${param.group_id}&target_id=${user.user_id}">위임</a></li>
-		                                                            <li><a href="${contextPath}/group/leader/exile?group_id=${param.group_id}&target_id=${user.user_id}">추방</a></li>
+		                                                            <li><a href="${contextPath}/group/leader/mandate?group_id=${param.group_id}&target_id=${member.user_id}">위임</a></li>
+		                                                            <li><a href="${contextPath}/group/leader/exile?group_id=${param.group_id}&target_id=${member.user_id}">추방</a></li>
 		                                                        </ul>
 		                                                 
 		                                                    </div>

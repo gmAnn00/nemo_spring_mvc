@@ -11,5 +11,10 @@ public interface LeaderController {
 	public ModelAndView memberInfo(
 			@RequestParam("group_id") int group_id,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView mandate(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("target_id") String target_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

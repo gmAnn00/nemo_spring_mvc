@@ -1,6 +1,7 @@
 package com.springmvc.nemo.leader.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -26,5 +27,17 @@ public class LeaderServiceImpl implements LeaderService{
 	public List<UserVO> getMemberInfo(int group_id) throws DataAccessException {
 		
 		return leaderDAO.getMemberInfo(group_id);
+	}
+	
+	
+	@Override
+	public String mandateLeader(Map<String, Object> mandateMap) throws DataAccessException {
+		
+		leaderDAO.mandateLeader(mandateMap);
+		
+		String target_id = (String) mandateMap.get("target_id");
+		String nickname = leaderDAO.getUserNickname(target_id);
+		
+		return nickname;
 	}
 }
