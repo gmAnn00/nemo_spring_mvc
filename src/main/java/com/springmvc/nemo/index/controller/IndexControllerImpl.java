@@ -10,10 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.springmvc.nemo.common.Message;
+
 @Controller("indexController")
 public class IndexControllerImpl implements IndexController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@Override
+	public ModelAndView defaultURL(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/index");
+
+		return mav;
+	}
 
 	@Override
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
