@@ -18,6 +18,8 @@ public interface MemberDAO {
 
 	public void cancelGroup(JoinVO joinVO) throws DataAccessException;
 
-	public void cancelWait(WaitListVO waitListVO) throws DataAccessException;;
+	public void cancelWait(WaitListVO waitListVO) throws DataAccessException;
+
+	public String getGroupLeader(int group_id) throws DataAccessException;
 
 }

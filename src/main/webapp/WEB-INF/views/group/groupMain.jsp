@@ -67,7 +67,7 @@
 		                                </a>
 		                            </li>
 		                            <li>
-		                                <a href="${contextPath}/group/leader/setting?group_id=${param.group_id}">
+		                                <a href="${contextPath}/group/leader/settingform?group_id=${param.group_id}">
 		                                    <div class="sc2_icon_menu">
 		                                        <div class="menu_submenu_name"><span>소모임관리</span></div>
 		                                        <i class="fa-solid fa-angle-right menu_angle"></i>

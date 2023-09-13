@@ -47,5 +47,11 @@ public class MemberDAOImpl implements MemberDAO{
 		
 		sqlSession.delete("mapper.member.cancelWait", waitListVO);
 	}
+	
+	@Override
+	public String getGroupLeader(int group_id) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.member.getGroupLeader", group_id);
+	}
 
 }

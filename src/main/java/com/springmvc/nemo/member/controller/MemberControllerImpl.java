@@ -72,11 +72,15 @@ public class MemberControllerImpl implements MemberController{
 		
 		boolean isAlreadyCancelResult = memberService.isAlreadyCancel(joinVO);
 		
+		boolean isGroupLeader = memberService.isGroupLeader(joinVO);
+		
 		ModelAndView mav = new ModelAndView();
 		
 		if(isAlreadyCancelResult) {
 			mav.addObject("data", new Message("이미 탈퇴한 소모임입니다.", request.getContextPath()+"/mypage/mygroup"));
-		}else {
+		} else if(!isAlreadyCancelResult && isGroupLeader) {
+			mav.addObject("data", new Message("소모임 리더는 소모임을 탈퇴할 수 없습니다.", request.getContextPath()+"/group/groupmain?group_id="+group_id));
+		} else {
 			memberService.cancelGroup(joinVO);
 			mav.addObject("data", new Message("소모임을 탈퇴하였습니다.", request.getContextPath()+"/mypage/mygroup"));
 		}

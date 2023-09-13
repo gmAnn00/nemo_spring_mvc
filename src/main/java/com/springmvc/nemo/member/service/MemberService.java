@@ -20,4 +20,6 @@ public interface MemberService {
 
 	public void cancelWait(WaitListVO waitListVO) throws DataAccessException;
 
+	public boolean isGroupLeader(JoinVO joinVO) throws DataAccessException;
+
 }

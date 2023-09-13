@@ -46,5 +46,11 @@ public class MemberServiceImpl implements MemberService{
 		
 		memberDAO.cancelWait(waitListVO);
 	}
+	
+	@Override
+	public boolean isGroupLeader(JoinVO joinVO) throws DataAccessException {
+		
+		return joinVO.getUser_id().equals(memberDAO.getGroupLeader(joinVO.getGroup_id()));
+	}
 
 }

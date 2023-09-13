@@ -50,5 +50,11 @@
 			DELETE FROM WAITLIST_TBL WHERE group_id=#{group_id} AND user_id=#{user_id}
 		]]>
 	</delete>
+	
+	<select id="getGroupLeader" parameterType="int" resultType="String">
+		<![CDATA[
+			SELECT group_leader FROM GROUP_TBL WHERE group_id=#{group_id}
+		]]>
+	</select>
 
 </mapper>

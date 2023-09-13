@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.leader">
+
+	<select id="getUserInfo" parameterType="String" resultType="userVO">
+		<![CDATA[
+			SELECT user_id, nickname, user_addr1, join_date, user_img
+			FROM USER_TBL WHERE user_id=#{user_id}
+		]]>
+	</select>
+	
+	
+	<select id="getMemberInfo" parameterType="int" resultType="userVO">
+		<![CDATA[
+			SELECT u.user_id, u.nickname, u.user_addr1, u.join_date, u.user_img
+			FROM USER_TBL u, GROUP_TBL g, JOIN_TBL j
+			WHERE g.group_id=#{group_id} AND j.group_id=#{group_id}
+			AND j.user_id=u.user_id AND j.cancel=0 AND j.user_id<>g.group_leader
+		]]>
+	</select>
+
+</mapper>
