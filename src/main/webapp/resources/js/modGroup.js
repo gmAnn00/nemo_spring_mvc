@@ -1,9 +1,9 @@
 $(document).ready(function () {
-	let main_name_hidden = $("#main_name_hidden").val();
-	let sub_name_hidden = $("#sub_name_hidden").val();
+	let main_cate_hidden = $("#main_cate_hidden").val();
+	let sub_cate_hidden = $("#sub_cate_hidden").val();
 	
-	$("select[name=main_name]").val(main_name_hidden).trigger("change");
-	$("select[name=sub_name]").val(sub_name_hidden);
+	$("select[name=main_cate]").val(main_cate_hidden).trigger("change");
+	$("select[name=sub_cate]").val(sub_cate_hidden);
 });
 
 const category = {
@@ -94,7 +94,7 @@ function selectInit() {
     let mainHtml = `<option value="">대분류</option>`;
     let smallHtml = `<option value="">소분류</option>`;
     
-    //let main_name_hidden = $(main_name_hidden).val();
+    //let main_cate_hidden = $(main_cate_hidden).val();
     
     
     for (const key in category) {
@@ -107,10 +107,10 @@ function selectInit() {
         }
     }
 
-    $("select[name=main_name]").html(mainHtml);
-    $("select[name=sub_name]").html(smallHtml);
+    $("select[name=main_cate]").html(mainHtml);
+    $("select[name=sub_cate]").html(smallHtml);
 
-    $("select[name=sub_name] option").each(function (idx, item) {
+    $("select[name=sub_cate] option").each(function (idx, item) {
         if ($(this).val == "") {
             return true;
         }
@@ -122,9 +122,9 @@ selectInit();
 
 
 
-$(document).on("change", "select[name=main_name]", function () {
+$(document).on("change", "select[name=main_cate]", function () {
     const mainVal = $(this).val();
-    $("select[name=sub_name] option").each(function (idx, item) {
+    $("select[name=sub_cate] option").each(function (idx, item) {
         if ($(this).data("class") == mainVal || $(this).val == "") {
             $(this).show();
             //console.log(mainVal);
@@ -132,16 +132,16 @@ $(document).on("change", "select[name=main_name]", function () {
             $(this).hide();
         }
     });
-    $("select[name=sub_name]").val("");
+    $("select[name=sub_cate]").val("");
 });
 
-$(document).on("change", "select[name=sub_name]", function(){
+$(document).on("change", "select[name=sub_cate]", function(){
 	console.log("소분류=", $(this).val());
 });
 
 function fn_category_selected(select){	
-	let main_name_hidden = $("#main_name_hidden").val();
-	let sub_name_hidden = $("#sub_name_hidden").val();
+	let main_cate_hidden = $("#main_cate_hidden").val();
+	let sub_cate_hidden = $("#sub_cate_hidden").val();
 	
 	if($(select).val() == ''){ 
 		console.log("not selected");
@@ -150,7 +150,7 @@ function fn_category_selected(select){
 		
 		
 	}else{
-		if($(select).val() == main_name_hidden) {
+		if($(select).val() == main_cate_hidden) {
 			$(".commonSelect.input").css("border", "1px solid #ccc");
 			console.log("1");
 			console.log("1select", $(select).val());
@@ -162,7 +162,7 @@ function fn_category_selected(select){
 			$(".commonSelect.input.selected").css("border", "2px solid var(--sub-color)");
 		}
 		
-		if($(select).val() == sub_name_hidden){
+		if($(select).val() == sub_cate_hidden){
 			console.log("3");
 			console.log("3select", $(select).val());
 		}else{
@@ -205,7 +205,9 @@ function readImage(input) {
 
 function popupImgFileRm() {
   $("#grp_img").val("");
-  document.getElementById("previewImage").src = "../../images/tmp01.jpg";
+  document.getElementById("previewImage").src = "/nemo/resources/images/sea.jpg";
+  $("#isDeleteImg").val("true");
+  //console.log("deletImg");
 }
 
 // input file에 change 이벤트 부여

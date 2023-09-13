@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.group.vo.JoinVO;
 import com.springmvc.nemo.leader.dao.LeaderDAO;
 import com.springmvc.nemo.user.vo.UserVO;
@@ -94,6 +95,27 @@ public class LeaderServiceImpl implements LeaderService{
 		String nickname = leaderDAO.getUserNickname(target_id);
 		
 		return nickname;
+	}
+	
+	
+	@Override
+	public GroupVO getGroupInfo(int group_id) throws DataAccessException {
+		
+		return leaderDAO.getGroupInfo(group_id);
+	}
+	
+	
+	@Override
+	public int getCurrentMaxMemNo(int group_id) throws DataAccessException {
+		
+		return leaderDAO.getCurrentMaxMemNo(group_id);
+	}
+	
+	@Override
+	public void modGroupSetting(Map<String, Object> groupMap) throws DataAccessException {
+		
+		leaderDAO.modGroupSetting(groupMap);
+		
 	}
 	
 	

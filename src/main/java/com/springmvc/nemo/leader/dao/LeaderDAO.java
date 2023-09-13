@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
 public interface LeaderDAO {
@@ -28,5 +29,11 @@ public interface LeaderDAO {
 	public void approveMember(Map<String, Object> approveMap) throws DataAccessException;
 
 	public void rejectMember(Map<String, Object> rejectMap) throws DataAccessException;
+
+	public GroupVO getGroupInfo(int group_id) throws DataAccessException;
+	
+	public int getCurrentMaxMemNo(int group_id) throws DataAccessException;
+
+	public void modGroupSetting(Map<String, Object> groupMap) throws DataAccessException;
 
 }

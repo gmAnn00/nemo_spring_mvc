@@ -14,24 +14,23 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>네모: 소모임 관리</title>
-        <link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-        <link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-        <link rel="stylesheet" href="${contextPath}/css/common.css" />
-        <link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-        <link rel="stylesheet" href="${contextPath}/css/sectionTitle.css" />
-        <link rel="stylesheet" href="${contextPath}/css/groupSetting.css" />
+        <link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/sectionTitle.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/groupSetting.css" />
         <script src="https://kit.fontawesome.com/bc604c01cc.js" crossorigin="anonymous"></script>
-        <script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
-        <script src="${contextPath}/js/header.js"></script>
+        <script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
+        <script src="${contextPath}/resources/js/header.js"></script>
         
     </head>
    
     <body>
-        <jsp:include page="../header.jsp" flush="true"></jsp:include>
-		<c:forEach var="group" items="${groupList}">
+        <jsp:include page="./../../header.jsp" flush="true"></jsp:include>
 		
         	<!-- section1 -->
-			<jsp:include page="./groupHeader.jsp" flush="true"></jsp:include>
+			<jsp:include page="./../groupheader.jsp" flush="true"></jsp:include>
 			<!-- section1종료 -->
 
 	        <!-- section2 시작 -->
@@ -59,7 +58,7 @@
 	                                </a>
 	                            </li>
 	                            <li>
-	                                <a href="${contextPath}/group/manager/member?group_id=${param.group_id}">
+	                                <a href="${contextPath}/group/leader/memberinfo?group_id=${param.group_id}">
 	                                    <div class="sc2_icon_menu">
 	                                        <div class="menu_submenu_name"><span>멤버</span></div>
 	                                        <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -67,7 +66,7 @@
 	                                </a>
 	                            </li>
 	                            <li>
-	                                <a href="${contextPath}/group/manager/setting?group_id=${param.group_id}">
+	                                <a href="${contextPath}/group/leader/settingform?group_id=${param.group_id}">
 	                                    <div class="sc2_icon_menu">
 	                                        <div class="menu_submenu_name submenu_select"><span>소모임관리</span></div>
 	                                        <i class="fa-solid fa-minus submenu_select"></i>
@@ -102,23 +101,25 @@
 	                    <!-- 소모임 생성 정보 입력 영역 -->
 	                    <div class="formArea">
 	                        <form
-	                            action="${contextPath}/group/manager/setting/modGroup?group_id=${group.grp_id}"
+	                            action="${contextPath}/group/leader/modgroupsetting"
 	                            method="post"
 	                            id="modGroup"
 	                            name="modGroup"
 	                            enctype="multipart/form-data"
 	                        >
+	                        	<input type="hidden" name="group_id" value="${group.group_id}" />
 	                            <!-- 프로필 사진 등록 영역-->
 	                            <div class="uploadArea">
 	                                <c:choose>
-						                <c:when test="${empty group.grp_img}">
+						                <c:when test="${empty group.group_img}">
 						                	<div class="imgCrop">
 						                		<img id="previewImage" src="" alt=" 프로필 사진" />
 						                	</div>
 						                </c:when>
-						                <c:when test="${!empty group.grp_img}">  
+						                <c:when test="${!empty group.group_img}">  
 						                    <div class="imgCrop">
-						                    	<img id="previewImage" class="grpImg" src="${contextPath}/groupImageDownload?group_id=${group.grp_id}&group_img=${group.grp_img}" alt=" 프로필 사진" />
+						                    	<img id="previewImage" class="grpImg"
+						                    	src="${contextPath}/groupimagedownload?group_id=${group.group_id}&group_img=${group.group_img}" alt=" 프로필 사진" />
 						                    </div>                      
 						                </c:when>
 					                </c:choose>
@@ -128,38 +129,42 @@
 	                                    </label>
 	                                    <input
 	                                        type="file"
-	                                        name="grp_img"
+	                                        name="group_img"
 	                                        id="file"
 	                                        class="hidden"
 	                                        accept="image/gif, image/jpeg, image/png"
 	                                        onchange="readImage(this);"
 	                                    />
+	                                    <input type="hidden" id="isDeleteImg" name="isDeleteImg"  value="false"/>
 	                                    <div class="buttonCancle btnComm" onClick="popupImgFileRm();">취소</div>
-	                                    <input type="hidden" name="originalFileName" value="${group.grp_img}" />
+	                                    <input type="hidden" name="originalFileName" value="${group.group_img}" />
 	                                </div>
 	                            </div>
 	                            <fieldset class="formTbl">
-	                                <legend class="hidden">네모 생성 정보 입력</legend>
+	                                <legend class="hidden">소모임 생성 정보 입력</legend>
 	                                    
 	
 	                                <div class="form_div">
-	                                    <label class="profile_label" for="groupName">네모이름</label>
-	                                    <span>${group.grp_name}</span>
+	                                    <label class="profile_label" for="groupName">소모임 이름</label>
+	                                    <input type="text" name="group_name"  minlength="2"
+                  						maxlength="10"placeholder="2~10글자 이내" value="${group.group_name}" required/>
+
 	                                </div>
 	                                <div class="groupNum form_div">
-	                                    <label for="groupNum" class="profile_label">네모인원</label>
+	                                    <label for="groupNum" class="profile_label">소모임 인원</label>
 	                                    <input
 	                                    type="text"
-	                                    name="mem_no"
+	                                    name="max_memno"
 	                                    id="groupNum"
 	                                    maxlength="3"
 	                                    placeholder="2~50"
-	                                    value="${group.mem_no}"
+	                                    value="${group.max_memno}"
+	                                    required
 	                                    /><span>명</span>
 	                                </div>
 	                                <div class="innerTblArea form_div">
-	                                	<input type="hidden" id="main_name_hidden" name="main_name_hidden" value="${group.main_name}">
-	                                	<input type="hidden" id="sub_name_hidden" name="sub_name_hidden" value="${group.sub_name}">
+	                                	<input type="hidden" id="main_cate_hidden" name="main_cate_hidden" value="${group.main_cate}">
+	                                	<input type="hidden" id="sub_cate_hidden" name="sub_cate_hidden" value="${group.sub_cate}">
 	                                    <label class="cateTbl profile_label">카테고리</label>
 	                                    <table>
 	                                    <tr>
@@ -170,7 +175,7 @@
 	                                        <td>
 						                      <div class="selectBox box1">
 						                        <select
-						                          name="main_name"
+						                          name="main_cate"
 						                          id="bigCate"
 						                          onchange="fn_category_selected(this);"
 						                          class="commonSelect input"
@@ -184,7 +189,7 @@
 						                    <td>
 						                      <div class="selectBox box2">
 						                        <select
-						                          name="sub_name"
+						                          name="sub_cate"
 						                          id="smallCate"
 						                          class="commonSelect select"
 						                          onchange="fn_category_selected(this);"
@@ -199,16 +204,16 @@
 	                                    <p>※대분류/소분류 모두 선택하셔야 합니다.</p>
 	                                </div>
 	                                <div class="form_div">
-	                                    <label for="findZipcode" class="profile_label">모임장소</label>
+	                                    <label for="findZipcode" class="profile_label">모임 장소</label>
 	
 	                                    <input
 	                                    type="text"
 	                                    id="zipcode"
-	                                    name="grp_zipcode"
+	                                    name="group_zipcode"
 	                                    maxlength="5"
 	                                    size="5"
 	                                    placeholder=""
-	                                    value="${group.grp_zipcode}"
+	                                    value="${group.group_zipcode}"
 	                                    readonly
 	                                    required
 	                                    />
@@ -223,29 +228,29 @@
 	                                    <input
 	                                    type="text"
 	                                    id="grp_addr1"
-	                                    name="grp_addr1"
+	                                    name="group_addr1"
 	                                    placeholder=""
-	                                    value="${group.grp_addr1}"
+	                                    value="${group.group_addr1}"
 	                                    readonly
 	                                    />
 	                                    <input
 	                                    type="text"
 	                                    id="grp_addr2"
-	                                    name="grp_addr2"
+	                                    name="group_addr2"
 	                                    placeholder=""
-	                                    value="${group.grp_addr2}"
+	                                    value="${group.group_addr2}"
 	                                    />
 	                                </div>
 	                                <div class="textAreaTd form_div">
-	                                    <label for="grpDescription" class="profile_label">네모소개</label>
+	                                    <label for="grpDescription" class="profile_label">소모임 소개</label>
 	                                    <textarea
-	                                    name="grp_intro"
+	                                    name="group_desc"
 	                                    id="grpDescription"
 	                                    placeholder=""
 	                                    rows="10"
 	                                    maxlength="1000"
-	                                    >${group.grp_intro}</textarea>
-	                                    <p>(<span><c:out value="${fn:length(group.grp_intro)}"/>/1000</span>)</p>
+	                                    >${group.group_desc}</textarea>
+	                                    <p>(<span><c:out value="${fn:length(group.group_desc)}"/>/1000</span>)</p>
 	                                    
 	                                </div>
 	                                <div class="creatGrp form_div">
@@ -277,8 +282,8 @@
 	        </div>
 	        <!-- section2 종료 -->
 	        <script>
-			  //var curMain = "${group.main_name}";
-			  //var curSub = "${group.sub_name}";
+			  //var curMain = "${group.main_cate}";
+			  //var curSub = "${group.sub_cate}";
 			  function Check_test() {
 		        	var arrSelect=document.getElementsByName("terms");
 		        	let inputLength = $('#grpDescription').val().length;
@@ -288,13 +293,13 @@
 		        		$('#grpDescription').focus();
 		        		return false;
 		        	} else {
-		        		return true;
+		        		$("#modGroup").submit();
 		        	}
 		        }
 			</script>
-	        <script src="${contextPath}/js/modGroup.js"></script>
-		</c:forEach>
-        <jsp:include page="../footer.jsp" flush="true"></jsp:include>
+	        <script src="${contextPath}/resources/js/modGroup.js"></script>
+
+        <jsp:include page="./../../footer.jsp" flush="true"></jsp:include>
     </body>
     
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

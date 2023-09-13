@@ -112,6 +112,31 @@
 			DELETE FROM WAITLIST_TBL WHERE group_id=#{group_id} AND user_id=#{target_id}
 		]]>
 	</delete>
+	
+	
+	<select id="getGroupInfo" parameterType="int" resultType="groupVO">
+		<![CDATA[
+			SELECT * FROM GROUP_TBL WHERE group_id=#{group_id}
+		]]>
+	</select>
+	
+	
+	<select id="getCurrentMaxMemNo" parameterType="int" resultType="int">
+		<![CDATA[
+			SELECT current_memno FROM GROUP_TBL WHERE group_id=#{group_id}
+		]]>
+	</select>
+	
+	
+	<update id="modGroupSetting" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE GROUP_TBL SET
+			group_name=#{group_name}, max_memno=#{max_memno}, main_cate=#{main_cate}, sub_cate=#{sub_cate},
+			group_zipcode=#{group_zipcode}, group_addr1=#{group_addr1}, group_addr2=#{group_addr2},
+			group_img=#{group_img}, group_desc=#{group_desc}
+			WHERE group_id=#{group_id}
+		]]>
+	</update>
 
 
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.group.vo.JoinVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
@@ -93,6 +94,26 @@ public class LeaderDAOImpl implements LeaderDAO{
 	public void rejectMember(Map<String, Object> rejectMap) throws DataAccessException {
 		
 		sqlSession.delete("mapper.leader.deleteWait", rejectMap);
+	}
+	
+	
+	@Override
+	public GroupVO getGroupInfo(int group_id) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.leader.getGroupInfo", group_id);
+	}
+	
+	
+	@Override
+	public int getCurrentMaxMemNo(int group_id) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.leader.getCurrentMaxMemNo", group_id);
+	}
+	
+	@Override
+	public void modGroupSetting(Map<String, Object> groupMap) throws DataAccessException {
+		
+		sqlSession.update("mapper.leader.modGroupSetting", groupMap);
 	}
 
 }
