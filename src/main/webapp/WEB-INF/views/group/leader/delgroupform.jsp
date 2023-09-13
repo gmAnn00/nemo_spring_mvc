@@ -12,25 +12,25 @@
 <head>
 <meta charset="UTF-8">
 <title>네모: 소모임삭제</title>
-<link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-<link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-<link rel="stylesheet" href="${contextPath}/css/common.css" />
-<link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-<link rel="stylesheet" href="${contextPath}/css/delUser.css" />
- <link rel="stylesheet" href="${contextPath}/css/sectionTitle.css" />
+<link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+<link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/delUser.css" />
+ <link rel="stylesheet" href="${contextPath}/resources/css/sectionTitle.css" />
 <script
   src="https://kit.fontawesome.com/bc604c01cc.js"
   crossorigin="anonymous"
 ></script>
-<script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
-<script src="${contextPath}/js/header.js"></script>
+<script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
+<script src="${contextPath}/resources/js/header.js"></script>
 
 </head>
 <body>
-				<jsp:include page="../header.jsp" flush="true"></jsp:include>
+				<jsp:include page="./../../header.jsp" flush="true"></jsp:include>
 	
 	 		<!-- section1 -->
-				<jsp:include page="./groupHeader.jsp" flush="true"></jsp:include>
+				<jsp:include page="./../groupheader.jsp" flush="true"></jsp:include>
 			<!-- section1종료 -->
 			
 	 <div class="section2">
@@ -57,7 +57,7 @@
 		                                </a>
 		                            </li>
 		                            <li>
-		                                <a href="${contextPath}/group/manager/member?group_id=${param.group_id}">
+		                                <a href="${contextPath}/group/leader/memberinfo?group_id=${param.group_id}">
 		                                    <div class="sc2_icon_menu">
 		                                        <div class="menu_submenu_name"><span>멤버</span></div>
 		                                        <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -65,7 +65,7 @@
 		                                </a>
 		                            </li>
 		                            <li>
-		                                <a href="${contextPath}/group/manager/setting?group_id=${param.group_id}">
+		                                <a href="${contextPath}/group/leader/settingform?group_id=${param.group_id}">
 		                                    <div class="sc2_icon_menu">
 		                                        <div class="menu_submenu_name"><span>소모임관리</span></div>
 		                                        <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -73,7 +73,7 @@
 		                                </a>
 		                            </li>
 		                            <li>
-		                                <a href="${contextPath}/group/manager/member/delGroupForm?group_id=${param.group_id}">
+		                                <a href="${contextPath}/group/leader/delgroupform?group_id=${param.group_id}">
 		                                    <div class="sc2_icon_menu reportArea">
 		                                        <div class="menu_submenu_name reportTitle"><span>소모임삭제</span></div>
 		                                        <i class="fa-solid fa-arrow-right menu_angle"></i>
@@ -117,6 +117,6 @@
       </div>
     </div>
 
-	<jsp:include page="../footer.jsp" flush="true"></jsp:include>
+	<jsp:include page="./../../footer.jsp" flush="true"></jsp:include>
 </body>
 </html>

@@ -137,6 +137,11 @@
 			WHERE group_id=#{group_id}
 		]]>
 	</update>
+	
+	
+	<delete id="delGroup" parameterType="int">
+		DELETE FROM GROUP_TBL WHERE group_id=#{group_id}
+	</delete>
 
 
 </mapper>

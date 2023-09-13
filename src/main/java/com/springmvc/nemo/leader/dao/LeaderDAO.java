@@ -36,4 +36,6 @@ public interface LeaderDAO {
 
 	public void modGroupSetting(Map<String, Object> groupMap) throws DataAccessException;
 
+	public void delGroup(int group_id) throws DataAccessException;
+
 }

@@ -293,6 +293,45 @@ public class LeaderControllerImpl implements LeaderController{
 	}
 	
 	
+	@RequestMapping(value = "/group/leader/delgroupform", method = RequestMethod.GET)
+	@Override
+	public ModelAndView delGroupForm(
+			@RequestParam("group_id") int group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/group/leader/delgroup", method = RequestMethod.POST)
+	@Override
+	public ModelAndView delGroup(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("delString") String delString,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		
+		if(delString.equals("삭제하기")) {
+			leaderService.delGroup(group_id);
+			mav.addObject("data", new Message("소모임이 삭제되었습니다.", request.getContextPath()+"/index"));
+			
+		} else {
+			
+			mav.addObject("data", new Message("잘못 입력하셨습니다.", request.getContextPath()+"/group/leader/delgroupform?group_id="+group_id));
+		}
+
+		
+		return mav;
+	}
+	
+	
 	private String upload(MultipartHttpServletRequest multipartRequest, String isDeleteImg) throws Exception {
 		String imageFileName = null;
 		Iterator<String> fileNames = multipartRequest.getFileNames();

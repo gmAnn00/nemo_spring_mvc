@@ -45,5 +45,14 @@ public interface LeaderController {
 	public ResponseEntity modGroupSetting(
 			MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	
+	
+	public ModelAndView delGroupForm(
+			@RequestParam("group_id") int group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView delGroup(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("delString") String delString,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

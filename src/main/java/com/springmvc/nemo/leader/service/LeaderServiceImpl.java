@@ -118,5 +118,11 @@ public class LeaderServiceImpl implements LeaderService{
 		
 	}
 	
+	@Override
+	public void delGroup(int group_id) throws DataAccessException {
+		leaderDAO.delGroup(group_id);
+		
+	}
+	
 	
 }

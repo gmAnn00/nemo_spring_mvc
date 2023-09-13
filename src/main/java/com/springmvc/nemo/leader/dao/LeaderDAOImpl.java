@@ -115,5 +115,11 @@ public class LeaderDAOImpl implements LeaderDAO{
 		
 		sqlSession.update("mapper.leader.modGroupSetting", groupMap);
 	}
+	
+	@Override
+	public void delGroup(int group_id) throws DataAccessException {
+		
+		sqlSession.delete("mapper.leader.delGroup", group_id);
+	}
 
 }
