@@ -13,6 +13,8 @@ public interface LeaderDAO {
 
 	public List<UserVO> getMemberInfo(int group_id) throws DataAccessException;
 	
+	public List<UserVO> getWaitUserInfo(int group_id) throws DataAccessException;
+	
 	public boolean isGroupMember(Map<String, Object> map) throws DataAccessException;
 
 	public void mandateLeader(Map<String, Object> mandateMap) throws DataAccessException;
@@ -21,6 +23,10 @@ public interface LeaderDAO {
 
 	public void exileMember(Map<String, Object> exileMap) throws DataAccessException;
 
-	
+	public boolean isWait(Map<String, Object> map) throws DataAccessException;
+
+	public void approveMember(Map<String, Object> approveMap) throws DataAccessException;
+
+	public void rejectMember(Map<String, Object> rejectMap) throws DataAccessException;
 
 }

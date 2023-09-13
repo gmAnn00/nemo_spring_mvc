@@ -30,6 +30,12 @@ public class LeaderServiceImpl implements LeaderService{
 	}
 	
 	@Override
+	public List<UserVO> getWaitUserInfo(int group_id) throws DataAccessException {
+		
+		return leaderDAO.getWaitUserInfo(group_id);
+	}
+	
+	@Override
 	public boolean isGroupMember(Map<String, Object> map) throws DataAccessException {
 		
 		return leaderDAO.isGroupMember(map);
@@ -57,4 +63,38 @@ public class LeaderServiceImpl implements LeaderService{
 		
 		return nickname;
 	}
+	
+	
+	@Override
+	public boolean isWait(Map<String, Object> map) throws DataAccessException {
+		
+		return leaderDAO.isWait(map);
+	}
+	
+	
+	@Override
+	public String approveMember(Map<String, Object> approveMap) throws DataAccessException {
+		
+		leaderDAO.approveMember(approveMap);
+		
+		String target_id = (String) approveMap.get("target_id");
+		String nickname = leaderDAO.getUserNickname(target_id);
+		
+		return nickname;
+		
+	}
+	
+	
+	@Override
+	public String rejectMember(Map<String, Object> rejectMap) throws DataAccessException {
+		
+		leaderDAO.rejectMember(rejectMap);
+		
+		String target_id = (String) rejectMap.get("target_id");
+		String nickname = leaderDAO.getUserNickname(target_id);
+		
+		return nickname;
+	}
+	
+	
 }

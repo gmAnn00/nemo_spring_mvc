@@ -22,6 +22,16 @@
 		]]>
 	</select>
 	
+	
+	<select id="getWaitUserInfo" parameterType="int" resultType="userVO">
+		<![CDATA[
+			SELECT u.user_id, u.nickname, u.user_addr1, u.join_date, u.user_img
+			FROM USER_TBL u, WAITLIST_TBL w
+			WHERE w.group_id=#{group_id} AND w.user_id=u.user_id
+		]]>
+	</select>
+	
+	
 	<select id="isGroupMember" parameterType="java.util.Map" resultType="boolean">
 		<![CDATA[
 			SELECT DECODE(count(*), 1, 'true', 'false') FROM JOIN_TBL
@@ -36,11 +46,13 @@
 		]]>
 	</select>
 
+
 	<update id="mandateLeader" parameterType="java.util.Map">
 		<![CDATA[
 			UPDATE GROUP_TBL SET group_leader=#{target_id} WHERE group_id=#{group_id}
 		]]>
 	</update>
+	
 	
 	<update id="exileMember" parameterType="java.util.Map">
 		<![CDATA[
@@ -48,10 +60,58 @@
 		]]>
 	</update>
 	
+	
 	<update id="decreaseCurrentMemNo" parameterType="java.util.Map">
 		<![CDATA[
 			UPDATE GROUP_TBL SET current_memno=current_memno-1 WHERE group_id=#{group_id}
 		]]>
 	</update>
+	
+	
+	<select id="isWait" parameterType="java.util.Map" resultType="boolean">
+		<![CDATA[
+			SELECT DECODE(count(*), 1, 'true', 'false') FROM WAITLIST_TBL
+			WHERE group_id=#{group_id} AND user_id=#{target_id}
+		]]>
+	</select>
+	
+	
+	<select id="getCancel" parameterType="java.util.Map" resultType="int">
+		<![CDATA[
+			SELECT nvl(max(cancel), 0) FROM JOIN_TBL
+			WHERE group_id=#{group_id} AND user_id=#{target_id}
+		]]>
+	</select>
+	
+	
+	<insert id="addJoin" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO JOIN_TBL(group_id, user_id, join_date, cancel)
+			VALUES(#{group_id}, #{target_id}, sysdate, 0)
+		]]>
+	</insert>
+	
+	
+	<update id="rejoin" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE JOIN_TBL SET cancel=0 WHERE group_id=#{group_id} AND user_id=#{target_id}
+		]]>
+	</update>
+	
+	
+	
+	<update id="increaseCurrentMemNo" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE GROUP_TBL SET current_memno=current_memno+1 WHERE group_id=#{group_id}
+		]]>
+	</update>
+	
+	
+	<delete id="deleteWait" parameterType="java.util.Map">
+		<![CDATA[
+			DELETE FROM WAITLIST_TBL WHERE group_id=#{group_id} AND user_id=#{target_id}
+		]]>
+	</delete>
+
 
 </mapper>

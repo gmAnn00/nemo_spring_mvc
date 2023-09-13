@@ -31,6 +31,12 @@ public class LeaderDAOImpl implements LeaderDAO{
 	}
 	
 	@Override
+	public List<UserVO> getWaitUserInfo(int group_id) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.leader.getWaitUserInfo", group_id);
+	}
+	
+	@Override
 	public boolean isGroupMember(Map<String, Object> map) throws DataAccessException {
 		
 		return sqlSession.selectOne("mapper.leader.isGroupMember", map);
@@ -52,6 +58,41 @@ public class LeaderDAOImpl implements LeaderDAO{
 		
 		sqlSession.update("mapper.leader.exileMember", exileMap);
 		sqlSession.update("mapper.leader.decreaseCurrentMemNo", exileMap);
+	}
+	
+	
+	@Override
+	public boolean isWait(Map<String, Object> map) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.leader.isWait", map);
+	}
+	
+	@Override
+	public void approveMember(Map<String, Object> approveMap) throws DataAccessException {
+		
+		int getCancelResult = sqlSession.selectOne("mapper.leader.getCancel", approveMap);
+		
+		if(getCancelResult == 0) {
+			
+			sqlSession.insert("mapper.leader.addJoin", approveMap);
+			
+		} else if(getCancelResult == 1) {
+	
+			sqlSession.update("mapper.leader.rejoin", approveMap);
+			
+		} else {
+			return;
+		}
+
+		sqlSession.update("mapper.leader.increaseCurrentMemNo", approveMap);
+		sqlSession.delete("mapper.leader.deleteWait", approveMap);
+	}
+	
+	
+	@Override
+	public void rejectMember(Map<String, Object> rejectMap) throws DataAccessException {
+		
+		sqlSession.delete("mapper.leader.deleteWait", rejectMap);
 	}
 
 }

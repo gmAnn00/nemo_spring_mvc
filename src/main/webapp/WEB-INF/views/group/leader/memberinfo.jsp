@@ -231,7 +231,8 @@
 	                                                            </div>
 	                                                            <div class="profile_group_joinDate">
 	                                                                <i class="fa-regular fa-calendar profile_icon"></i>
-	                                                                <span>${wait.join_date}</span>
+	                                                                <c:set var="formatDate" value="${wait.join_date}" />
+	                                                                <span><fmt:formatDate value="${formatDate}" pattern="yyyy-MM-dd" type="date"/></span>
 	                                                            </div>
 	                                                        </div>
 	                                                    </div>

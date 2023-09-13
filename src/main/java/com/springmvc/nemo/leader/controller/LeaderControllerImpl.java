@@ -41,12 +41,14 @@ public class LeaderControllerImpl implements LeaderController{
 		UserVO user = leaderService.getUserInfo(user_id);
 		
 		List<UserVO> membersList = leaderService.getMemberInfo(group_id);
+		List<UserVO> waitUsersList = leaderService.getWaitUserInfo(group_id);
 		
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("user", user);
 		mav.addObject("membersList", membersList);
+		mav.addObject("waitUsersList", waitUsersList);
 		
 		return mav;
 	}
@@ -106,5 +108,66 @@ public class LeaderControllerImpl implements LeaderController{
 		return mav;
 	}
 	
+	
+	@RequestMapping(value = "/group/leader/approve", method = RequestMethod.GET)
+	@Override
+	public ModelAndView approve(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("target_id") String target_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		Map<String, Object> approveMap = new HashMap<String, Object>();
+		approveMap.put("group_id", group_id);
+		approveMap.put("target_id", target_id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		
+		boolean isWaitResult = leaderService.isWait(approveMap);
+		
+		if(isWaitResult) {
+			
+			String msg = leaderService.approveMember(approveMap) + "님의 소모임 가입을 승인하였습니다.";
+			mav.addObject("data", new Message(msg, request.getContextPath()+"/group/leader/memberinfo?group_id="+group_id));
+			
+		}else {
+			
+			mav.addObject("data", new Message("해당 회원은 가입 대기 중이 아닙니다.", request.getContextPath()+"/group/leader/memberinfo?group_id="+group_id));
+			
+		}
+
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/group/leader/reject", method = RequestMethod.GET)
+	@Override
+	public ModelAndView reject(int group_id, String target_id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		Map<String, Object> rejectMap = new HashMap<String, Object>();
+		rejectMap.put("group_id", group_id);
+		rejectMap.put("target_id", target_id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		
+		boolean isWaitResult = leaderService.isWait(rejectMap);
+		
+		if(isWaitResult) {
+			
+			String msg = leaderService.rejectMember(rejectMap) + "님의 소모임 가입을 거절하였습니다.";
+			mav.addObject("data", new Message(msg, request.getContextPath()+"/group/leader/memberinfo?group_id="+group_id));
+			
+		}else {
+			
+			mav.addObject("data", new Message("해당 회원은 가입 대기 중이 아닙니다.", request.getContextPath()+"/group/leader/memberinfo?group_id="+group_id));
+			
+		}
+
+		return mav;
+		
+		
+	}
 
 }
