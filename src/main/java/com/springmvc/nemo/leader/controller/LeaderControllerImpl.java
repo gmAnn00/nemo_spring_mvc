@@ -65,10 +65,46 @@ public class LeaderControllerImpl implements LeaderController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("message");
 		
-		String msg = leaderService.mandateLeader(mandateMap) + "님에게 소모임 리더를 위임했습니다.";
-		mav.addObject("data", new Message(msg, request.getContextPath()+"/group/groupmain?group_id="+group_id));
+		boolean isGroupMemberResult = leaderService.isGroupMember(mandateMap);
+		
+		if(isGroupMemberResult) {
+			String msg = leaderService.mandateLeader(mandateMap) + "님에게 소모임 리더를 위임했습니다.";
+			mav.addObject("data", new Message(msg, request.getContextPath()+"/group/groupmain?group_id="+group_id));
+		}else {
+			mav.addObject("data", new Message("해당 회원은 소모임 멤버가 아닙니다.", request.getContextPath()+"/group/leader/memberinfo?group_id="+group_id));
+		}
+		
+		
 		
 		return mav;
 	}
+	
+	
+	@RequestMapping(value = "/group/leader/exile", method = RequestMethod.GET)
+	@Override
+	public ModelAndView exile(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("target_id") String target_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		Map<String, Object> exileMap = new HashMap<String, Object>();
+		exileMap.put("group_id", group_id);
+		exileMap.put("target_id", target_id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		
+		boolean isGroupMemberResult = leaderService.isGroupMember(exileMap);
+		
+		if(isGroupMemberResult) {
+			String msg = leaderService.exileMember(exileMap) + "님을 소모임에서 추방했습니다.";
+			mav.addObject("data", new Message(msg, request.getContextPath()+"/group/leader/memberinfo?group_id="+group_id));
+		} else {
+			mav.addObject("data", new Message("해당 회원은 소모임 멤버가 아닙니다.", request.getContextPath()+"/group/leader/memberinfo?group_id="+group_id));
+		}
+
+		return mav;
+	}
+	
 
 }

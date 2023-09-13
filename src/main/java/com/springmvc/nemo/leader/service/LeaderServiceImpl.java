@@ -29,6 +29,12 @@ public class LeaderServiceImpl implements LeaderService{
 		return leaderDAO.getMemberInfo(group_id);
 	}
 	
+	@Override
+	public boolean isGroupMember(Map<String, Object> map) throws DataAccessException {
+		
+		return leaderDAO.isGroupMember(map);
+	}
+	
 	
 	@Override
 	public String mandateLeader(Map<String, Object> mandateMap) throws DataAccessException {
@@ -36,6 +42,17 @@ public class LeaderServiceImpl implements LeaderService{
 		leaderDAO.mandateLeader(mandateMap);
 		
 		String target_id = (String) mandateMap.get("target_id");
+		String nickname = leaderDAO.getUserNickname(target_id);
+		
+		return nickname;
+	}
+	
+	@Override
+	public String exileMember(Map<String, Object> exileMap) throws DataAccessException {
+		
+		leaderDAO.exileMember(exileMap);
+		
+		String target_id = (String) exileMap.get("target_id");
 		String nickname = leaderDAO.getUserNickname(target_id);
 		
 		return nickname;

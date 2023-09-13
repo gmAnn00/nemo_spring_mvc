@@ -12,9 +12,15 @@ public interface LeaderDAO {
 	public UserVO getUserInfo(String user_id) throws DataAccessException;
 
 	public List<UserVO> getMemberInfo(int group_id) throws DataAccessException;
+	
+	public boolean isGroupMember(Map<String, Object> map) throws DataAccessException;
 
 	public void mandateLeader(Map<String, Object> mandateMap) throws DataAccessException;
 
 	public String getUserNickname(String target_id) throws DataAccessException;
+
+	public void exileMember(Map<String, Object> exileMap) throws DataAccessException;
+
+	
 
 }

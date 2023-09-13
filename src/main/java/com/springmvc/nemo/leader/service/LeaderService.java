@@ -12,6 +12,12 @@ public interface LeaderService {
 	public UserVO getUserInfo(String user_id) throws DataAccessException;
 
 	public List<UserVO> getMemberInfo(int group_id) throws DataAccessException;
+	
+	public boolean isGroupMember(Map<String, Object> mandateMap) throws DataAccessException;
 
 	public String mandateLeader(Map<String, Object> mandateMap) throws DataAccessException;
+
+	public String exileMember(Map<String, Object> exileMap) throws DataAccessException;
+
+	
 }

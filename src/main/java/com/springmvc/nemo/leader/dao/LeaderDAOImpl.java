@@ -31,6 +31,12 @@ public class LeaderDAOImpl implements LeaderDAO{
 	}
 	
 	@Override
+	public boolean isGroupMember(Map<String, Object> map) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.leader.isGroupMember", map);
+	}
+	
+	@Override
 	public String getUserNickname(String target_id) throws DataAccessException{
 		return sqlSession.selectOne("mapper.leader.getUserNickname", target_id);
 	}
@@ -39,6 +45,13 @@ public class LeaderDAOImpl implements LeaderDAO{
 	public void mandateLeader(Map<String, Object> mandateMap) throws DataAccessException {
 		
 		sqlSession.update("mapper.leader.mandateLeader", mandateMap);
+	}
+	
+	@Override
+	public void exileMember(Map<String, Object> exileMap) throws DataAccessException {
+		
+		sqlSession.update("mapper.leader.exileMember", exileMap);
+		sqlSession.update("mapper.leader.decreaseCurrentMemNo", exileMap);
 	}
 
 }

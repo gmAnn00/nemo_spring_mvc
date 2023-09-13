@@ -16,5 +16,10 @@ public interface LeaderController {
 			@RequestParam("group_id") int group_id,
 			@RequestParam("target_id") String target_id,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView exile(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("target_id") String target_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }
