@@ -28,7 +28,7 @@
 	
 	<select id="getCancel" parameterType="joinVO" resultType="int">
 		<![CDATA[
-         SELECT cancel FROM JOIN_TBL WHERE group_id=#{group_id} AND user_id=#{user_id}
+         SELECT nvl(max(cancel), 0) FROM JOIN_TBL WHERE group_id=#{group_id} AND user_id=#{user_id}
       ]]>
 	</select>
 	
