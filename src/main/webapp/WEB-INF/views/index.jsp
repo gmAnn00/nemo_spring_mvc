@@ -202,19 +202,22 @@
 	                    <h3 class="smallText_title">추천 소모임</h3>
 	                </div>
 	                <div class="cards">
-	               		 <c:forEach var="group" items="${randomGroupsList}">
+	               		 <c:forEach var="group" items="${randomGroupList}">
 		                    <div class="card card--1">
 		                        <div class="card__info-hover">
 		                        </div>
 		                        <div class="card__img"></div>
-		                        <a href="${contextPath}/group/groupInfo?group_id=${group.grp_id}" class="card_link">
-		                            <div class="card__img--hover" style="background-image: url('${contextPath}/resources/groupImages/${group.grp_id}/${group.grp_img}')"></div>
+		                        <a href="${contextPath}/group/groupinfo?group_id=${group.group_id}" class="card_link">
+		                            <div>
+		                            	<img alt="소모임 프로필 사진" class="card__img--hover"
+		                            	src="${contextPath}/groupimagedownload?group_id=${group.group_id}&group_img=${group.group_img}">
+		                            </div>
 		                        </a>
 		                        <div class="card__info">
-		                            <span class="card__category">${group.main_name}</span>
-		                            <span class="card__category">${group.sub_name}</span>
-		                            <h3 class="card__title">${group.grp_name}</h3>
-		                            <span class="card__by"><i class="fa-solid fa-location-dot"></i> <a href="" class="card__author">${group.grp_addr1}</a></span>
+		                            <span class="card__category">${group.main_cate}</span>
+		                            <span class="card__category">${group.sub_cate}</span>
+		                            <h3 class="card__title">${group.group_name}</h3>
+		                            <span class="card__by"><i class="fa-solid fa-location-dot"></i> <a href="" class="card__author">${group.group_addr1}</a></span>
 		                        </div>
 		                    </div>
 	                	
@@ -230,19 +233,22 @@
 	                    <h3 class="smallText_title">관심사 소모임</h3>
 	                </div>
 	               <div class="cards">
-	               		<c:forEach var="group" items="${interestGroupsList}">
+	               		<c:forEach var="group" items="${interestGroupList}">
 		                    <div class="card card--1">
 		                        <div class="card__info-hover">
 		                        </div>
 		                        <div class="card__img"></div>
-		                        <a href="${contextPath}/group/groupinfo?group_id=${group.grp_id}" class="card_link">
-		                            <div class="card__img--hover" style="background-image: url('${contextPath}/resources/groupImages/${group.grp_id}/${group.grp_img}')"></div>
+		                        <a href="${contextPath}/group/groupinfo?group_id=${group.group_id}" class="card_link">
+		                            <div>
+		                            	<img alt="소모임 프로필 사진" class="card__img--hover"
+		                            	src="${contextPath}/groupimagedownload?group_id=${group.group_id}&group_img=${group.group_img}">
+		                            </div>
 		                        </a>
 		                        <div class="card__info">
-		                            <span class="card__category">${group.main_name}</span>
-		                            <span class="card__category">${group.sub_name}</span>
-		                            <h3 class="card__title">${group.grp_name}</h3>
-		                            <span class="card__by"><i class="fa-solid fa-location-dot"></i> <a href="#" class="card__author">${group.grp_addr1}</a></span>
+		                            <span class="card__category">${group.main_cate}</span>
+		                            <span class="card__category">${group.sub_cate}</span>
+		                            <h3 class="card__title">${group.group_name}</h3>
+		                            <span class="card__by"><i class="fa-solid fa-location-dot"></i> <a href="#" class="card__author">${group.group_addr1}</a></span>
 		                        </div>
 		                    </div>
 	               	   </c:forEach> 
@@ -254,20 +260,23 @@
 	                    <h3 class="smallText_title">가까운 소모임</h3>
 	                </div>
 	                <div class="cards">
-	              		 <c:forEach var="group" items="${nearGroupsList}">
+	              		 <c:forEach var="group" items="${nearGroupList}">
 	               		
 		                    <div class="card card--1">
 		                        <div class="card__info-hover">
 		                        </div>
 		                        <div class="card__img"></div>
-		                        <a href="${contextPath}/group/groupinfo?group_id=${group.grp_id}" class="card_link">
-		                            <div class="card__img--hover" style="background-image: url('${contextPath}/resources/groupImages/${group.grp_id}/${group.grp_img}')"></div>
+		                        <a href="${contextPath}/group/groupinfo?group_id=${group.group_id}" class="card_link">
+		                            <div>
+		                            	<img class="card__img--hover" alt="프로필 이미지 사진"
+		                            	src="${contextPath}/groupimagedownload?group_id=${group.group_id}&group_img=${group.group_img}">
+		                            </div>
 		                        </a>
 		                        <div class="card__info">
-		                            <span class="card__category">${group.main_name}</span>
-		                            <span class="card__category">${group.sub_name}</span>
-		                            <h3 class="card__title">${group.grp_name}</h3>
-		                            <span class="card__by"><i class="fa-solid fa-location-dot"></i> <a href="#" class="card__author">${group.grp_addr1}</a></span>
+		                            <span class="card__category">${group.main_cate}</span>
+		                            <span class="card__category">${group.sub_cate}</span>
+		                            <h3 class="card__title">${group.group_name}</h3>
+		                            <span class="card__by"><i class="fa-solid fa-location-dot"></i> <a href="#" class="card__author">${group.group_addr1}</a></span>
 		                        </div>
 		                    </div>
 	            	   </c:forEach>
