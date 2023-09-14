@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.report">
+
+	<select id="isAlreadyReportGroup" parameterType="groupReportVO" resultType="boolean">
+		<![CDATA[
+         SELECT DECODE(count(*), 1, 'true' , 'false') as result
+         FROM GROUPREPORT_TBL WHERE group_id=#{group_id} AND reporter_id=#{reporter_id}
+      ]]>
+	</select>
+	
+	<select id="getNextGroupReportId" resultType="int">
+		<![CDATA[
+         SELECT nvl(max(report_id), 0)+1 FROM GROUPREPORT_TBL
+      ]]>
+	</select>
+	
+	<update id="increaseGroupReportCnt" parameterType="int">
+		<![CDATA[
+         UPDATE GROUP_TBL SET report_cnt=report_cnt+1 WHERE group_id=#{group_id}
+      ]]>
+	</update>
+	
+	<insert id="reportGroup" parameterType="groupReportVO">
+		<![CDATA[
+			INSERT INTO GROUPREPORT_TBL(report_id, group_id, reporter_id, report_date)
+			VALUES(#{report_id}, #{group_id}, #{reporter_id}, sysdate)
+      ]]>
+	</insert>
+	
+	
+	<select id="isAlreadyReportMember" parameterType="userReportVO" resultType="boolean">
+		<![CDATA[
+         SELECT DECODE(count(*), 1, 'true' , 'false') as result
+         FROM USERREPORT_TBL WHERE accused_id=#{accused_id} AND reporter_id=#{reporter_id}
+      ]]>
+	</select>
+	
+	<select id="getNextUserReportId" resultType="int">
+		<![CDATA[
+         SELECT nvl(max(report_id), 0)+1 FROM USERREPORT_TBL
+      ]]>
+	</select>
+	
+	<update id="increaseUserReportCnt" parameterType="String">
+		<![CDATA[
+         UPDATE USER_TBL SET report_cnt=report_cnt+1 WHERE user_id=#{accused_id}
+      ]]>
+	</update>
+	
+	<insert id="reportMember" parameterType="userReportVO">
+		<![CDATA[
+			INSERT INTO USERREPORT_TBL(report_id, accused_id, reporter_id, report_date)
+			VALUES(#{report_id}, #{accused_id}, #{reporter_id}, sysdate)
+      ]]>
+	</insert>
+
+</mapper>

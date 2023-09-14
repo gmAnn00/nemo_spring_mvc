@@ -8,7 +8,7 @@ public class GroupReportVO {
 	private int group_id;
 	private String reporter_id;
 	private Date report_date;
-	private String report_cont;
+	private String report_content;
 	
 	public GroupReportVO() {
 		// TODO Auto-generated constructor stub
@@ -46,19 +46,21 @@ public class GroupReportVO {
 		this.report_date = report_date;
 	}
 
-	public String getReport_cont() {
-		return report_cont;
+	public String getReport_content() {
+		return report_content;
 	}
 
-	public void setReport_cont(String report_cont) {
-		this.report_cont = report_cont;
+	public void setReport_content(String report_content) {
+		this.report_content = report_content;
 	}
 
 	@Override
 	public String toString() {
 		return "GroupReportVO [report_id=" + report_id + ", group_id=" + group_id + ", reporter_id=" + reporter_id
-				+ ", report_date=" + report_date + ", report_cont=" + report_cont + "]";
+				+ ", report_date=" + report_date + ", report_content=" + report_content + "]";
 	}
+
+	
 	
 	
 
