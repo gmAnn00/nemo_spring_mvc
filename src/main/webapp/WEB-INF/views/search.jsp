@@ -226,9 +226,7 @@ request.setCharacterEncoding("utf-8");
 	<input type="hidden" id="main_name_hidden"
 		value="${searchMap.main_cate}" />
 	<input type="hidden" id="sub_name_hidden" value="${searchMap.sub_cate}" />
-	<input type="hidden" id="user_id_hidden" value="${user_id}" />
 	<input type="hidden" id="areaBar_hidden" value="${searchMap.area}" />
-	<!--  <input type="hidden" id="jsonResultList" value='${jsonResultList}' /> -->
 
 	<jsp:include page="footer.jsp" flush="true"></jsp:include>
 </body>
