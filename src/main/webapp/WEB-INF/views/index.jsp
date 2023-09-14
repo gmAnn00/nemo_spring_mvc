@@ -48,52 +48,52 @@
             <div class="flowBanner1">
                 <ul class="list01">
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=문화 · 공연 · 축제&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=문화 · 공연 · 축제&sub_cate=none&area=-1&keyword=&sort=name">
                     		<div class="imgBox sle1">
                            		<span class="box_text">문화,공연</span>
                         	</div>
                     	</a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=음악 · 악기&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=음악 · 악기&sub_cate=none&area=-1&keyword=&sort=name">
 	                        <div class="imgBox sle2">
 	                            <span class="box_text">음악,악기</span>
 	                        </div>
 	                    </a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=사진 · 영상&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=사진 · 영상&sub_cate=none&area=-1&keyword=&sort=name">
 	                        <div class="imgBox sle3">
 	                            <span class="box_text">사진,영상</span>
 	                        </div>
                        	</a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=아웃도어 · 여행&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=아웃도어 · 여행&sub_cate=none&area=-1&keyword=&sort=name">
 	                        <div class="imgBox sle4">
 	                            <span class="box_text">아웃도어</span>
 	                        </div>
 	                    </a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=운동 · 스포츠&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=운동 · 스포츠&sub_cate=none&area=-1&keyword=&sort=name">
                         	<div class="imgBox sle5"><span class="box_text">스포츠</span></div>
                         </a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=인문학 · 책 · 글&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=인문학 · 책 · 글&sub_cate=none&area=-1&keyword=&sort=name">
 	                        <div class="imgBox sle6">
 	                            <span class="box_text">인문학,책</span>
 	                        </div>
                         </a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=외국 · 언어&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=외국 · 언어&sub_cate=none&area=-1&keyword=&sort=name">
                         	<div class="imgBox sle7"><span class="box_text">언어</span></div>
                         </a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=공예 · 만들기&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=공예 · 만들기&sub_cate=none&area=-1&keyword=&sort=name">
                         	<div class="imgBox sle8"><span class="box_text">공예</span></div>
                        	</a>
                     </li>
@@ -103,44 +103,44 @@
             <div class="flowBanner2">
                 <ul class="list02">
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=댄스 · 무용&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=댄스 · 무용&sub_cate=none&area=-1&keyword=&sort=name">
                         	<div class="imgBox sle9"><span class="box_text">댄스</span></div>
                         </a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=봉사활동&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=봉사활동&sub_cate=none&area=-1&keyword=&sort=name">
                         	<div class="imgBox sle10"><span class="box_text">봉사</span></div>
                         </a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=사교 · 인맥&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=사교 · 인맥&sub_cate=none&area=-1&keyword=&sort=name">
                         	<div class="imgBox sle11"><span class="box_text">사교</span></div>
                         </a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=차 · 오토바이&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=차 · 오토바이&sub_cate=none&area=-1&keyword=&sort=name">
                         	<div class="imgBox sle12"><span class="box_text">자동차</span></div>
                        	</a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=스포츠 관람&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=스포츠 관람&sub_cate=none&area=-1&keyword=&sort=name">
 	                        <div class="imgBox sle13">
 	                            <span class="box_text">경기관람</span>
 	                        </div>
 	                    </a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=게임 · 오락&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=게임 · 오락&sub_cate=none&area=-1&keyword=&sort=name">
                         	<div class="imgBox sle14"><span class="box_text">게임</span></div>
                        	</a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=요리 · 제조&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=요리 · 제조&sub_cate=none&area=-1&keyword=&sort=name">
                         	<div class="imgBox sle15"><span class="box_text">요리</span></div>
                         </a>
                     </li>
                     <li>
-                    	<a href="${contextPath}/search?userLat=none&userLng=none&bigCate=반려동물&smallCate=none&areaBar=-1&searchText=&sort=sortByName">
+                    	<a href="${contextPath}/search?user_lat=none&user_lng=none&main_cate=반려동물&sub_cate=none&area=-1&keyword=&sort=name">
 	                        <div class="imgBox sle16">
 	                            <span class="box_text">반려동물</span>
 	                        </div>

@@ -5,6 +5,44 @@
    
 <mapper namespace="mapper.search">
 	
-	
+	<select id="searchGroup" parameterType="java.util.Map" resultType="searchResultVO">
+		
+		SELECT g.*, DECODE( 
+			(SELECT count(*)
+			FROM GROUP_TBL g2, BOOKMARK_TBL t
+			WHERE g2.group_id=t.group_id AND t.user_id=#{user_id} AND g.group_id=t.group_id)
+		, 1, 'true', 'false') as isBookmark
+		
+		FROM GROUP_TBL g
+		WHERE g.group_name LIKE '%'||#{keyword}||'%'
+		
+		<if test="joinable.equals('on')">
+			AND current_memno &lt; max_memno
+		</if>
+		
+		<if test="!main_cate.equals('none')">
+			AND g.main_cate = #{main_cate}
+		</if>
+		
+		<if test="!sub_cate.equals('none')">
+			AND g.sub_cate = #{sub_cate}
+		</if>
+		
+		
+		<choose>
+			<when test="sort.equals('number')">
+				ORDER BY g.current_memno desc
+			</when>
+			
+			<when test="sort.equals('bookmark')">
+				ORDER BY g.bookmark_no desc
+			</when>
+			
+			<otherwise>
+				ORDER BY g.group_name asc
+			</otherwise>
+		</choose>
+
+	</select>
 
 </mapper>

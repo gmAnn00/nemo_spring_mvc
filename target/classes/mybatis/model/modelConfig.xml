@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.springmvc.nemo.mypage.vo.CommingScheduleVO" alias="commingScheduleVO"/>
 		<typeAlias type="com.springmvc.nemo.mypage.vo.MyProfileVO" alias="myProfileVO"/>
 		<typeAlias type="com.springmvc.nemo.mypage.vo.ModInfoVO" alias="modInfoVO"/>
+		<typeAlias type="com.springmvc.nemo.search.vo.SearchResultVO" alias="searchResultVO"/>
 	</typeAliases>
 	
 	
