@@ -11,5 +11,10 @@ public interface SearchService {
 
 	public List<SearchResultVO> search(Map<String, Object> searchMap) throws DataAccessException;
 
+	public int searchLength(Map<String, Object> searchMap) throws DataAccessException;
+	
+	public List<SearchResultVO> paging(Map<String, Object> searchMap, List<SearchResultVO> temp)
+			throws DataAccessException;
+
 
 }

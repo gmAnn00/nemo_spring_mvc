@@ -66,8 +66,11 @@ public class SearchControllerImpl implements SearchController{
 		searchMap.put("section", section);
 		searchMap.put("pagenum", pagenum);
 		
+		int resultLength = searchService.searchLength(searchMap);
+		
 		List<SearchResultVO> resultList = new ArrayList<SearchResultVO>();
 		resultList = searchService.search(searchMap);
+		resultList = searchService.paging(searchMap, resultList);
 		
 		//logger.info("searchMap={}", searchMap.toString());
 		
