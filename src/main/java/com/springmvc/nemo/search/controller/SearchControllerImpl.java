@@ -69,9 +69,9 @@ public class SearchControllerImpl implements SearchController{
 		List<SearchResultVO> resultList = new ArrayList<SearchResultVO>();
 		resultList = searchService.search(searchMap);
 		
-		logger.info("searchMap={}", searchMap.toString());
+		//logger.info("searchMap={}", searchMap.toString());
 		
-		logger.info("resultList={}", resultList.toString());
+		//logger.info("resultList={}", resultList.toString());
 		
 		mav.addObject("searchMap", searchMap);
 		mav.addObject("resultList", resultList);

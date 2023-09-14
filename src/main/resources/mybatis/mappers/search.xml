@@ -12,7 +12,6 @@
 			FROM GROUP_TBL g2, BOOKMARK_TBL t
 			WHERE g2.group_id=t.group_id AND t.user_id=#{user_id} AND g.group_id=t.group_id)
 		, 1, 'true', 'false') as isBookmark
-		
 		FROM GROUP_TBL g
 		WHERE g.group_name LIKE '%'||#{keyword}||'%'
 		
