@@ -78,6 +78,7 @@ public class SearchControllerImpl implements SearchController{
 		
 		mav.addObject("searchMap", searchMap);
 		mav.addObject("resultList", resultList);
+		mav.addObject("resultLength", resultLength);
 		
 		
 		return mav;

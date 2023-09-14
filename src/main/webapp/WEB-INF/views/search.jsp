@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:set var="totGroup" value="${fn:length(resultList)}" />
+<c:set var="totGroup" value="${resultLength}" />
 <c:set var="section" value="${searchMap.section}"/>
 <c:set var="pagenum" value="${searchMap.pagenum}"/>
 
@@ -202,20 +202,20 @@ request.setCharacterEncoding("utf-8");
 			<c:if test="${totGroup != 0}"> <!-- 게시글이 있을 경우 -->
 				<c:forEach var="page" begin="1" end="${endValue}" step="1">
 					<c:if test="${section > 1 && page == 1}">
-						<a href="${contextPath}/search?main_cate=${param.main_cate}&sub_cate=${param.sub_cate}&area=1&keyword=${param.keyword}&section=${section-1}&pagenum=10&sort=${param.sort}">prev</a>
+						<a href="${contextPath}/search?main_cate=${param.main_cate}&sub_cate=${param.sub_cate}&area=${param.area}&keyword=${param.keyword}&section=${section-1}&pagenum=10&sort=${param.sort}">prev</a>
 					</c:if>
 					
 					<c:choose>
 						<c:when test="${page==pagenum}">
-							<a style='color:var(--main-color)' href="${contextPath}/search?main_cate=${param.main_cate}&sub_cate=${param.sub_cate}&area=1&keyword=${param.keyword}&section=${section}&pagenum=${page}&sort=${param.sort}">${(section-1)*10 + page}</a>
+							<a style='color:var(--main-color)' href="${contextPath}/search?main_cate=${param.main_cate}&sub_cate=${param.sub_cate}&area=${param.area}&keyword=${param.keyword}&section=${section}&pagenum=${page}&sort=${param.sort}">${(section-1)*10 + page}</a>
 						</c:when>
 						<c:otherwise>
-							<a href="${contextPath}/search?main_cate=${param.main_cate}&sub_cate=${param.sub_cate}&area=1&keyword=${param.keyword}&section=${section}&pagenum=${page}&sort=${param.sort}">${(section-1)*10 + page}</a>
+							<a href="${contextPath}/search?main_cate=${param.main_cate}&sub_cate=${param.sub_cate}&area=${param.area}&keyword=${param.keyword}&section=${section}&pagenum=${page}&sort=${param.sort}">${(section-1)*10 + page}</a>
 						</c:otherwise>
 					</c:choose>
 					
 					<c:if test="${page == 10 and totGroup/100 > section}">
-						<a href="${contextPath}/search?main_cate=${param.main_cate}&sub_cate=${param.sub_cate}&area=1&keyword=${param.keyword}&section=${section+1}&pagenum=1&sort=${param.sort}">next</a>
+						<a href="${contextPath}/search?main_cate=${param.main_cate}&sub_cate=${param.sub_cate}&area=${param.area}&keyword=${param.keyword}&section=${section+1}&pagenum=1&sort=${param.sort}">next</a>
 					</c:if>
 				</c:forEach>
 			</c:if>
