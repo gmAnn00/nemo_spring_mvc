@@ -60,11 +60,17 @@ public class IndexControllerImpl implements IndexController{
 			
 		}else {
 			// 로그인 함
+			List<GroupVO> interestGroupList = new ArrayList<GroupVO>();
+			interestGroupList = indexService.getInterestGroupList(user_id);
+			
+			List<GroupVO> nearGroupList = new ArrayList<GroupVO>();
+			nearGroupList = indexService.getNearGroupList(user_id);			
+			
+			mav.addObject("interestGroupList", interestGroupList);
+			mav.addObject("nearGroupList", nearGroupList);
 			
 		}
-		
-		
-		
+
 		return mav;
 	}
 
