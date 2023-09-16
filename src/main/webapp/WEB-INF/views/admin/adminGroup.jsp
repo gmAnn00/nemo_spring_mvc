@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
         <link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
         <link href="${contextPath}/resources/DataTables/datatables.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="${contextPath}/css/adminGroup.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/adminGroup.css" />
         <script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
     	<script src="https://kit.fontawesome.com/f9a2702e84.js" crossorigin="anonymous"></script>
     	<script src="${contextPath}/resources/js/header.js"></script>
@@ -58,17 +58,7 @@
                                 </a>
                             </li>                            
                             <li>
-                                <a href="${contextPath}/admin/adminreport">
-                                    <div class="sc2_icon_menu">
-                                        <div class="menu_submenu_name">
-                                            <span>신고 관리</span>
-                                        </div>
-                                        <i class="fa-solid fa-angle-right menu_angle"></i>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="${contextPath}/qna">
+                                <a href="${contextPath}/qna/viewqna">
                                     <div class="sc2_icon_menu">
                                         <div class="menu_submenu_name"><span>고객센터 Q&A</span></div>
                                         <i class="fa-solid fa-angle-right menu_angle"></i>

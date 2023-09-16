@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.springmvc.nemo.admin.service.AdminService;
 import com.springmvc.nemo.common.Message;
 import com.springmvc.nemo.group.vo.GroupVO;
+import com.springmvc.nemo.report.vo.GroupReportVO;
+import com.springmvc.nemo.report.vo.UserReportVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
 @Controller("adminController")
@@ -75,7 +77,7 @@ public class AdminControllerImpl implements AdminController{
 	}
 	
 	
-	@RequestMapping(value = "/admin/delgroup", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/admingroup/delgroup", method = RequestMethod.POST)
 	@Override
 	public ModelAndView delGroup(
 			@RequestParam("group_id") int group_id,
@@ -91,6 +93,7 @@ public class AdminControllerImpl implements AdminController{
 		return mav;
 		
 	}
+	
 
 
 }

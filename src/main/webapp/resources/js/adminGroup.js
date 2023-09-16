@@ -31,25 +31,8 @@ function fn_Grpdelete(group_id){
 		let newForm = $('<form></form>');
 		newForm.attr("name","newForm");
 		newForm.attr("method","post");
-		newForm.attr("action","/nemo/admin/delgroup");
+		newForm.attr("action","/nemo/admin/admingroup/delgroup");
 		newForm.append($('<input/>', {type: 'hidden', name: 'group_id', value:group_id }));
-		newForm.appendTo('body');
-
-	// submit form
-	newForm.submit();
-	}else {
-		
-	}
-}
-
-function fn_Userdelete(user_id){
-		let result=confirm("삭제 하시겠습니까?");
-	if(result) {
-		let newForm = $('<form></form>');
-		newForm.attr("name","newForm");
-		newForm.attr("method","post");
-		newForm.attr("action","/nemo/admin/delUser");
-		newForm.append($('<input/>', {type: 'hidden', name: 'user_id', value:user_id }));
 		newForm.appendTo('body');
 
 	// submit form

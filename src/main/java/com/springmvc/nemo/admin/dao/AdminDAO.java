@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.springmvc.nemo.group.vo.GroupVO;
+import com.springmvc.nemo.report.vo.GroupReportVO;
+import com.springmvc.nemo.report.vo.UserReportVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
 public interface AdminDAO {

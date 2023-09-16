@@ -8,6 +8,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.nemo.group.vo.GroupVO;
+import com.springmvc.nemo.report.vo.GroupReportVO;
+import com.springmvc.nemo.report.vo.UserReportVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
 @Repository("adminDAO")
@@ -41,4 +43,6 @@ public class AdminDAOImpl implements AdminDAO{
 		
 		sqlSession.delete("mapper.admin.delGroup", group_id);
 	}
+	
+
 }

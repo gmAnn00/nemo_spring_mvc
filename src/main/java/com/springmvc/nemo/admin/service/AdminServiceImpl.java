@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.springmvc.nemo.admin.dao.AdminDAO;
 import com.springmvc.nemo.group.vo.GroupVO;
+import com.springmvc.nemo.report.vo.GroupReportVO;
+import com.springmvc.nemo.report.vo.UserReportVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
 @Service("adminService")
@@ -40,5 +42,6 @@ public class AdminServiceImpl implements AdminService{
 		adminDAO.delGroup(group_id);
 		
 	}
+
 
 }

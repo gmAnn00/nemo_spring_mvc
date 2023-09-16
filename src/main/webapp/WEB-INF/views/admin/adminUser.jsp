@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="${contextPath}/resources/css/adminUser.css" />
         <script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
         <script src="https://kit.fontawesome.com/f9a2702e84.js" crossorigin="anonymous"></script>
-        <script src="${contextPath}/resources/resources/js/header.js"></script>
+        <script src="${contextPath}/resources/js/header.js"></script>
         <script src="${contextPath}/resources/DataTables/datatables.min.js"></script>
         <script src="${contextPath}/resources/js/adminUser.js"></script>
     </head>
@@ -54,16 +54,6 @@
                                 <a href="${contextPath}/admin/admingroup">
                                     <div class="sc2_icon_menu">
                                         <div class="menu_submenu_name"><span>소모임 관리</span></div>
-                                        <i class="fa-solid fa-angle-right menu_angle"></i>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="${contextPath}/admin/adminreport">
-                                    <div class="sc2_icon_menu">
-                                        <div class="menu_submenu_name">
-                                            <span>신고 관리</span>
-                                        </div>
                                         <i class="fa-solid fa-angle-right menu_angle"></i>
                                     </div>
                                 </a>

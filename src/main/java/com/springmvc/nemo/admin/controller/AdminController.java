@@ -19,5 +19,6 @@ public interface AdminController {
 	public ModelAndView delGroup(
 			@RequestParam("group_id") int group_id,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 	
 }

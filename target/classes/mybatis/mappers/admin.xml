@@ -27,5 +27,7 @@
 		DELETE FROM GROUP_TBL WHERE group_id=#{group_id}
 	</delete>
 	
+
+	
 	
 </mapper>
