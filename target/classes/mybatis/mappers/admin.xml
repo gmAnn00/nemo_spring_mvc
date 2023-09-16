@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.admin">
+
+
+	<select id="getUsersList" resultType="userVO">
+		<![CDATA[
+         SELECT user_id, nickname, join_date, report_cnt, cancel FROM USER_TBL WHERE admin = 0
+      ]]>
+	</select>
+	
+	<delete id="delUser" parameterType="String">
+		DELETE FROM USER_TBL WHERE user_id=#{user_id}
+	</delete>
+	
+	<select id="getGroupList" resultType="groupVO">
+		<![CDATA[
+         SELECT * FROM GROUP_TBL
+      ]]>
+	</select>
+	
+	
+	<delete id="delGroup" parameterType="int">
+		DELETE FROM GROUP_TBL WHERE group_id=#{group_id}
+	</delete>
+	
+	
+</mapper>

@@ -57,7 +57,7 @@ public class IndexControllerImpl implements IndexController{
 			int supplement = 4;
 			List<GroupVO> randomGroupList = new ArrayList<GroupVO>();
 			randomGroupList = indexService.getRandomGroupList(supplement);
-			logger.info("로그인 안함 randomGroupList={}", randomGroupList.toString());
+			//logger.info("로그인 안함 randomGroupList={}", randomGroupList.toString());
 			mav.addObject("randomGroupList", randomGroupList);
 			
 			

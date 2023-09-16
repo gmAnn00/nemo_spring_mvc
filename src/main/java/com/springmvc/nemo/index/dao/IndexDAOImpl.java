@@ -132,7 +132,7 @@ public class IndexDAOImpl implements IndexDAO{
 			allGroupList = allGroupList.subList(0, 4);
 		}
 		
-		logger.info("allGroupList={}", allGroupList.toString());
+		//logger.info("allGroupList={}", allGroupList.toString());
 		return allGroupList;
 	}
 

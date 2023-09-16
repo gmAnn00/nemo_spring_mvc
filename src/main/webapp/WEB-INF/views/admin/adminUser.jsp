@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false"
-    import="java.util.*, nemo.*"
+    import="java.util.*"
     %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("utf-8"); %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -17,21 +18,21 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>네모: 회원 관리</title>
-        <link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-        <link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-        <link rel="stylesheet" href="${contextPath}/css/common.css" />
-        <link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-        <link href="${contextPath}/DataTables/datatables.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="${contextPath}/css/adminUser.css" />
-        <script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
+        <link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+        <link href="${contextPath}/resources/DataTables/datatables.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/adminUser.css" />
+        <script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
         <script src="https://kit.fontawesome.com/f9a2702e84.js" crossorigin="anonymous"></script>
-        <script src="${contextPath}/js/header.js"></script>
-        <script src="${contextPath}/DataTables/datatables.min.js"></script>
-        <script src="${contextPath}/js/adminUser.js"></script>
+        <script src="${contextPath}/resources/resources/js/header.js"></script>
+        <script src="${contextPath}/resources/DataTables/datatables.min.js"></script>
+        <script src="${contextPath}/resources/js/adminUser.js"></script>
     </head>
 
     <body>
-	<jsp:include page="../header.jsp" flush="true"></jsp:include>
+	<jsp:include page="./../header.jsp" flush="true"></jsp:include>
 
         <!-- 콘텐츠 영역 시작 -->
         <div class="section2">
@@ -42,7 +43,7 @@
                         <h2 class="sc2_menu_title">관리자</h2>
                         <ul class="sc2_menu_list">                            
                             <li>
-                                <a href="${contextPath}/adminUser">
+                                <a href="${contextPath}/admin/adminuser">
                                     <div class="sc2_icon_menu">
                                         <div class="menu_submenu_name submenu_select"><span>회원 관리</span></div>
                                         <i class="fa-solid fa-minus submenu_select"></i>
@@ -50,7 +51,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="${contextPath}/adminGroup">
+                                <a href="${contextPath}/admin/admingroup">
                                     <div class="sc2_icon_menu">
                                         <div class="menu_submenu_name"><span>소모임 관리</span></div>
                                         <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -58,7 +59,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="${contextPath}/adminReport">
+                                <a href="${contextPath}/admin/adminreport">
                                     <div class="sc2_icon_menu">
                                         <div class="menu_submenu_name">
                                             <span>신고 관리</span>
@@ -68,7 +69,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="${contextPath}/viewQna">
+                                <a href="${contextPath}/qna/viewqna">
                                     <div class="sc2_icon_menu">
                                         <div class="menu_submenu_name"><span>고객센터 Q&A</span></div>
                                         <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -99,13 +100,9 @@
                     <div class="sc2_subcontents">
                         <div class="sc2_subcontent">
                             <div class="searchMemberArea">
-                                <!-- <input type="text" placeholder="아이디로 검색" /> -->
-                                <!-- <button id="adminSearchMemberIdBtn">검색</button> -->
+                                
                             </div>
-                            <!-- <div class="sortMemberArea">
-                <button id="adminSortByMemberIdBtn">번호순 정렬</button>
-                <button id="adminSortByMemberReportBtn">신고 횟수 정렬</button>
-                </div> -->
+                            
                             <div class="userListArea">
                                 <div class="userList">
                                     <!-- 테이블 동적생성 해야함 -->
@@ -117,27 +114,35 @@
                                                 <th>닉네임</th>
                                                 <th>가입일</th>
                                                 <th>신고누적횟수</th>
+                                                <th>탈퇴 여부</th>
                                                 <th>회원삭제</th>
                                             </tr>
                                         </thead>
                                         
 										<c:choose>
-												<c:when test="${empty userList}">
+												<c:when test="${empty usersList}">
 													<tr>
 														<td colspan="6" align="center">
 															등록된 회원이 없습니다.
 														</td>	
 													</tr>
 												</c:when>
-												<c:when test="${!empty userList}">
-													<c:forEach var="user" items="${userList}" varStatus="status">
+												<c:when test="${!empty usersList}">
+													<c:forEach var="user" items="${usersList}" varStatus="status">
 														<tr align="center">
 															<td>${status.count}</td>
-															<td>${user.userVO.user_id}</td>
-															<td>${user.userVO.nickname}</td>
-															<td>${user.userVO.join_date}</td>
-															<td>${user.reportCnt}</td>
-															<td><button role="button" class="button" onclick="fn_delete('${user.userVO.user_id}')">삭제</button></td>
+															<td>${user.user_id}</td>
+															<td>${user.nickname}</td>
+															<c:set var="formatDate" value="${user.join_date}" />
+															<td><fmt:formatDate value="${formatDate}" pattern="yyyy-MM-dd" type="date"/></td>
+															<td>${user.report_cnt}</td>
+															<c:if test="${user.cancel eq 0}">
+																<td style="color: #2859a3;">탈퇴 안함</td>
+															</c:if>
+															<c:if test="${user.cancel eq 1}">
+																<td style="color: #ff003e;">탈퇴 함</td>
+															</c:if>
+															<td><button role="button" class="button" onclick="fn_delete('${user.user_id}')">삭제</button></td>
 															
 														</tr>
 													</c:forEach>
@@ -147,7 +152,7 @@
            
                                     </table>
                                 </div>
-                                <!-- <div class="memberTablePage"></div> -->
+                               
                             </div>
                         </div>
                     </div>
@@ -156,7 +161,7 @@
         </div>
         <!-- 콘텐츠 영역 종료-->
 
-	<jsp:include page="../footer.jsp" flush="true"></jsp:include>
+	<jsp:include page="./../footer.jsp" flush="true"></jsp:include>
 
     </body>
 </html>

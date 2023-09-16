@@ -59,6 +59,11 @@
 		</mvc:interceptor>
 		
 		<mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<beans:bean class="com.springmvc.nemo.common.interceptor.AdminInterceptor"></beans:bean>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
 			<mvc:mapping path="/group/groupmain"/>
 			<mvc:mapping path="/group/schedule/**"/>
 			<mvc:mapping path="/group/board/**"/>

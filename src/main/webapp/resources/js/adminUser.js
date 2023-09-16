@@ -13,7 +13,7 @@ function fn_delete(user_id){
 		let newForm = $('<form></form>');
 		newForm.attr("name","newForm");
 		newForm.attr("method","post");
-		newForm.attr("action","/nemo/adminUser/delUser.do");
+		newForm.attr("action","/nemo/admin/adminuser/deluser");
 		newForm.append($('<input/>', {type: 'hidden', name: 'user_id', value:user_id }));
 		newForm.appendTo('body');
 

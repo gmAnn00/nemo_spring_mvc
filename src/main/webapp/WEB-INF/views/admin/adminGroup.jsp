@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false"
-    import="java.util.*, nemo.*"
+    import="java.util.*"
     %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -16,17 +17,17 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>네모: 소모임 관리</title>
-        <link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-        <link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-        <link rel="stylesheet" href="${contextPath}/css/common.css" />
-        <link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-        <link href="${contextPath}/DataTables/datatables.min.css" rel="stylesheet" />
+        <link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+        <link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+        <link href="${contextPath}/resources/DataTables/datatables.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="${contextPath}/css/adminGroup.css" />
-        <script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
+        <script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
     	<script src="https://kit.fontawesome.com/f9a2702e84.js" crossorigin="anonymous"></script>
-    	<script src="${contextPath}/js/header.js"></script>
-        <script src="${contextPath}/DataTables/datatables.min.js"></script>
-        <script src="${contextPath}/js/adminGroup.js"></script>
+    	<script src="${contextPath}/resources/js/header.js"></script>
+        <script src="${contextPath}/resources/DataTables/datatables.min.js"></script>
+        <script src="${contextPath}/resources/js/adminGroup.js"></script>
     </head>
     
     <body>
@@ -41,7 +42,7 @@
                         <h2 class="sc2_menu_title">관리자</h2>
                         <ul class="sc2_menu_list">
                         	<li>
-                                <a href="${contextPath}/adminUser">
+                                <a href="${contextPath}/admin/adminuser">
                                     <div class="sc2_icon_menu">
                                         <div class="menu_submenu_name"><span>회원 관리</span></div>
                                         <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -49,7 +50,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="${contextPath}/adminGroup">
+                                <a href="${contextPath}/admin/admingroup">
                                     <div class="sc2_icon_menu">
                                         <div class="menu_submenu_name submenu_select"><span>소모임 관리</span></div>
                                         <i class="fa-solid fa-minus submenu_select"></i>
@@ -57,7 +58,7 @@
                                 </a>
                             </li>                            
                             <li>
-                                <a href="${contextPath}/adminReport">
+                                <a href="${contextPath}/admin/adminreport">
                                     <div class="sc2_icon_menu">
                                         <div class="menu_submenu_name">
                                             <span>신고 관리</span>
@@ -67,7 +68,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="${contextPath}/viewQna">
+                                <a href="${contextPath}/qna">
                                     <div class="sc2_icon_menu">
                                         <div class="menu_submenu_name"><span>고객센터 Q&A</span></div>
                                         <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -98,22 +99,6 @@
                     </div>
 
                     <div class="sc2_subcontents">
-                    <!--  
-                        <div class="searchGroupArea">
-                            <select name="adminMainCategory" id="adminMainCategory"></select>
-                            <select name="adminSmallCategory" id="adminSmallCategory"></select>
-                            <input type="text" placeholder="소모임 이름으로 검색" />
-                            <button role="button" id="adminSearchGroupNameBtn" class="btn">검색</button>
-                        </div>
-                        -->
-                        <!-- <div class="sortGroupArea">
-            <a href="#" id="adminSortByGroupIndexBtn" class="button">
-                번호순 정렬
-            </a>
-            <a href="#" id="adminSortByGroupReportBtn" class="button">
-                신고 횟수 정렬s
-            </a>
-            </div> -->
                         <div class="groupListArea">
                             <div class="groupList">
                                 <table class="adminGroupTbl">
@@ -144,14 +129,15 @@
                                     	 	<c:forEach var="group" items="${groupList}" varStatus="status">
                                     	 		<tr align="center">
                                     	 			<td>${status.count}</td>
-                                    	 			<td><a href="${contextPath}/group/groupMain?group_id=${group.groupVO.grp_id}">${group.groupVO.grp_id}</a></td>
-                                    	 			<td>${group.groupVO.grp_mng}</td>
-                                    	 			<td><a href="${contextPath}/group/groupMain?group_id=${group.groupVO.grp_id}">${group.groupVO.grp_name}</a></td>
-                                    	 			<td>${group.currentMemNO}</td>
-                                    	 			<td>${group.groupVO.mem_no}</td>
-                                    	 			<td>${group.groupVO.create_date}</td>
-                                    	 			<td>${group.reportCnt}</td>
-                                    	 			<td><button role="button" class="button" onclick="fn_Grpdelete(${group.groupVO.grp_id})">삭제</button></td>
+                                    	 			<td><a href="${contextPath}/group/groupmain?group_id=${group.group_id}">${group.group_id}</a></td>
+                                    	 			<td>${group.group_leader}</td>
+                                    	 			<td><a href="${contextPath}/group/groupmain?group_id=${group.group_id}">${group.group_name}</a></td>
+                                    	 			<td>${group.current_memno}</td>
+                                    	 			<td>${group.max_memno}</td>
+                                    	 			<c:set var="formatDate" value="${group.create_date}" />
+                                    	 			<td><fmt:formatDate value="${formatDate}" pattern="yyyy-MM-dd" type="date"/></td>
+                                    	 			<td>${group.report_cnt}</td>
+                                    	 			<td><button role="button" class="button" onclick="fn_Grpdelete(${group.group_id})">삭제</button></td>
                                     	 		</tr>
                                     	 	</c:forEach>
                                     	</c:when>
