@@ -233,7 +233,7 @@
 	                    <h3 class="smallText_title">관심사 소모임</h3>
 	                </div>
 	               <div class="cards">
-	               		<c:forEach var="group" items="${interestGroupList}">
+	               		<c:forEach var="group" items="${interestsGroupList}">
 		                    <div class="card card--1">
 		                        <div class="card__info-hover">
 		                        </div>

@@ -53,20 +53,22 @@ public class IndexControllerImpl implements IndexController{
 		
 		if(user_id == null) {
 			// 로그인 안함
+			
+			int supplement = 4;
 			List<GroupVO> randomGroupList = new ArrayList<GroupVO>();
-			randomGroupList = indexService.getRandomGroupList();
+			randomGroupList = indexService.getRandomGroupList(supplement);
 			mav.addObject("randomGroupList", randomGroupList);
 			
 			
 		}else {
 			// 로그인 함
-			List<GroupVO> interestGroupList = new ArrayList<GroupVO>();
-			interestGroupList = indexService.getInterestGroupList(user_id);
+			List<GroupVO> interestsGroupList = new ArrayList<GroupVO>();
+			interestsGroupList = indexService.getInterestsGroupList(user_id);
 			
 			List<GroupVO> nearGroupList = new ArrayList<GroupVO>();
 			nearGroupList = indexService.getNearGroupList(user_id);			
 			
-			mav.addObject("interestGroupList", interestGroupList);
+			mav.addObject("interestsGroupList", interestsGroupList);
 			mav.addObject("nearGroupList", nearGroupList);
 			
 		}

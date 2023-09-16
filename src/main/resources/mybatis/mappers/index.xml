@@ -6,12 +6,58 @@
 <mapper namespace="mapper.index">
 	
 	
-	<select id="getRandomGroupList" resultType="groupVO">
-		<![CDATA[
+	<select id="getRandomGroupList" parameterType="java.util.Map" resultType="groupVO">
          SELECT * FROM
-         	(SELECT * FROM GROUP_TBL ORDER BY dbms_random.value)
+         	(SELECT * FROM GROUP_TBL 
+         	WHERE group_id NOT IN (
+         		<foreach collection="groupIdList" item="item" separator=",">
+         			#{item}
+         		</foreach>
+         	)
+         	ORDER BY dbms_random.value)
+         <![CDATA[
+         WHERE rownum <= #{supplement}
+         ]]>
+	</select>
+	
+	
+	<select id="getSubInterestsGroupList" parameterType="String" resultType="groupVO">
+		
+         SELECT a.* FROM
+         	(SELECT g.* FROM GROUP_TBL g, INTERESTS_TBL i 
+         	 WHERE i.user_id=#{user_id} AND g.main_cate=i.main_cate
+         	 AND g.sub_cate=g.sub_cate
+         	 ORDER BY dbms_random.value) a
+         <![CDATA[
          WHERE rownum <= 4
-      ]]>
+         ]]>
+      
+	</select>
+	
+	
+	<select id="getMainInterestsGroupList" parameterType="java.util.Map" resultType="groupVO">
+         SELECT a.* FROM
+         	(SELECT g.* FROM GROUP_TBL g, INTERESTS_TBL i 
+         	 WHERE i.user_id=#{user_id} AND g.main_cate=i.main_cate
+         	 AND g.group_id NOT IN (
+         	 	<foreach collection="groupIdList" item="item" separator=",">
+         	 		#{item}
+         	 	</foreach>
+         	 )
+         	 ORDER BY dbms_random.value) a
+         <![CDATA[
+         WHERE rownum <= #{supplement}
+         ]]>
+	</select>
+	
+	
+	<select id="getAllGroupList" resultType="groupVO">
+		SELECT * FROM GROUP_TBL
+	</select>
+	
+	
+	<select id="getUserAddr" parameterType="String" resultType="String">
+		SELECT user_addr1 FROM USER_TBL WHERE user_id=#{user_id}
 	</select>
 
 </mapper>
