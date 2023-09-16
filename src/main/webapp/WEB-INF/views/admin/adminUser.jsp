@@ -59,7 +59,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="${contextPath}/qna/viewqna">
+                                <a href="${contextPath}/qna/qnalist">
                                     <div class="sc2_icon_menu">
                                         <div class="menu_submenu_name"><span>고객센터 Q&A</span></div>
                                         <i class="fa-solid fa-angle-right menu_angle"></i>

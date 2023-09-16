@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false"
-    import="java.util.*, nemo.*"
+    import="java.util.*"
     %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -28,13 +28,6 @@
 	</c:otherwise>
 </c:choose>
 
-<c:set var="isMng" value="false" />
-<c:forEach var="elem" items="${grpMngList}" >
-	<c:if test="${elem eq param.group_id}">
-		<c:set var="isMng" value="true" />
-	</c:if>
-</c:forEach>
-
 <% request.setCharacterEncoding("utf-8"); %>
 
 <!DOCTYPE html>
@@ -43,25 +36,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>네모: 게시판</title>
-    <link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-    <link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-    <link rel="stylesheet" href="${contextPath}/css/common.css" />
-    <link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-    <link rel="stylesheet" href="${contextPath}/css/sectionTitle.css" />
-    <link rel="stylesheet" href="${contextPath}/css/board.css" />
-    <script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
+    <link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/sectionTitle.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/board.css" />
+    <script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
     <script src="https://kit.fontawesome.com/97cbadfe25.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="${contextPath}/js/header.js"></script>
-    <script src="${contextPath}/js/board.js"></script>
+    <script src="${contextPath}/resources/js/header.js"></script>
+    <script src="${contextPath}/resources/js/board.js"></script>
   </head>
   <body>
     <!-- header 시작 -->
-	<jsp:include page="../header.jsp" flush="true"></jsp:include>
+	<jsp:include page="./../../header.jsp" flush="true"></jsp:include>
     <!-- header 종료 -->
 
 	<!-- section1 -->
-	<jsp:include page="./groupHeader.jsp" flush="true"></jsp:include>
+	<jsp:include page="./../groupheader.jsp" flush="true"></jsp:include>
 	<!-- section1종료 -->
 
     <!-- 콘텐츠 영역 -->
@@ -73,7 +66,7 @@
             <h2 class="sc2_menu_title">게시판</h2>
             <ul class="sc2_menu_list">
                <c:choose>
-					<c:when test="${isMng == true }">
+					<c:when test="${isLeader == true }">
 						<li>
 	                      <a href="${contextPath}/group/schedule?group_id=${param.group_id}">
 	                          <div class="sc2_icon_menu">
@@ -91,7 +84,7 @@
 	                      </a>
 	                  	</li>
 	                  	<li>
-	                      <a href="${contextPath}/group/manager/member?group_id=${param.group_id}">
+	                      <a href="${contextPath}/group/leader/memberinfo?group_id=${param.group_id}">
 	                          <div class="sc2_icon_menu">
 	                              <div class="menu_submenu_name"><span>멤버</span></div>
 	                              <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -99,7 +92,7 @@
 	                      </a>
 		                </li>
 		                <li>
-	                      <a href="${contextPath}/group/manager/setting?group_id=${param.group_id}">
+	                      <a href="${contextPath}/group/leader/settingform?group_id=${param.group_id}">
 	                          <div class="sc2_icon_menu">
 	                              <div class="menu_submenu_name"><span>소모임관리</span></div>
 	                              <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -148,7 +141,7 @@
 
             <!-- nav 바 시작 -->
             <div class="nav_bar">
-              <a href="index.html">
+              <a href="${contextPath}/index">
                 <i class="fa-solid fa-house nav_icon"></i>
               </a>
               <i class="fa-solid fa-angle-right nav_icon"></i>
