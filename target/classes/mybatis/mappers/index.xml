@@ -8,12 +8,15 @@
 	
 	<select id="getRandomGroupList" parameterType="java.util.Map" resultType="groupVO">
          SELECT * FROM
-         	(SELECT * FROM GROUP_TBL 
-         	WHERE group_id NOT IN (
-         		<foreach collection="groupIdList" item="item" separator=",">
+         	(SELECT * FROM GROUP_TBL
+         	<if test="groupIdList.size() != 0">
+         		WHERE group_id NOT IN (
+         		<foreach collection="groupIdList" item="item" separator=", ">
          			#{item}
          		</foreach>
-         	)
+         		)
+         	</if>
+         	
          	ORDER BY dbms_random.value)
          <![CDATA[
          WHERE rownum <= #{supplement}
@@ -39,11 +42,13 @@
          SELECT a.* FROM
          	(SELECT g.* FROM GROUP_TBL g, INTERESTS_TBL i 
          	 WHERE i.user_id=#{user_id} AND g.main_cate=i.main_cate
-         	 AND g.group_id NOT IN (
-         	 	<foreach collection="groupIdList" item="item" separator=",">
-         	 		#{item}
-         	 	</foreach>
-         	 )
+         	 <if test="groupIdList.size() != 0">
+	         	 AND g.group_id NOT IN (
+	         	 	<foreach collection="groupIdList" item="item" separator=", ">
+	         	 		#{item}
+	         	 	</foreach>
+	         	 )
+         	 </if>
          	 ORDER BY dbms_random.value) a
          <![CDATA[
          WHERE rownum <= #{supplement}

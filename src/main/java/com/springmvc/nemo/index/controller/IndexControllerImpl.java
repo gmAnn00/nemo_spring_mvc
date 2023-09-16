@@ -57,6 +57,7 @@ public class IndexControllerImpl implements IndexController{
 			int supplement = 4;
 			List<GroupVO> randomGroupList = new ArrayList<GroupVO>();
 			randomGroupList = indexService.getRandomGroupList(supplement);
+			logger.info("로그인 안함 randomGroupList={}", randomGroupList.toString());
 			mav.addObject("randomGroupList", randomGroupList);
 			
 			
@@ -66,7 +67,10 @@ public class IndexControllerImpl implements IndexController{
 			interestsGroupList = indexService.getInterestsGroupList(user_id);
 			
 			List<GroupVO> nearGroupList = new ArrayList<GroupVO>();
-			nearGroupList = indexService.getNearGroupList(user_id);			
+			nearGroupList = indexService.getNearGroupList(user_id);		
+			
+			//logger.info("로그인 함 interestsGroupList={}", interestsGroupList.toString());
+			//logger.info("로그인 함 nearGroupList={}", nearGroupList.toString());
 			
 			mav.addObject("interestsGroupList", interestsGroupList);
 			mav.addObject("nearGroupList", nearGroupList);

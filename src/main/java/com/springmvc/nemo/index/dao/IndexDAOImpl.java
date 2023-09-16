@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -21,6 +23,8 @@ import com.springmvc.nemo.search.vo.KaKaoGeoRes;
 
 @Repository("indexDAO")
 public class IndexDAOImpl implements IndexDAO{
+	
+	private static final Logger logger = LoggerFactory.getLogger(IndexDAOImpl.class);
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -81,7 +85,7 @@ public class IndexDAOImpl implements IndexDAO{
 		
 		try {
 			
-			for(int i = allGroupList.size()-1; i >=0; i++) {
+			for(int i = allGroupList.size()-1; i >=0; i--) {
 				
 				GroupVO group = (GroupVO) allGroupList.get(i);
 				String address = group.getGroup_addr1();
@@ -98,7 +102,6 @@ public class IndexDAOImpl implements IndexDAO{
 				double groupLng = 0.0;
 				
 				if(bodyJson.getDocuments().size() > 0) {
-					System.out.println("bodyJson="+bodyJson.getDocuments().size());
 					groupLat = bodyJson.getDocuments().get(0).getY();
 					groupLng = bodyJson.getDocuments().get(0).getX();
 				}
@@ -129,7 +132,7 @@ public class IndexDAOImpl implements IndexDAO{
 			allGroupList = allGroupList.subList(0, 4);
 		}
 		
-		
+		logger.info("allGroupList={}", allGroupList.toString());
 		return allGroupList;
 	}
 
