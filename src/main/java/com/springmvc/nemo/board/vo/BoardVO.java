@@ -6,6 +6,8 @@ public class BoardVO {
 
 	private int article_no;
 	private String user_id;
+	private String nickname;
+	private String user_img;
 	private int group_id;
 	private Date create_date;
 	private String title;
@@ -32,6 +34,22 @@ public class BoardVO {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getUser_img() {
+		return user_img;
+	}
+
+	public void setUser_img(String user_img) {
+		this.user_img = user_img;
 	}
 
 	public int getGroup_id() {

@@ -3,41 +3,35 @@
     isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:set var="group" value="${groupInfo}" />
-<c:set var="isMng" value="false" />
-<c:forEach var="elem" items="${grpMngList}" >
-	<c:if test="${elem eq param.group_id}">
-		<c:set var="isMng" value="true" />
-	</c:if>
-</c:forEach>
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>네모: 게시판</title>
-    <link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-    <link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-    <link rel="stylesheet" href="${contextPath}/css/common.css" />
-    <link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-    <link rel="stylesheet" href="${contextPath}/css/sectionTitle.css" />
-    <link rel="stylesheet" href="${contextPath}/css/boardWrite.css" />
-    <link rel="stylesheet" href="${contextPath}/resources/summernote/summernote-lite.css"/>
-    <script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
+    <link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/sectionTitle.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/boardWrite.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/resources/summernote/summernote-lite.css"/>
+    <script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
 	<script src="https://kit.fontawesome.com/97cbadfe25.js" crossorigin="anonymous"></script>
-    <script src="${contextPath}/resources/summernote/summernote-lite.js"></script>
-    <script src="${contextPath}/resources/summernote/lang/summernote-ko-KR.js"></script>
+    <script src="${contextPath}/resources/resources/summernote/summernote-lite.js"></script>
+    <script src="${contextPath}/resources/resources/summernote/lang/summernote-ko-KR.js"></script>
     <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet"> -->
-    <script src="${contextPath}/js/header.js"></script>
-    <script src="${contextPath}/js/boardWrite.js"></script>
+    <script src="${contextPath}/resources/js/header.js"></script>
+    <script src="${contextPath}/resources/js/boardWrite.js"></script>
   </head>
   <body>
     <!-- header 시작 -->
-	<jsp:include page="../header.jsp" flush="true"></jsp:include>
+	<jsp:include page="./../../header.jsp" flush="true"></jsp:include>
     <!-- header 종료 -->
 
 	<!-- section1 -->
-	<jsp:include page="./groupHeader.jsp" flush="true"></jsp:include>
+	<jsp:include page="./../groupheader.jsp" flush="true"></jsp:include>
 	<!-- section1종료 -->
 
     <!-- 콘텐츠 영역 -->
@@ -49,7 +43,7 @@
             <h2 class="sc2_menu_title">게시판</h2>
             <ul class="sc2_menu_list">
               <c:choose>
-					<c:when test="${isMng == true }">
+					<c:when test="${isLeader == true }">
 						<li>
 	                      <a href="${contextPath}/group/schedule?group_id=${param.group_id}">
 	                          <div class="sc2_icon_menu">
@@ -67,7 +61,7 @@
 	                      </a>
 	                  	</li>
 	                  	<li>
-	                      <a href="${contextPath}/group/manager/member?group_id=${param.group_id}">
+	                      <a href="${contextPath}/group/leader/memberinfo?group_id=${param.group_id}">
 	                          <div class="sc2_icon_menu">
 	                              <div class="menu_submenu_name"><span>멤버</span></div>
 	                              <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -75,7 +69,7 @@
 	                      </a>
 		                </li>
 		                <li>
-	                      <a href="${contextPath}/group/manager/setting?group_id=${param.group_id}">
+	                      <a href="${contextPath}/group/leader/settingform?group_id=${param.group_id}">
 	                          <div class="sc2_icon_menu">
 	                              <div class="menu_submenu_name"><span>소모임관리</span></div>
 	                              <i class="fa-solid fa-angle-right menu_angle"></i>
@@ -142,15 +136,15 @@
           <div class="boardWriteArea">
          
             <!-- <form action="/group/board/addArticle" method="post" name="articleForm" id="articleForm"> -->
-              <form action="${contextPath}/group/board/addArticle" method="post" name="articleForm" id="articleForm">
-              <input type="hidden" name="group_id" value="${group.groupVO.grp_id}"/>
+              <form action="${contextPath}/group/board/addboard" method="post" name="articleForm" id="articleForm">
+              <input type="hidden" name="group_id" value="${param.group_id}"/>
               <!-- 제목 영역 -->
               <div class="articleWritingTitle">
                 <!-- 말머리 컨텐츠 확인 필요 -->
                 <div class="headTitleArea">
 	                <select name="brackets" id="headTitle" class="headTitle">
 	                  <option value="">말머리</option>
-	                  <c:if test="${user_id==group.groupVO.grp_mng}">
+	                  <c:if test="${isLeader == true }">
 	                  	<option value="notice">공지</option>
 	                  </c:if>
 	                  <option value="freeArticle">자유</option>
@@ -169,7 +163,7 @@
               <!-- 등록 버튼 -->
               <div class="btnRegister">
                 <a href="#" role="button" class="button">등록</a>
-                <a href="#" role="button" class="buttonCancle" onclick="fn_cancel(${group.groupVO.grp_id})">취소</a>
+                <a href="#" role="button" class="buttonCancle" onclick="fn_cancel(${param.group_id})">취소</a>
               </div>
 
             </form>
@@ -180,6 +174,6 @@
       </div>
     </div>
 
-	<jsp:include page="../footer.jsp" flush="true"></jsp:include>
+	<jsp:include page="./../../footer.jsp" flush="true"></jsp:include>
   </body>
 </html>

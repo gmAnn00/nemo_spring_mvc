@@ -4,12 +4,41 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="mapper.board">
-	<select id="idCheck" parameterType="String" resultType="String">
+
+
+	<select id="getNoticeList" parameterType="int" resultType="boardVO">
 		<![CDATA[
-         SELECT DECODE(count(*), 1, 'disable' , 'usable') as result FROM USER_TBL WHERE user_id = #{user_id}
+         SELECT z.article_no, z.user_id, z.nickname, z.group_id,
+         z.create_date, z.title, z.brackets, z.view_cnt, z.comment_cnt FROM
+         	(SELECT ROWNUM as recNum, a.* FROM
+         		(SELECT b.article_no, b.user_id, u.nickname,
+				b.group_id, b.create_date, b.title, b.brackets, b.view_cnt, b.comment_cnt
+         		FROM BOARD_TBL b, USER_TBL u WHERE u.user_id=b.user_id
+         		AND b.group_id=#{group_id} AND b.brackets='공지' order by create_date desc) a
+         	) z
+         WHERE recNum BETWEEN 0 AND 3
       ]]>
 	</select>
 	
+	
+	<select id="getTotBoard" parameterType="int" resultType="int">
+		<![CDATA[
+         SELECT COUNT(*) FROM BOARD_TBL WHERE group_id=#{group_id}
+      ]]>
+	</select>
+	
+	
+	<select id="getBoard" parameterType="int" resultType="int">
+		<![CDATA[
+         SELECT * FROM
+         	(SELECT ROWNUM as recNum, a.* FROM
+         		(SELECT b.article_no, b.user_id, u.nickname, b.group_id, b.create_date, b.title, b.brackets, b.view_cnt, b.comment_cnt
+         		FROM BOARD_TBL b, USER_TBL u WHERE u.user_id=b.user_id AND b.group_id=#{group_id} order by b.article_no desc) a
+         	)
+         WHERE recNum BETWEEN (#{section}-1)*100 + (#{pagenum}-1)*10+1 AND (#{section}-1)*100 + #{pagenum}*10
+         	
+      ]]>
+	</select>
 	
 	
 	
