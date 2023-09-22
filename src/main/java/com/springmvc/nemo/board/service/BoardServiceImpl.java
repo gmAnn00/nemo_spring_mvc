@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.springmvc.nemo.board.dao.BoardDAO;
 import com.springmvc.nemo.board.vo.BoardVO;
+import com.springmvc.nemo.board.vo.CommentVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
@@ -26,7 +27,7 @@ public class BoardServiceImpl implements BoardService{
 		
 		int totBoard = boardDAO.getTotBoard(group_id);
 		
-		List<BoardVO> boardList =  boardDAO.getBoard(pagingMap);
+		List<BoardVO> boardList =  boardDAO.getBoardList(pagingMap);
 		
 		
 		Map<String, Object> boardMap = new HashMap<String, Object>();
@@ -35,6 +36,25 @@ public class BoardServiceImpl implements BoardService{
 		boardMap.put("boardList", boardList);
 		
 		return boardMap;
+	}
+	
+	
+	@Override
+	public BoardVO getBoard(int article_no) throws DataAccessException {
+		
+		return boardDAO.getBoard(article_no);
+	}
+	
+	@Override
+	public List<CommentVO> getCommentsList(int article_no) throws DataAccessException {
+		
+		return boardDAO.getCommentsList(article_no);
+	}
+	
+	@Override
+	public void updateBoardViewCnt(int article_no) throws DataAccessException {
+		
+		boardDAO.updateBoardViewCnt(article_no);
 	}
 
 }

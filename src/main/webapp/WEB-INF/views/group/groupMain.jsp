@@ -209,7 +209,7 @@
                         			<c:forEach var="board" items="${boardsList}">
                         				<tr>
                         					<td>
-                        						<a href="${contextPath}/group/board/viewArticle?group_id=${param.group_id}&article_no=${board.article_no}">
+                        						<a href="${contextPath}/group/board/viewboard?group_id=${param.group_id}&article_no=${board.article_no}">
                         							<p>${board.title}</p>
                         						</a>
                         					</td>

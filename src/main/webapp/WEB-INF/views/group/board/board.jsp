@@ -214,12 +214,12 @@
 						                <td class="tdArticle">
 					                    	<div class="titleArea">
 						                    	<div class="titleInner">
-									            	<a href="${contextPath}/group/board/viewArticle?group_id=${param.group_id}&article_no=${notice.article_no}" class="titleLink">
+									            	<a href="${contextPath}/group/board/viewboard?group_id=${param.group_id}&article_no=${notice.article_no}" class="titleLink">
 									                	<span class="title">${notice.title}</span>
 									                 </a>
 										             <div class="commentArea">
-										             	<a href="${contextPath}/group/board/viewArticle?group_id=${param.group_id}&article_no=${notice.article_no}" class="cmtLink">
-										                	<span class="cmt">${notice.com_cnt}</span>
+										             	<a href="${contextPath}/group/board/viewboard?group_id=${param.group_id}&article_no=${notice.article_no}" class="cmtLink">
+										                	<span class="cmt">${notice.comment_cnt}</span>
 										                </a>
 										             </div>
 								                 </div>
@@ -241,21 +241,21 @@
 				                    	<div class="titleInner">
 				                    		<c:choose>
 				                    			<c:when test="${not empty filter}">
-							                      <a href="${contextPath}/group/board/viewArticle?group_id=${param.group_id}&filter=${filter}&keyword=${keyword}&article_no=${board.article_no}" class="titleLink">
+							                      <a href="${contextPath}/group/board/viewboard?group_id=${param.group_id}&filter=${filter}&keyword=${keyword}&article_no=${board.article_no}" class="titleLink">
 							                        <span class="title">${board.title}</span>
 							                      </a>
 								                  <div class="commentArea">
-								                     <a href="${contextPath}/group/board/viewArticle?group_id=${param.group_id}&filter=${filter}&keyword=${keyword}&article_no=${board.article_no}" class="cmtLink">
+								                     <a href="${contextPath}/group/board/viewboard?group_id=${param.group_id}&filter=${filter}&keyword=${keyword}&article_no=${board.article_no}" class="cmtLink">
 								                      <span class="cmt">${board.comment_cnt}</span>
 								                     </a>
 								                  </div>
 						                     	</c:when>
 						                    	<c:otherwise>
-						                     	 <a href="${contextPath}/group/board/viewArticle?group_id=${param.group_id}&article_no=${board.article_no}" class="titleLink">
+						                     	 <a href="${contextPath}/group/board/viewboard?group_id=${param.group_id}&article_no=${board.article_no}" class="titleLink">
 						                        	<span class="title">${board.title}</span>
 						                      	 </a>
 							                  	 <div class="commentArea">
-							                     	<a href="${contextPath}/group/board/viewArticle?group_id=${param.group_id}&article_no=${board.article_no}" class="cmtLink">
+							                     	<a href="${contextPath}/group/board/viewboard?group_id=${param.group_id}&article_no=${board.article_no}" class="cmtLink">
 							                      		<span class="cmt">${board.comment_cnt}</span>
 							                     	</a>
 							                     </div>

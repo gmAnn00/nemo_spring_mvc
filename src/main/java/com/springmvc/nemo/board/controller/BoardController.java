@@ -15,8 +15,16 @@ public interface BoardController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	
+	public ModelAndView viewBoard(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("article_no") int article_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
 	public ModelAndView boardForm(
 			@RequestParam("group_id") int group_id,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
 
 }

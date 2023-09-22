@@ -28,7 +28,7 @@
 	</select>
 	
 	
-	<select id="getBoard" parameterType="int" resultType="int">
+	<select id="getBoardList" parameterType="java.util.Map" resultType="boardVO">
 		<![CDATA[
          SELECT * FROM
          	(SELECT ROWNUM as recNum, a.* FROM
@@ -39,6 +39,30 @@
          	
       ]]>
 	</select>
+	
+	<select id="getBoard" parameterType="int" resultType="boardVO">
+		<![CDATA[
+         SELECT b.*, u.nickname, u.user_img FROM BOARD_TBL b, USER_TBL u
+         WHERE b.article_no=#{article_no} AND b.user_id=u.user_id
+      ]]>
+	</select>
+	
+	
+	<select id="getCommentsList" parameterType="int" resultType="commentVO">
+		<![CDATA[
+         SELECT LEVEL, c.*, u.nickname, u.user_img
+         FROM COMMENT_TBL c, USER_TBL u
+         WHERE u.user_id=c.user_id AND c.article_no=#{article_no}
+         START WITH c.parent_no=0
+         CONNECT BY PRIOR c.comment_no=c.parent_no
+         ORDER SIBLINGS BY c.comment_no
+      ]]>
+	</select>
+	
+	
+	<update id="updateBoardViewCnt" parameterType="int">
+		UPDATE BOARD_TBL SET view_cnt=view_cnt+1 WHERE article_no=#{article_no}
+	</update>
 	
 	
 	

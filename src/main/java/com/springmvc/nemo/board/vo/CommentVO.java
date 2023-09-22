@@ -4,16 +4,33 @@ import java.sql.Date;
 
 public class CommentVO {
 
+	private int level;
 	private int comment_no;
 	private int article_no;
 	private String user_id;
+	private String nickname;
+	private String user_img;
 	private Date create_date;
 	private String content;
 	private int parent_no;
-	
+
 	public CommentVO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public int getLevel() {
+		return level;
+	}
+
+
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+
 
 	public int getComment_no() {
 		return comment_no;
@@ -37,6 +54,22 @@ public class CommentVO {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getUser_img() {
+		return user_img;
+	}
+
+	public void setUser_img(String user_img) {
+		this.user_img = user_img;
 	}
 
 	public Date getCreate_date() {
@@ -68,7 +101,5 @@ public class CommentVO {
 		return "CommentVO [comment_no=" + comment_no + ", article_no=" + article_no + ", user_id=" + user_id
 				+ ", create_date=" + create_date + ", content=" + content + ", parent_no=" + parent_no + "]";
 	}
-	
-	
-	
+
 }

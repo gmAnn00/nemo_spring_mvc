@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.nemo.board.vo.BoardVO;
+import com.springmvc.nemo.board.vo.CommentVO;
 
 @Repository("boardDAO")
 public class BoardDAOImpl implements BoardDAO{
@@ -30,9 +31,29 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	@Override
-	public List<BoardVO> getBoard(Map<String, Object> pagingMap) throws DataAccessException {
+	public List<BoardVO> getBoardList(Map<String, Object> pagingMap) throws DataAccessException {
 		
-		return sqlSession.selectList("getBoard", pagingMap);
+		return sqlSession.selectList("getBoardList", pagingMap);
+	}
+	
+	
+	@Override
+	public BoardVO getBoard(int article_no) throws DataAccessException {
+		
+		return sqlSession.selectOne("getBoard", article_no);
+	}
+	
+	@Override
+	public List<CommentVO> getCommentsList(int article_no) throws DataAccessException {
+		
+		return sqlSession.selectList("getCommentsList", article_no);
+	}
+	
+	
+	@Override
+	public void updateBoardViewCnt(int article_no) throws DataAccessException {
+		
+		sqlSession.update("updateBoardViewCnt", article_no);
 	}
 
 }
