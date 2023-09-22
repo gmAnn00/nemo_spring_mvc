@@ -18,5 +18,7 @@ public interface BoardService {
 
 	public void updateBoardViewCnt(int article_no) throws DataAccessException;
 
+	public int addBoard(BoardVO boardVO) throws DataAccessException;
+
 	
 }

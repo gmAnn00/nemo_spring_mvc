@@ -65,5 +65,21 @@
 	</update>
 	
 	
+	<select id="getNewArticleNo" resultType="int">
+		<![CDATA[
+			SELECT MAX(article_no)+1 FROM BOARD_TBL
+		 ]]>
+	</select>
+	
+	
+	
+	<insert id="addBoard" parameterType="boardVO">
+		INSERT INTO BOARD_TBL(article_no, user_id, group_id, create_date,
+		title, content, brackets, view_cnt, comment_cnt)
+		VALUES(#{article_no}, #{user_id}, #{group_id}, sysdate,
+		#{title}, #{content}, #{brackets}, 0, 0)
+	</insert>
+	
+	
 	
 </mapper>

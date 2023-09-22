@@ -22,5 +22,9 @@ public interface BoardDAO {
 
 	public void updateBoardViewCnt(int article_no) throws DataAccessException;
 
+	public int getNewArticleNo() throws DataAccessException;
+
+	public void addBoard(BoardVO boardVO) throws DataAccessException;
+
 	 
 }

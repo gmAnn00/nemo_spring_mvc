@@ -53,7 +53,7 @@ public class SummerNoteUploadImage {
 			
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);
-			jsonObject.addProperty("url", "/nemo/sngetimage/getreviewimage?savedfilename="+savedFileName);
+			jsonObject.addProperty("url", "/nemo/sngetimage/gettempimage?savedfilename="+savedFileName);
 			jsonObject.addProperty("responseCode", "success");
 			
 			

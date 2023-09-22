@@ -3,8 +3,11 @@ package com.springmvc.nemo.board.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.springmvc.nemo.board.vo.BoardVO;
 
 public interface BoardController {
 	
@@ -23,6 +26,11 @@ public interface BoardController {
 	
 	public ModelAndView boardForm(
 			@RequestParam("group_id") int group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
+	public ModelAndView addBoard(
+			@ModelAttribute BoardVO boardVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	

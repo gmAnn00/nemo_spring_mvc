@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.springmvc.nemo.board.service.BoardService;
 import com.springmvc.nemo.board.vo.BoardVO;
 import com.springmvc.nemo.board.vo.CommentVO;
+import com.springmvc.nemo.common.Message;
 
 @Controller("boardController")
 public class BoardControllerImpl implements BoardController{
@@ -101,6 +103,25 @@ public class BoardControllerImpl implements BoardController{
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/group/board/addboard", method = RequestMethod.POST)
+	@Override
+	public ModelAndView addBoard(
+			@ModelAttribute BoardVO boardVO,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		
+		int article_no = boardService.addBoard(boardVO);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("data", new Message("새 글을 등록했습니다.",
+				request.getContextPath()+"/group/board/viewboard?group_id="+boardVO.getGroup_id()+"&article_no="+article_no));
+		mav.setViewName("message");
 		
 		return mav;
 	}

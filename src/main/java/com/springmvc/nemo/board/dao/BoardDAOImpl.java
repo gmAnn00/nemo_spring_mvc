@@ -55,5 +55,18 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		sqlSession.update("updateBoardViewCnt", article_no);
 	}
+	
+	
+	@Override
+	public int getNewArticleNo() throws DataAccessException {
+		
+		return sqlSession.selectOne("getNewArticleNo");
+	}
+	
+	@Override
+	public void addBoard(BoardVO boardVO) throws DataAccessException {
+		
+		sqlSession.insert("addBoard", boardVO);
+	}
 
 }

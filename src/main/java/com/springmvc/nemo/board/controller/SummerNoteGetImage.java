@@ -19,7 +19,7 @@ public class SummerNoteGetImage {
 	
 	private static String BOARD_IMG_DIR;
 	
-	@RequestMapping(value = "/sngetimage/getreviewimage")
+	@RequestMapping(value = "/sngetimage/gettempimage")
 	public void getReviewImage(
 			@RequestParam("savedfilename") String savedFileName,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -34,7 +34,7 @@ public class SummerNoteGetImage {
 		
 	}
 	
-	@RequestMapping(value = "sngetimage/getimage")
+	@RequestMapping(value = "/sngetimage/getimage")
 	public void getImage(
 			@RequestParam("savedfilename") String savedFileName,
 			@RequestParam("article_no") int article_no,

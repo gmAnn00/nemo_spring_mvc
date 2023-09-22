@@ -24,20 +24,22 @@ $(document).ready(function () {
         } else {
             console.log("content");
             $('textarea[name="content"]').val($("#summernote").summernote("code"));
-            console.log($('textarea[name="content"]').val($("#summernote").summernote("code")));
-
+            //console.log($('textarea[name="content"]').val($("#summernote").summernote("code")));
+			//console.log("jsonArray=",jsonArray);
             if (jsonArray.length > 0) {
                 //
                 for (var i = 0; i < jsonArray.length; i++) {
                     var str = jsonArray[i];
                     var result = str.toString().split("=");
                     let img = "<input type='hidden' name='imageName' value='" + result[1] + "'>";
-                    console.log(img);
+                    //console.log(img);
                     $("#articleForm").append(img);
                 }
                 $("#articleForm").append('<input type="hidden" name="isImgExist" value="true">');
+                //console.log("true true");
             } else {
                 $("#articleForm").append('<input type="hidden" name="isImgExist" value="false">');
+                //console.log("false false");
             }
             $("#articleForm").submit();
         }

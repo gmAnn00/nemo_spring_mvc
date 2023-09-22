@@ -1,6 +1,7 @@
 package com.springmvc.nemo.board.vo;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class BoardVO {
 
@@ -15,6 +16,8 @@ public class BoardVO {
 	private String brackets;
 	private int view_cnt;
 	private int comment_cnt;
+	private boolean isImgExist;
+	private String[] imageName;
 	
 	public BoardVO() {
 		// TODO Auto-generated constructor stub
@@ -108,13 +111,31 @@ public class BoardVO {
 		this.comment_cnt = comment_cnt;
 	}
 
+	public boolean getIsImgExist() {
+		return isImgExist;
+	}
+
+	public void setIsImgExist(boolean isImgExist) {
+		this.isImgExist = isImgExist;
+	}
+
+	public String[] getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String[] imageName) {
+		this.imageName = imageName;
+	}
+
 	@Override
 	public String toString() {
-		return "BoardVO [article_no=" + article_no + ", user_id=" + user_id + ", group_id=" + group_id
-				+ ", create_date=" + create_date + ", title=" + title + ", content=" + content + ", brackets="
-				+ brackets + ", view_cnt=" + view_cnt + ", comment_cnt=" + comment_cnt + "]";
+		return "BoardVO [article_no=" + article_no + ", user_id=" + user_id + ", nickname=" + nickname + ", user_img="
+				+ user_img + ", group_id=" + group_id + ", create_date=" + create_date + ", title=" + title
+				+ ", content=" + content + ", brackets=" + brackets + ", view_cnt=" + view_cnt + ", comment_cnt="
+				+ comment_cnt + ", isImgExist=" + isImgExist + ", imageName=" + Arrays.toString(imageName) + "]";
 	}
-	
-	
+
+
+
 	
 }
