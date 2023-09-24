@@ -113,6 +113,7 @@ function scheduleChk(selScheDate) {
                 memNum = attendUsersList.length;
                 $("#attendCnt").text("현재 참석인원 " + memNum + " 명");
                 $(".scheduleDetailArea").show();
+                $("#joinSchedule").show();
 
                 setTimeout(function () {
                     // true : 수정 가능, false : 수정 불가
@@ -171,6 +172,7 @@ function scheduleChk(selScheDate) {
             } else {
                 // 일정이 존재하지 않음=> 새 일정 등록
                 $("#schedule_h3").text("일정 등록하기");
+                $("#joinSchedule").hide();
                 
                 $(".scheduleDetailArea").show();
 
