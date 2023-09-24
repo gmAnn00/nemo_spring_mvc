@@ -25,7 +25,7 @@ $(document).ready(function () {
             console.log("content");
             $('textarea[name="content"]').val($("#summernote").summernote("code"));
             //console.log($('textarea[name="content"]').val($("#summernote").summernote("code")));
-			//console.log("jsonArray=",jsonArray);
+            //console.log("jsonArray=",jsonArray);
             if (jsonArray.length > 0) {
                 //
                 for (var i = 0; i < jsonArray.length; i++) {
@@ -83,17 +83,6 @@ $(document).ready(function () {
                 console.log();
                 //deleteFile(target[0].src);
             },
-
-            //end of onImageUpload 콜백
-            /* onMediaDelete: function ($target, editor, $editable) {
-					let deletedImageUrl=$target
-						.attr('src')
-						.split('/')
-						.pop();
-						console.log(deletedImageUrl);
-				//		deleteImageFile(deletedImageUrl)
-				} //end of onMediaDelete 콜백
-			}*/
         },
     });
 });
@@ -122,12 +111,12 @@ function uploadSummerNoteImage(file, el) {
 }
 
 function fn_cancel(group_id) {
-    console.log("여긴오니???????????????");
+    //console.log("여긴오니???????????????");
     let cancelForm = document.createElement("form");
     cancelForm.name = "cancelForm";
     cancelForm.method = "post";
-    cancelForm.action = "cancelAddArticle?group_id=" + group_id;
-    console.log(jsonArray.length);
+    cancelForm.action = "/nemo/group/board/canceladdboard";
+    //console.log(jsonArray.length);
     if (jsonArray.length > 0) {
         for (var i = 0; i < jsonArray.length; i++) {
             var str = jsonArray[i];
@@ -140,13 +129,18 @@ function fn_cancel(group_id) {
             console.log(input);
             cancelForm.appendChild(input);
         }
-        console.log("여기는 ture 입니다.");
+        //console.log("여기는 ture 입니다.");
         let msg = document.createElement("input");
         msg.setAttribute("type", "hidden");
         msg.setAttribute("name", "isImgExist");
         msg.setAttribute("value", "true");
-        //'<input type="hidden" name="isImgExist" value="true">';
         cancelForm.appendChild(msg);
+        
+        let groupId = document.createElement("input");
+        groupId.setAttribute("type", "hidden");
+        groupId.setAttribute("name", "group_id");
+        groupId.setAttribute("value", group_id);
+        cancelForm.appendChild(groupId);
     } else {
         console.log("여기는 false입니다.");
         let msg = document.createElement("input");

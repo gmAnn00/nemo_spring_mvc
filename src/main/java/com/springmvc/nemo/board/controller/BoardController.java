@@ -34,5 +34,17 @@ public interface BoardController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	
+	public ModelAndView cancelAddBoard(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("isImgExist") boolean isImgExist,
+			@RequestParam("imageName") String[] imageName,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
+	public ModelAndView modBoardForm(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("article_no") int article_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 
 }

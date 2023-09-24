@@ -1,5 +1,6 @@
 package com.springmvc.nemo.board.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,7 @@ public class BoardControllerImpl implements BoardController{
 	private BoardService boardService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardControllerImpl.class);
+	private static String BOARD_IMG_DIR;
 	
 	
 	@RequestMapping(value = "/group/board", method = RequestMethod.GET)
@@ -112,9 +115,11 @@ public class BoardControllerImpl implements BoardController{
 	@Override
 	public ModelAndView addBoard(
 			@ModelAttribute BoardVO boardVO,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		boardVO.setUser_id(user_id);
 		
 		int article_no = boardService.addBoard(boardVO);
 		
@@ -125,5 +130,64 @@ public class BoardControllerImpl implements BoardController{
 		
 		return mav;
 	}
+	
+	
+	@RequestMapping(value = "/group/board/canceladdboard", method = RequestMethod.POST)
+	@Override
+	public ModelAndView cancelAddBoard(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("isImgExist") boolean isImgExist,
+			@RequestParam("imageName") String[] imageName,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		if(isImgExist) {
+			deleteTempImg(imageName);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/group/board?group_id="+group_id);
+		return mav;
+	}
+	
+
+	@RequestMapping(value = "/group/board/modboardform", method = RequestMethod.GET)
+	@Override
+	public ModelAndView modBoardForm(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("article_no") int article_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		BoardVO board = boardService.getBoard(article_no);
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("board", board);
+		
+		return mav;
+	}
+	
+	
+	
+	private void deleteTempImg(String[] imageName) {
+		try {
+			BOARD_IMG_DIR=this.getClass().getResource("").getPath();
+			BOARD_IMG_DIR=BOARD_IMG_DIR.substring(1,BOARD_IMG_DIR.indexOf(".metadata"));
+			BOARD_IMG_DIR=BOARD_IMG_DIR.replace("/", "\\");
+			BOARD_IMG_DIR+="nemo_spring_mvc\\src\\main\\webapp\\WEB-INF\\views\\boardImages\\temp\\";
+
+			if(imageName!=null && imageName.length !=0) {
+				for(String imgName:imageName) {
+					File srcFile=new File(BOARD_IMG_DIR+imgName);
+					srcFile.delete();
+				}	
+			}
+			
+		} catch (Exception e) {
+			logger.info("이미지 삭제 중 에러");
+			e.printStackTrace();
+		}
+	}
+		
 
 }

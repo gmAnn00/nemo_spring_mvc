@@ -64,7 +64,7 @@ public class SummerNoteUploadImage {
 		}
 		
 		String jsonString = jsonObject.toString();
-		logger.info("jsonString={}",jsonString);
+		//logger.info("jsonString={}",jsonString);
 		return jsonString;
 		
 	}

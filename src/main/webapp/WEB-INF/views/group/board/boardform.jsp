@@ -138,7 +138,6 @@
             <!-- <form action="/group/board/addArticle" method="post" name="articleForm" id="articleForm"> -->
               <form action="${contextPath}/group/board/addboard" method="post" name="articleForm" id="articleForm">
               <input type="hidden" name="group_id" value="${param.group_id}"/>
-              <input type="hidden" name="user_id" value="${user_id}"/>
               <!-- 제목 영역 -->
               <div class="articleWritingTitle">
                 <!-- 말머리 컨텐츠 확인 필요 -->
