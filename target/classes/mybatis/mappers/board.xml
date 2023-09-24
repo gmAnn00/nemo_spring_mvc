@@ -81,5 +81,11 @@
 	</insert>
 	
 	
+	<update id="modBoard" parameterType="boardVO">
+		UPDATE BOARD_TBL SET title=#{title}, content=#{content}, brackets=#{brackets}
+		WHERE article_no=#{article_no}
+	</update>
+	
+	
 	
 </mapper>

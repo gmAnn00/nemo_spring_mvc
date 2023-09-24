@@ -134,10 +134,10 @@
 
           <!-- 글쓰기 영역 -->
           <div class="boardWriteArea">         
-            <!-- <form action="/group/board/addArticle" method="post" name="articleForm" id="articleForm"> -->
-              <form action="${contextPath}/group/board/updateArticle" method="post" name="articleForm" id="articleForm">
+              <form action="${contextPath}/group/board/modboard" method="post" name="articleForm" id="articleForm">
               <input type="hidden" name="group_id" value="${param.group_id}"/>
               <input type="hidden" name="article_no" value="${board.article_no}"/>
+              <input type="hidden" name="user_id" value="${board.user_id}"/>
               <!-- 제목 영역 -->
               <div class="articleWritingTitle">
                 <!-- 말머리 컨텐츠 확인 필요 -->
@@ -145,10 +145,10 @@
 	                <select name="brackets" id="headTitle" class="headTitle">
 	                  <option value="">말머리</option>
 	                  <c:if test="${isLeader == true}">
-	                  	<option value="notice" <c:if test="${board.brackets eq '공지'}">selected</c:if>>공지</option>
+	                  	<option value="공지" <c:if test="${board.brackets eq '공지'}">selected</c:if>>공지</option>
 	                  </c:if>
-	                  <option value="freeArticle" <c:if test="${board.brackets eq '자유'}">selected</c:if>>자유</option>
-	                  <option value="afterMeeting" <c:if test="${board.brackets eq '후기'}">selected</c:if>>후기</option>
+	                  <option value="자유" <c:if test="${board.brackets eq '자유'}">selected</c:if>>자유</option>
+	                  <option value="후기" <c:if test="${board.brackets eq '후기'}">selected</c:if>>후기</option>
 	                </select>
                 </div>
                 <!-- 제목 -->
@@ -163,7 +163,7 @@
               <!-- 수정 버튼 -->
               <div class="btnRegister">
                 <a href="#" role="button" class="button">수정</a>
-                <a href="#" role="button" class="buttonCancle" onclick="fn_cancel(${param.group_id})">취소</a>
+                <a href="#" role="button" class="buttonCancle" onclick="fn_cancel(${param.group_id}, ${param.article_no})">취소</a>
               </div>
 
             </form>

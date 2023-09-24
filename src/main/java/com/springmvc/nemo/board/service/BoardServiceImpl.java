@@ -95,31 +95,118 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	
-	
-		//temp 에서 이미지 폴더 이동 하는 메소드 
-		private void moveImageDir(List<String> fileNameList, int article_no) {
-		//articleno로 폴더 생성
-		//tmp에서 articleno폴더로 이동
-			try {
-				BOARD_IMG_DIR=this.getClass().getResource("").getPath();
-				BOARD_IMG_DIR=BOARD_IMG_DIR.substring(1,BOARD_IMG_DIR.indexOf(".metadata"));
-				BOARD_IMG_DIR=BOARD_IMG_DIR.replace("/", "\\");
-				BOARD_IMG_DIR+="nemo_spring_mvc\\src\\main\\webapp\\WEB-INF\\views\\boardImages";
+	@Override
+	public void modBoard(BoardVO boardVO) throws DataAccessException {
+		
+		BoardVO oldBoard = boardDAO.getBoard(boardVO.getArticle_no());
+		String oldContent = oldBoard.getContent();
+		int article_no = oldBoard.getArticle_no();
+		
+		
+		String[] imgName = boardVO.getImageName();
+		List<String> fileNameList= new ArrayList<String>(Arrays.asList(imgName));
+		String newContent = boardVO.getContent();
 
-				if(fileNameList!=null && fileNameList.size()!=0) {
-					for(String imgName:fileNameList) {
-						File srcFile=new File(BOARD_IMG_DIR+"\\temp\\"+imgName);
-						File destDir=new File(BOARD_IMG_DIR+"\\"+article_no);
-						FileUtils.moveFileToDirectory(srcFile, destDir, true);
-						srcFile.delete();
-					}	
-				}
-				
-			} catch (Exception e) {
-				System.out.println("temp에서 이미지 파일 복사하는 중 에러");
-				e.printStackTrace();
+		if(boardVO.getIsImgExist()) {
+			// content 업데이트
+			newContent=newContent.replace("/gettempimage?", "/getimage?article_no="+article_no+"&");
+			boardVO.setContent(newContent);
+			
+			
+			List<String> oldFileNameList = getImageFileName(oldContent, article_no);
+			List<String> newFileNameList = getImageFileName(newContent, article_no);
+			
+			logger.info("oldContent={}", oldContent);
+			logger.info("newContent={}", newContent);
+			
+			logger.info("oldFileNameList={}", oldFileNameList.toString());
+			logger.info("newFileNameList={}", newFileNameList.toString());
+			
+			
+			// 수정되어서 없어진 이미지 삭제
+			delOldFile(article_no, oldFileNameList, newFileNameList);
+			
+			// temp에 올라온 이미지 옮기기
+			moveImageDir(fileNameList, article_no);
+		}
+		
+		boardDAO.modBoard(boardVO);
+
+	}
+	
+	
+	
+	//temp 에서 이미지 폴더 이동 하는 메소드 
+	private void moveImageDir(List<String> fileNameList, int article_no) {
+	//articleno로 폴더 생성
+	//tmp에서 articleno폴더로 이동
+		try {
+			BOARD_IMG_DIR=this.getClass().getResource("").getPath();
+			BOARD_IMG_DIR=BOARD_IMG_DIR.substring(1,BOARD_IMG_DIR.indexOf(".metadata"));
+			BOARD_IMG_DIR=BOARD_IMG_DIR.replace("/", "\\");
+			BOARD_IMG_DIR+="nemo_spring_mvc\\src\\main\\webapp\\WEB-INF\\views\\boardImages";
+
+			if(fileNameList!=null && fileNameList.size()!=0) {
+				for(String imgName:fileNameList) {
+					File srcFile=new File(BOARD_IMG_DIR+"\\temp\\"+imgName);
+					File destDir=new File(BOARD_IMG_DIR+"\\"+article_no);
+					FileUtils.moveFileToDirectory(srcFile, destDir, true);
+					srcFile.delete();
+				}	
+			}
+			
+		} catch (Exception e) {
+			logger.info("temp에서 이미지 파일 복사하는 중 에러");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	// old content에서 이미지 이름 추출
+	private List<String> getImageFileName(String content, int article_no){
+		List<String> fileNameList = new ArrayList<String>();
+		
+		Pattern pattern=Pattern.compile("<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>");
+		Matcher matcher=pattern.matcher(content);
+		while(matcher.find()) {
+			String[] arr = matcher.group(1).split("getimage\\?article\\_no="+article_no+"&amp\\;savedfilename=");
+			if(arr.length>1) {
+				logger.info("getImageFileName={}", arr[1]);
+				fileNameList.add(arr[1]);
 			}
 		}
+		
+		return fileNameList;
+	}
+	
+	
+	
+	private void delOldFile(
+			int article_no, List<String> oldFileNameList, List<String> newFileNameList) {
+		
+		try {
+			BOARD_IMG_DIR=this.getClass().getResource("").getPath();
+			BOARD_IMG_DIR=BOARD_IMG_DIR.substring(1,BOARD_IMG_DIR.indexOf(".metadata"));
+			BOARD_IMG_DIR=BOARD_IMG_DIR.replace("/", "\\");
+			BOARD_IMG_DIR+="nemo_spring_mvc\\src\\main\\webapp\\WEB-INF\\views\\boardImages\\"+article_no+"\\";
+			
+			for(String oldFileName : oldFileNameList) {
+				
+				if(!newFileNameList.contains(oldFileName)) {
+					logger.info("삭제될 파일 이름={}",oldFileName);
+					File oldFile = new File(BOARD_IMG_DIR+"\\"+oldFileName);
+					oldFile.delete();
+				}
+				
+			}
+			
+			
+		} catch (Exception e) {
+			logger.info("오래된 이미지 파일 삭제하는 중 에러");
+			e.printStackTrace();
+		}
+		
+	}
 	
 
 }

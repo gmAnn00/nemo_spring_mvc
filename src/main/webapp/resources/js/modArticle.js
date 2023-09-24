@@ -101,11 +101,8 @@ function uploadSummerNoteImage(file, el) {
         enctype: "multipart/form-data",
         processData: false,
         success: function (data) {
-            console.log("~성공");
-            let json = JSON.parse(data);
-
-            $(el).summernote("editor.insertImage", json["url"]);
-            jsonArray.push(json["url"]);
+            $(el).summernote("editor.insertImage", data.url);
+            jsonArray.push(data.url);
             jsonFn(jsonArray);
         },
         error: function (e) {
@@ -114,32 +111,42 @@ function uploadSummerNoteImage(file, el) {
     });
 }
 
-function fn_cancel(group_id) {
-    console.log("여긴오니???????????????");
+function fn_cancel(group_id, article_no) {
+
     let cancelForm = document.createElement("form");
     cancelForm.name = "cancelForm";
     cancelForm.method = "post";
-    cancelForm.action = "cancelboard?group_id=" + group_id;
-    console.log(jsonArray.length);
+    cancelForm.action = "/nemo/group/board/cancelmodboard";
+
     if (jsonArray.length > 0) {
         for (var i = 0; i < jsonArray.length; i++) {
             var str = jsonArray[i];
             var result = str.toString().split("=");
-            //let img="<input type='hidden' name='imageName' value='"+result[1]+"'>";
             var input = document.createElement("input");
             input.setAttribute("name", "imageName");
             input.setAttribute("type", "hidden");
             input.setAttribute("value", result[1]);
-            console.log(input);
             cancelForm.appendChild(input);
         }
-        console.log("여기는 ture 입니다.");
+
         let msg = document.createElement("input");
         msg.setAttribute("type", "hidden");
         msg.setAttribute("name", "isImgExist");
         msg.setAttribute("value", "true");
-        //'<input type="hidden" name="isImgExist" value="true">';
         cancelForm.appendChild(msg);
+        
+        let groupId = document.createElement("input");
+        groupId.setAttribute("type", "hidden");
+        groupId.setAttribute("name", "group_id");
+        groupId.setAttribute("value", group_id);
+        cancelForm.appendChild(groupId);
+        
+        let articleNo = document.createElement("input");
+        articleNo.setAttribute("type", "hidden");
+        articleNo.setAttribute("name", "article_no");
+        articleNo.setAttribute("value", article_no);
+        cancelForm.appendChild(articleNo);
+        
     } else {
         console.log("여기는 false입니다.");
         let msg = document.createElement("input");

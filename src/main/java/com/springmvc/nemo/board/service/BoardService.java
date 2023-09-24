@@ -20,5 +20,7 @@ public interface BoardService {
 
 	public int addBoard(BoardVO boardVO) throws DataAccessException;
 
+	public void modBoard(BoardVO boardVO) throws DataAccessException;
+
 	
 }

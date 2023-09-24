@@ -168,6 +168,55 @@ public class BoardControllerImpl implements BoardController{
 	}
 	
 	
+	@RequestMapping(value = "/group/board/modboard", method = RequestMethod.POST)
+	@Override
+	public ModelAndView modBoard(
+			@ModelAttribute BoardVO boardVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		
+		
+		
+		if(!user_id.equals(boardVO.getUser_id())) {
+			mav.addObject("data", new Message("글쓴이만 글을 수정할 수 있습니다.",
+					request.getContextPath()+"/group/board/viewboard?group_id="+boardVO.getGroup_id()+"&article_no="+boardVO.getArticle_no()));
+			return mav;
+		}
+		
+		boardService.modBoard(boardVO);
+		mav.addObject("data", new Message("글을 수정했습니다.",
+				request.getContextPath()+"/group/board/viewboard?group_id="+boardVO.getGroup_id()+"&article_no="+boardVO.getArticle_no()));
+		
+		
+		return mav;
+
+	}
+	
+	@RequestMapping(value = "/group/board/cancelmodboard", method = RequestMethod.POST)
+	@Override
+	public ModelAndView cancelModBoard(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("article_no") int article_no,
+			@RequestParam("isImgExist") boolean isImgExist,
+			@RequestParam("imageName") String[] imageName,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		if(isImgExist) {
+			deleteTempImg(imageName);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/group/board/viewboard?group_id="+group_id+"&article_no="+article_no);
+		return mav;
+		
+	}
+	
+	
 	
 	private void deleteTempImg(String[] imageName) {
 		try {

@@ -68,5 +68,11 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		sqlSession.insert("addBoard", boardVO);
 	}
+	
+	@Override
+	public void modBoard(BoardVO boardVO) throws DataAccessException {
+		
+		sqlSession.update("modBoard", boardVO);
+	}
 
 }

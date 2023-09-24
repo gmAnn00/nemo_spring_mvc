@@ -26,5 +26,7 @@ public interface BoardDAO {
 
 	public void addBoard(BoardVO boardVO) throws DataAccessException;
 
+	public void modBoard(BoardVO boardVO) throws DataAccessException;
+
 	 
 }
