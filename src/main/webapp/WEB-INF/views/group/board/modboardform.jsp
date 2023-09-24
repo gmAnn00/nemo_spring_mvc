@@ -134,7 +134,7 @@
 
           <!-- 글쓰기 영역 -->
           <div class="boardWriteArea">         
-              <form action="${contextPath}/group/board/modboard" method="post" name="articleForm" id="articleForm">
+              <form action="${contextPath}/group/board/modboard?group_id=${param.group_id}" method="post" name="articleForm" id="articleForm">
               <input type="hidden" name="group_id" value="${param.group_id}"/>
               <input type="hidden" name="article_no" value="${board.article_no}"/>
               <input type="hidden" name="user_id" value="${board.user_id}"/>

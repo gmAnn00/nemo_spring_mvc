@@ -90,7 +90,6 @@ function uploadSummerNoteImage(file, el) {
     console.log("업로드 펑션 콜백오니");
     let ctx = getContextPath();
     let data = new FormData();
-    console.log(ctx + "/summernote/uploadImage");
     data.append("file", file);
     $.ajax({
         data: data,
@@ -116,7 +115,7 @@ function fn_cancel(group_id, article_no) {
     let cancelForm = document.createElement("form");
     cancelForm.name = "cancelForm";
     cancelForm.method = "post";
-    cancelForm.action = "/nemo/group/board/cancelmodboard";
+    cancelForm.action = "/nemo/group/board/cancelmodboard?group_id="+group_id+"&article_no="+article_no;
 
     if (jsonArray.length > 0) {
         for (var i = 0; i < jsonArray.length; i++) {
@@ -134,18 +133,7 @@ function fn_cancel(group_id, article_no) {
         msg.setAttribute("name", "isImgExist");
         msg.setAttribute("value", "true");
         cancelForm.appendChild(msg);
-        
-        let groupId = document.createElement("input");
-        groupId.setAttribute("type", "hidden");
-        groupId.setAttribute("name", "group_id");
-        groupId.setAttribute("value", group_id);
-        cancelForm.appendChild(groupId);
-        
-        let articleNo = document.createElement("input");
-        articleNo.setAttribute("type", "hidden");
-        articleNo.setAttribute("name", "article_no");
-        articleNo.setAttribute("value", article_no);
-        cancelForm.appendChild(articleNo);
+
         
     } else {
         console.log("여기는 false입니다.");

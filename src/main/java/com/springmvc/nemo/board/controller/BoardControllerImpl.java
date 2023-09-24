@@ -137,7 +137,7 @@ public class BoardControllerImpl implements BoardController{
 	public ModelAndView cancelAddBoard(
 			@RequestParam("group_id") int group_id,
 			@RequestParam("isImgExist") boolean isImgExist,
-			@RequestParam("imageName") String[] imageName,
+			@RequestParam(value = "imageName", required = false) String[] imageName,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(isImgExist) {
@@ -159,8 +159,20 @@ public class BoardControllerImpl implements BoardController{
 		
 		BoardVO board = boardService.getBoard(article_no);
 		
-		String viewName = (String) request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
 		ModelAndView mav = new ModelAndView();
+		
+		if(!user_id.equals(board.getUser_id())) {
+			mav.setViewName("message");
+			mav.addObject("data", new Message("글쓴이만 글을 수정할 수 있습니다.",
+					request.getContextPath()+"/group/board/viewboard?group_id="+group_id+"&article_no="+article_no));
+			return mav;
+		}
+		
+		
+		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
 		mav.addObject("board", board);
 		
@@ -203,7 +215,7 @@ public class BoardControllerImpl implements BoardController{
 			@RequestParam("group_id") int group_id,
 			@RequestParam("article_no") int article_no,
 			@RequestParam("isImgExist") boolean isImgExist,
-			@RequestParam("imageName") String[] imageName,
+			@RequestParam(value = "imageName", required = false) String[] imageName,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		if(isImgExist) {

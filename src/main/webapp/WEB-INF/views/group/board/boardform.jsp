@@ -136,7 +136,7 @@
           <div class="boardWriteArea">
          
             <!-- <form action="/group/board/addArticle" method="post" name="articleForm" id="articleForm"> -->
-              <form action="${contextPath}/group/board/addboard" method="post" name="articleForm" id="articleForm">
+              <form action="${contextPath}/group/board/addboard?group_id=${param.group_id}" method="post" name="articleForm" id="articleForm">
               <input type="hidden" name="group_id" value="${param.group_id}"/>
               <!-- 제목 영역 -->
               <div class="articleWritingTitle">

@@ -77,11 +77,11 @@ public class BoardServiceImpl implements BoardService{
 		
 		String[] imgName = boardVO.getImageName();
 		String content = boardVO.getContent();
-		List<String> fileNameList= new ArrayList<String>(Arrays.asList(imgName));
+		
 		
 		
 		if(boardVO.getIsImgExist()) {
-			
+			List<String> fileNameList= new ArrayList<String>(Arrays.asList(imgName));
             moveImageDir(fileNameList, article_no);
 			content=content.replace("/gettempimage?", "/getimage?article_no="+article_no+"&");
 			boardVO.setContent(content);
@@ -104,10 +104,11 @@ public class BoardServiceImpl implements BoardService{
 		
 		
 		String[] imgName = boardVO.getImageName();
-		List<String> fileNameList= new ArrayList<String>(Arrays.asList(imgName));
+		
 		String newContent = boardVO.getContent();
 
 		if(boardVO.getIsImgExist()) {
+			List<String> fileNameList= new ArrayList<String>(Arrays.asList(imgName));
 			// content 업데이트
 			newContent=newContent.replace("/gettempimage?", "/getimage?article_no="+article_no+"&");
 			boardVO.setContent(newContent);

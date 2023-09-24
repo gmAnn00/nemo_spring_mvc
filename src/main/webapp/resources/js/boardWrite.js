@@ -115,7 +115,7 @@ function fn_cancel(group_id) {
     let cancelForm = document.createElement("form");
     cancelForm.name = "cancelForm";
     cancelForm.method = "post";
-    cancelForm.action = "/nemo/group/board/canceladdboard";
+    cancelForm.action = "/nemo/group/board/canceladdboard?group_id="+group_id;
     //console.log(jsonArray.length);
     if (jsonArray.length > 0) {
         for (var i = 0; i < jsonArray.length; i++) {
@@ -135,12 +135,8 @@ function fn_cancel(group_id) {
         msg.setAttribute("name", "isImgExist");
         msg.setAttribute("value", "true");
         cancelForm.appendChild(msg);
+
         
-        let groupId = document.createElement("input");
-        groupId.setAttribute("type", "hidden");
-        groupId.setAttribute("name", "group_id");
-        groupId.setAttribute("value", group_id);
-        cancelForm.appendChild(groupId);
     } else {
         console.log("여기는 false입니다.");
         let msg = document.createElement("input");
