@@ -229,6 +229,40 @@ public class BoardControllerImpl implements BoardController{
 	}
 	
 	
+	@RequestMapping(value = "/group/board/delboard", method = RequestMethod.GET)
+	@Override
+	public ModelAndView delboard(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("article_no") int article_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		
+		BoardVO board = boardService.getBoard(article_no);
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		
+		if(user_id.equals(board.getUser_id())) {
+			
+			boardService.delBoard(article_no);
+			
+			mav.addObject("data", new Message("글을 삭제했습니다.",
+					request.getContextPath()+"/group/board?group_id="+group_id));
+			
+			
+		}else {
+			mav.addObject("data", new Message("글쓴이만 글을 삭제할 수 있습니다.",
+					request.getContextPath()+"/group/board/viewboard?group_id="+group_id+"&article_no="+article_no));
+		}
+		
+		return mav;
+		
+	}
+	
+	
 	
 	private void deleteTempImg(String[] imageName) {
 		try {

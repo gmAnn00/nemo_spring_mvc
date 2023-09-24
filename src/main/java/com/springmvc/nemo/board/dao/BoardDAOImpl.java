@@ -74,5 +74,12 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		sqlSession.update("modBoard", boardVO);
 	}
+	
+	
+	@Override
+	public void delBoard(int article_no) throws DataAccessException {
+		
+		sqlSession.delete("delBoard", article_no);
+	}
 
 }

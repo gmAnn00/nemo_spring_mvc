@@ -58,5 +58,11 @@ public interface BoardController {
 			@RequestParam("imageName") String[] imageName,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	public ModelAndView delboard(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("article_no") int article_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
 
 }

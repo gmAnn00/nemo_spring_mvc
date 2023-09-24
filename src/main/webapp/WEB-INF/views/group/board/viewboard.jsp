@@ -188,7 +188,7 @@
 	            	<div class="contentEditTool">
 		            	<c:if test="${user_id==board.user_id}">
 				            <a href="${contextPath}/group/board/modboardform?group_id=${board.group_id}&article_no=${board.article_no}" role="button" class="btnEdit btn">수정</a>
-				            <a href="${contextPath}/group/board/delboard?group_id=${board.group_id}&article_no=${board.article_no}" role="button" class="btnDel btn">삭제</a>
+				            <a href="javascript:void(0)" onclick="delBoard(${param.group_id}, ${param.article_no})" role="button" class="btnDel btn">삭제</a>
 		              	</c:if>
 	            	</div>
 	            	<div class="content">

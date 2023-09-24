@@ -136,6 +136,28 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	
+	@Override
+	public void delBoard(int article_no) throws DataAccessException {
+		
+		boardDAO.delBoard(article_no);
+		
+		try {
+			
+			BOARD_IMG_DIR=this.getClass().getResource("").getPath();
+			BOARD_IMG_DIR=BOARD_IMG_DIR.substring(1,BOARD_IMG_DIR.indexOf(".metadata"));
+			BOARD_IMG_DIR=BOARD_IMG_DIR.replace("/", "\\");
+			BOARD_IMG_DIR+="nemo_spring_mvc\\src\\main\\webapp\\WEB-INF\\views\\boardImages\\"+article_no;
+			
+			File boardDir = new File(BOARD_IMG_DIR);
+			FileUtils.deleteDirectory(boardDir);
+			
+		} catch (Exception e) {
+			logger.info("게시글 삭제 중 에러");
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 	//temp 에서 이미지 폴더 이동 하는 메소드 
 	private void moveImageDir(List<String> fileNameList, int article_no) {

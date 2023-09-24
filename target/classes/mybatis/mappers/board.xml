@@ -67,7 +67,7 @@
 	
 	<select id="getNewArticleNo" resultType="int">
 		<![CDATA[
-			SELECT MAX(article_no)+1 FROM BOARD_TBL
+			SELECT nvl(max(article_no), 0)+1 FROM BOARD_TBL
 		 ]]>
 	</select>
 	
@@ -86,6 +86,10 @@
 		WHERE article_no=#{article_no}
 	</update>
 	
+	
+	<delete id="delBoard" parameterType="int">
+		DELETE FROM BOARD_TBL WHERE article_no=#{article_no}
+	</delete>
 	
 	
 </mapper>

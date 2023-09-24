@@ -28,5 +28,7 @@ public interface BoardDAO {
 
 	public void modBoard(BoardVO boardVO) throws DataAccessException;
 
+	public void delBoard(int article_no) throws DataAccessException;
+
 	 
 }

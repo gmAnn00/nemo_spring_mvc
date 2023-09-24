@@ -1,6 +1,17 @@
 let itemArr=[];
 let ctx;
 
+// 게시글 삭제 확인
+function delBoard(group_id, article_no){
+
+	if(confirm("글을 삭제하시겠습니까?")){
+		location.href="/nemo/group/board/delboard?group_id="+group_id+"&article_no="+article_no;
+		
+	}
+
+}
+
+
 $(document).ready(function() {
 	
 	ctx = getContextPath();
@@ -90,19 +101,9 @@ $(document).ready(function() {
 
         
     });
-	/*
-	$(document).on('click','.btnSubmitRe', function(){
-        let parentSiblings=$(this).parent().siblings();
-        let textArea=parentSiblings.find('textarea');
-        if(!textArea.val()){
-            alert('내용을 입력해주세요');
-        } else {
-            //ajax로 댓글 등록 하는거 처리하기~
-
-        }
-	});*/
 	
-
+	
+	
 	function removeReplyBox(){
 		$('.replyBox').remove();
 	    for(let i=0; i<itemArr.length; i++) {
