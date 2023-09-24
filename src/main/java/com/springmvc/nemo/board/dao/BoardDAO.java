@@ -30,5 +30,9 @@ public interface BoardDAO {
 
 	public void delBoard(int article_no) throws DataAccessException;
 
+	public List<BoardVO> searchBoard(Map<String, Object> searchMap) throws DataAccessException;
+
+	public int getTotSearchBoard(Map<String, Object> searchMap) throws DataAccessException;
+
 	 
 }

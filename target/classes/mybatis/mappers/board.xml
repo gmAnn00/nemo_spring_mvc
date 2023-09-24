@@ -92,4 +92,69 @@
 	</delete>
 	
 	
+	<select id="searchBoard" parameterType="java.util.Map" resultType="boardVO">
+		 SELECT z.* FROM
+         	(SELECT ROWNUM as recNum, a.* FROM
+         		(SELECT b.article_no, b.user_id, u.nickname, b.group_id, b.create_date, b.title, b.brackets, b.view_cnt, b.comment_cnt
+         		FROM BOARD_TBL b, USER_TBL u WHERE u.user_id=b.user_id AND b.group_id=#{group_id}
+         		
+         		<choose>
+		         	<when test="filter.equals('brackets')">
+		         		AND b.brackets=#{keyword}
+		         	</when>
+         	
+		         	<when test="filter.equals('title')">
+		         		AND b.title LIKE '%'||#{keyword}||'%'
+		         	</when>
+		         	
+		         	<when test="filter.equals('content')">
+		         		AND b.content LIKE '%'||#{keyword}||'%'
+		         	</when>
+		         	
+		         	<when test="filter.equals('writer')">
+		         		AND u.nickname LIKE '%'||#{keyword}||'%'
+		         	</when>
+        		 </choose>
+         		
+         		
+         		 order by b.article_no desc) a
+         	) z
+         WHERE recNum BETWEEN (#{section}-1)*100 + (#{pagenum}-1)*10+1 AND (#{section}-1)*100 + #{pagenum}*10
+         
+         
+
+	</select>
+	
+	<select id="getTotSearchBoard" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM
+         	(SELECT ROWNUM as recNum, a.* FROM
+         		(SELECT b.article_no, b.user_id, u.nickname, b.group_id, b.create_date, b.title, b.brackets, b.view_cnt, b.comment_cnt
+         		FROM BOARD_TBL b, USER_TBL u WHERE u.user_id=b.user_id AND b.group_id=#{group_id}
+         		
+         		<choose>
+         			<when test="filter.equals('brackets')">
+		         		AND b.brackets=#{keyword}
+		         	</when>
+		         	
+		         	<when test="filter.equals('title')">
+		         		AND b.title LIKE '%'||#{keyword}||'%'
+		         	</when>
+		         	
+		         	<when test="filter.equals('content')">
+		         		AND b.content LIKE '%'||#{keyword}||'%'
+		         	</when>
+		         	
+		         	<when test="filter.equals('writer')">
+		         		AND u.nickname LIKE '%'||#{keyword}||'%'
+		         	</when>
+         		</choose>
+         		
+         		order by b.article_no desc) a
+         	) z
+         WHERE recNum BETWEEN (#{section}-1)*100 + (#{pagenum}-1)*10+1 AND (#{section}-1)*100 + #{pagenum}*10
+         
+
+	</select>
+	
+	
 </mapper>

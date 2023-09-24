@@ -159,6 +159,21 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	
+	@Override
+	public Map<String, Object> searchBoard(Map<String, Object> searchMap) throws DataAccessException {
+		
+		Map<String, Object> boardMap = new HashMap<String, Object>();
+		
+		List<BoardVO> boardList = boardDAO.searchBoard(searchMap);
+		int totBoard = boardDAO.getTotSearchBoard(searchMap);
+		
+		boardMap.put("boardList", boardList);
+		boardMap.put("totBoard", totBoard);
+		
+		return boardMap;
+	}
+	
+	
 	//temp 에서 이미지 폴더 이동 하는 메소드 
 	private void moveImageDir(List<String> fileNameList, int article_no) {
 	//articleno로 폴더 생성

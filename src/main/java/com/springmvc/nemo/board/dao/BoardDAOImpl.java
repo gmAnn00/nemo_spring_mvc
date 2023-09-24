@@ -81,5 +81,17 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		sqlSession.delete("delBoard", article_no);
 	}
+	
+	@Override
+	public List<BoardVO> searchBoard(Map<String, Object> searchMap) throws DataAccessException {
+		
+		return sqlSession.selectList("searchBoard", searchMap);
+	}
+	
+	@Override
+	public int getTotSearchBoard(Map<String, Object> searchMap) throws DataAccessException {
+		
+		return sqlSession.selectOne("getTotSearchBoard", searchMap);
+	}
 
 }

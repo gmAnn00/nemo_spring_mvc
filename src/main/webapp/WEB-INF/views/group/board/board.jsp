@@ -154,7 +154,7 @@
 		  
 		  <div class="boardArea">
 		  	 <!-- <form action="${contextPath}/group/board/search?group_id=${param.group_id}" id="search" name="search" method="get"> -->
-		     <form action="${contextPath}/group/board/search?group_id=${param.group_id}" id="search" name="search" method="get">
+		     <form action="${contextPath}/group/board/boardsearch?group_id=${param.group_id}" id="search" name="search" method="get">
 	          	<div class="search">
 	            <!-- 검색 부분 필요할 듯 , input 태그에 name, id 넣어야 함 -->
 		            <input type="hidden" name="group_id" value="${param.group_id}"/>
@@ -174,15 +174,15 @@
 	          	<a href="${contextPath}/group/board?group_id=${param.group_id}" class="categoryLink">
 					<span class="title">전체</span>
 				</a>
-				<a href="${contextPath}/group/board/search?group_id=${param.group_id}&filter=brackets&keyword=공지" class="categoryLink">
+				<a href="${contextPath}/group/board/boardsearch?group_id=${param.group_id}&filter=brackets&keyword=공지" class="categoryLink">
 					<span class="title brackets">공지</span>
 					<div class="notice bracketFilter"></div>
 				</a>
-		        <a href="${contextPath}/group/board/search?group_id=${param.group_id}&filter=brackets&keyword=자유" class="categoryLink">
+		        <a href="${contextPath}/group/board/boardsearch?group_id=${param.group_id}&filter=brackets&keyword=자유" class="categoryLink">
 					<span class="title brackets">자유	</span>
 					<div class="free bracketFilter"></div>
 				</a>
-		        <a href="${contextPath}/group/board/search?group_id=${param.group_id}&filter=brackets&keyword=후기" class="categoryLink">
+		        <a href="${contextPath}/group/board/boardsearch?group_id=${param.group_id}&filter=brackets&keyword=후기" class="categoryLink">
 					<span class="title brackets">후기	</span>
 					<div class="review bracketFilter"></div>
 				</a>

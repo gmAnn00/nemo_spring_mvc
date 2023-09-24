@@ -263,6 +263,38 @@ public class BoardControllerImpl implements BoardController{
 	}
 	
 	
+	@RequestMapping(value = "/group/board/boardsearch", method = RequestMethod.GET)
+	@Override
+	public ModelAndView boardSeach(
+			@RequestParam("group_id") int group_id,
+			@RequestParam(value = "filter", required = false) String filter,
+			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "section", defaultValue = "1", required = false) int section,
+			@RequestParam(value = "pagenum", defaultValue = "1", required = false) int pagenum,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("filter", filter);
+		searchMap.put("keyword", keyword);
+		searchMap.put("section", section);
+		searchMap.put("pagenum", pagenum);
+		searchMap.put("group_id", group_id);
+		
+		
+		Map<String, Object> boardMap = boardService.searchBoard(searchMap);
+		searchMap.put("filter", filter);
+		searchMap.put("keyword", keyword);
+		boardMap.put("section", section);
+		boardMap.put("pagenum", pagenum);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/group/board/board");
+		mav.addObject("boardMap", boardMap);
+		
+		return mav;
+	}
+	
+	
 	
 	private void deleteTempImg(String[] imageName) {
 		try {

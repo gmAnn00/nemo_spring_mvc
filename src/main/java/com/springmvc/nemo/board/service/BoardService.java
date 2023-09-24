@@ -24,5 +24,7 @@ public interface BoardService {
 
 	public void delBoard(int article_no) throws DataAccessException;
 
+	public Map<String, Object> searchBoard(Map<String, Object> searchMap) throws DataAccessException;
+
 	
 }
