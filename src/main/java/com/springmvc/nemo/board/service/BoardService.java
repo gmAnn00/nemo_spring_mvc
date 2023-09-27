@@ -28,5 +28,9 @@ public interface BoardService {
 
 	public CommentVO addComment(CommentVO commentVO) throws DataAccessException;
 
+	public String modComment(CommentVO commentVO) throws DataAccessException;
+
+	public String getContentByCommentNo(int comment_no)  throws DataAccessException;
+
 	
 }

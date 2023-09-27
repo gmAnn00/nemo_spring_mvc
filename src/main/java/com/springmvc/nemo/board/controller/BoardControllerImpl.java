@@ -339,11 +339,39 @@ public class BoardControllerImpl implements BoardController{
 		Gson gson = new Gson();
 		String commentInfo = gson.toJson(comment);
 		
-		logger.info("commentInfo={}", commentInfo);
+		//logger.info("commentInfo={}", commentInfo);
 		
 		return commentInfo;
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "/group/board/modcomment", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@Override
+	public String modComment(
+			@RequestParam("group_id") int group_id,
+			@ModelAttribute CommentVO commentVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		commentVO.setUser_id(user_id);
+
+		return boardService.modComment(commentVO);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/group/board/cancelmod", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@Override
+	public String cancelMod(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("comment_no") int comment_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		return boardService.getContentByCommentNo(comment_no);
+	}
 	
 	
 	

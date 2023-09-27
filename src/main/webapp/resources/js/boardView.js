@@ -221,7 +221,7 @@ $(document).ready(function() {
 					                    role="button"
 					                    class="modReplyBtn"
 					                    id="modReplyBtn${commentInfo.comment_no}"
-					                    onclick="fn_cancleMod(this, ${commentInfo.comment_no})"
+					                    onclick="fn_cancelMod(this, ${commentInfo.comment_no})"
 					                >
 					                    취소
 					                </a>
@@ -303,21 +303,22 @@ $(document).ready(function() {
 			});
 
             let ctx =getContextPath();
-            url=ctx+"/group/board/modComment?group_id="+group_id;
-            console.log(url);
+            url=ctx+"/group/board/modcomment?group_id="+group_id;
             
             $.ajax({
 				url: url,
 				async: true,
 				data: {
-					"com_cont": content,
+					"content": content,
 					"comment_no": cnt
 				},
 				type: "post",
 				success:function(result) {
 					if(result=="success") {
 						alert("댓글이 수정 되었습니다.");
-					}					
+					}else if(result == "fail"){
+						alert("작성자만 댓글을 수정할 수 있습니다.");
+					}				
 				},
 				error: {
 					
@@ -328,7 +329,7 @@ $(document).ready(function() {
 	} //end of fn_modComment
 	
 	//댓글 수정 취소하기 
-	function fn_cancleMod(obj, cnt) {
+	function fn_cancelMod(obj, cnt) {
 		let textAreaId="#viewTextArea"+cnt;
 		let comModId="#comModBtn"+cnt;
 		let comDelID="#comDelBtn"+cnt;
@@ -337,7 +338,7 @@ $(document).ready(function() {
 		let group_id=$('#group_id').val();
 		
 		let ctx =getContextPath();
-            url=ctx+"/group/board/modCancle?group_id="+group_id;
+            url=ctx+"/group/board/cancelmod?group_id="+group_id;
             console.log(url);
             
             $.ajax({

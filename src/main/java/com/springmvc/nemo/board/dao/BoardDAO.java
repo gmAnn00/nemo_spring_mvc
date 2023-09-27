@@ -42,5 +42,11 @@ public interface BoardDAO {
 
 	public void increaseCommentCnt(int article_no) throws DataAccessException;
 
+	public String getUserIdByCommentNo(int comment_no) throws DataAccessException;
+
+	public void modComment(CommentVO commentVO) throws DataAccessException;
+
+	public String getContentByCommentNo(int comment_no) throws DataAccessException;
+
 	 
 }

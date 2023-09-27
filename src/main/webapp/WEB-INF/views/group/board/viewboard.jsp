@@ -242,7 +242,7 @@
 					                                    		<a href="#" role="button" class="modReplyBtn" id="modReplyBtn${comment.comment_no}"
 					                                    		 onclick="fn_modComment(this, ${comment.comment_no})">수정하기</a>
 					                                    		 <a href="#" role="button" class="modReplyBtn" id="cancelMod${comment.comment_no}" 
-					                                    		onclick="fn_cancleMod(this, ${comment.comment_no})">취소</a>
+					                                    		onclick="fn_cancelMod(this, ${comment.comment_no})">취소</a>
 					                                    	</span>
 					                                    </c:if>
 					                                </div>
@@ -284,7 +284,7 @@
 					                                    		<a href="#" role="button" class="modReplyBtn" id="modReplyBtn${comment.comment_no}" 
 					                                    		onclick="fn_modComment(this, ${comment.comment_no})">수정하기</a>
 					                                    		<a href="#" role="button" class="modReplyBtn" id="cancelMod${comment.comment_no}" 
-					                                    		onclick="fn_cancleMod(this, ${comment.comment_no})">취소</a>
+					                                    		onclick="fn_cancelMod(this, ${comment.comment_no})">취소</a>
 					                                    	</span>
 					                                	</c:if>
 					                                </div>

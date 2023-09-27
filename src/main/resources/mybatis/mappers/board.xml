@@ -182,4 +182,18 @@
 	</update>
 	
 	
+	<select id="getUserIdByCommentNo" parameterType="int" resultType="String">
+		SELECT user_id FROM COMMENT_TBL WHERE comment_no=#{comment_no}
+	</select>
+	
+	
+	<update id="modComment" parameterType="commentVO">
+		UPDATE COMMENT_TBL SET content=#{content} WHERE comment_no=#{comment_no}
+	</update>
+	
+	
+	<select id="getContentByCommentNo" parameterType="int" resultType="String">
+		SELECT content FROM COMMENT_TBL WHERE comment_no=#{comment_no}
+	</select>
+	
 </mapper>

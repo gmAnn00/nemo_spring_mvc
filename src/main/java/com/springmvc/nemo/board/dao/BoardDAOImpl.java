@@ -118,4 +118,23 @@ public class BoardDAOImpl implements BoardDAO{
 		sqlSession.update("increaseCommentCnt", article_no);
 		
 	}
+	
+	@Override
+	public String getUserIdByCommentNo(int comment_no) throws DataAccessException {
+		
+		return sqlSession.selectOne("getUserIdByCommentNo", comment_no);
+	}
+	
+	@Override
+	public void modComment(CommentVO commentVO) throws DataAccessException {
+		
+		sqlSession.update("modComment", commentVO);
+	}
+	
+	
+	@Override
+	public String getContentByCommentNo(int comment_no) throws DataAccessException {
+		
+		return sqlSession.selectOne("getContentByCommentNo", comment_no);
+	}
 }

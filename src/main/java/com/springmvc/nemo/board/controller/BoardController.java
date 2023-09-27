@@ -79,18 +79,25 @@ public interface BoardController {
 			@ModelAttribute CommentVO commentVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	
 	public String addReply(
 			@RequestParam("group_id") int group_id,
 			@ModelAttribute CommentVO commentVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	
-	/*
-	public ModelAndView modComment(
+	public String modComment(
 			@RequestParam("group_id") int group_id,
 			@ModelAttribute CommentVO commentVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	public String cancelMod(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("comment_no") int comment_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
+	/*
 	public ModelAndView delComment(
 			@RequestParam("group_id") int group_id,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
