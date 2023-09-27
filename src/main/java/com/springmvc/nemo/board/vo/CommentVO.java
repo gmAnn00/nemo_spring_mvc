@@ -13,6 +13,9 @@ public class CommentVO {
 	private Date create_date;
 	private String content;
 	private int parent_no;
+	private int group_id;
+	private String group_name;
+	private String title;
 
 	public CommentVO() {
 		// TODO Auto-generated constructor stub
@@ -95,6 +98,46 @@ public class CommentVO {
 	public void setParent_no(int parent_no) {
 		this.parent_no = parent_no;
 	}
+	
+	
+	
+
+	public int getGroup_id() {
+		return group_id;
+	}
+
+
+
+	public void setGroup_id(int group_id) {
+		this.group_id = group_id;
+	}
+
+
+
+	public String getGroup_name() {
+		return group_name;
+	}
+
+
+
+	public void setGroup_name(String group_name) {
+		this.group_name = group_name;
+	}
+
+	
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
 
 	@Override
 	public String toString() {

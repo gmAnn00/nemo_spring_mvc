@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.springmvc.nemo.board.vo.BoardVO;
+import com.springmvc.nemo.board.vo.CommentVO;
 import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.mypage.vo.CommingScheduleVO;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
@@ -41,6 +43,12 @@ public interface MyPageService {
 	public List<GroupVO> getWaitGroup(String user_id) throws DataAccessException;
 
 	public List<GroupVO> getBookmarkGroup(String user_id) throws DataAccessException;
+
+	public List<BoardVO> getMyBoardList(String user_id) throws DataAccessException;
+
+	public List<CommentVO> getMyCommentList(String user_id) throws DataAccessException;
+	
+	
 
 	
 	

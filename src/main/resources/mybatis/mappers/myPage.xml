@@ -124,5 +124,21 @@
         	WHERE b.user_id=#{user_id} AND g.group_id=b.group_id
       ]]>
 	</select>
+	
+	
+	<select id="getMyBoardList" parameterType="String" resultType="boardVO">
+		SELECT b.*, g.group_name, u.nickname, u.user_img
+		FROM BOARD_TBL b, GROUP_TBL g, USER_TBL u
+		WHERE u.user_id=#{user_id} AND b.user_id=#{user_id}
+		AND b.group_id=g.group_id
+	</select>
+	
+	
+	<select id="getMyCommentList" parameterType="String" resultType="commentVO">
+		SELECT c.*, u.nickname, u.user_img, g.group_id, g.group_name, b.title
+		FROM COMMENT_TBL c, GROUP_TBL g, BOARD_TBL b, USER_TBL u
+		WHERE u.user_id=#{user_id} AND c.user_id=#{user_id}
+		AND b.group_id=g.group_id AND b.article_no=c.article_no
+	</select>
 
 </mapper>

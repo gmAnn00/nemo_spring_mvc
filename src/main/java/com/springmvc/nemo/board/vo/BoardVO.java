@@ -10,6 +10,7 @@ public class BoardVO {
 	private String nickname;
 	private String user_img;
 	private int group_id;
+	private String group_name;
 	private Date create_date;
 	private String title;
 	private String content;
@@ -61,6 +62,14 @@ public class BoardVO {
 
 	public void setGroup_id(int group_id) {
 		this.group_id = group_id;
+	}
+	
+	public String getGroup_name() {
+		return group_name;
+	}
+
+	public void setGroup_name(String group_name) {
+		this.group_name = group_name;
 	}
 
 	public Date getCreate_date() {

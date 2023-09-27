@@ -3,7 +3,7 @@
     isELIgnored="false"
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <%
@@ -166,7 +166,7 @@
 	                <div class="profileArea">
 	                  <div class="profileInfo">
 	                    <p class="writerNick">${board.nickname}</p>
-	                    <p class="date comDate">${board.create_date }</p>
+	                    <p class="date comDate"><fmt:formatDate value="${board.create_date}" pattern="yyyy-MM-dd" /></p>
 	                  </div>
 	                 <!-- 
 	                  <div class="articleInfo">

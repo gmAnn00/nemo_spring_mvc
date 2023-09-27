@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.springmvc.nemo.board.vo.BoardVO;
+import com.springmvc.nemo.board.vo.CommentVO;
 import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.mypage.vo.CommingScheduleVO;
 import com.springmvc.nemo.mypage.vo.ModInfoVO;
@@ -116,6 +118,20 @@ public class MyPageDAOImpl implements MyPageDAO{
 	public List<GroupVO> getBookmarkGroup(String user_id) throws DataAccessException {
 		
 		return sqlSession.selectList("mapper.myPage.getBookmarkGroup", user_id);
+	}
+	
+	
+	@Override
+	public List<BoardVO> getMyBoardList(String user_id) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.myPage.getMyBoardList", user_id);
+	}
+	
+	
+	@Override
+	public List<CommentVO> getMyCommentList(String user_id) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.myPage.getMyCommentList", user_id);
 	}
 
 }

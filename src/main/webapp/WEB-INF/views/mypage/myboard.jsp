@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%
 	request.setCharacterEncoding("utf-8");
@@ -103,38 +104,38 @@
 	                  <div class="tab_box">
 	                    <!-- 글 시작 -->
                         <c:choose>
-		                  <c:when test="${empty myArticleList}">
+		                  <c:when test="${empty myBoardList}">
 		                    <p>작성된 글이 없습니다.</p>
 		                  </c:when>
-		                  <c:when test="${!empty myArticleList}">
-		                    <c:forEach var="myArticle" items="${myArticleList}" varStatus="loop">
+		                  <c:when test="${!empty myBoardList}">
+		                    <c:forEach var="myBoard" items="${myBoardList}" varStatus="loop">
 	                        	  
 		                    <div class="user-comment">
 		                      <div class="comments-section">	                                          
 	                        	<div class="comment_box">	                         
 		                          <div class="comment_title">
 		                            <div class="comment_textarea">
-		                              <h3 class="comment_group_title">${myArticle.groupVO.grp_name}</h3>
-		                              <span class="comment_board_title">${myArticle.boardVO.title}</span>
+		                              <h3 class="comment_group_title">${myBoard.group_name}</h3>
+		                              <span class="comment_board_title">${myBoard.title}</span>
 		                            </div>
 		                          </div>
 		
 		                          <div class="comment-post">
-		                            <div class="comment-img"><img src="${contextPath}/userImageDownload?user_id=${myArticle.userVO.user_id}&user_img=${myArticle.userVO.user_img}" /></div>
+		                            <div class="comment-img"><img src="${contextPath}/userimagedownload?user_id=${myBoard.user_id}&user_img=${myBoard.user_img}" /></div>
 		                            <div class="comment-details">
 		                              <div class="comment_details_titlebox">
 		                                <div class="comment_details_title">
-		                                  <span class="comment-author" id="user"> ${myArticle.userVO.nickname}</span>
-		                                  <span class="comment-time">${myArticle.boardVO.create_date}</span>
+		                                  <span class="comment-author" id="user"> ${myBoard.nickname}</span>
+		                                  <span class="comment-time"><fmt:formatDate value="${myBoard.create_date}" pattern="yyyy-MM-dd" /></span>
 		                                   <div class="comment-like-unlike">
-			                                  <span><a href="${contextPath}/group/board?group_id=${myArticle.groupVO.grp_id}&article_no=${myArticle.boardVO.article_no}"><i class="fa-solid fa-pen"></i></a></span>
-			                                  <span><a href="${contextPath}/mypage/myBoardList/delArticle?article_no=${myArticle.boardVO.article_no}"><i class="fa-solid fa-xmark"></i></a></span>
+			                                  <span><a href="${contextPath}/group/board/viewboard?group_id=${myBoard.group_id}&article_no=${myBoard.article_no}"><i class="fa-solid fa-pen"></i></a></span>
+			                                  <span><a href="${contextPath}/group/board/delboard?group_id=${myBoard.group_id}&article_no=${myBoard.article_no}"><i class="fa-solid fa-xmark"></i></a></span>
 			                                </div>
 		                                </div>
 		                               
 		                              </div>
 		                              <p class="comment-content">
-		                               	${myArticle.boardVO.content}
+		                               	${myBoard.content}
 		                              </p>
 		                            </div>
 		                          </div>
@@ -166,27 +167,27 @@
 	                        	<div class="comment_box">	                         
 		                          <div class="comment_title">
 		                            <div class="comment_textarea">
-		                              <h3 class="comment_group_title">${myComment.groupVO.grp_name}</h3>
-		                              <span class="comment_board_title">${myComment.boardVO.title}</span>
+		                              <h3 class="comment_group_title">${myComment.group_name}</h3>
+		                              <span class="comment_board_title">${myComment.title}</span>
 		                            </div>
 		                          </div>
 		
 		                          <div class="comment-post">
-		                            <div class="comment-img"><img src="${contextPath}/userImageDownload?user_id=${myComment.userVO.user_id}&user_img=${myComment.userVO.user_img}" /></div>
+		                            <div class="comment-img"><img src="${contextPath}/userimagedownload?user_id=${myComment.user_id}&user_img=${myComment.user_img}" /></div>
 		                            <div class="comment-details">
 		                              <div class="comment_details_titlebox">
 		                                <div class="comment_details_title">
-		                                  <span class="comment-author" id="user"> ${myComment.userVO.nickname}</span>
-		                                  <span class="comment-time">${myCommentcreate_date}</span>
+		                                  <span class="comment-author" id="user"> ${myComment.nickname}</span>
+		                                  <span class="comment-time"><fmt:formatDate value="${myComment.create_date}" pattern="yyyy-MM-dd HH:mm" /></span>
 		                                   <div class="comment-like-unlike">
-			                                  <span><a href="${contextPath}/group/board?group_id=${myComment.groupVO.grp_id}&article_no=${myComment.boardVO.article_no}"><i class="fa-solid fa-pen"></i></a></span>
-			                                  <span><a href="${contextPath}/mypage/myBoardList/delComment?comment_no=${myComment.commentVO.comment_no}"><i class="fa-solid fa-xmark"></i></a></span>
+			                                  <span><a href="${contextPath}/group/board/viewboard?group_id=${myComment.group_id}&article_no=${myComment.article_no}"><i class="fa-solid fa-pen"></i></a></span>
+			                                  <span><a href="${contextPath}/group/board/delcomment?group_id=${myComment.group_id}&article_no=${myComment.article_no}&comment_no=${myComment.comment_no}"><i class="fa-solid fa-xmark"></i></a></span>
 			                                </div>
 		                                </div>
 		                               
 		                              </div>
 		                              <p class="comment-content">
-		                              	 ${myComment.commentVO.com_cont}
+		                              	 ${myComment.content}
 		                              </p>
 		                            </div>
 		                          </div>

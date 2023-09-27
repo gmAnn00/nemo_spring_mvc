@@ -5,6 +5,7 @@
     %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -226,7 +227,7 @@
 						                    </div>
 						                  </td>
 						                  <td>${notice.nickname}</td>
-				                  		  <td>${notice.create_date}</td>
+				                  		  <td><fmt:formatDate value="${notice.create_date}" pattern="yyyy-MM-dd" /></td>
 				                  		  <td>${notice.view_cnt}</td>
 	              					</tr>
 	              				</c:forEach>
@@ -265,7 +266,7 @@
 					                    </div>
 				                  </td>
 				                  <td>${board.nickname}</td>
-				                  <td>${board.create_date}</td>
+				                  <td><fmt:formatDate value="${board.create_date}" pattern="yyyy-MM-dd" /></td>
 				                  <td>${board.view_cnt}</td>
 				                </tr>
 			            	</c:forEach>

@@ -32,6 +32,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.springmvc.nemo.board.vo.BoardVO;
+import com.springmvc.nemo.board.vo.CommentVO;
 import com.springmvc.nemo.common.Message;
 import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.mypage.service.MyPageService;
@@ -461,7 +463,15 @@ public class MyPageControllerImpl implements MyPageController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
 		// 내가 쓴글 정보 추가
+		List<BoardVO> myBoardList = myPageService.getMyBoardList(user_id);
+		List<CommentVO> myCommentList = myPageService.getMyCommentList(user_id);
+		
+		mav.addObject("myBoardList", myBoardList);
+		mav.addObject("myCommentList", myCommentList);
 		
 		return mav;
 	}

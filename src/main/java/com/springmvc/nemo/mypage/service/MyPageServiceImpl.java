@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.springmvc.nemo.board.vo.BoardVO;
+import com.springmvc.nemo.board.vo.CommentVO;
 import com.springmvc.nemo.group.vo.GroupVO;
 import com.springmvc.nemo.mypage.dao.MyPageDAO;
 import com.springmvc.nemo.mypage.vo.CommingScheduleVO;
@@ -112,6 +114,18 @@ public class MyPageServiceImpl implements MyPageService{
 	public List<GroupVO> getBookmarkGroup(String user_id) throws DataAccessException {
 		
 		return myPageDAO.getBookmarkGroup(user_id);
+	}
+	
+	@Override
+	public List<BoardVO> getMyBoardList(String user_id) throws DataAccessException {
+
+		return myPageDAO.getMyBoardList(user_id);
+	}
+	
+	@Override
+	public List<CommentVO> getMyCommentList(String user_id) throws DataAccessException {
+		
+		return myPageDAO.getMyCommentList(user_id);
 	}
 
 }
