@@ -12,6 +12,18 @@ function delBoard(group_id, article_no){
 }
 
 
+// 댓글 삭제 확인
+function fn_delComment(group_id, article_no, comment_no){
+
+	if(confirm("댓글을 삭제하시겠습니까?")){
+		location.href="/nemo/group/board/delcomment?group_id="+group_id+"&article_no="+article_no + "&comment_no="+comment_no;
+		
+	}
+
+}
+
+
+
 $(document).ready(function() {
 	
 	ctx = getContextPath();
@@ -178,9 +190,10 @@ $(document).ready(function() {
 					            </span>
 					            <span class="comDel comToolBtn">
 					                <a
-					                    href="${ctx}/group/board/deleteComment?group_id=${group_id}&article_no=${article_no}&comment_no=${commentInfo.comment_no}"
+					                    href="javascript:void(0)"
 					                    role="button"
 					                    id="comDelBtn${commentInfo.comment_no}"
+					                    onclick="fn_delComment(${group_id}, ${article_no}, ${commentInfo.comment_no})"
 					                >
 					                    삭제
 					                </a>
@@ -435,9 +448,10 @@ $(document).ready(function() {
 						            </span>
 						            <span class="comDel comToolBtn">
 						                <a
-						                    href="${ctx}/group/board/deleteComment?group_id=${group_id}&article_no=${article_no}&comment_no=${commentInfo.comment_no}"
+						                    href="javascript:void(0)"
 						                    role="button"
 						                    id="comDelBtn${commentInfo.comment_no}"
+						                    onclick="fn_delComment(${group_id}, ${article_no}, ${commentInfo.comment_no})"
 						                >
 						                    삭제
 						                </a>

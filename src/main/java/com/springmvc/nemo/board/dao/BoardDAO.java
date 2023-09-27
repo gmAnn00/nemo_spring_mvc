@@ -48,5 +48,9 @@ public interface BoardDAO {
 
 	public String getContentByCommentNo(int comment_no) throws DataAccessException;
 
+	public void delComment(int comment_no) throws DataAccessException;
+
+	public void decreaseCommentCnt(int article_no) throws DataAccessException;
+
 	 
 }

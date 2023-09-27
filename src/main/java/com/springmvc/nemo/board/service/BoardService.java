@@ -30,7 +30,11 @@ public interface BoardService {
 
 	public String modComment(CommentVO commentVO) throws DataAccessException;
 
-	public String getContentByCommentNo(int comment_no)  throws DataAccessException;
+	public String getContentByCommentNo(int comment_no) throws DataAccessException;
+
+	public String getUserIdByCommentNo(int comment_no) throws DataAccessException;
+
+	public void delComment(CommentVO commentVO) throws DataAccessException;
 
 	
 }

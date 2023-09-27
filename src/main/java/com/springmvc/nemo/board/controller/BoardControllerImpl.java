@@ -374,6 +374,41 @@ public class BoardControllerImpl implements BoardController{
 	}
 	
 	
+	@RequestMapping(value = "/group/board/delcomment", method = RequestMethod.GET)
+	@Override
+	public ModelAndView delComment(
+			@RequestParam("group_id") int group_id,
+			@RequestParam("article_no") int article_no,
+			@RequestParam("comment_no") int comment_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		String original_user_id = boardService.getUserIdByCommentNo(comment_no);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		
+		if(!user_id.equals(original_user_id)) {
+			
+			mav.addObject("data", new Message("댓글을 쓴 사용자만 댓글을 삭제할 수 있습니다.",
+					request.getContextPath()+"/group/board/viewboard?group_id="+group_id+"&article_no="+article_no));
+			
+			return mav;
+		}
+		
+		CommentVO commentVO = new CommentVO();
+		commentVO.setArticle_no(article_no);
+		commentVO.setComment_no(comment_no);
+		
+		boardService.delComment(commentVO);
+		mav.addObject("data", new Message("댓글을 삭제하였습니다.",
+				request.getContextPath()+"/group/board/viewboard?group_id="+group_id+"&article_no="+article_no));
+		
+		return mav;
+	}
+	
+	
 	
 	
 	private void deleteTempImg(String[] imageName) {

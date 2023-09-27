@@ -95,12 +95,12 @@ public interface BoardController {
 			@RequestParam("group_id") int group_id,
 			@RequestParam("comment_no") int comment_no,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
-	
-	/*
+
 	public ModelAndView delComment(
 			@RequestParam("group_id") int group_id,
+			@RequestParam("article_no") int article_no,
+			@RequestParam("comment_no") int comment_no,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
-	*/
+
 
 }

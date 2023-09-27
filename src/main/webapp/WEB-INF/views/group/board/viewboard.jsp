@@ -216,8 +216,10 @@
 					                                    		id="comModBtn${comment.comment_no}">수정</a>
 					                                    	</span>
 					                                    	<span class="comDel comToolBtn">
-					                                    		<a href="${contextPath}/group/board/delcomment?group_id=${param.group_id}&article_no=${comment.article_no}&comment_no=${comment.comment_no}" 
-					                                    		role="button" id="comDelBtn${comment.comment_no}">삭제</a>
+					                                    		<a href="javascript:void(0)" 
+					                                    		role="button" id="comDelBtn${comment.comment_no}"
+					                                    		onclick="fn_delComment(${param.group_id}, ${comment.article_no}, ${comment.comment_no})"
+					                                    		>삭제</a>
 					                                    	</span>
 					                                	</c:if>
 					                                </div>
@@ -259,8 +261,9 @@
 					                                    		<a href="#" role="button" onclick="fn_enable(this,${comment.comment_no})" 
 					                                    		id="comModBtn${comment.comment_no}">수정</a></span>
 					                                    	<span class="comDel comToolBtn">
-					                                    		<a href="${contextPath}/group/board/delcomment?group_id=${param.group_id}&article_no=${comment.article_no}&comment_no=${comment.comment_no}" 
-					                                    		role="button"  id="comDelBtn${comment.comment_no}">삭제</a></span>
+					                                    		<a href="javascript:void(0)" 
+					                                    		role="button"  id="comDelBtn${comment.comment_no}"
+					                                    		onclick="fn_delComment(${param.group_id}, ${comment.article_no}, ${comment.comment_no})">삭제</a></span>
 					                                	</c:if>
 					                                </div>
 					                                <!-- 닉네임이랑 프로필 사진 같은 링크 -->

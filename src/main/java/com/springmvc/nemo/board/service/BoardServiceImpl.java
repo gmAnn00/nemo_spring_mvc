@@ -216,6 +216,24 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	
+	@Override
+	public String getUserIdByCommentNo(int comment_no) throws DataAccessException {
+		
+		return boardDAO.getUserIdByCommentNo(comment_no);
+	}
+	
+	
+	@Override
+	public void delComment(CommentVO commentVO) throws DataAccessException {
+		int comment_no = commentVO.getComment_no();
+		int article_no = commentVO.getArticle_no();
+		
+		boardDAO.delComment(comment_no);
+		boardDAO.decreaseCommentCnt(article_no);
+		
+	}
+	
+	
 	//temp 에서 이미지 폴더 이동 하는 메소드 
 	private void moveImageDir(List<String> fileNameList, int article_no) {
 	//articleno로 폴더 생성
