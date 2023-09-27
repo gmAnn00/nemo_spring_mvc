@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.nemo.board.vo.BoardVO;
+import com.springmvc.nemo.board.vo.CommentVO;
 
 public interface BoardController {
 	
@@ -37,7 +38,7 @@ public interface BoardController {
 	public ModelAndView cancelAddBoard(
 			@RequestParam("group_id") int group_id,
 			@RequestParam("isImgExist") boolean isImgExist,
-			@RequestParam("imageName") String[] imageName,
+			@RequestParam(value = "imageName", required = false) String[] imageName,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	
@@ -55,7 +56,7 @@ public interface BoardController {
 			@RequestParam("group_id") int group_id,
 			@RequestParam("article_no") int article_no,
 			@RequestParam("isImgExist") boolean isImgExist,
-			@RequestParam("imageName") String[] imageName,
+			@RequestParam(value = "imageName", required = false) String[] imageName,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView delboard(
@@ -72,5 +73,20 @@ public interface BoardController {
 			@RequestParam(value = "pagenum", defaultValue = "1", required = false) int pagenum,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	
+	public String addComment(
+			@RequestParam("group_id") int group_id,
+			@ModelAttribute CommentVO commentVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	/*
+	public ModelAndView modComment(
+			@RequestParam("group_id") int group_id,
+			@ModelAttribute CommentVO commentVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView delComment(
+			@RequestParam("group_id") int group_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	*/
 
 }

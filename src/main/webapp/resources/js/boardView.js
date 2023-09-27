@@ -112,61 +112,100 @@ $(document).ready(function() {
 	}
 	
 	//댓글 등록 함수
-	function fn_regComment() {
+	function fn_addComment() {
 		if($('#isAdmin').val()=='true') {
-			console.log('여기 나오냐');
 			alert('관지자는 댓글을 달 수 없습니다.');
 			return;	
 		} else {
 		let parentSiblings=$(this).parent().siblings();
-        //let textArea=parentSiblings.find('textarea');
 		let content=$('#textArea').val();
 		let article_no=$('#article_no').val();
 		let group_id=$('#group_id').val();
 
-
-		//console.log("fn_regComment()");
-		console.log(content+"article_no"+article_no);
-		console.log(ctx);
-		console.log(group_id);
         if(!content){
             alert('내용을 입력해주세요');
         } else {
             //ajax로 댓글 등록 하는거 처리하기~
             let ctx =getContextPath();
-            url=ctx+"/group/board/addComment?group_id="+group_id;
+            url=ctx+"/group/board/addcomment?group_id="+group_id;
             console.log(url);
             $.ajax({
 				url: url,
 				async: true,
 				data: {
-					"com_cont": content,
+					"content": content,
 					"article_no": article_no,
 					"parent_no": 0
 				},
 				type: "post",
 				success:function(data) {
-					let commentInfo=JSON.parse(data);
-					console.log(ctx);
-					let appendItem="<li id='"+commentInfo.comment_no+"' class='commentItem commentLi'>";
-					appendItem+="<div class='commentbox'><div class='commentTool'><span class='comMod comToolBtn'>";
-					appendItem+="<a href='#' role='button' onclick='fn_enable(this,"+commentInfo.comment_no+")'";
-					appendItem+="id='comModBtn"+commentInfo.comment_no+"'>수정</a></span>";
-					appendItem+="<span class='comDel comToolBtn'>";
-					appendItem+="<a href='"+ ctx +"/group/board/deleteComment?group_id="+group_id+"&article_no="+article_no+"&comment_no="+commentInfo.comment_no+"'"; 
-					appendItem+="role='button'  id='comDelBtn"+commentInfo.comment_no+"'>삭제</a></span></div>";
-					appendItem+="<a href='#' class='commentThumb'>";
-					//<img src="${contextPath}/userImageDownload?user_id=${user_id}&user_img=${comment.userVO.user_img}" alt="프로필사진"/>
-					appendItem+="<img src='"+ctx+"/userImageDownload?user_id="+commentInfo.user_id+"&user_img="+commentInfo.user_img+"' alt='프로필사진' /></a>";
-					appendItem+="<div class='commentNick'><span  class='commentNickInfo'>";
-					appendItem+="<a href='#' role='button'>"+commentInfo.nickname+"</a></span></div><div class='commentText'>";
-					appendItem+="<p><textarea class='viewTextArea' rows='1' id='viewTextArea"+commentInfo.comment_no+"'";
-					appendItem+="onkeydown='resize(this)' onkeyup='resize(this)' disabled>"+commentInfo.com_cont+"</textarea></p>";
-					appendItem+="</div><div class='commentInfo'><span class='commentDate comDate'>"+commentInfo.create_date+"</span>"
-					appendItem+="<span class='replyCom'><a href='#' role='button' class='comReplyBtn' id='comReplyBtn"+commentInfo.comment_no+"'>답글쓰기</a></span>";
-					appendItem+="<span class='comMod comToolBtn modReply' id='modReply"+commentInfo.comment_no+"'>";
-					appendItem+="<a href='#' role='button' class='modReplyBtn' id='modReplyBtn"+commentInfo.comment_no+"'";
-					appendItem+="onclick='fn_cancleMod(this,"+commentInfo.comment_no+")'>취소</a></span></div></div></li>";
+					let cnt = $("#comment_cnt").text();
+					$("#comment_cnt").text(Number(cnt)+1);
+					let commentInfo= JSON.parse(data);
+					console.log("commentInfo=", commentInfo);
+					let appendItem =
+					`<li id="${commentInfo.comment_no}" class="commentItem commentLi">
+					    <div class="commentbox">
+					        <div class="commentTool">
+					            <span class="comMod comToolBtn">
+					                <a href="#" role="button" onclick="fn_enable(this, ${commentInfo.comment_no})" id="comModBtn${commentInfo.comment_no}">
+					                    수정
+					                </a>
+					            </span>
+					            <span class="comDel comToolBtn">
+					                <a
+					                    href="${ctx}/group/board/deleteComment?group_id=${group_id}&article_no=${article_no}&comment_no=${commentInfo.comment_no}"
+					                    role="button"
+					                    id="comDelBtn${commentInfo.comment_no}"
+					                >
+					                    삭제
+					                </a>
+					            </span>
+					        </div>
+					        <a href="#" class="commentThumb">
+					            <img src="${ctx}/userimagedownload?user_id=${commentInfo.user_id}&user_img=${commentInfo.user_img}" alt="프로필사진" />
+					        </a>
+					        <div class="commentNick">
+					            <span class="commentNickInfo">
+					                <a href="#" role="button">
+					                    ${commentInfo.nickname}
+					                </a>
+					            </span>
+					        </div>
+					        <div class="commentText">
+					            <p>
+					                <textarea
+					                    class="viewTextArea"
+					                    rows="1"
+					                    id="viewTextArea${commentInfo.comment_no}"
+					                    onkeydown="resize(this)"
+					                    onkeyup="resize(this)"
+					                    disabled
+					                >${commentInfo.content}</textarea>
+					            </p>
+					        </div>
+					        <div class="commentInfo">
+					            <span class="commentDate comDate">${commentInfo.create_date}</span>
+					            <span class="replyCom">
+					                <a href="#" role="button" class="comReplyBtn" id="comReplyBtn${commentInfo.comment_no}">
+					                    답글쓰기
+					                </a>
+					            </span>
+					            <span class="comMod comToolBtn modReply" id="modReply${commentInfo.comment_no}">
+					                <a
+					                    href="#"
+					                    role="button"
+					                    class="modReplyBtn"
+					                    id="modReplyBtn${commentInfo.comment_no}"
+					                    onclick="fn_cancleMod(this, ${commentInfo.comment_no})"
+					                >
+					                    취소
+					                </a>
+					            </span>
+					        </div>
+					    </div>
+					</li>`;
+					
 					
 					$('.commentList').append(appendItem);
 					$('.com_cnt').text(commentInfo.com_cnt);

@@ -93,5 +93,29 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		return sqlSession.selectOne("getTotSearchBoard", searchMap);
 	}
+	
+	@Override
+	public int getNewCommentNo() throws DataAccessException {
+		
+		return sqlSession.selectOne("getNewCommenteNo");
+	}
+	
+	@Override
+	public void addComment(CommentVO commentVO) throws DataAccessException {
+		
+		sqlSession.insert("addComment", commentVO);
+	}
+	
+	@Override
+	public CommentVO getCommentVOByNo(int newCommentNo) throws DataAccessException {
+		
+		return sqlSession.selectOne("getCommentVOByNo", newCommentNo);
+	}
 
+	
+	@Override
+	public void increaseCommentCnt(int article_no) throws DataAccessException {
+		sqlSession.update("increaseCommentCnt", article_no);
+		
+	}
 }

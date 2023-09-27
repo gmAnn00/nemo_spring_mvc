@@ -195,11 +195,12 @@
 	            		${board.content}
 	            	</div>
 	            </div>
+	            
 	            <!-- 댓글 영역 -->
 	            <div id="commentArea" class="commentArea">
 	            	<input type="hidden" id="article_no" value="${board.article_no}">
 	            	<input type="hidden" id="group_id" value="${board.group_id}">
-	              	<p class="comment">댓글 <span class="com_cnt">${board.comment_cnt}</span></p>
+	              	<p class="comment">댓글 <span id="comment_cnt" class="com_cnt">${board.comment_cnt}</span></p>
 	              	<ul class="commentList">
 						<c:choose>
 					    	<c:when test="${!empty commentsList }">
@@ -302,9 +303,10 @@
 	                  <textarea placeholder="댓글을 남겨보세요" class="commentInboxText" rows="1" id="textArea" onkeydown="resize(this)" onkeyup="resize(this)"></textarea>
 	                </div>
 	                <div class="commentRegister">
-	                  <a href="#" role="button" class="button btnRegister" id="regBtn" onclick="fn_regComment()">등록</a>
+	                  <a href="javascript:void(0)" role="button" class="button btnRegister" id="regBtn" onclick="fn_addComment()">등록</a>
 	                </div>
 	              </div>
+	              
 	            </div>
 	          </div>
 	          <!-- 글 아래쪽 버튼 영역 -->

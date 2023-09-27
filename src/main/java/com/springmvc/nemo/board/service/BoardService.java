@@ -26,5 +26,7 @@ public interface BoardService {
 
 	public Map<String, Object> searchBoard(Map<String, Object> searchMap) throws DataAccessException;
 
+	public CommentVO addComment(CommentVO commentVO) throws DataAccessException;
+
 	
 }

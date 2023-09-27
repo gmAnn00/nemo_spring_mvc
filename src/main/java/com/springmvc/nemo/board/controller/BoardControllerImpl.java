@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.springmvc.nemo.board.service.BoardService;
 import com.springmvc.nemo.board.vo.BoardVO;
 import com.springmvc.nemo.board.vo.CommentVO;
@@ -293,6 +295,33 @@ public class BoardControllerImpl implements BoardController{
 		
 		return mav;
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/group/board/addcomment", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@Override
+	public String addComment(
+			@RequestParam("group_id") int group_id,
+			@ModelAttribute CommentVO commentVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		commentVO.setUser_id(user_id);
+		
+		CommentVO comment = boardService.addComment(commentVO);
+		
+		Gson gson = new Gson();
+		String commentInfo = gson.toJson(comment);
+		
+		//logger.info("commentInfo={}", commentInfo);
+		
+		return commentInfo;
+	}
+	
+	
+	
 	
 	
 	

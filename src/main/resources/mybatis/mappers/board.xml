@@ -157,4 +157,29 @@
 	</select>
 	
 	
+	
+	<select id="getNewCommenteNo" resultType="int">
+		<![CDATA[
+			SELECT nvl(max(comment_no), 0)+1 FROM COMMENT_TBL
+		 ]]>
+	</select>
+	
+	
+	<insert id="addComment" parameterType="commentVO">
+		INSERT INTO COMMENT_TBL(comment_no, article_no, user_id, create_date, content, parent_no)
+		VALUES (#{comment_no}, #{article_no}, #{user_id}, sysdate, #{content}, #{parent_no})
+	</insert>
+	
+	
+	<select id="getCommentVOByNo" parameterType="int" resultType="commentVO">
+		SELECT c.*, u.nickname, u.user_img FROM COMMENT_TBL c, USER_TBL u
+		WHERE c.comment_no=#{newCommentNo} AND c.user_id = u.user_id
+	</select>
+	
+	
+	<update id="increaseCommentCnt" parameterType="int">
+		UPDATE BOARD_TBL SET comment_cnt=comment_cnt+1 WHERE article_no=#{article_no}
+	</update>
+	
+	
 </mapper>

@@ -34,5 +34,13 @@ public interface BoardDAO {
 
 	public int getTotSearchBoard(Map<String, Object> searchMap) throws DataAccessException;
 
+	public int getNewCommentNo() throws DataAccessException;
+
+	public void addComment(CommentVO commentVO) throws DataAccessException;
+
+	public CommentVO getCommentVOByNo(int newCommentNo) throws DataAccessException;
+
+	public void increaseCommentCnt(int article_no) throws DataAccessException;
+
 	 
 }

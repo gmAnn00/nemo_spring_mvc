@@ -174,6 +174,22 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	
+	
+	@Override
+	public CommentVO addComment(CommentVO commentVO) throws DataAccessException {
+		
+		int newCommentNo = boardDAO.getNewCommentNo();
+		commentVO.setComment_no(newCommentNo);
+		
+		boardDAO.addComment(commentVO);
+		
+		int article_no = commentVO.getArticle_no();
+		boardDAO.increaseCommentCnt(article_no);
+		
+		return boardDAO.getCommentVOByNo(newCommentNo);
+	}
+	
+	
 	//temp 에서 이미지 폴더 이동 하는 메소드 
 	private void moveImageDir(List<String> fileNameList, int article_no) {
 	//articleno로 폴더 생성
