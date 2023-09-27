@@ -72,7 +72,8 @@ public class MyPageDAOImpl implements MyPageDAO{
 	@Override
 	public void delUser(UserVO userVO) throws DataAccessException {
 		
-		sqlSession.update("mapper.myPage.delUser", userVO);
+//		sqlSession.update("mapper.myPage.delUser", userVO);
+		sqlSession.delete("mapper.myPage.delUser", userVO);
 	}
 	
 	@Override

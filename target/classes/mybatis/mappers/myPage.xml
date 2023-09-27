@@ -52,9 +52,14 @@
       ]]>
 	</select>
 	
-	<update id="delUser" parameterType="userVO">
+	<update id="delUserBefore" parameterType="userVO">
 		UPDATE USER_TBL SET cancel=1 WHERE user_id=#{user_id} AND password=#{password} AND cancel=0
 	</update>
+
+	
+	<delete id="delUser">
+		DELETE FROM USER_TBL WHERE user_id=#{user_id}
+	</delete>
 
 
 	<select id="getCommingSchedules" parameterType="String" resultType="commingScheduleVO">
