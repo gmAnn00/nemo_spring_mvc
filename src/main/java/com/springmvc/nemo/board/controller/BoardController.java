@@ -78,6 +78,13 @@ public interface BoardController {
 			@RequestParam("group_id") int group_id,
 			@ModelAttribute CommentVO commentVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public String addReply(
+			@RequestParam("group_id") int group_id,
+			@ModelAttribute CommentVO commentVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
 	/*
 	public ModelAndView modComment(
 			@RequestParam("group_id") int group_id,

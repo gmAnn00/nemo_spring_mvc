@@ -1,7 +1,7 @@
 package com.springmvc.nemo.board.vo;
 
-import java.sql.Date;
 import java.util.Arrays;
+import java.util.Date;
 
 public class BoardVO {
 
