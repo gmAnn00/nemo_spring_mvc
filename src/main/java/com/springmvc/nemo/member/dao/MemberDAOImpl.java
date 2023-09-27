@@ -38,7 +38,8 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public void cancelGroup(JoinVO joinVO) throws DataAccessException {
 		int group_id = joinVO.getGroup_id();
-		sqlSession.update("mapper.member.cancelGroup", joinVO);
+//		sqlSession.update("mapper.member.cancelGroup", joinVO);
+		sqlSession.delete("mapper.member.cancelGroup", joinVO);
 		sqlSession.update("mapper.member.decreaseCurrentMemNo", group_id);
 	}
 	

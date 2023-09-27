@@ -37,12 +37,18 @@
 	</update>
 	
 	
-	<update id="cancelGroup" parameterType="joinVO">
+	<update id="cancelGroupBefore" parameterType="joinVO">
 		<![CDATA[
 			UPDATE JOIN_TBL SET cancel=1
 			WHERE group_id=#{group_id} AND user_id=#{user_id}
 		]]>
 	</update>
+	
+	
+	<delete id="cancelGroup" parameterType="joinVO">
+		DELETE FROM JOIN_TBL
+		WHERE group_id=#{group_id} AND user_id=#{user_id}
+	</delete>
 	
 	
 	<delete id="cancelWait" parameterType="waitListVO">
