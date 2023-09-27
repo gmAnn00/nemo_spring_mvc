@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false"
-    import="java.util.*, nemo.*"
+    import="java.util.*"
     %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -32,17 +32,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>네모: 고객센터</title>
-    <link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-    <link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-    <link rel="stylesheet" href="${contextPath}/css/common.css" />
-    <link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-    <link rel="stylesheet" href="${contextPath}/css/sectionTitle.css" />
-    <link rel="stylesheet" href="${contextPath}/css/helpQnA.css" />
-    <script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
+    <link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/sectionTitle.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/helpQnA.css" />
+    <script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
     <script src="https://kit.fontawesome.com/97cbadfe25.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="${contextPath}/js/header.js"></script>
-    <script src="${contextPath}/js/helpQnA.js"></script>
+    <script src="${contextPath}/resources/js/header.js"></script>
+    <script src="${contextPath}/resources/js/helpQnA.js"></script>
   </head>
   <body>
     <!-- header 시작 -->
@@ -62,10 +62,32 @@
 		        <div class="sc2_menu_contents">
 		          <div class="sc2_menu">
 		            <h2 class="sc2_menu_title">관리자</h2>
-		      
-		            
-		            <!-- include -->
-		            <jsp:include page="/views/qna/includes/admin_header.jsp"/>
+		            <ul class="sc2_menu_list">
+                        	<li>
+                                <a href="${contextPath}/admin/adminuser">
+                                    <div class="sc2_icon_menu">
+                                        <div class="menu_submenu_name"><span>회원 관리</span></div>
+                                        <i class="fa-solid fa-angle-right menu_angle"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="${contextPath}/admin/admingroup">
+                                    <div class="sc2_icon_menu">
+                                        <div class="menu_submenu_name"><span>소모임 관리</span></div>
+                                        <i class="fa-solid fa-angle-right menu_angle"></i>
+                                    </div>
+                                </a>
+                            </li>                            
+                            <li>
+                                <a href="${contextPath}/qna">
+                                    <div class="sc2_icon_menu">
+                                        <div class="menu_submenu_name submenu_select"><span>고객센터 Q&A</span></div>
+                                        <i class="fa-solid fa-minus submenu_select"></i>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
 		          </div>
 		        </div>
 	        	<!-- 메뉴바 종료 -->
@@ -77,7 +99,7 @@
 	            <h2 class="sc2_menu_title">고객센터</h2>
 	            <ul class="sc2_menu_list">
 	              <li>
-	                <a href="${contextPath}/viewQna">
+	                <a href="${contextPath}/qna">
 	                  <div class="sc2_icon_menu">
 	                    <div class="menu_submenu_name submenu_select"><span>Q&A</span></div>
 	                    <i class="fa-solid fa-minus submenu_select"></i>
@@ -99,7 +121,7 @@
 
             <!-- nav 바 시작 -->
             <div class="nav_bar">
-              <a href="index.html">
+              <a href="/index">
                 <i class="fa-solid fa-house nav_icon"></i>
               </a>
               <i class="fa-solid fa-angle-right nav_icon"></i>
@@ -112,7 +134,7 @@
 
 		  
 		  <div class="boardArea">
-			  <form action="${contextPath}/viewQna/search" id="search" name="search" method="get">
+			  <form action="${contextPath}/qna/search" id="search" name="search" method="get">
 		          <div class="search">
 		            <!-- 검색 부분 필요할 듯 , input 태그에 name, id 넣어야 함 -->
 		            <select name="filter" id="searchSelect">
