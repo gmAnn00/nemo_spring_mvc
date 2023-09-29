@@ -13,6 +13,8 @@ public interface QnaService {
 	public QnaVO getQna(int qna_no) throws DataAccessException;
 
 	public int addQna(QnaVO qnaVO) throws DataAccessException;
+
+	public void modQna(QnaVO qnaVO) throws DataAccessException;
 	
 
 }

@@ -115,6 +115,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     <div class="boardWriteArea">
                         <form action="${contextPath}/qna/modqna" method="post" name="qnaArticleForm" id="qnaArticleForm">
                             <input type="hidden" name="qna_no" value="${qna.qna_no}" />
+                            <input type="hidden" name="user_id" value="${qna.user_id}" />
                             
                             <!-- 제목 영역 -->
                             <div class="articleWritingTitle">

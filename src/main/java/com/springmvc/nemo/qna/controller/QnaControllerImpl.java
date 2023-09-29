@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -172,6 +173,34 @@ public class QnaControllerImpl implements QnaController{
 		mav.addObject("qna", qna);
 		
 		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/qna/modqna", method = RequestMethod.POST)
+	@Override
+	public ModelAndView modQna(
+			@ModelAttribute QnaVO qnaVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+
+		if(!user_id.equals(qnaVO.getUser_id())) {
+			mav.addObject("data", new Message("글쓴이만 문의사항을 수정할 수 있습니다.",
+					request.getContextPath()+"/qna"));
+			return mav;
+		}
+		
+		qnaService.modQna(qnaVO);
+		mav.addObject("data", new Message("문의사항을 수정했습니다.",
+				request.getContextPath()+"/qna/viewqna?&qna_no="+qnaVO.getQna_no()));
+		
+		
+		return mav;
+
 	}
 	
 	

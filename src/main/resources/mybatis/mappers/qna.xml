@@ -51,6 +51,12 @@
 			VALUES(#{qna_no}, #{user_id}, 0, #{title}, #{content}, sysdate)
 		]]>
 	</insert>
+	
+	
+	<update id="modQna" parameterType="qnaVO">
+		UPDATE QNA_TBL SET title=#{title}, content=#{content}
+		WHERE qna_no=#{qna_no}
+	</update>
 
 	
 	

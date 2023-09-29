@@ -21,4 +21,6 @@ public interface QnaDAO {
 
 	public void addQna(QnaVO qnaVO) throws DataAccessException;
 
+	public void modQna(QnaVO qnaVO) throws DataAccessException;
+
 }

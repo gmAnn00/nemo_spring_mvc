@@ -55,5 +55,12 @@ public class QnaDAOImpl implements QnaDAO{
 		
 		sqlSession.insert("mapper.qna.addQna", qnaVO);
 	}
+	
+	
+	@Override
+	public void modQna(QnaVO qnaVO) throws DataAccessException {
+		
+		sqlSession.update("mapper.qna.modQna", qnaVO);
+	}
 
 }

@@ -40,4 +40,12 @@ public interface QnaController {
 	public ModelAndView modQnaForm(
 			@RequestParam("qna_no") int qna_no,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
+	public ModelAndView modQna(
+			@ModelAttribute QnaVO qnaVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
+	
 }
