@@ -145,6 +145,36 @@ public class QnaControllerImpl implements QnaController{
 	}
 	
 	
+	@RequestMapping(value = "/qna/modqnaform")
+	@Override
+	public ModelAndView modQnaForm(
+			@RequestParam("qna_no") int qna_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		
+		QnaVO qna = qnaService.getQna(qna_no);
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(!user_id.equals(qna.getUser_id())) {
+			mav.setViewName("message");
+			mav.addObject("data", new Message("글쓴이만 글을 수정할 수 있습니다.",
+					request.getContextPath()+"/qna"));
+			return mav;
+		}
+		
+		
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		mav.addObject("qna", qna);
+		
+		return mav;
+	}
+	
+	
 	
 	
 	private void deleteTempImg(String[] imageName) {

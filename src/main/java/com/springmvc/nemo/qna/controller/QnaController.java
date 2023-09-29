@@ -35,4 +35,9 @@ public interface QnaController {
 			@RequestParam("isImgExist") boolean isImgExist,
 			@RequestParam(value = "imageName", required = false) String[] imageName,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
+	public ModelAndView modQnaForm(
+			@RequestParam("qna_no") int qna_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
