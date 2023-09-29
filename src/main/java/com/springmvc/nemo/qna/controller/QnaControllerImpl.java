@@ -128,7 +128,7 @@ public class QnaControllerImpl implements QnaController{
 	}
 	
 	
-	@RequestMapping(value = "/qna/canceladdqna")
+	@RequestMapping(value = "/qna/canceladdqna", method = RequestMethod.POST)
 	@Override
 	public ModelAndView cancelAddQna(
 			@RequestParam("isImgExist") boolean isImgExist,
@@ -146,7 +146,7 @@ public class QnaControllerImpl implements QnaController{
 	}
 	
 	
-	@RequestMapping(value = "/qna/modqnaform")
+	@RequestMapping(value = "/qna/modqnaform", method = RequestMethod.GET)
 	@Override
 	public ModelAndView modQnaForm(
 			@RequestParam("qna_no") int qna_no,
@@ -201,6 +201,24 @@ public class QnaControllerImpl implements QnaController{
 		
 		return mav;
 
+	}
+	
+	
+	@RequestMapping(value = "/qna/cancelmodqna", method = RequestMethod.POST)
+	@Override
+	public ModelAndView cancelModQna(
+			@RequestParam("qna_no") int qna_no,
+			@RequestParam("isImgExist") boolean isImgExist,
+			@RequestParam(value = "imageName", required = false) String[] imageName,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		if(isImgExist) {
+			deleteTempImg(imageName);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/qna/viewqna?&qna_no="+qna_no);
+		return mav;
 	}
 	
 	

@@ -46,6 +46,12 @@ public interface QnaController {
 			@ModelAttribute QnaVO qnaVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	public ModelAndView cancelModQna(
+			@RequestParam("qna_no") int qna_no,
+			@RequestParam("isImgExist") boolean isImgExist,
+			@RequestParam(value = "imageName", required = false) String[] imageName,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	
 	
 }

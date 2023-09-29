@@ -97,7 +97,7 @@ function uploadSummerNoteImage(file, el) {
     });
 }
 
-function fn_cancel() {
+function fn_cancel(qna_no) {
     if (!confirm("문의사항 수정을 취소하시겠습니까?")) {
         return;
     }
@@ -106,6 +106,12 @@ function fn_cancel() {
     cancelForm.name = "cancelForm";
     cancelForm.method = "post";
     cancelForm.action = "/nemo/qna/cancelmodqna";
+    
+    let qnaNo = document.createElement("input");
+    qnaNo.setAttribute("type", "hidden");
+    qnaNo.setAttribute("name", "qna_no");
+    qnaNo.setAttribute("value", qna_no);
+    cancelForm.appendChild(qnaNo);
 
     if (jsonArray.length > 0) {
         for (var i = 0; i < jsonArray.length; i++) {

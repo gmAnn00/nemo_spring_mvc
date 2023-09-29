@@ -133,7 +133,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                             <!-- 등록 버튼 -->
                             <div class="btnRegister">
                                 <a href="#" role="button" class="button">수정</a>
-                                <a href="javascript:void(0)" role="button" class="buttonCancle" onclick="fn_cancel()">취소</a>
+                                <a href="javascript:void(0)" role="button" class="buttonCancle" onclick="fn_cancel(${qna.qna_no})">취소</a>
                             </div>
                         </form>
                     </div>
