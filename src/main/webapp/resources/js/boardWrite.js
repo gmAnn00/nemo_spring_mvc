@@ -111,7 +111,11 @@ function uploadSummerNoteImage(file, el) {
 }
 
 function fn_cancel(group_id) {
-    //console.log("여긴오니???????????????");
+    
+    if(!confirm("글 작성을 취소하시겠습니까?")){
+    	return;
+    }
+    
     let cancelForm = document.createElement("form");
     cancelForm.name = "cancelForm";
     cancelForm.method = "post";
