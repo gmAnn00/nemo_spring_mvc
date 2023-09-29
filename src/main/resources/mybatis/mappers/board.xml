@@ -198,7 +198,10 @@
 	
 	
 	<delete id="delComment" parameterType="int">
-		DELETE FROM COMMENT_TBL WHERE comment_no=#{comment_no}
+		DELETE FROM COMMENT_TBL WHERE comment_no
+			IN (SELECT comment_no FROM COMMENT_TBL
+				START WITH comment_no=#{comment_no}
+				CONNECT BY PRIOR comment_no=parent_no)
 	</delete>
 	
 	
