@@ -43,7 +43,7 @@
     <script src="https://kit.fontawesome.com/97cbadfe25.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="${contextPath}/resources/js/header.js"></script>
-    <script src="${contextPath}/resources/js/helpQnA.js"></script>
+    <script src="${contextPath}/resources/js/qna.js"></script>
   </head>
   <body>
     <!-- header 시작 -->
@@ -144,7 +144,7 @@
 		              <option value="writer">작성자</option>
 		            </select>
 		            <input type="text" name="keyword" id="keyword" onkeyup="if(window.event.keyCode==13){submitSearchForm()}"/>
-		            <a href="#" role="button" class="button searchBtn" type="submit" onclick="submitSearchForm()">검색</a>
+		            <button class="button searchBtn" type="submit" >검색</button>
 		          </div>
 		       </form>
 	          

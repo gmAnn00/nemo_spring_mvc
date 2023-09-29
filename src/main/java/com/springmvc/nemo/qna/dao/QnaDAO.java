@@ -27,4 +27,12 @@ public interface QnaDAO {
 
 	public void delQna(int qna_no) throws DataAccessException;
 
+	public List<QnaVO> adminSearchQna(Map<String, Object> searchMap) throws DataAccessException;
+	
+	public List<QnaVO> userSearchQna(Map<String, Object> searchMap) throws DataAccessException;
+
+	public int getTotAdminSearchQna(Map<String, Object> searchMap) throws DataAccessException;
+	
+	public int getTotUserSearchQna(Map<String, Object> searchMap) throws DataAccessException;
+
 }

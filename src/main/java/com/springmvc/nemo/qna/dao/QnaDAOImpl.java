@@ -77,5 +77,32 @@ public class QnaDAOImpl implements QnaDAO{
 		sqlSession.delete("mapper.qna.delQna", qna_no);
 	}
 	
+	@Override
+	public List<QnaVO> adminSearchQna(Map<String, Object> searchMap) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.qna.adminSearchQna", searchMap);
+	}
+	
+	@Override
+	public List<QnaVO> userSearchQna(Map<String, Object> searchMap) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.qna.userSearchQna", searchMap);
+	}
+	
+	@Override
+	public int getTotAdminSearchQna(Map<String, Object> searchMap) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.qna.getTotAdminSearchQna", searchMap);
+	}
+	
+	@Override
+	public int getTotUserSearchQna(Map<String, Object> searchMap) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.qna.getTotUserSearchQna", searchMap);
+	}
+	
+	
+	
+	
 
 }

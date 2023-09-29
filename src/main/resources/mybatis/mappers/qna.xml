@@ -73,4 +73,142 @@
 				CONNECT BY PRIOR qna_no=parent_no)
 	</delete>
 	
+	
+	<select id="adminSearchQna" parameterType="java.util.Map" resultType="qnaVO">
+		SELECT * FROM (SELECT ROWNUM AS recNum, LVL, qna_no, parent_no, title, user_id, create_date, nickname
+		FROM (SELECT LEVEL AS LVL, q.qna_no, q.parent_no, q.title, q.user_id, q.create_date, u.nickname
+		        FROM qna_tbl q, user_tbl u 
+		        WHERE
+		        
+		        <choose>
+		         	<when test="filter.equals('title')">
+		         		q.title LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+		         	
+		         	<when test="filter.equals('content')">
+		         		q.content LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+		         	
+		         	<when test="filter.equals('writer')">
+		         		u.nickname LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+        		 </choose>
+		        
+		        q.user_id=u.user_id START WITH q.parent_no=0
+		        CONNECT BY PRIOR q.qna_no=q.parent_no ORDER SIBLINGS BY q.qna_no DESC))
+		WHERE recNum BETWEEN (#{section}-1)*100+(#{pagenum}-1)*10+1 AND (#{section}-1)*100+#{pagenum}*10
+	</select>
+	
+	
+	<select id="userSearchQna" parameterType="java.util.Map" resultType="qnaVO">
+		SELECT * FROM (SELECT ROWNUM AS recNum, LVL, qna_no, parent_no, title, user_id, create_date, nickname
+		    FROM (SELECT LEVEL AS LVL, q.qna_no, q.parent_no, q.title, q.user_id, q.create_date, u.nickname
+		    	FROM qna_tbl q, user_tbl u
+		    WHERE
+		    (
+		    <choose>
+		         	<when test="filter.equals('title')">
+		         		q.title LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+		         	
+		         	<when test="filter.equals('content')">
+		         		q.content LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+		         	
+		         	<when test="filter.equals('writer')">
+		         		u.nickname LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+        		 </choose>
+		    
+		    q.user_id=u.user_id AND q.user_id = #{user_id})
+		    	OR 
+		    	(
+		    	<choose>
+		         	<when test="filter.equals('title')">
+		         		q.title LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+		         	
+		         	<when test="filter.equals('content')">
+		         		q.content LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+		         	
+		         	<when test="filter.equals('writer')">
+		         		u.nickname LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+        		 </choose>
+		    	q.parent_no IN (SELECT qna_no FROM qna_tbl WHERE user_id=#{user_id})
+		    	)
+		    START WITH q.parent_no=0 CONNECT BY PRIOR q.qna_no=q.parent_no ORDER SIBLINGS BY q.qna_no DESC))
+	    WHERE recNum BETWEEN (#{section}-1)*100+(#{pagenum}-1)*10+1 AND (#{section}-1)*100+#{pagenum}*10
+	</select>
+	
+	
+	<select id="getTotAdminSearchQna" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM (SELECT ROWNUM AS recNum, LVL, qna_no, parent_no, title, user_id, create_date, nickname
+		FROM (SELECT LEVEL AS LVL, q.qna_no, q.parent_no, q.title, q.user_id, q.create_date, u.nickname
+		        FROM qna_tbl q, user_tbl u 
+		        WHERE
+		        
+		        <choose>
+		         	<when test="filter.equals('title')">
+		         		q.title LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+		         	
+		         	<when test="filter.equals('content')">
+		         		q.content LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+		         	
+		         	<when test="filter.equals('writer')">
+		         		u.nickname LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+        		 </choose>
+		        
+		        q.user_id=u.user_id START WITH q.parent_no=0
+		        CONNECT BY PRIOR q.qna_no=q.parent_no ORDER SIBLINGS BY q.qna_no DESC))
+		WHERE recNum BETWEEN (#{section}-1)*100+(#{pagenum}-1)*10+1 AND (#{section}-1)*100+#{pagenum}*10
+	</select>
+	
+	
+	<select id="getTotUserSearchQna" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM (SELECT ROWNUM AS recNum, LVL, qna_no, parent_no, title, user_id, create_date, nickname
+		    FROM (SELECT LEVEL AS LVL, q.qna_no, q.parent_no, q.title, q.user_id, q.create_date, u.nickname
+		    	FROM qna_tbl q, user_tbl u
+		    WHERE
+		    (
+		    <choose>
+		         	<when test="filter.equals('title')">
+		         		q.title LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+		         	
+		         	<when test="filter.equals('content')">
+		         		q.content LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+		         	
+		         	<when test="filter.equals('writer')">
+		         		u.nickname LIKE '%'||#{keyword}||'%' AND
+		         	</when>
+        		 </choose>
+		    
+		    q.user_id=u.user_id AND q.user_id = #{user_id})
+		    	OR (
+		    		<choose>
+			         	<when test="filter.equals('title')">
+			         		q.title LIKE '%'||#{keyword}||'%' AND
+			         	</when>
+			         	
+			         	<when test="filter.equals('content')">
+			         		q.content LIKE '%'||#{keyword}||'%' AND
+			         	</when>
+			         	
+			         	<when test="filter.equals('writer')">
+			         		u.nickname LIKE '%'||#{keyword}||'%' AND
+			         	</when>
+        			 </choose>
+		    		q.parent_no IN (SELECT qna_no FROM qna_tbl WHERE user_id=#{user_id})
+		    	)
+		    START WITH q.parent_no=0 CONNECT BY PRIOR q.qna_no=q.parent_no ORDER SIBLINGS BY q.qna_no DESC))
+	    WHERE recNum BETWEEN (#{section}-1)*100+(#{pagenum}-1)*10+1 AND (#{section}-1)*100+#{pagenum}*10
+	</select>
+	
+	
 </mapper>

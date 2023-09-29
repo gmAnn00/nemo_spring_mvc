@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.springmvc.nemo.board.vo.BoardVO;
 import com.springmvc.nemo.qna.dao.QnaDAO;
 import com.springmvc.nemo.qna.vo.QnaVO;
 
@@ -153,6 +152,32 @@ public class QnaServiceImpl implements QnaService {
 		
 	}
 
+	
+	@Override
+	public Map<String, Object> searchQna(Map<String, Object> searchMap) throws DataAccessException {
+
+		Map<String, Object> qnaMap = new HashMap<String, Object>();
+		
+		List<QnaVO> qnaList = new ArrayList<QnaVO>();
+		int totQna = 0;
+		
+		int admin = (Integer) searchMap.get("admin");
+		
+		if(admin==1) {
+			qnaList = qnaDAO.adminSearchQna(searchMap);
+			totQna = qnaDAO.getTotAdminSearchQna(searchMap);
+		}else {
+			qnaList = qnaDAO.userSearchQna(searchMap);
+			totQna = qnaDAO.getTotUserSearchQna(searchMap);
+		}
+		
+		
+		qnaMap.put("qnaList", qnaList);
+		qnaMap.put("totQna", totQna);
+		
+		return qnaMap;
+		
+	}
 	
 	
 	// temp 에서 이미지 폴더 이동 하는 메소드

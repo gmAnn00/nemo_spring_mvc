@@ -289,6 +289,43 @@ public class QnaControllerImpl implements QnaController{
 	}
 	
 	
+	@RequestMapping(value = "/qna/qnasearch", method = RequestMethod.GET)
+	@Override
+	public ModelAndView qnaSearch(
+			@RequestParam(value = "filter", required = false) String filter,
+			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "section", defaultValue = "1", required = false) int section,
+			@RequestParam(value = "pagenum", defaultValue = "1", required = false) int pagenum,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		int admin = (Integer) session.getAttribute("admin");
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("filter", filter);
+		searchMap.put("keyword", keyword);
+		searchMap.put("section", section);
+		searchMap.put("pagenum", pagenum);
+		searchMap.put("user_id", user_id);
+		searchMap.put("admin", admin);
+		
+		
+		Map<String, Object> qnaMap = qnaService.searchQna(searchMap);
+		qnaMap.put("filter", filter);
+		qnaMap.put("keyword", keyword);
+		qnaMap.put("section", section);
+		qnaMap.put("pagenum", pagenum);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/qna/qna");
+		mav.addObject("qnaMap", qnaMap);
+		
+		return mav;
+		
+	}
+	
+	
 	
 	private void deleteTempImg(String[] imageName) {
 		try {

@@ -19,6 +19,8 @@ public interface QnaService {
 	public boolean getAccessible(Map<String, Object> accessMap) throws DataAccessException;
 
 	public void delQna(int qna_no) throws DataAccessException;
+
+	public Map<String, Object> searchQna(Map<String, Object> searchMap) throws DataAccessException;
 	
 
 }

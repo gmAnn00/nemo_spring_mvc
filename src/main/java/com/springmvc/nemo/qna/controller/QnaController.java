@@ -59,6 +59,14 @@ public interface QnaController {
 	public ModelAndView delQna(
 			@RequestParam("qna_no") int qna_no,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
+	public ModelAndView qnaSearch(
+			@RequestParam(value = "filter", required = false) String filter,
+			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "section", defaultValue = "1", required = false) int section,
+			@RequestParam(value = "pagenum", defaultValue = "1", required = false) int pagenum,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 			
 	
 }

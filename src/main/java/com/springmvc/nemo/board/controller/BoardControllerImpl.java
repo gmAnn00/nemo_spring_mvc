@@ -284,8 +284,8 @@ public class BoardControllerImpl implements BoardController{
 		
 		
 		Map<String, Object> boardMap = boardService.searchBoard(searchMap);
-		searchMap.put("filter", filter);
-		searchMap.put("keyword", keyword);
+		boardMap.put("filter", filter);
+		boardMap.put("keyword", keyword);
 		boardMap.put("section", section);
 		boardMap.put("pagenum", pagenum);
 		
