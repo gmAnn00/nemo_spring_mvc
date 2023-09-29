@@ -5,18 +5,19 @@
     %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<c:set var="articlesList" value="${articleMap.articlesList}" />
-<c:set var="totArticles" value="${articleMap.totArticles}" />
-<c:set var="section" value="${articleMap.section }" />
-<c:set var="pageNum" value="${articleMap.pageNum }" />
-<c:set var="qna" value="${articleMap.qna }" />
+<c:set var="qnaList" value="${qnaMap.qnaList}" />
+<c:set var="totQna" value="${qnaMap.totQna}" />
+<c:set var="section" value="${qnaMap.section }" />
+<c:set var="pagenum" value="${qnaMap.pagenum }" />
+<c:set var="qna" value="${qnaMap.qna }" />
 
 <c:choose>
-	<c:when test="${section >totArticles/100 }">
-		<c:set var="endValue" value="${(totArticles mod 100)%10==0 ? (totArticles mod 100)/10 : (totArticles mod 100)/10 +1}"/>
+	<c:when test="${section >totQna/100 }">
+		<c:set var="endValue" value="${(totQna mod 100)%10==0 ? (totQna mod 100)/10 : (totQna mod 100)/10 +1}"/>
 	</c:when>
 	
 	<c:otherwise>
@@ -134,7 +135,7 @@
 
 		  
 		  <div class="boardArea">
-			  <form action="${contextPath}/qna/search" id="search" name="search" method="get">
+			  <form action="${contextPath}/qna/qnasearch" id="search" name="search" method="get">
 		          <div class="search">
 		            <!-- 검색 부분 필요할 듯 , input 태그에 name, id 넣어야 함 -->
 		            <select name="filter" id="searchSelect">
@@ -157,17 +158,17 @@
 	              </tr>
 	              <tbody>
 	              	<c:choose>
-	              		<c:when test="${empty articlesList}">
+	              		<c:when test="${empty qnaList}">
 	              			<tr>
 	              				<td colspan="6" class="emptyList">등록된 글이 없습니다.</td>
 	              			</tr>
 	              		</c:when>
-	              		<c:when test="${!empty articlesList}">
-	              			<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
+	              		<c:when test="${!empty qnaList}">
+	              			<c:forEach var="article" items="${qnaList}" varStatus="articleNum">
 				                <tr>
-				                	<!-- <td>${totArticles-(pageNum-1)*10+articleNum.count}</td> -->
-				                	<!-- <td>${totArticles-(section-1)*10-articleNum.index}</td>  -->
-				                  <td>${(totArticles-(pageNum-1)*10-articleNum.index)-((section-1)*100)}</td>
+				                	<!-- <td>${totQna-(pagenum-1)*10+articleNum.count}</td> -->
+				                	<!-- <td>${totQna-(section-1)*10-articleNum.index}</td>  -->
+				                  <td>${(totQna-(pagenum-1)*10-articleNum.index)-((section-1)*100)}</td>
 				                  <td>
 				                    <div class="titleArea">
 				                    	<div class="titleInner">
@@ -176,10 +177,10 @@
 					                        		<c:forEach begin="1" end="${article.level-1}" step="1">
 									               		<span style="padding-left: 10px"></span>
 					                        		</c:forEach>
-					                        		└ Re : <a href="${contextPath}/viewQna/QnAView.do?qna_id=${article.qna_id}">${article.title}</a>
+					                        		└ Re : <a href="${contextPath}/qna/viewqna?qna_no=${article.qna_no}">${article.title}</a>
 					                        	</c:when>
 					                        	<c:otherwise>
-					                        		<a href="${contextPath}/viewQna/QnAView.do?qna_id=${article.qna_id}">${article.title}</a>
+					                        		<a href="${contextPath}/qna/viewqna?qna_no=${article.qna_no}">${article.title}</a>
 					                        	</c:otherwise>
 					                        </c:choose>
 					                      </a>
@@ -187,8 +188,8 @@
 					                    </div>
 				                    </div>
 				                  </td>
-				                  <td>${article.userVO.nickname}</td>
-				                  <td>${article.create_date}</td>
+				                  <td>${article.nickname}</td>
+				                  <td><fmt:formatDate value="${article.create_date}" pattern="yyyy-MM-dd" /></td>
 				                  
 				                </tr>
 			            	</c:forEach>
@@ -198,29 +199,29 @@
 	            </table>
 	            <c:if test="${admin eq 0}">
 		            <div class="bottomBtn">
-		              <a href="${contextPath}/viewQna/QnAWrite.do" role="button" class="button">글쓰기</a>
+		              <a href="${contextPath}/qna/qnaform" role="button" class="button">글쓰기</a>
 		            </div>
 	            </c:if>
 	            
 	            <div class="pagenation">
-					<c:if test="${totArticles != 0}">
+					<c:if test="${totQna != 0}">
 						<c:forEach var="page" begin="1" end="${endValue}" step="1">
 							<c:if test="${section>1 && page==1}">
-								<span class="paging prev"><a href="${contextPath}/viewQna?section=${section-1}&pageNum=10">&lt</a></span>
+								<span class="paging prev"><a href="${contextPath}/qna?section=${section-1}&pagenum=10">&lt</a></span>
 							</c:if>
 								
 							<c:choose>
-								<c:when test="${page==pageNum}">
-									<span class="paging currentPage"><a href="${contextPath}/viewQna?section=${section}&pageNum=${page}">${(section-1)*10+page}</a></span>
+								<c:when test="${page==pagenum}">
+									<span class="paging currentPage"><a href="${contextPath}/qna?section=${section}&pagenum=${page}">${(section-1)*10+page}</a></span>
 								</c:when>
 								
 								<c:otherwise>
-									<span class="paging notCurrent"><a href="${contextPath}/viewQna?section=${section}&pageNum=${page}">${(section-1)*10+page}</a></span>
+									<span class="paging notCurrent"><a href="${contextPath}/qna?section=${section}&pagenum=${page}">${(section-1)*10+page}</a></span>
 								</c:otherwise>
 							</c:choose>
 								
-							<c:if test="${page==10 and totArticles/100>section}">
-								<span class="paing next"><a href="${contextPath}/viewQna?section=${section+1}&pageNum=1">&gt</a></span>
+							<c:if test="${page==10 and totQna/100>section}">
+								<span class="paing next"><a href="${contextPath}/qna?section=${section+1}&pagenum=1">&gt</a></span>
 							</c:if>
 						</c:forEach>
 					</c:if>

@@ -5,8 +5,30 @@
    
 <mapper namespace="mapper.qna">
 
-
+	<select id="getTotQna" resultType="int">
+		SELECT count(*) FROM QNA_TBL
+	</select>
 	
+	
+	<select id="getAdminQnaList" parameterType="java.util.Map" resultType="qnaVO">
+		SELECT * FROM (SELECT ROWNUM AS recNum, LVL, qna_no, parent_no, title, user_id, create_date, nickname
+		FROM (SELECT LEVEL AS LVL, q.qna_no, q.parent_no, q.title, q.user_id, q.create_date, u.nickname
+		        FROM qna_tbl q, user_tbl u 
+		        WHERE q.user_id=u.user_id START WITH q.parent_no=0
+		        CONNECT BY PRIOR q.qna_no=q.parent_no ORDER SIBLINGS BY q.qna_no DESC))
+		WHERE recNum BETWEEN (#{section}-1)*100+(#{pagenum}-1)*10+1 AND (#{section}-1)*100+#{pagenum}*10
+	</select>
+	
+	
+	<select id="getUserQnaList" parameterType="java.util.Map" resultType="qnaVO">
+		SELECT * FROM (SELECT ROWNUM AS recNum, LVL, qna_no, parent_no, title, user_id, create_date, nickname
+		    FROM (SELECT LEVEL AS LVL, q.qna_no, q.parent_no, q.title, q.user_id, q.create_date, u.nickname
+		    	FROM qna_tbl q, user_tbl u
+		    WHERE q.user_id=u.user_id AND q.user_id = #{user_id}
+		    	OR q.parent_no IN (SELECT qna_no FROM qna_tbl WHERE user_id=#{user_id})
+		    START WITH q.parent_no=0 CONNECT BY PRIOR q.qna_no=q.parent_no ORDER SIBLINGS BY q.qna_no DESC))
+	    WHERE recNum BETWEEN (#{section}-1)*100+(#{pagenum}-1)*10+1 AND (#{section}-1)*100+#{pagenum}*10
+	</select>
 	
 
 	

@@ -1,18 +1,32 @@
 package com.springmvc.nemo.qna.vo;
 
-import java.sql.Date;
+import java.util.Arrays;
+import java.util.Date;
 
 public class QnaVO {
 
+	private int level;
 	private int qna_no;
 	private String user_id;
+	private String nickname;
+	private String user_img;
 	private int parent_no;
 	private String title;
 	private String content;
 	private Date create_date;
-	
+	private boolean isImgExist;
+	private String[] imageName;
+
 	public QnaVO() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 	public int getQna_no() {
@@ -29,6 +43,22 @@ public class QnaVO {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getUser_img() {
+		return user_img;
+	}
+
+	public void setUser_img(String user_img) {
+		this.user_img = user_img;
 	}
 
 	public int getParent_no() {
@@ -63,11 +93,30 @@ public class QnaVO {
 		this.create_date = create_date;
 	}
 
+	public boolean isImgExist() {
+		return isImgExist;
+	}
+
+	public void setImgExist(boolean isImgExist) {
+		this.isImgExist = isImgExist;
+	}
+
+	public String[] getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String[] imageName) {
+		this.imageName = imageName;
+	}
+
 	@Override
 	public String toString() {
-		return "QnaVO [qna_no=" + qna_no + ", user_id=" + user_id + ", parent_no=" + parent_no + ", title=" + title
-				+ ", content=" + content + ", create_date=" + create_date + "]";
+		return "QnaVO [level=" + level + ", qna_no=" + qna_no + ", user_id=" + user_id + ", nickname=" + nickname
+				+ ", user_img=" + user_img + ", parent_no=" + parent_no + ", title=" + title + ", content=" + content
+				+ ", create_date=" + create_date + ", isImgExist=" + isImgExist + ", imageName="
+				+ Arrays.toString(imageName) + "]";
 	}
+
 	
-	
+
 }
