@@ -25,4 +25,6 @@ public interface QnaDAO {
 
 	public int getAccessible(Map<String, Object> accessMap) throws DataAccessException;
 
+	public void delQna(int qna_no) throws DataAccessException;
+
 }

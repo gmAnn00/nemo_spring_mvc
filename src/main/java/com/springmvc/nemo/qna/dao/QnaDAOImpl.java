@@ -69,5 +69,13 @@ public class QnaDAOImpl implements QnaDAO{
 		
 		return sqlSession.selectOne("mapper.qna.getAccessible", accessMap);
 	}
+	
+	
+	@Override
+	public void delQna(int qna_no) throws DataAccessException {
+		
+		sqlSession.delete("mapper.qna.delQna", qna_no);
+	}
+	
 
 }

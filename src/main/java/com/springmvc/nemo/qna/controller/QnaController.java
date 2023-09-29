@@ -55,6 +55,10 @@ public interface QnaController {
 	public ModelAndView replyForm(
 			@RequestParam("parent_no") int parent_no,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView delQna(
+			@RequestParam("qna_no") int qna_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 			
 	
 }

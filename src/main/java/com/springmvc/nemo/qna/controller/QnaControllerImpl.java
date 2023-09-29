@@ -257,6 +257,37 @@ public class QnaControllerImpl implements QnaController{
 	}
 	
 	
+	@RequestMapping(value = "/qna/delqna", method = RequestMethod.GET)
+	@Override
+	public ModelAndView delQna(
+			@RequestParam("qna_no") int qna_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		
+		QnaVO qna = qnaService.getQna(qna_no);
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		
+		if(user_id.equals(qna.getUser_id())) {
+			
+			qnaService.delQna(qna_no);
+			
+			mav.addObject("data", new Message("문의사항을 삭제했습니다.",
+					request.getContextPath()+"/qna"));
+			
+			
+		}else {
+			mav.addObject("data", new Message("글쓴이만 문의사항을 삭제할 수 있습니다.",
+					request.getContextPath()+"/qna"));
+		}
+		
+		return mav;
+	}
+	
 	
 	
 	private void deleteTempImg(String[] imageName) {

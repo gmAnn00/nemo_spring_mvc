@@ -66,4 +66,11 @@
 	</select>
 	
 	
+	<delete id="delQna" parameterType="int">
+		DELETE FROM QNA_TBL WHERE qna_no
+			IN (SELECT qna_no FROM QNA_TBL
+				START WITH qna_no=#{qna_no}
+				CONNECT BY PRIOR qna_no=parent_no)
+	</delete>
+	
 </mapper>

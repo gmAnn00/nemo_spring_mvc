@@ -129,6 +129,29 @@ public class QnaServiceImpl implements QnaService {
 		
 		return true;
 	}
+	
+	
+	@Override
+	public void delQna(int qna_no) throws DataAccessException {
+	
+		qnaDAO.delQna(qna_no);
+		
+		try {
+			
+			QNA_IMG_DIR=this.getClass().getResource("").getPath();
+			QNA_IMG_DIR=QNA_IMG_DIR.substring(1,QNA_IMG_DIR.indexOf(".metadata"));
+			QNA_IMG_DIR=QNA_IMG_DIR.replace("/", "\\");
+			QNA_IMG_DIR+="nemo_spring_mvc\\src\\main\\webapp\\WEB-INF\\views\\qnaImages\\"+qna_no;
+			
+			File qnaDir = new File(QNA_IMG_DIR);
+			FileUtils.deleteDirectory(qnaDir);
+			
+		} catch (Exception e) {
+			logger.info("게시글 삭제 중 에러");
+			e.printStackTrace();
+		}
+		
+	}
 
 	
 	
