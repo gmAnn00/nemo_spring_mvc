@@ -110,7 +110,7 @@
 
             <!-- nav 바 시작 -->
             <div class="nav_bar">
-              <a href="index">
+              <a href="${contextPath}/index">
                 <i class="fa-solid fa-house nav_icon"></i>
               </a>
               <i class="fa-solid fa-angle-right nav_icon"></i>
@@ -158,7 +158,7 @@
 				            <a href="javascript:void(0)" role="button" class="btnDel btn" onclick="fn_deleteChk(${qna.qna_no})">삭제</a>
 			            </c:if>
 			            <c:if test="${admin eq 1 and qna.user_id != user_id}">
-				            <a href="javascript:void(0)" role="button" class="btnEdit btn" onclick="fn_reply_form(${qna.qna_no}})">답글쓰기</a>
+				            <a href="javascript:void(0)" role="button" class="btnEdit btn" onclick="fn_reply_form(${qna.qna_no})">답글쓰기</a>
 			            </c:if>
 				         <c:if test="${admin eq 1 and qna.user_id eq user_id}">
 				         	<a href="javascript:void(0)" role="button" class="btnEdit btn" onclick="fn_modify_article(${qna.qna_no})">수정</a>

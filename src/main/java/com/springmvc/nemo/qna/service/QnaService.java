@@ -15,6 +15,8 @@ public interface QnaService {
 	public int addQna(QnaVO qnaVO) throws DataAccessException;
 
 	public void modQna(QnaVO qnaVO) throws DataAccessException;
+
+	public boolean getAccessible(Map<String, Object> accessMap) throws DataAccessException;
 	
 
 }

@@ -52,6 +52,9 @@ public interface QnaController {
 			@RequestParam(value = "imageName", required = false) String[] imageName,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	
+	public ModelAndView replyForm(
+			@RequestParam("parent_no") int parent_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+			
 	
 }

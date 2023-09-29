@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	ctx = getContextPath();
 	// a href='#' 클릭 무시 스크립트
 	$('a[href="#"]').click(function(ignore) {
 	    ignore.preventDefault();

@@ -48,7 +48,7 @@
 	<insert id="addQna" parameterType="qnaVO">
 		<![CDATA[
 			INSERT INTO QNA_TBL(qna_no, user_id, parent_no, title, content, create_date)
-			VALUES(#{qna_no}, #{user_id}, 0, #{title}, #{content}, sysdate)
+			VALUES(#{qna_no}, #{user_id}, #{parent_no}, #{title}, #{content}, sysdate)
 		]]>
 	</insert>
 	
@@ -58,6 +58,12 @@
 		WHERE qna_no=#{qna_no}
 	</update>
 
+
+	<select id="getAccessible" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM QNA_TBL
+		WHERE ( SELECT parent_no FROM QNA_TBL WHERE qna_no=#{qna_no} )
+			IN (SELECT qna_no FROM QNA_TBL WHERE user_id=#{user_id})
+	</select>
 	
 	
 </mapper>

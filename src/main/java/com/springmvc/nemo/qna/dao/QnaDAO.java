@@ -23,4 +23,6 @@ public interface QnaDAO {
 
 	public void modQna(QnaVO qnaVO) throws DataAccessException;
 
+	public int getAccessible(Map<String, Object> accessMap) throws DataAccessException;
+
 }

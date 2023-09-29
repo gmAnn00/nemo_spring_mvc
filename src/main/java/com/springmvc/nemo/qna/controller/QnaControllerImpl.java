@@ -78,7 +78,13 @@ public class QnaControllerImpl implements QnaController{
 		
 		QnaVO qna = qnaService.getQna(qna_no);
 		
-		if(admin == 0 && !user_id.equals(qna.getUser_id())) {
+		Map<String, Object> accessMap = new HashMap<String, Object>();
+		accessMap.put("user_id", user_id);
+		accessMap.put("qna_no", qna_no);
+		
+		boolean accessible = qnaService.getAccessible(accessMap);
+		
+		if(admin == 0 && !user_id.equals(qna.getUser_id()) && !accessible) {
 			mav.setViewName("message");
 			mav.addObject("data", new Message("해당 문의사항을 볼 수 없습니다.", request.getContextPath() + "/qna"));
 			
@@ -120,9 +126,14 @@ public class QnaControllerImpl implements QnaController{
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("message");
-		mav.addObject("data", new Message("새 문의사항을 등록했습니다.",
-				request.getContextPath()+"/qna/viewqna?qna_no="+qna_no));
 		
+		if(qnaVO.getParent_no() == 0) {
+			mav.addObject("data", new Message("새 문의사항을 등록했습니다.",
+					request.getContextPath()+"/qna/viewqna?qna_no="+qna_no));
+		} else {
+			mav.addObject("data", new Message("새 답변을 등록했습니다.",
+					request.getContextPath()+"/qna/viewqna?qna_no="+qna_no));
+		}
 		
 		return mav;
 	}
@@ -218,6 +229,30 @@ public class QnaControllerImpl implements QnaController{
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/qna/viewqna?&qna_no="+qna_no);
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/qna/replyform", method=RequestMethod.GET)
+	@Override
+	public ModelAndView replyForm(
+			@RequestParam("parent_no") int parent_no,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		
+		int admin = (Integer) session.getAttribute("admin");
+		
+		ModelAndView mav = new ModelAndView();
+		if(admin == 1) {
+			String viewName = (String) request.getAttribute("viewName");
+			mav.setViewName(viewName);
+
+		} else {
+			mav.setViewName("message");
+			mav.addObject("data", new Message("관리자만 답변을 작성할 수 있습니다.", request.getContextPath()+"/qna"));
+		}
+		
 		return mav;
 	}
 	

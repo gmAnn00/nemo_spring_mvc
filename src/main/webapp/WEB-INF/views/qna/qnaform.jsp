@@ -104,7 +104,7 @@
 
             <!-- nav 바 시작 -->
             <div class="nav_bar">
-              <a href="index">
+              <a href="${contextPath}/index">
                 <i class="fa-solid fa-house nav_icon"></i>
               </a>
               <i class="fa-solid fa-angle-right nav_icon"></i>
@@ -120,6 +120,7 @@
           <div class="boardWriteArea">
           
             <form action="${contextPath}/qna/addqna" method="post" name="qnaArticleForm" id="qnaArticleForm">
+            	<input type="hidden" name="parent_no" value="0" />
               <!-- 제목 영역 -->
               <div class="articleWritingTitle">
               <%-- 

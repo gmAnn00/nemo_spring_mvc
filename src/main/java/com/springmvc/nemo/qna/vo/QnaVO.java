@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class QnaVO {
 
-	private int level;
+	private int LVL;
 	private int qna_no;
 	private String user_id;
 	private String nickname;
@@ -21,12 +21,12 @@ public class QnaVO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getLevel() {
-		return level;
+	public int getLVL() {
+		return LVL;
 	}
 
-	public void setLevel(int level) {
-		this.level = level;
+	public void setLVL(int LVL) {
+		this.LVL = LVL;
 	}
 
 	public int getQna_no() {
@@ -111,7 +111,7 @@ public class QnaVO {
 
 	@Override
 	public String toString() {
-		return "QnaVO [level=" + level + ", qna_no=" + qna_no + ", user_id=" + user_id + ", nickname=" + nickname
+		return "QnaVO [level=" + LVL + ", qna_no=" + qna_no + ", user_id=" + user_id + ", nickname=" + nickname
 				+ ", user_img=" + user_img + ", parent_no=" + parent_no + ", title=" + title + ", content=" + content
 				+ ", create_date=" + create_date + ", isImgExist=" + isImgExist + ", imageName="
 				+ Arrays.toString(imageName) + "]";

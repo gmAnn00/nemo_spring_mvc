@@ -8,12 +8,12 @@ $(document).ready(function() {
 	});
 	
 	$('.button').click(function(){
-		//let headTitle=$('#headTitle').val();
+
 		let writeTitle=$('#writeTitle').val();
 
 		let summernote=$('#summernote').val();
 		let text=$('#summernote').summernote('code');
-		console.log(text.length);
+
 
 		if(!writeTitle) {
 			alert('제목을 입력해주세요');
@@ -82,24 +82,21 @@ $(document).ready(function() {
 });
 
 function uploadSummerNoteImage(file,el) {
-		console.log('업로드 펑션 콜백오니');
 		let ctx=getContextPath();
 		let data = new FormData();
 		data.append("file",file);
 			$.ajax({
 				data:data,
-				url: '/nemo/qnaSnUploadImage',
+				url: '/nemo/qnasnuploadimage',
 				type:'POST',
         		cache: false,
         		contentType: false,
         		enctype: 'multipart/form-data',
         		processData: false,
 				success :function(data) {
-					console.log("~성공");
-					let json=JSON.parse(data);
 					
-					$(el).summernote('editor.insertImage',json["url"]);
-						jsonArray.push(json["url"]);
+					$(el).summernote('editor.insertImage', data.url);
+						jsonArray.push(data.url);
 						jsonFn(jsonArray);
 				},
 				error:function(e) {
@@ -108,34 +105,39 @@ function uploadSummerNoteImage(file,el) {
 			});
 }
 
-	function fn_cancel(){
-		console.log('여긴오니???????????????');
+	function fn_cancel(parent_no){
+	
+		if(!confirm("답변 작성을 취소하겠습니까?")){
+			return;
+		}
+
 		let cancelForm=document.createElement('form');
 		cancelForm.name='cancelForm';
 		cancelForm.method='post';
-		cancelForm.action="qnaCancelAddArticle";
-		console.log(jsonArray.length);
+		cancelForm.action="canceladdqna";
+		
+		let parentNo=document.createElement('input');
+		parentNo.setAttribute('type','hidden');
+		parentNo.setAttribute('name','parent_no');
+		parentNo.setAttribute('value',parent_no);
+		cancelForm.appendChild(parentNo);
+		
 		if(jsonArray.length>0) {
 			for(var i=0; i<jsonArray.length; i++) {
 				var str=jsonArray[i];
 				var result=str.toString().split('=');
-				//let img="<input type='hidden' name='imageName' value='"+result[1]+"'>";
 				var input = document.createElement('input');
 				input.setAttribute("name","imageName");
 				input.setAttribute("type","hidden");
 				input.setAttribute("value",result[1]);
-				console.log(input);
 				cancelForm.appendChild(input)
 			}
-			console.log("여기는 ture 입니다.");
 			let msg=document.createElement('input');
 			msg.setAttribute('type','hidden');
 			msg.setAttribute('name','isImgExist');
 			msg.setAttribute('value','true');
-			//'<input type="hidden" name="isImgExist" value="true">';
 			cancelForm.appendChild(msg);
 		} else {
-			console.log("여기는 false입니다.");
 			let msg=document.createElement('input');
 			msg.setAttribute('type','hidden');
 			msg.setAttribute('name','isImgExist');

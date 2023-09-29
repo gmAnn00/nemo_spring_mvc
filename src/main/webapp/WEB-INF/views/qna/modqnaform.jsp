@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -99,7 +99,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
                         <!-- nav 바 시작 -->
                         <div class="nav_bar">
-                            <a href="index">
+                            <a href="${contextPath}/index">
                                 <i class="fa-solid fa-house nav_icon"></i>
                             </a>
                             <i class="fa-solid fa-angle-right nav_icon"></i>
@@ -116,6 +116,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         <form action="${contextPath}/qna/modqna" method="post" name="qnaArticleForm" id="qnaArticleForm">
                             <input type="hidden" name="qna_no" value="${qna.qna_no}" />
                             <input type="hidden" name="user_id" value="${qna.user_id}" />
+                            <input type="hidden" name="parent_no" value="${qna.parent_no}" />
                             
                             <!-- 제목 영역 -->
                             <div class="articleWritingTitle">

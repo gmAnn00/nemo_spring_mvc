@@ -62,5 +62,12 @@ public class QnaDAOImpl implements QnaDAO{
 		
 		sqlSession.update("mapper.qna.modQna", qnaVO);
 	}
+	
+	
+	@Override
+	public int getAccessible(Map<String, Object> accessMap) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.qna.getAccessible", accessMap);
+	}
 
 }

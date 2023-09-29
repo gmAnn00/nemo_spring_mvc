@@ -122,7 +122,7 @@
 
             <!-- nav 바 시작 -->
             <div class="nav_bar">
-              <a href="/index">
+              <a href="${contextPath}/index">
                 <i class="fa-solid fa-house nav_icon"></i>
               </a>
               <i class="fa-solid fa-angle-right nav_icon"></i>
@@ -173,8 +173,8 @@
 				                    <div class="titleArea">
 				                    	<div class="titleInner">
 					                        <c:choose>
-					                        	<c:when test="${article.level>1}">
-					                        		<c:forEach begin="1" end="${article.level-1}" step="1">
+					                        	<c:when test="${article.LVL>1}">
+					                        		<c:forEach begin="1" end="${article.LVL-1}" step="1">
 									               		<span style="padding-left: 10px"></span>
 					                        		</c:forEach>
 					                        		└ Re : <a href="${contextPath}/qna/viewqna?qna_no=${article.qna_no}">${article.title}</a>

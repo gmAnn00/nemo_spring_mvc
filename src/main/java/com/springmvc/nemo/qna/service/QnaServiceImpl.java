@@ -116,7 +116,22 @@ public class QnaServiceImpl implements QnaService {
 		qnaDAO.modQna(qnaVO);
 
 	}
+	
+	
+	@Override
+	public boolean getAccessible(Map<String, Object> accessMap) throws DataAccessException {
+		
+		int accessible = qnaDAO.getAccessible(accessMap);
+		
+		if(accessible == 0) {
+			return false;
+		}
+		
+		return true;
+	}
 
+	
+	
 	// temp 에서 이미지 폴더 이동 하는 메소드
 	private void moveImageDir(List<String> fileNameList, int qna_no) {
 		// qnano로 폴더 생성
