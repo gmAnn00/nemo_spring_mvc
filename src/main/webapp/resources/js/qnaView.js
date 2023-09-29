@@ -11,19 +11,25 @@ $(document).ready(function() {
 
 })
 
-function fn_deleteChk(qna_id) {
-	let result=confirm("삭제 하시겠습니까?");
-	if(result) {
-		let newForm = $('<form></form>');
-		newForm.attr("name","newForm");
-		newForm.attr("method","post");
-		newForm.attr("action","/nemo/viewQna/removeArticle.do");
-		newForm.append($('<input/>', {type: 'hidden', name: 'qna_id', value:qna_id }));
-		newForm.appendTo('body');
+// 목록으로 돌아가기
+function backToList() {
+		location.href="/nemo/qna";
+}
+	
+// 글 수정	
+function fn_modify_article(qna_no) {
+	location.href="/nemo/qna/modqnaform?qna_no="+qna_no;
+}
 
-	// submit form
-	newForm.submit();
-	}else {
+// 답글 쓰기
+function fn_reply_form(parent_no) {  //답글쓰기 폼 구현
+	location.href="/nemo/qna/replyform?parent_no="+parent_no;
+}
+
+// 삭제 확인
+function fn_deleteChk(qna_no) {
+	if(confirm("글을 삭제하시겠습니까?")){
+		location.href="/nemo/qna/delqna?qna_no="+qna_no;
 		
 	}
 } 
@@ -49,11 +55,7 @@ function fn_deleteChk(qna_id) {
 	alert("URL이 복사되었습니다.")
 }
 
-function backToList() {
-	let referrer = document.referrer;
-	location.href=referrer;
-	console.log(referrer);
-}
+
 
 
 

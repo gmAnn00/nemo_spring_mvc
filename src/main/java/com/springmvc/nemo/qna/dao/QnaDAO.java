@@ -15,4 +15,6 @@ public interface QnaDAO {
 
 	public List<QnaVO> getUserQnaList(Map<String, Object> pagingMap) throws DataAccessException;
 
+	public QnaVO getQna(int qna_no) throws DataAccessException;
+
 }

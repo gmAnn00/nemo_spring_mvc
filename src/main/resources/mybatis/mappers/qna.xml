@@ -30,6 +30,14 @@
 	    WHERE recNum BETWEEN (#{section}-1)*100+(#{pagenum}-1)*10+1 AND (#{section}-1)*100+#{pagenum}*10
 	</select>
 	
+	
+	<select id="getQna" parameterType="int" resultType="qnaVO">
+		SELECT q.*, u.nickname, u.user_img
+		FROM QNA_TBL q, USER_TBL u
+		WHERE q.qna_no=#{qna_no} AND q.user_id=u.user_id
+	</select>
+	
+	
 
 	
 	

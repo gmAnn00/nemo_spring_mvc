@@ -43,5 +43,12 @@ public class QnaServiceImpl implements QnaService{
 		
 		return qnaMap;
 	}
+	
+	
+	@Override
+	public QnaVO getQna(int qna_no) throws DataAccessException {
+		
+		return qnaDAO.getQna(qna_no);
+	}
 
 }

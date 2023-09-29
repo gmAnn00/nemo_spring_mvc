@@ -35,5 +35,12 @@ public class QnaDAOImpl implements QnaDAO{
 
 		return sqlSession.selectList("mapper.qna.getUserQnaList", pagingMap);
 	}
+	
+	
+	@Override
+	public QnaVO getQna(int qna_no) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.qna.getQna", qna_no);
+	}
 
 }
