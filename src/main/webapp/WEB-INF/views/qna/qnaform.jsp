@@ -10,20 +10,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>네모: 고객센터</title>
-    <link rel="shortcut icon" href="${contextPath}/images/favicon.png" />
-    <link rel="stylesheet" href="${contextPath}/css/normalize.css" />
-    <link rel="stylesheet" href="${contextPath}/css/common.css" />
-    <link rel="stylesheet" href="${contextPath}/css/submenu.css" />
-    <link rel="stylesheet" href="${contextPath}/css/sectionTitle.css" />
-    <link rel="stylesheet" href="${contextPath}/css/qnaWrite.css" />
-    <link rel="stylesheet" href="${contextPath}/resources/summernote/summernote-lite.css"/>
-    <script src="${contextPath}/js/jquery-3.6.4.min.js"></script>
+    <link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/submenu.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/sectionTitle.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/qnaWrite.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/resources/summernote/summernote-lite.css"/>
+    <script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
     <script src="https://kit.fontawesome.com/97cbadfe25.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="${contextPath}/resources/summernote/summernote-lite.js"></script>
-    <script src="${contextPath}/resources/summernote/lang/summernote-ko-KR.js"></script>
-    <script src="${contextPath}/js/header.js"></script>
-    <script src="${contextPath}/js/qnaWrite.js"></script>
+    <script src="${contextPath}/resources/resources/summernote/summernote-lite.js"></script>
+    <script src="${contextPath}/resources/resources/summernote/lang/summernote-ko-KR.js"></script>
+    <script src="${contextPath}/resources/js/header.js"></script>
+    <script src="${contextPath}/resources/js/qnaWrite.js"></script>
 
  </head>
  
@@ -42,10 +42,34 @@
 	        <div class="sc2_menu_contents">
 	          <div class="sc2_menu">
 	            <h2 class="sc2_menu_title">관리자</h2>
-	      
+	      		<ul class="sc2_menu_list">
+					<li>
+					       <a href="${contextPath}/admin/adminuser">
+					          <div class="sc2_icon_menu">
+					              <div class="menu_submenu_name"><span>회원 관리</span></div>
+					              <i class="fa-solid fa-angle-right menu_angle"></i>
+					          </div>
+					      </a>
+					  </li>
+					  <li>
+					      <a href="${contextPath}/admin/admingroup">
+					          <div class="sc2_icon_menu">
+					              <div class="menu_submenu_name"><span>소모임 관리</span></div>
+					              <i class="fa-solid fa-angle-right menu_angle"></i>
+					          </div>
+					      </a>
+					  </li>                            
+					  <li>
+					      <a href="${contextPath}/qna">
+					          <div class="sc2_icon_menu">
+					              <div class="menu_submenu_name submenu_select"><span>고객센터 Q&A</span></div>
+					              <i class="fa-solid fa-minus submenu_select"></i>
+					          </div>
+					      </a>
+					  </li>
+                </ul>
 	            
-	            <!-- include -->
-	            <jsp:include page="/views/qna/includes/admin_header.jsp"/>
+	            
 	          </div>
 	        </div>
         	<!-- 메뉴바 종료 -->
@@ -57,7 +81,7 @@
             <h2 class="sc2_menu_title">고객센터</h2>
             <ul class="sc2_menu_list">
               <li>
-                <a href="${contextPath}/schedule.html">
+                <a href="${contextPath}/qna">
                   <div class="sc2_icon_menu">
                     <div class="menu_submenu_name submenu_select"><span>Q&A</span></div>
                     <i class="fa-solid fa-minus submenu_select"></i>
@@ -80,7 +104,7 @@
 
             <!-- nav 바 시작 -->
             <div class="nav_bar">
-              <a href="index.html">
+              <a href="index">
                 <i class="fa-solid fa-house nav_icon"></i>
               </a>
               <i class="fa-solid fa-angle-right nav_icon"></i>
@@ -95,9 +119,10 @@
           <!-- 글쓰기 영역 -->
           <div class="boardWriteArea">
           
-            <form action="${contextPath}/viewQna/addArticle.do" method="post" name="qnaArticleForm" id="qnaArticleForm">
+            <form action="${contextPath}/qna/addqna" method="post" name="qnaArticleForm" id="qnaArticleForm">
               <!-- 제목 영역 -->
               <div class="articleWritingTitle">
+              <%-- 
 				<div class="headTitleArea">
 	                <select name="headTitle" id="headTitle" class="headTitle">
 	                	<c:if test="${admin eq 1}">
@@ -106,6 +131,7 @@
 		                  <option value="afterMeeting">문의사항</option>
 	                </select>
                 </div>
+                --%>
                 <!-- 제목 -->
                 <div class="titleArea">
                 	<input type="text" name="title" id="writeTitle" class="writeTitle" placeholder="제목을 입력해주세요"></input>
@@ -120,7 +146,7 @@
               <!-- 등록 버튼 -->
               <div class="btnRegister">
                 <a href="#" role="button" class="button">등록</a>
-                <a href="#" role="button" class="buttonCancle" onclick="fn_cancel()">취소</a>
+                <a href="javascript:void(0)" role="button" class="buttonCancle" onclick="fn_cancel()">취소</a>
               </div>
             </form>
 

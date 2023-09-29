@@ -38,6 +38,19 @@
 	</select>
 	
 	
+	<select id="getNewQnaNo" resultType="int">
+		<![CDATA[
+			SELECT nvl(max(qna_no), 0)+1 FROM QNA_TBL
+		]]>
+	</select>
+	
+	
+	<insert id="addQna" parameterType="qnaVO">
+		<![CDATA[
+			INSERT INTO QNA_TBL(qna_no, user_id, parent_no, title, content, create_date)
+			VALUES(#{qna_no}, #{user_id}, 0, #{title}, #{content}, sysdate)
+		]]>
+	</insert>
 
 	
 	

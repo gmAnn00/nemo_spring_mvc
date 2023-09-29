@@ -42,5 +42,18 @@ public class QnaDAOImpl implements QnaDAO{
 		
 		return sqlSession.selectOne("mapper.qna.getQna", qna_no);
 	}
+	
+	@Override
+	public int getNewQnaNo() throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.qna.getNewQnaNo");
+	}
+	
+	
+	@Override
+	public void addQna(QnaVO qnaVO) throws DataAccessException {
+		
+		sqlSession.insert("mapper.qna.addQna", qnaVO);
+	}
 
 }

@@ -17,4 +17,8 @@ public interface QnaDAO {
 
 	public QnaVO getQna(int qna_no) throws DataAccessException;
 
+	public int getNewQnaNo() throws DataAccessException;
+
+	public void addQna(QnaVO qnaVO) throws DataAccessException;
+
 }

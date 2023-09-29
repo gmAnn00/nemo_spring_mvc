@@ -93,11 +93,11 @@ public class QnaVO {
 		this.create_date = create_date;
 	}
 
-	public boolean isImgExist() {
+	public boolean getIsImgExist() {
 		return isImgExist;
 	}
 
-	public void setImgExist(boolean isImgExist) {
+	public void setIsImgExist(boolean isImgExist) {
 		this.isImgExist = isImgExist;
 	}
 

@@ -1,5 +1,6 @@
 package com.springmvc.nemo.qna.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,8 @@ import com.springmvc.nemo.qna.vo.QnaVO;
 public class QnaControllerImpl implements QnaController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(QnaControllerImpl.class);
+	
+	private static String QNA_IMG_DIR;
 	
 	@Autowired
 	private QnaService qnaService;
@@ -88,5 +91,81 @@ public class QnaControllerImpl implements QnaController{
 		
 		return mav;
 	}
+	
+	
+	@RequestMapping(value = "/qna/qnaform", method = RequestMethod.GET)
+	@Override
+	public ModelAndView qnaForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/qna/addqna", method = RequestMethod.POST)
+	@Override
+	public ModelAndView addQna(QnaVO qnaVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		qnaVO.setUser_id(user_id);
+		
+		logger.info("qnaVO={}",qnaVO.toString());
+		
+		int qna_no = qnaService.addQna(qnaVO);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message");
+		mav.addObject("data", new Message("새 문의사항을 등록했습니다.",
+				request.getContextPath()+"/qna/viewqna?qna_no="+qna_no));
+		
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/qna/canceladdqna")
+	@Override
+	public ModelAndView cancelAddQna(
+			@RequestParam("isImgExist") boolean isImgExist,
+			@RequestParam(value = "imageName", required = false) String[] imageName,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		if(isImgExist) {
+			deleteTempImg(imageName);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/qna");
+		return mav;
+		
+	}
+	
+	
+	
+	
+	private void deleteTempImg(String[] imageName) {
+		try {
+			QNA_IMG_DIR=this.getClass().getResource("").getPath();
+			QNA_IMG_DIR=QNA_IMG_DIR.substring(1,QNA_IMG_DIR.indexOf(".metadata"));
+			QNA_IMG_DIR=QNA_IMG_DIR.replace("/", "\\");
+			QNA_IMG_DIR+="nemo_spring_mvc\\src\\main\\webapp\\WEB-INF\\views\\qnaImages\\temp\\";
+
+			if(imageName!=null && imageName.length !=0) {
+				for(String imgName:imageName) {
+					File srcFile=new File(QNA_IMG_DIR+imgName);
+					srcFile.delete();
+				}	
+			}
+			
+		} catch (Exception e) {
+			logger.info("이미지 삭제 중 에러");
+			e.printStackTrace();
+		}
+	}
+	
 
 }
