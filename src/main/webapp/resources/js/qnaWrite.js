@@ -99,6 +99,11 @@ function uploadSummerNoteImage(file, el) {
 }
 
 function fn_cancel() {
+
+	if(!confirm("문의사항 작성을 취소하시겠습니까?")){
+    	return;
+    }
+
     let cancelForm = document.createElement("form");
     cancelForm.name = "cancelForm";
     cancelForm.method = "post";
