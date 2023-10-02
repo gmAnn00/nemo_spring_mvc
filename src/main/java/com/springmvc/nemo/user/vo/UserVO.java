@@ -24,6 +24,7 @@ public class UserVO {
 	private int sns_login;
 	private int admin;
 	private int cancel;
+	private Date limit_date;
 
 	public UserVO() {
 		// TODO Auto-generated constructor stub
@@ -178,6 +179,16 @@ public class UserVO {
 	public void setCancel(int cancel) {
 		this.cancel = cancel;
 	}
+	
+	
+
+	public Date getLimit_date() {
+		return limit_date;
+	}
+
+	public void setLimit_date(Date limit_date) {
+		this.limit_date = limit_date;
+	}
 
 	@Override
 	public String toString() {
@@ -185,7 +196,10 @@ public class UserVO {
 				+ nickname + ", zipcode=" + zipcode + ", user_addr1=" + user_addr1 + ", user_addr2=" + user_addr2
 				+ ", phone=" + phone + ", email=" + email + ", join_date=" + join_date + ", birthdate=" + birthdate
 				+ ", user_img=" + user_img + ", report_cnt=" + report_cnt + ", session_id=" + session_id
-				+ ", sns_login=" + sns_login + ", admin=" + admin + ", cancel=" + cancel + "]";
+				+ ", sns_login=" + sns_login + ", admin=" + admin + ", cancel=" + cancel + ", limit_date=" + limit_date
+				+ "]";
 	}
+
+	
 
 }
