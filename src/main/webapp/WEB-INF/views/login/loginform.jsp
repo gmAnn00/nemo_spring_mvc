@@ -13,6 +13,7 @@
 	<script src="${contextPath}/resources/js/jquery-3.6.4.min.js"></script>
     <script src="${contextPath}/resources/js/header.js"></script>
     <script src="${contextPath}/resources/js/loginCook.js"></script>
+    <script src="${contextPath}/resources/js/loginform.js"></script>
     <link rel="shortcut icon" href="${contextPath}/resources/images/favicon.png" />
     <link rel="stylesheet" href="${contextPath}/resources/css/normalize.css" />
     <link rel="stylesheet" href="${contextPath}/resources/css/common.css" />
@@ -68,12 +69,15 @@
             <a href="${contextPath}/signup/agree" class="join">회원가입</a>
             <a href="${contextPath}/login/findidform"class="find">아이디/비밀번호 찾기</a>
           </p>
-          <input
-            type="image"
+          <img
+            id="kakao_login"
             src="${contextPath}/resources/images/login_kakao.png"
             alt="카카오 아이디로 로그인"
             class="kakaoLog"
+            onclick="fn_kakao_login()"
           />
+          <button type="button">카카오 로그아웃</button>
+          <button type="button">카카오 로그인 탈퇴</button>
           <!-- 
           <input
             type="image"

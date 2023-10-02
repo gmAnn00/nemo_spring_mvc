@@ -1,15 +1,13 @@
 package com.springmvc.nemo.user.vo;
 
-import java.sql.Date;
-
 public class KakaoVO {
-	
+
 	private String user_id;
 	private String kakao_mail;
-	private String name;
-	private Date birthdate;
-	private String phone;
-	
+	private String nickname;
+	private String kakao_img;
+	private String access_token;
+
 	public KakaoVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -30,37 +28,34 @@ public class KakaoVO {
 		this.kakao_mail = kakao_mail;
 	}
 
-	public String getName() {
-		return name;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
-	public Date getBirthdate() {
-		return birthdate;
+	public String getKakao_img() {
+		return kakao_img;
 	}
 
-	public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
+	public void setKakao_img(String kakao_img) {
+		this.kakao_img = kakao_img;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getAccess_token() {
+		return access_token;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setAccess_token(String access_token) {
+		this.access_token = access_token;
 	}
 
 	@Override
 	public String toString() {
-		return "KakaoVO [user_id=" + user_id + ", kakao_mail=" + kakao_mail + ", name=" + name + ", birthdate="
-				+ birthdate + ", phone=" + phone + "]";
+		return "KakaoVO [user_id=" + user_id + ", kakao_mail=" + kakao_mail + ", nickname=" + nickname + ", kakao_img="
+				+ kakao_img + ", access_token=" + access_token + "]";
 	}
-	
-	
-	
 
 }

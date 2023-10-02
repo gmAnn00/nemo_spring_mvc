@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.springmvc.nemo.user.vo.KakaoVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
 @Repository("loginDAO")
@@ -44,10 +45,35 @@ public class LoginDAOImpl implements LoginDAO{
 		
 	}
 
+	@Override
+	public boolean isAlreayKakaoUser(KakaoVO kakaoVO) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.login.isAlreayKakaoUser", kakaoVO);
+	}
+	
+	@Override
+	public void updateKakaoUser(KakaoVO kakaoVO) throws DataAccessException {
+		
+		sqlSession.update("mapper.login.updateKakaoUser", kakaoVO);
+	}
 	
 	
+	@Override
+	public void insertKakaoUser(KakaoVO kakaoVO) throws DataAccessException {
+		
+		sqlSession.insert("mapper.login.insertKakaoUser", kakaoVO);
+	}
 	
+	@Override
+	public void addUserTbl(UserVO userVO) throws DataAccessException {
+		
+		sqlSession.insert("mapper.login.addUserTbl", userVO);
+	}
 	
-	
+	@Override
+	public UserVO getUserInfo(String user_id) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.login.getUserInfo", user_id);
+	}
 
 }

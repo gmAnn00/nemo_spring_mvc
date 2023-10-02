@@ -33,5 +33,11 @@ public interface LoginController {
 	public ModelAndView resetPassword(@RequestParam("password") String password,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	public String oauth(
+			@RequestParam(value = "code", required = false) String code,
+			@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "error_description", required = false) String error_description,
+			@RequestParam(value = "state", required = false) String state,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 }

@@ -34,5 +34,36 @@
          UPDATE USER_TBL SET password = #{password} WHERE user_id = #{user_id}  AND cancel = 0
       ]]>
 	</update>
+	
+	
+	<select id="isAlreayKakaoUser" parameterType="kakaoVO" resultType="boolean">
+		<![CDATA[
+         SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM KAKAO_TBL WHERE user_id = #{user_id}
+      ]]>
+	</select>
+	
+	
+	<update id="updateKakaoUser" parameterType="kakaoVO">
+		UPDATE KAKAO_TBL SET kakao_mail=#{kakao_mail}, nickname=#{nickname}, kakao_img=#{kakao_img}, access_token=#{access_token}
+		WHERE user_id=#{user_id}
+	</update>
+	
+	
+	<insert id="insertKakaoUser" parameterType="kakaoVO">
+		INSERT INTO KAKAO_TBL(user_id, kakao_mail, nickname, kakao_img, access_token)
+		VALUES(#{user_id}, #{kakao_mail}, #{nickname}, #{kakao_img}, #{access_token})
+	</insert>
+
+
+	<insert id="addUserTbl" parameterType="userVO">
+		INSERT INTO USER_TBL(user_id, nickname, email, join_date, user_img, sns_login, admin, cancel)
+		VALUES(#{user_id}, #{nickname}, #{email}, sysdate, #{user_img}, #{sns_login}, #{admin}, 0)
+	</insert>
+
+
+	<select id="getUserInfo" parameterType="String" resultType="userVO">
+		SELECT * FROM USER_TBL WHERE user_id=#{user_id}
+	</select>
+
 
 </mapper>
