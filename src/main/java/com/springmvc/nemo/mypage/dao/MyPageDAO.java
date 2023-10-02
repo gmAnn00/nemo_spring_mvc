@@ -26,13 +26,15 @@ public interface MyPageDAO {
 
 	public void modImage(Map<String, Object> userMap) throws DataAccessException;
 	
-	public void deleteInterests(String user_Id) throws DataAccessException;
+	public void deleteInterests(String user_id) throws DataAccessException;
 
 	public void addInterests(List<InterestsVO> interestsList) throws DataAccessException;
 
 	public boolean checkPassword(UserVO userVO) throws DataAccessException;
 
-	public void delUser(UserVO userVO) throws DataAccessException;
+	public void delUser(String user_id) throws DataAccessException;
+	
+	public void delKakaoUser(String user_id) throws DataAccessException;
 
 	public List<CommingScheduleVO> getCommingSchedules(String user_id) throws DataAccessException;
 
@@ -51,6 +53,10 @@ public interface MyPageDAO {
 	public List<BoardVO> getMyBoardList(String user_id) throws DataAccessException;
 
 	public List<CommentVO> getMyCommentList(String user_id) throws DataAccessException;
+
+	public String getAccessToken(String user_id) throws DataAccessException;
+
+	
 
 
 }

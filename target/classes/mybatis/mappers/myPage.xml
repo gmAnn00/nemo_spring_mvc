@@ -57,8 +57,12 @@
 	</update>
 
 	
-	<delete id="delUser">
+	<delete id="delUser" parameterType="String">
 		DELETE FROM USER_TBL WHERE user_id=#{user_id}
+	</delete>
+	
+	<delete id="delKakaoUser" parameterType="String">
+		DELETE FROM KAKAO_TBL WHERE user_id=#{user_id}
 	</delete>
 
 
@@ -139,6 +143,10 @@
 		FROM COMMENT_TBL c, GROUP_TBL g, BOARD_TBL b, USER_TBL u
 		WHERE u.user_id=#{user_id} AND c.user_id=#{user_id}
 		AND b.group_id=g.group_id AND b.article_no=c.article_no
+	</select>
+	
+	<select id="getAccessToken" parameterType="String" resultType="String">
+		SELECT access_token FROM KAKAO_TBL WHERE user_id=#{user_id}
 	</select>
 
 </mapper>

@@ -355,6 +355,24 @@ public class MyPageControllerImpl implements MyPageController{
 		return mav;
 	}
 	
+	@RequestMapping(value = "/mypage/delkakaouser", method = RequestMethod.POST)
+	@Override
+	public ModelAndView delKakaoUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		
+		myPageService.delKakaoUser(user_id);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		session.invalidate();
+		mav.addObject("data", new Message("네모 탈퇴를 완료하였습니다.", request.getContextPath()+"/index"));
+		mav.setViewName("message");
+		return mav;
+	}
+	
+	
 	@RequestMapping(value = "/mypage/myschedule", method = RequestMethod.GET)
 	@Override
 	public ModelAndView mySchedule(HttpServletRequest request, HttpServletResponse response) throws Exception {

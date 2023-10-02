@@ -99,11 +99,18 @@
           <!-- 탈퇴 -->
           <div class="withdrawal">
             <h3>정말로 네모를 <span>탈퇴</span>하시겠습니까?</h3>
-            <h4>탈퇴하시려면 비밀번호를 입력하고 탈퇴하기를 눌러주세요</h4>
-            <form action="${contextPath}/mypage/deluser" method="post">
-              비밀번호 확인 <input type="password" name="password" />
-              <input type="submit" class="buttonCancle" value="탈퇴하기" />
-            </form>
+            <c:if test="${sns eq 0}">
+	            <h4>탈퇴하시려면 비밀번호를 입력하고 탈퇴하기를 눌러주세요</h4>
+	            <form action="${contextPath}/mypage/deluser" method="post">
+	              비밀번호 확인 <input type="password" name="password" />
+	              <input type="submit" class="buttonCancle" value="탈퇴하기" />
+	            </form>
+            </c:if>
+            <c:if test="${sns eq 1}">
+            	<form action="${contextPath}/mypage/delkakaouser" method="post">
+	              <input type="submit" class="buttonCancle" value="예" />
+	            </form>
+            </c:if>
           </div>
         </div>
       </div>

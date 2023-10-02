@@ -29,6 +29,8 @@ public interface MyPageService {
 	public void modInterests(List<InterestsVO> interestsList) throws DataAccessException;
 
 	public boolean delUser(UserVO userVO) throws DataAccessException;
+	
+	public void delKakaoUser(String user_id) throws DataAccessException;
 
 	public List<CommingScheduleVO> getCommingSchedules(String user_id) throws DataAccessException;
 
@@ -47,6 +49,8 @@ public interface MyPageService {
 	public List<BoardVO> getMyBoardList(String user_id) throws DataAccessException;
 
 	public List<CommentVO> getMyCommentList(String user_id) throws DataAccessException;
+
+	
 	
 	
 

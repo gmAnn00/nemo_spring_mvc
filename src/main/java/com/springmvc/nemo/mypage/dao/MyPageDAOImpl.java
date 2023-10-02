@@ -72,10 +72,17 @@ public class MyPageDAOImpl implements MyPageDAO{
 	}
 	
 	@Override
-	public void delUser(UserVO userVO) throws DataAccessException {
+	public void delUser(String user_id) throws DataAccessException {
 		
 //		sqlSession.update("mapper.myPage.delUser", userVO);
-		sqlSession.delete("mapper.myPage.delUser", userVO);
+
+		sqlSession.delete("mapper.myPage.delUser", user_id);
+	}
+	
+	@Override
+	public void delKakaoUser(String user_id) throws DataAccessException {
+		
+		sqlSession.delete("mapper.myPage.delKakaoUser", user_id);
 	}
 	
 	@Override
@@ -132,6 +139,13 @@ public class MyPageDAOImpl implements MyPageDAO{
 	public List<CommentVO> getMyCommentList(String user_id) throws DataAccessException {
 		
 		return sqlSession.selectList("mapper.myPage.getMyCommentList", user_id);
+	}
+	
+	
+	@Override
+	public String getAccessToken(String user_id) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.myPage.getAccessToken", user_id);
 	}
 
 }

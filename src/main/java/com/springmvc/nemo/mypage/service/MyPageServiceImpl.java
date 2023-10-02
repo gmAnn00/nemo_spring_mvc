@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import com.springmvc.nemo.board.vo.BoardVO;
 import com.springmvc.nemo.board.vo.CommentVO;
 import com.springmvc.nemo.group.vo.GroupVO;
@@ -66,12 +70,32 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		// true : 아이디와 비밀번호 일치
 		if(result) {
-			myPageDAO.delUser(userVO);
+			myPageDAO.delUser(userVO.getUser_id());
 			return true;
 		}
 		
 		
 		return false;
+	}
+	
+	
+	@Override
+	public void delKakaoUser(String user_id) throws DataAccessException {
+		
+		String accessToken = myPageDAO.getAccessToken(user_id);
+		
+		try {
+			HttpResponse<JsonNode> response = Unirest.post("https://kapi.kakao.com/v1/user/unlink")
+					.header("Authorization", "Bearer " + accessToken)
+					.asJson();
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		myPageDAO.delUser(user_id);
+		myPageDAO.delKakaoUser(user_id);
+		
 	}
 	
 	@Override
