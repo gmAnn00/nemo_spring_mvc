@@ -147,3 +147,20 @@ td div {
 .withdrawal .delMemberlink {
   color: #ff26a5;
 }
+
+.sns_myprofile{
+	background-color: #FEE500;
+	margin: 20px auto;
+	
+	border-radius: 5px;
+	padding-top : 10px;
+	padding-bottom: 10px;
+}
+
+.sns_myprofile p {
+	padding-top : 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	color: #191919;
+}

@@ -76,8 +76,6 @@
             class="kakaoLog"
             onclick="fn_kakao_login()"
           />
-          <button type="button">카카오 로그아웃</button>
-          <button type="button">카카오 로그인 탈퇴</button>
           <!-- 
           <input
             type="image"
