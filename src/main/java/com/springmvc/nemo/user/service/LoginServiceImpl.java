@@ -170,5 +170,25 @@ public class LoginServiceImpl implements LoginService{
 	}
 	
 	
+	@Override
+	public void kakaoLogout(String user_id) throws Exception {
+		
+		try {
+			String access_token = loginDAO.getAccessToken(user_id);
+			String logoutURL = "https://kapi.kakao.com/v1/user/logout";
+			
+			HttpResponse<JsonNode> response = Unirest.post(logoutURL)
+					.header("Authorization", "Bearer " + access_token)
+					.asJson();
+			
+			loginDAO.delAccessToken(user_id);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 }

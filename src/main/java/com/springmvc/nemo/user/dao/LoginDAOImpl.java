@@ -9,71 +9,83 @@ import com.springmvc.nemo.user.vo.KakaoVO;
 import com.springmvc.nemo.user.vo.UserVO;
 
 @Repository("loginDAO")
-public class LoginDAOImpl implements LoginDAO{
+public class LoginDAOImpl implements LoginDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Override
 	public Boolean loginTry(UserVO userVO) throws DataAccessException {
 		Boolean result = Boolean.parseBoolean(sqlSession.selectOne("mapper.login.loginTry", userVO));
-		
+
 		return result;
 	}
 
 	@Override
 	public UserVO findUserById(String user_id) throws DataAccessException {
-		
+
 		return sqlSession.selectOne("mapper.login.findUserById", user_id);
 	}
 
 	@Override
 	public String findId(UserVO userVO) throws DataAccessException {
-		
+
 		return sqlSession.selectOne("mapper.login.findId", userVO);
 	}
-	
+
 	@Override
 	public Boolean resetPasswordCheck(UserVO userVO) throws DataAccessException {
-	
+
 		return Boolean.parseBoolean(sqlSession.selectOne("mapper.login.resetPasswordCheck", userVO));
 	}
 
 	@Override
 	public void resetPassword(UserVO userVO) throws DataAccessException {
 		sqlSession.update("mapper.login.resetPassword", userVO);
-		
+
 	}
 
 	@Override
 	public boolean isAlreayKakaoUser(KakaoVO kakaoVO) throws DataAccessException {
-		
+
 		return sqlSession.selectOne("mapper.login.isAlreayKakaoUser", kakaoVO);
 	}
-	
+
 	@Override
 	public void updateKakaoUser(KakaoVO kakaoVO) throws DataAccessException {
-		
+
 		sqlSession.update("mapper.login.updateKakaoUser", kakaoVO);
 	}
-	
-	
+
 	@Override
 	public void insertKakaoUser(KakaoVO kakaoVO) throws DataAccessException {
-		
+
 		sqlSession.insert("mapper.login.insertKakaoUser", kakaoVO);
 	}
-	
+
 	@Override
 	public void addUserTbl(UserVO userVO) throws DataAccessException {
-		
+
 		sqlSession.insert("mapper.login.addUserTbl", userVO);
 	}
-	
+
 	@Override
 	public UserVO getUserInfo(String user_id) throws DataAccessException {
-		
+
 		return sqlSession.selectOne("mapper.login.getUserInfo", user_id);
+	}
+
+	@Override
+	public String getAccessToken(String user_id) throws DataAccessException {
+
+		return sqlSession.selectOne("mapper.login.getAccessToken", user_id);
+	}
+
+	@Override
+	public void delAccessToken(String user_id) throws DataAccessException {
+		
+		sqlSession.update("mapper.login.delAccessToken", user_id);
+
 	}
 
 }

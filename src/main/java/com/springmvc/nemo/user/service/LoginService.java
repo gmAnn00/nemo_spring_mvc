@@ -23,4 +23,6 @@ public interface LoginService {
 
 	public UserVO kakaoLogin(KakaoVO kakaoVO) throws Exception;
 
+	public void kakaoLogout(String user_id) throws Exception;
+
 }

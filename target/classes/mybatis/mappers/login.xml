@@ -64,6 +64,15 @@
 	<select id="getUserInfo" parameterType="String" resultType="userVO">
 		SELECT * FROM USER_TBL WHERE user_id=#{user_id}
 	</select>
+	
+	<select id="getAccessToken" parameterType="String" resultType="String">
+		SELECT access_token FROM KAKAO_TBL WHERE user_id=#{user_id}
+	</select>
+	
+	
+	<update id="delAccessToken" parameterType="String">
+		UPDATE KAKAO_TBL SET access_token=null WHERE user_id=#{user_id} 
+	</update>
 
 
 </mapper>

@@ -27,4 +27,8 @@ public interface LoginDAO {
 
 	public UserVO getUserInfo(String user_id) throws DataAccessException;
 
+	public String getAccessToken(String user_id) throws DataAccessException;
+
+	public void delAccessToken(String user_id) throws DataAccessException;
+
 }

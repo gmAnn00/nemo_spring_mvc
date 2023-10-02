@@ -81,8 +81,20 @@ public class LoginControllerImpl implements LoginController{
 		HttpSession session = request.getSession(false);
 		
 		if(session != null) {
+			
+			String user_id = (String)session.getAttribute("user_id");
+			int sns = (Integer) session.getAttribute("sns");
+			
+			if(sns == 1){
+				loginService.kakaoLogout(user_id);
+			}
+
 			session.invalidate();
+			
+			
 		}
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/index");
@@ -201,7 +213,7 @@ public class LoginControllerImpl implements LoginController{
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession(false);
-		
+
 		//logger.info("code={}", code);
 		//logger.info("error={}", error);
 		//logger.info("error_description={}", error_description);
