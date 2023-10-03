@@ -1,5 +1,8 @@
 package com.springmvc.nemo.user.controller;
 
+import java.util.Date;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -43,7 +46,9 @@ public class LoginControllerImpl implements LoginController{
 
 	@RequestMapping(value = "/login/logintry", method = RequestMethod.POST)
 	@Override
-	public ModelAndView loginTry(@ModelAttribute("user") UserVO user,
+	public ModelAndView loginTry(
+			@ModelAttribute("user") UserVO user,
+			@RequestParam(value = "keepLogin", required = false, defaultValue = "off") String keepLogin,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
@@ -53,13 +58,29 @@ public class LoginControllerImpl implements LoginController{
 		Boolean loginResult = loginService.loginTry(user);
 		
 		if(loginResult) {
-			
+
 			UserVO userVO = loginService.findUserById(user.getUser_id());
 			session.setAttribute("user_id", userVO.getUser_id());
 			session.setAttribute("nickname", userVO.getNickname());
 			session.setAttribute("user_img", userVO.getUser_img());
 			session.setAttribute("admin", userVO.getAdmin());
 			session.setAttribute("sns", 0);
+			
+			logger.info("keepLogin={}", keepLogin);
+			if(keepLogin.equals("on")) {
+				String session_id = session.getId();
+				Cookie loginCookie = new Cookie("loginCookie", session_id);
+				loginCookie.setPath("/");
+				// 60초 * 60분 * 24시간 * 7일
+				int maxAge = 60*60*24*7;
+				loginCookie.setMaxAge(maxAge);
+				response.addCookie(loginCookie);
+				
+				Date limit_date = new Date(System.currentTimeMillis() + (1000*maxAge));
+				userVO.setSession_id(session_id);
+				userVO.setLimit_date(limit_date);
+				loginService.keepLogin(userVO);
+			}
 			
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("redirect:/index");

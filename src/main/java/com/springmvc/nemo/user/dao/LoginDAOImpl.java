@@ -20,6 +20,20 @@ public class LoginDAOImpl implements LoginDAO {
 
 		return result;
 	}
+	
+	
+	@Override
+	public void keepLogin(UserVO userVO) throws DataAccessException {
+		
+		sqlSession.update("mapper.login.keepLogin", userVO);
+	}
+	
+	@Override
+	public UserVO getUserBySessionId(String session_id) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.login.getUserBySessionId", session_id);
+	}
+	
 
 	@Override
 	public UserVO findUserById(String user_id) throws DataAccessException {

@@ -32,6 +32,18 @@ public class LoginServiceImpl implements LoginService{
 	public Boolean loginTry(UserVO userVO) throws DataAccessException {
 		return loginDAO.loginTry(userVO);
 	}
+	
+	@Override
+	public void keepLogin(UserVO userVO) throws DataAccessException {
+		
+		loginDAO.keepLogin(userVO);
+	}
+	
+	@Override
+	public UserVO getUserBySessionId(String session_id) throws DataAccessException {
+		
+		return loginDAO.getUserBySessionId(session_id);
+	}
 
 	@Override
 	public UserVO findUserById(String user_id) throws DataAccessException {

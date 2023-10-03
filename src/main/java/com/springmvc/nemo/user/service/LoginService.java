@@ -8,6 +8,10 @@ import com.springmvc.nemo.user.vo.UserVO;
 public interface LoginService {
 
 	public Boolean loginTry(UserVO userVO) throws DataAccessException;
+	
+	public void keepLogin(UserVO userVO) throws DataAccessException;
+	
+	public UserVO getUserBySessionId(String session_id) throws DataAccessException;
 
 	public UserVO findUserById(String user_id) throws DataAccessException;
 

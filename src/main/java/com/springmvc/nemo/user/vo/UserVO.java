@@ -4,7 +4,6 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Date;
 
-
 public class UserVO {
 
 	private String user_id;
@@ -179,8 +178,6 @@ public class UserVO {
 	public void setCancel(int cancel) {
 		this.cancel = cancel;
 	}
-	
-	
 
 	public Date getLimit_date() {
 		return limit_date;
@@ -199,7 +196,5 @@ public class UserVO {
 				+ ", sns_login=" + sns_login + ", admin=" + admin + ", cancel=" + cancel + ", limit_date=" + limit_date
 				+ "]";
 	}
-
-	
 
 }

@@ -7,8 +7,22 @@
 
 	<select id="loginTry" parameterType="userVO" resultType="String">
 		<![CDATA[
-         SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM USER_TBL WHERE user_id = #{user_id} AND password = #{password} AND cancel = 0
+         SELECT DECODE(count(*), 1, 'true' , 'false') as result
+         FROM USER_TBL 
+         WHERE user_id = #{user_id} AND password = #{password} AND cancel = 0
       ]]>
+	</select>
+	
+	
+	<update id="keepLogin" parameterType="userVO">
+		UPDATE USER_TBL SET session_id=#{session_id}, limit_date=#{limit_date}
+		WHERE user_id=#{user_id}
+	</update>
+	
+	
+	<select id="getUserBySessionId" parameterType="String" resultType="userVO">
+		SELECT * FROM USER_TBL
+		WHERE session_id=#{session_id}
 	</select>
 	
 	<select id="findUserById" parameterType="String" resultType="userVO">
@@ -25,7 +39,9 @@
 	
 	<select id="resetPasswordCheck" parameterType="userVO" resultType="String">
 		<![CDATA[
-         SELECT DECODE(count(*), 1, 'true' , 'false') as result FROM USER_TBL WHERE user_id = #{user_id} AND user_name = #{user_name} AND email = #{email}  AND cancel = 0
+         SELECT DECODE(count(*), 1, 'true' , 'false') as result 
+         FROM USER_TBL 
+         WHERE user_id = #{user_id} AND user_name = #{user_name} AND email = #{email}  AND cancel = 0
       ]]>
 	</select>
 

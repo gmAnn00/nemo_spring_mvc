@@ -13,7 +13,9 @@ public interface LoginController {
 	
 	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView loginTry(@ModelAttribute("user") UserVO user,
+	public ModelAndView loginTry(
+			@ModelAttribute("user") UserVO user,
+			@RequestParam(value = "keepLogin", required = false, defaultValue = "off") String keepLogin,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
