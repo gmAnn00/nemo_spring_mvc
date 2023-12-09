@@ -36,12 +36,12 @@ public class IndexServiceImpl implements IndexService{
 		return indexDAO.getRandomGroupList(map);
 	}
 	
+	// 사용자의 관심사와 관련된 소모임을 추천하는 Service
 	@Override
 	public List<GroupVO> getInterestsGroupList(String user_id) throws DataAccessException {
 		
+		// 소분류 카테고리까지 같은 소모임 검색
 		List<GroupVO> interestsGroupList = indexDAO.getSubInterestsGroupList(user_id);
-		
-		//logger.info("interestGroupList1={}", interestsGroupList.toString());
 		
 		if(interestsGroupList.size() < 4) {
 			int supplement = 4 - interestsGroupList.size();
@@ -58,7 +58,6 @@ public class IndexServiceImpl implements IndexService{
 			List<GroupVO> supplementList = indexDAO.getMainInterestsGroupList(supplementMap);
 			
 			interestsGroupList.addAll(supplementList);
-			//logger.info("interestGroupList2={}", interestsGroupList.toString());
 		}
 		
 		if(interestsGroupList.size() < 4) {
@@ -76,9 +75,7 @@ public class IndexServiceImpl implements IndexService{
 			List<GroupVO> supplementList = indexDAO.getRandomGroupList(supplementMap);
 			
 			interestsGroupList.addAll(supplementList);
-			//logger.info("interestGroupList3={}", interestsGroupList.toString());
 		}
-		
 		
 		
 		return interestsGroupList;

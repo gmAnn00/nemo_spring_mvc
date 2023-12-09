@@ -51,6 +51,7 @@ public class IndexDAOImpl implements IndexDAO{
 	@Override
 	public List<GroupVO> getNearGroupList(String user_id) throws DataAccessException {
 		
+		// 모든 소모임 가져옴
 		List<GroupVO> allGroupList = sqlSession.selectList("mapper.index.getAllGroupList");
 		String userAddr = sqlSession.selectOne("mapper.index.getUserAddr", user_id);
 		
@@ -58,7 +59,7 @@ public class IndexDAOImpl implements IndexDAO{
 		double userLat = 0.0;
 		double userLnt = 0.0;
 		
-		// 유저 위도 경도 받기
+		// 유저의 위치를 위도 경도로 변환
 		try {
 			
 			String apiURL = "https://dapi.kakao.com/v2/local/search/address.json?query=" 
@@ -84,7 +85,7 @@ public class IndexDAOImpl implements IndexDAO{
 		
 		
 		try {
-			
+			// 소모임의 위치를 위도 경도로 변환한 후 사용자의 위도 경도와의 거리를 계산	
 			for(int i = allGroupList.size()-1; i >=0; i--) {
 				
 				GroupVO group = (GroupVO) allGroupList.get(i);
@@ -115,10 +116,10 @@ public class IndexDAOImpl implements IndexDAO{
 				dist = 2 * Math.atan2(Math.sqrt(dist), Math.sqrt(1-dist));
 				dist = 6371 * dist * 1000;
 				
+				// 거리가 20km가 넘을 경우 List에서 제외
 				if(dist > 2000) {
 					allGroupList.remove(i);
 				}
-				
 				
 			}
 			
@@ -127,12 +128,12 @@ public class IndexDAOImpl implements IndexDAO{
 			e.printStackTrace();
 		}
 		
+		// 거리가 20km이내인 소모임을 섞은 후 4개 추출
 		Collections.shuffle(allGroupList);
 		if(allGroupList.size() > 4) {
 			allGroupList = allGroupList.subList(0, 4);
 		}
 		
-		//logger.info("allGroupList={}", allGroupList.toString());
 		return allGroupList;
 	}
 
